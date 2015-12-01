@@ -33,9 +33,10 @@ if (file_exists(__DIR__.'/config/config.php')) {
 	require_once __DIR__.'/config/config.php';
 }
 
+$container = new Container($loader);
+
 // инициализация переменных
 if (isset($_SERVER['REQUEST_URI'])) {
-	$container = new Container($loader);
 	$params = array();
 	$sql = 'SELECT name, value FROM config_variable';
 	$stmt = $container->get('connection')->prepare($sql);
