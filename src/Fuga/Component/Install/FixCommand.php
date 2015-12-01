@@ -24,7 +24,6 @@ class FixCommand extends Command
 		chmod(__DIR__.'/../../../../app/logs/.gitkeep', 0644);
 		$this->chmod_R(__DIR__.'/../../../../app/cache/', 666, 777, $output);  
 		chmod(__DIR__.'/../../../../app/cache/.gitkeep', 0644);
-		chmod(__DIR__.'/../../../../app/cache/smarty/.gitkeep', 0644);
 		chmod(__DIR__.'/../../../../app/cache/twig/.gitkeep', 0644);
 		chmod(__DIR__.'/../../../../app/cache/proxies/.gitkeep', 0644);
 		chmod(__DIR__.'/../../../../app/cache/hydrators/.gitkeep', 0644);
