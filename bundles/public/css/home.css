@@ -94,17 +94,9 @@ img#girl-paints {
     margin: 20px auto;
 }
 
-#pictures {
+#pictures2 {
     text-align: center;
     margin: 10px 0 30px;
-}
-
-#pictures2 {
-    display: none;
-}
-
-img#picture2 {
-    display: none;
 }
 
 .content ul.rules li {
@@ -231,7 +223,7 @@ p.video iframe {
 
     .girl {
         content: " ";
-        height: 20px;
+        height: 15px;
     }
 
     img#girl-paints {
@@ -280,7 +272,7 @@ p.video iframe {
 
     img#boy {
         float: left;
-        margin-top: 30px;
+        margin-top: 20px;
         margin-left: 0;
         margin-right: 30px;
         margin-bottom: 40px;
