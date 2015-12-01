@@ -1,0 +1,336 @@
+body.modal-open {
+    overflow: hidden;
+}
+
+h2 {
+    font-family: "SignPainter-HouseScript", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: center;
+    color: #cf142b;
+}
+
+.search-form select {
+    height: 40px;
+    border: 1px solid #999;
+    background-color: #fff;
+    width: 100%;
+}
+
+#dealer {
+    display: none;
+}
+
+ul.dealer {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+ul.dealer li {
+    padding-bottom: 30px;
+}
+
+ul.dealer .title {
+    text-transform: uppercase;
+    color: #cf142b;
+    margin-bottom: 15px;
+}
+
+ul.dealer .roadmap-link {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+ul.dealer .site-link {
+    display: block;
+    margin-top: 25px;
+}
+
+.content ul.dealer li:before {
+    content: "";
+}
+
+.map-link-helper {
+    display: none;
+}
+
+.map-dot {
+    display: none;
+}
+
+.map-canvas {
+    display: none;
+}
+
+.modal {
+    display: none;
+}
+
+.social {
+    margin-top: 120px;
+}
+
+.selectize-control.single .selectize-input:after {
+    background: url('../img/lupa.png') center center;
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    margin-top: -9px;
+    width: 20px;
+    height: 20px;
+    border-style: solid;
+    border-width: 0;
+    opacity: 0.7;
+}
+.selectize-control.single .selectize-input.dropdown-active:after {
+    margin-top: -9px;
+    border-width: 0;
+}
+
+.selectize-input {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0 0  0 0;
+    -moz-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+}
+
+.selectize-dropdown-header {
+    -webkit-border-radius: 0 0  0 0;
+    -moz-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+}
+
+.selectize-dropdown {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0 0 0 0;
+    -moz-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+}
+
+.selectize-input.focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.selectize-input.dropdown-active {
+    -webkit-border-radius: 0 0 0 0;
+    -moz-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+}
+
+.selectize-dropdown .active {
+    background-color: rgba(207,20,43, 0.05);
+}
+
+@media (min-width: 768px){
+    ul.dealer li {
+        float:left;
+        width: 50%;
+        padding-right: 20px;
+    }
+}
+
+@media (min-width: 1140px) {
+    .content {
+        background: none;
+        padding: 40px 23px 0 23px;
+    }
+
+    .content > p {
+        padding-right: 97px;
+    }
+
+    h2 {
+        font-size: 34px;
+        line-height: 34px;
+    }
+
+    .map {
+        margin-top: 58px;
+        position: relative;
+        min-height: 830px;
+    }
+
+    .map-bg {
+        position: absolute;
+        background-image: url('../img/map_bg2.png');
+        background-position: top center;
+        background-repeat: no-repeat;
+        width: 952px;
+        height: 830px;
+        top: 0;
+        left: -49px;
+        z-index: 1;
+    }
+
+    .map h2 {
+        position: absolute;
+        top: 120px;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .map-link-helper {
+        position: absolute;
+        font-family: "ToyotaDisplay", "Helvetica Neue", Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        display: block;
+        width: 290px;
+        text-align: center;
+        z-index: 2;
+        top: 210px;
+        left: 50%;
+        margin-left: -145px;
+        letter-spacing: 1px;
+    }
+
+    .search-form {
+        position: absolute;
+        top: 170px;
+        left: 50%;
+        margin-left: -145px;
+        width: 290px;
+        z-index: 4;
+    }
+
+    .search-form select {
+        width: 290px;
+        text-align: left;
+    }
+
+    .modal {
+        /*display: block;*/
+        position: absolute;
+        top: 200px;
+        left: -23px;
+        width: 900px;
+        height: 600px;
+        background-color: #fff;
+        background-image: url('../img/modal_bg.png');
+        background-position: center center;
+        border-radius: 11px;
+        z-index: 10;
+    }
+
+    .modal-dialog {
+        position: relative;
+    }
+
+    .modal-close {
+        display: block;
+        position: absolute;
+        top: -15px;
+        right: -35px;
+        background-image: url('../img/close.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        width: 64px;
+        height: 64px;
+        z-index: 11;
+    }
+
+    .map-canvas {
+        display: block;
+        position: absolute;
+        top: 244px;
+        width: 855px;
+        height: 492px;
+        /*border: 1px solid #0f0;*/
+        z-index: 3;
+    }
+
+    .map-dot {
+        position: absolute;
+        top: 300px;
+        left: 100px;
+        z-index: 5;
+        display: none;
+        width: 250px;
+        overflow: hidden;
+        /*border: 1px solid #ff0;*/
+    }
+
+    .map-dot3 {
+        width: 260px;
+    }
+
+    .map-dot .dot {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        background-color: #cf142b;
+        border: 9px solid #fff;
+        border-radius: 18px;
+        float: left;
+    }
+
+    .map-dot .dot:hover {
+        cursor: pointer;
+    }
+
+    .map-dot .title:hover {
+        cursor: pointer;
+    }
+
+    .map-dot .title {
+        float: left;
+        display: inline-block;
+        height: 36px;
+        padding-top: 2px;
+    }
+
+    .map-dot .title span {
+        display: inline-block;
+        /*font-family: "SignPainter-HouseScript", "Helvetica Neue", Arial, Helvetica, sans-serif;*/
+        font-size: 20px;
+        line-height: 24px;
+        background-color: #fff;
+        padding: 2px 10px 2px 12px;
+        height: 32px;
+    }
+
+    .map-dot .title:before {
+        display: inline-block;
+        content: " ";
+        border: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-right: 20px solid #fff;
+        /*width: 20px;*/
+        /*height: 10px;*/
+        margin: 10px 0 0;
+    }
+
+    #modal-dealers {
+        margin: 40px;
+        /*border: 1px solid #f00;*/
+        height: 520px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+}
+
+@media (min-width: 1200px) {
+
+    .map-bg {
+        left: 101px;
+    }
+
+    .map-canvas {
+        left: 150px;
+    }
+
+    .modal {
+        left: 127px;
+    }
+}

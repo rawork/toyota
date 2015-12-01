@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="ru">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Toyoya Dreamcar - {{ title }}</title>
+    <link type="text/css" rel="stylesheet" href="/bundles/public/css/normalize.css" media="screen">
+    <link type="text/css" rel="stylesheet" href="/bundles/selectize/css/selectize.css" media="screen">
+    <link type="text/css" rel="stylesheet" href="/bundles/public/css/app.css?2015113002" media="screen">
+    <link type="text/css" rel="stylesheet" href="/bundles/public/css/{{ curnode.name }}.css?2015113002" media="screen">
+</head>
+<body>
+    <div class="menu-button"><a href="">Меню</a></div>
+    <div class="header-container">
+        <div class="relative">
+            <div class="slider-gradient"></div>
+        </div>
+        <div class="container">
+            <div class="header">
+                <div class="logo"><a href="/"><img src="/bundles/public/img/logo.png"></a></div>
+                <div class="mainmenu">
+                    <div class="container">
+                        <ul>
+                            <li><a href="/">Главная</a></li>
+                            {% for menuitem in links %}
+                                <li{% if menuitem.id == curnode.id  %} class="active"{% endif %}><a href="{{ menuitem.ref }}">{{ menuitem.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-wrapper">
+        <div class="container content-container">
+            <div class="content">
+
+                {{ maincontent }}
+
+            </div>
+            <div class="social">
+                {{ render('Fuga:Public:Common:block', {name: 'social'}) }}
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="footer-content">
+                {{ render('Fuga:Public:Common:block', {name: 'footer'}) }}
+            </div>
+
+        </div>
+    </div>
+    <script src="/bundles/jquery/jquery.js"></script>
+    <script src="/bundles/selectize/js/standalone/selectize.min.js"></script>
+    <script src="/bundles/scrollto/jquery.scrollTo.min.js"></script>
+    <script src="/bundles/public/js/app.js?2015113001"></script>
+    <script src="/bundles/public/js/{{ curnode.name }}.js?2015113001"></script>
+</body>
+</html>
