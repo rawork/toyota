@@ -5,18 +5,33 @@ namespace Fuga\PublicBundle\Controller;
 use Fuga\CommonBundle\Controller\PublicController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class BookController extends PublicController
+class NewsController extends PublicController
 {
 	public function __construct()
 	{
-		parent::__construct('book');
+		parent::__construct('news');
 	}
 
 	public function indexAction()
 	{
-		$feedback = $this->get('container')->getItems('book_feedback', 'publish=1');
+		$news = $this->get('container')->getItems('news_news', 'publish=1');
 
-		return $this->render('book/index.html.twig', compact('feedback'));
+		return $this->render('news/index.html.twig', compact('news'));
+	}
+
+	public function detailAction($id)
+	{
+		$news = $this->get('container')->getItem('news_news', 'publish=1');
+
+		return $this->render('news/detail.html.twig', compact('news'));
+	}
+
+	public function archiveAction()
+	{
+		$years = $this->get('container')->getItems('news_news', 'publish=1');
+		$months = $this->get('container')->getItems('news_news', 'publish=1');
+
+		return $this->render('news/archive.html.twig', compact('years', 'months'));
 	}
 
 	public function addAction()
