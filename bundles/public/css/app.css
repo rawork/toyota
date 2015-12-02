@@ -415,7 +415,6 @@ p.video iframe {
     .mainmenu {
         position: fixed;
         display: block;
-        background-color: transparent;
         top: 0;
         background-color: #fff;
     }
@@ -430,9 +429,10 @@ p.video iframe {
     .mainmenu ul li {
         float: left;
         padding: 9px 10px 7px;
-        background-color: #bbb;
-        margin: 0 2px;
+        /*background-color: #bbb;*/
+        /*margin: 0 2px;*/
         border-bottom: 0;
+        border-top: 2px solid #cf142b
     }
 
     .mainmenu ul li.active {
@@ -451,7 +451,8 @@ p.video iframe {
         font-family: "ToyotaDisplay", "Helvetica Neue", Arial, Helvetica, sans-serif;
         font-size: 17px;
         line-height: 17px;
-        color: #fff;
+        /*color: #fff;*/
+        color: #000;
         text-decoration: none;
     }
 
