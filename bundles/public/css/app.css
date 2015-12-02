@@ -428,10 +428,11 @@ p.video iframe {
 
     .mainmenu ul li {
         float: left;
-        padding: 9px 10px 7px;
+        padding: 6px 10px 7px;
         /*background-color: #bbb;*/
         margin: 0 2px;
         border-bottom: 0;
+        border-top: 3px solid transparent;
     }
 
     .mainmenu ul li.active {
