@@ -432,11 +432,12 @@ p.video iframe {
         /*background-color: #bbb;*/
         /*margin: 0 2px;*/
         border-bottom: 0;
-        border-top: 2px solid #cf142b
+        border-top: 2px solid #cf142b;
     }
 
     .mainmenu ul li.active {
-        background-color: #cf142b;
+        /*background-color: #cf142b;*/
+
     }
 
     .mainmenu ul li:first-child {
@@ -457,7 +458,8 @@ p.video iframe {
     }
 
     .mainmenu ul li.active a {
-        color: #fff;
+        /*color: #fff;*/
+        color: #cf142b;
     }
 
     .content {
