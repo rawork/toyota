@@ -436,7 +436,7 @@ p.video iframe {
 
     .mainmenu ul li.active {
         /*background-color: #cf142b;*/
-        border-top: 2px solid #cf142b;
+        border-top: 3px solid #cf142b;
     }
 
     .mainmenu ul li:first-child {
