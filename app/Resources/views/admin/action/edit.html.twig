@@ -7,7 +7,7 @@
         <br>
         <form enctype="multipart/form-data" method="post" id="entityForm" action="{{ path('admin_entity_edit', {'state': state, 'module': module, 'entity': entity, 'id': item.id}) }}">
             <input type="hidden" name="id" value="{{ item.id }}">
-            <input type="hidden" id="utype" name="utype" value="0">
+            <input type="hidden" name="utype" id="utype" value="0">
             <table class="table table-condensed">
                 <thead>
                 <tr>
@@ -24,8 +24,8 @@
                 </tr>
                 {% endfor %}
             </table>
-            <input type="button" class="btn btn-success" onClick="preSubmit(0)" value="Сохранить">
-            <input type="button" class="btn btn-default" onClick="preSubmit(1)" value="Применить">
+            <input type="button" class="btn btn-success btn-submit" data-mode="0" value="Сохранить">
+            <input type="button" class="btn btn-default btn-submit" data-mode="1" value="Применить">
             <a href="{{ path('admin_entity_index', {'state': state, 'module': module, 'entity': entity}) }}" class="btn btn-danger">Отменить</a>
         </form>
     </div>

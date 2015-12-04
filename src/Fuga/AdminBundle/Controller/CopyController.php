@@ -25,13 +25,13 @@ class CopyController extends AdminController
 		$response = new JsonResponse();
 		$response->setData(array(
 			'title' => 'Копирование элемента',
-			'button' => '<a class="btn btn-default" data-dismiss="modal" aria-hidden="true">Закрыть</a><a class="btn btn-success" onclick="startCopy(\'/'.$id.'/copy\')">Копировать</a>',
+			'button' => '<a class="btn btn-default" data-dismiss="modal" aria-hidden="true">Закрыть</a><a class="btn btn-success btn-copy" data-id="'.$id.'">Копировать</a>',
 			'content' => '
-<div class="control-group" id="copyInput">
+<div class="control-group" id="copy-input">
   <label class="control-label" for="inputError">Количество новых (1-10)</label>
   <div class="controls">
-    <input type="text" name="quantity" id="copyQuantity" value="1">
-    <span class="help-inline" id="copyHelp"></span>
+    <input type="text" name="amount" id="copy-amount" value="1">
+    <span class="help-inline" id="copy-help"></span>
   </div>
 </div>'
 		));

@@ -21,7 +21,7 @@
 {% if showCreated %}
 <th width="10%">Дата создания</th>
 {% endif %}
-<th class="text-center"><span class="glyphicon glyphicon-align-justify"></span></th>
+<th class="text-center"><span class="glyphicon glyphicon-menu-hamburger"></span></th>
 </tr>
 </thead>
 {{ tableData }}
@@ -38,7 +38,7 @@
 	<div class="form-group rpp">
 		<div class="input-group">
 			<span class="input-group-addon">&nbsp;&nbsp;На странице:&nbsp;&nbsp;</span> 
-			<select class="form-control col-sm-3" name="rpp" onChange="setRpp(this, '{{ tableName }}')">';
+			<select id="select-rpp" class="form-control col-sm-3" name="rpp" data-table="{{ tableName }}" data-url="{{ path('admin_entity_rpp') }}">
 			{% for rpp in rpps %}
 			<option value="{{ rpp }}" {% if rowPerPage == rpp %} selected{% endif %}>{{ rpp }}</option>
 			{% endfor %}

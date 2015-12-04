@@ -4,8 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Управление сайтом - {{ prj_name }}.{{ currentLocale }}</title>
 	<link href="{{ theme_ref }}/bootstrap3/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-	{#<link href="{{ theme_ref }}/bootstrap3/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">#}
-	<link href="{{ theme_ref }}/admin/css/default.css" type="text/css" rel="stylesheet">
+	<link href="{{ theme_ref }}/admin/css/app.admin.css" type="text/css" rel="stylesheet">
 	<link href="{{ theme_ref }}/admin/css/colorpicker.css" type="text/css" rel="stylesheet">
 	<link href="{{ theme_ref }}/calendar/calendar.css" type="text/css" rel="stylesheet">
 	<link href="{{ theme_ref }}/treeview/jquery.treeview.css" type="text/css" rel="stylesheet">
@@ -66,23 +65,29 @@
 			{% endfor %}
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{{ path('security_logout') }}" title="Выйти из Управление сайтом"><span class="glyphicon glyphicon-user"></span> {{ user.name }} {{ user.lastname }}, выйти</a></li>
+				<li class="user-menu"><a href="{{ path('security_logout') }}" title="Выйти из Управление сайтом"><span class="glyphicon glyphicon-user"></span> {{ user.name }} {{ user.lastname }}, выйти</a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</nav>
 	<div class="container">
 	<div class="row">
-		<div class="col-md-3">
-			<div class="well" id="moduleMenu">{{ render('Fuga:Admin:Menu:state', {'state': state, 'module': module}) }}</div>
+		<div class="col-xs-12">
+			{% block content %}{% endblock %}
 			<form id="formLocale" method="post"><input type="hidden" name="locale" value="ru"></form>
 		</div>
-		<div class="col-md-9">
-			{% block content %}{% endblock %}
-		</div>
 	</div>
 	</div>
-	<div class="navbar navbar-default navbar-fixed-bottom footer">Fuga CMS &copy; 2005-2014</div>
-	<div id="waiting" class="hidden"><img src="{{ theme_ref }}/admin/img/loading.gif">Обработка запроса...</div>
+	<div class="navbar navbar-default navbar-fixed-bottom footer">FugaCMS &copy; 2005-2015</div>
+	<div id="state-menu-icon">
+		<button type="button" class="btn btn-default btn-sm">
+			<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+		</button>
+	</div>
+	<div class="statebar">
+		<a class="close">&times;</a>
+		<div id="moduleMenu">{{ render('Fuga:Admin:Menu:state', {'state': state, 'module': module}) }}</div>
+	</div>
+	<div id="waiting"><img src="{{ theme_ref }}/admin/img/loading.gif">Операция выполняется&hellip;</div>
 	<div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="popupTitle" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -103,7 +108,7 @@
 	<script type="text/javascript" src="{{ theme_ref }}/multifile/jquery.form.js"></script>
 	<script type="text/javascript" src="{{ theme_ref }}/multifile/jquery.blockUI.js"></script>
 	<script type="text/javascript" src="{{ theme_ref }}/admin/js/jquery.colorpicker.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/admin/js/admin.js"></script>
+	<script type="text/javascript" src="{{ theme_ref }}/admin/js/app.admin.js"></script>
 	<script type="text/javascript" src="{{ theme_ref }}/tinymce/tinymce.min.js"></script> 
 	<script type="text/javascript" src="{{ theme_ref }}/tinymce/tinymce_init.js"></script>
 	<script type="text/javascript" src="{{ theme_ref }}/calendar/calendar.js"></script>

@@ -49,17 +49,16 @@ class IndexAction extends AdminController
 	/* Кнопки управления записью */
 	private function _getUpdateDelete($id)
 	{
-		$ref = explode('?', $this->fullRef);
 		$buttons = '<td>
 <div class="btn-group pull-right">
   <a class="btn btn-default btn-sm dropdown-toggle admin-dropdown-toggle" id="drop'.$id.'" data-toggle="dropdown" href="#">
-    <span class="glyphicon glyphicon-align-justify"></span>
+    <span class="glyphicon glyphicon-menu-hamburger"></span>
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu admin-dropdown-menu">
-    <li><a href="'.$ref[0].'/'.$id.'/edit"><i class="glyphicon glyphicon-pencil"></i> Изменить</a></li>
-    <li><a href="javascript:startDelete('.$id.')"><i class="glyphicon glyphicon-trash"></i> Удалить</a></li>
-    <li><a href="javascript:showCopyDialog('.$id.')"><i class="glyphicon glyphicon-random"></i> Копировать</a></li>
+    <li><a href="'.$this->generateUrl('admin_entity_edit', array('state' => $this->state, 'module' => $this->module, 'entity' => $this->entity, 'id' => $id)).'"><i class="glyphicon glyphicon-pencil"></i> Изменить</a></li>
+    <li><a href="#" class="entity-delete-link" data-url="'.$this->generateUrl('admin_entity_delete', array('state' => $this->state, 'module' => $this->module, 'entity' => $this->entity, 'id' => $id)).'"><i class="glyphicon glyphicon-trash"></i> Удалить</a></li>
+    <li><a href="#" class="entity-copy-link" data-url="'.$this->generateUrl('admin_entity_copy_dialog', array('id' => $id)).'"><i class="glyphicon glyphicon-random"></i> Копировать</a></li>
   </ul>
 </div>
 </td>

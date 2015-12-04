@@ -24,7 +24,7 @@
         {% endfor %}
         {% endfor %}
         </table>
-        <input type="button" class="btn btn-success" onClick="preSubmit(0)" value="Сохранить">
+        <input type="button" class="btn btn-success btn-submit" data-mode="0" value="Сохранить">
         <a class="btn btn-default" href="{{ path('admin_entity_index', {'state': state, 'module': module, 'entity': entity}) }}">Отменить</a>
         </form>
     </div>

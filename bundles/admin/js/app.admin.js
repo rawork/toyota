@@ -1,19 +1,3 @@
-function preSubmit(utype) {
-	if (utype) {
-		$('#entityForm input[name=utype]').val(utype);	
-	}
-	$('#entityForm').submit();
-}
-
-function startDelete(id) {
-	if (confirm('Уверены, что хотите удалить запись?')) {
-		path = location.href.split('?');
-		window.location = path[0] + '/' + id + '/delete';
-	} else {
-		return false;
-	}
-}
-
 function showPopup() {
 	$('#modalDialog').modal('show');
 }
@@ -160,61 +144,6 @@ function showTemplateDialog(name) {
 	}
 }
 
-function showCopyDialog(id) {
-	$.post(prj_ref + "/admin/copy/"+id, {},
-	function(data){
-		$('#popupTitle').html(data.title);
-		$('#popupButtons').html(data.button);
-		$('#popupContent').html(data.content);
-		showPopup();
-	}, "json");
-}
-
-function startCopy(ref) {
-	var quantity = parseInt($('#copyQuantity').val());
-	if (quantity && (quantity < 1 || quantity > 10)) {
-		$('#copyInput').addClass('error');
-		$('#copyHelp').html('Введите число от 1 до 10');	
-	} else if (quantity) {
-		hidePopup();
-		path = location.href.split('?');
-		window.location = path[0] + ref + '/' + quantity + (1 in path ? '?'+ path[1] : '');
-	} else {
-		$('#copyInput').addClass('error');
-		$('#copyHelp').html('Введите число от 1 до 10');	
-	}
-}
-
-function editField(fieldId) {
-	$.post(prj_ref+"/adminajax/", {method: 'editField', fieldId: fieldId},
-	function(data){
-		$('#popupTitle').html(data.title);
-		$('#popupButtons').html(data.button);
-		$('#popupContent').html(data.content);
-		showPopup();
-	}, "json");
-}
-
-function createBackup() {
-	$('#waiting').show(0);
-	$("#archive_info").addClass('closed').empty();
-	$.post(prj_ref + "/admin/backup/create", {},
-	function(data){
-        $('#waiting').hide(0);
-		window.location.reload();
-	}, "json");
-}
-
-function clearCache() {
-    $('#waiting').show(0);
-	$("#cache_info").addClass('closed').empty();
-	$.post(prj_ref + "/admin/cache/clear", {},
-	function(data){
-		$("#cache_info").html(data.content).removeClass('closed');
-        $('#waiting').hide(0);
-	}, "json");
-}
-
 function addGalleryInput(el) {
     $('#'+el+'_input').append('<br><input name="'+el+'[]" type="file">');
 }
@@ -227,16 +156,6 @@ function deleteGalleryImage(id) {
 		} else {
             $('#file_'+id).remove();
         }
-	}, "json");
-}
-
-function setRpp(sel, tableName) {
-    $('#waiting').show(0);
-    var rpp = sel.options[sel.selectedIndex].value;
-	$.post(prj_ref+"/admin/rpp", {table: tableName, rpp: rpp},
-	function(data){
-        $('#waiting').hide(0);
-        window.location.reload();
 	}, "json");
 }
 
@@ -278,6 +197,51 @@ function setFieldType(it){
 
 (function($) {
     $(function() {
+
+        $(document).on('click', '.btn-submit', function (e) {
+            var mode = parseInt($(this).attr('data-mode'));
+
+            if (mode) {
+                $('input#utype').val(mode);
+            }
+
+            $('#entityForm').submit();
+        });
+
+        $(document).on('click', '#state-menu-icon', function(e){
+            e.preventDefault();
+
+            var that = $(this);
+
+            if ($('.statebar').css('left') == '-260px') {
+                $('.container').css('position', 'absolute')
+                    .animate({
+                        right: '-260px'
+                    }, 200);
+
+                $('.statebar').animate({
+                    left: '0px'
+                }, 200);
+                that.hide();
+            } else {
+                $('.container')
+                    .animate({
+                        right: 'auto'
+                    }, 200)
+                    .css('position', 'static');
+
+                $('.statebar').animate({
+                    left: '-260px'
+                }, 200);
+                that.show();
+            }
+        });
+
+        $(document).on('click', '.statebar a.close', function(e) {
+            e.preventDefault();
+
+            $('#state-menu-icon').trigger('click');
+        });
 
         $(document).on('click', '#btn-filter-cancel', function(e) {
             e.preventDefault();
@@ -346,11 +310,22 @@ function setFieldType(it){
 
                     $('#moduleMenu').html(data.content);
                     $('#waiting').hide(0);
+                    if ($('.statebar').css('left') == '-260px') {
+                        $('.container').css('position', 'absolute')
+                            .animate({
+                                right: '-260px'
+                            }, 200);
+
+                        $('.statebar').animate({
+                            left: '0px'
+                        }, 200);
+                        $('#state-menu-icon').hide();
+                    }
                 }, "json");
         });
 
         $(document).on('click', 'a.module', function () {
-            $('#waiting').show(0);
+            $('#waiting').show();
             var module = $(this).attr('data-module');
             tablelist = $('#table-menu-'+module);
             if (tablelist.html() == '') {
@@ -362,21 +337,90 @@ function setFieldType(it){
                             tablelist.html(data.content);
                             tablelist.show();
                         }
-                        $('#waiting').hide(0);
+                        $('#waiting').hide();
                     }, "json");
             } else if (tablelist.css('display') == 'none') {
                 tablelist.show();
-                $('#waiting').hide(0);
+                $('#waiting').hide();
             } else {
                 tablelist.hide();
-                $('#waiting').hide(0);
+                $('#waiting').hide();
             }
-        })
+        });
 
-        $('#myTab a').click(function (e) {
+        $(document).on('change', '#select-rpp', function (e) {
+            $('#waiting').show();
+            var that = $(this);
+            var tableName = that.attr('data-table');
+            var url = that.attr('data-url');
+            var rpp = that.val();
+            $.post(url, {table: tableName, rpp: rpp},
+                function(data){
+                    $('#waiting').hide();
+                    window.location.reload();
+                }, "json");
+        });
+
+        $(document).on('click', '.entity-delete-link', function (e) {
             e.preventDefault();
-            $(this).tab('show');
-        })
+            var url = $(this).attr('data-url');
+            if (confirm('Уверены, что хотите удалить запись?')) {
+                window.location = url;
+            } else {
+                return false;
+            }
+        });
+
+        $(document).on('click', '.entity-copy-link', function (e) {
+            e.preventDefault();
+
+            var url = $(this).attr('data-url');
+            $.post(url, {},
+                function(data){
+                    $('#popupTitle').html(data.title);
+                    $('#popupButtons').html(data.button);
+                    $('#popupContent').html(data.content);
+                    showPopup();
+                }, "json");
+        });
+
+        $(document).on('click', '.btn-copy', function (e) {
+
+            var ref = '/' + $(this).attr('data-id') + '/copy';
+            var quantity = parseInt($('#copy-amount').val());
+
+            if (quantity > 0 && quantity < 11) {
+                hidePopup();
+                path = location.href.split('?');
+                window.location = path[0] + ref + '/' + quantity + (1 in path ? '?'+ path[1] : '');
+            } else {
+                $('#copy-input').addClass('has-error');
+                $('#copy-help').html('Введите число от 1 до 10');
+            }
+        });
+
+        $('.btn-create-backup').bind('click', function() {
+            var url = $(this).attr('data-url');
+            $('#waiting').show();
+            $("#archive_info").addClass('closed').empty();
+            $.post(url, {},
+                function(data){
+                    $('#waiting').hide();
+                    window.location.reload();
+                }, "json");
+        });
+
+        $('.btn-clear-cache').bind('click', function() {
+            var url = $(this).attr('data-url');
+            $('#waiting').show();
+            $("#cache_info").addClass('closed').empty();
+            $.post(url, {},
+                function(data){
+                    $("#cache_info").html(data.content).removeClass('closed');
+                    $('#waiting').hide();
+                }, "json");
+        });
+
 
         $('.multi').MultiFile({
             accept:'jpg|gif|png|rar|zip|pdf|flv|ppt|xls|doc',

@@ -1,10 +1,23 @@
 body {
 	padding-top: 70px;
 	padding-bottom: 40px;
+	font-weight: 300;
 }
 
-.navbar .brand {
-	margin-left: 10px;
+.navbar-brand {
+	margin-left: 30px;
+	text-transform: uppercase;
+	font-weight: 300;
+}
+
+.navbar-default .navbar-nav>li>a {
+	text-transform: uppercase;
+	font-weight: 300;
+}
+
+.label {
+	font-size: 100%;
+	font-weight: 300;
 }
 
 .pointer {
@@ -19,13 +32,6 @@ body {
 	padding-left: 5px;
 }
 
-#moduleMenu {
-	/*width: 190px;*/
-}
-
-#moduleMenu a {
-	font-size: 14px;
-}
 
 .footer {
 	min-height: 24px;
@@ -56,19 +62,24 @@ body {
 	display: none;
 }
 
-div#waiting {
-	display:none;
-	border:solid 1px #00CC00;
-	background-color:#FFFFFF;
-	z-index: 1031;
+#waiting {
+	display: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	background-color: rgba(255,255,255,0.9);
+	z-index: 1050;
 	position: fixed;
-	padding: 3px;
-	top: 100px;
-	left: 300px;
+	padding: 20px;
+	top: 25px;
+	right: 25px;
+	width: 280px;
+	text-align: center;
+	font-size: 16px;
 }
 
-div#waiting * {
-	color: #999999;
+#waiting img {
+	display: inline-block;
+	margin-right: 10px;
 }
 
 .admin-dropdown-menu {
@@ -119,10 +130,6 @@ textarea.tinymce {
 	height: 400px;
 }
 
-.navbar .nav>li>a.locale {
-	padding: 15px 2px;
-}
-
 .view-button {
 
 }
@@ -158,6 +165,67 @@ textarea.tinymce {
 .color-static {
     width: 24px;
     height: 24px;
+}
+
+#state-menu-icon {
+	position: fixed;
+	z-index: 1040;
+	top: 10px;
+	left: 5px;
+	width: 30px;
+	height: 30px;
+	/*border: 1px solid #f00;*/
+}
+
+.statebar {
+	position: fixed;
+	z-index: 501;
+	top: 50px;
+	left: -260px;
+	bottom: 0;
+	width: 260px;
+	background: rgba(51,73,94,0.9);
+	padding: 15px;
+	font-size: 18px;
+}
+
+.statebar a {
+	color: #fff;
+	display: block;
+	margin-bottom: 10px;
+}
+
+.statebar a:hover {
+	color: #f0f0f0;
+	text-decoration: none;
+}
+
+.statebar a span {
+	margin-right: 5px;
+}
+
+.statebar a.entity {
+	font-size: 15px;
+}
+
+@media (min-width: 768px) {
+	.container {
+		width: 100%;
+	}
+
+	.navbar .nav>li>a.locale {
+		padding: 15px 2px;
+	}
+
+	.navbar-nav>li.user-menu {
+		padding-right: 15px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.container {
+		width: 100%;
+	}
 }
 
 

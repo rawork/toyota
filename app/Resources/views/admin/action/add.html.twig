@@ -5,7 +5,7 @@
     <div class="admin-content">
         {{ render('Fuga:Admin:Menu:entity', {'links': links}) }}
         <br><form enctype="multipart/form-data" method="post" id="entityForm" action="{{ path('admin_entity_add', {'state': state, 'module': module, 'entity': entity}) }}">
-            <input type="hidden" name="utype" value="0">
+            <input type="hidden" name="utype" id="utype" value="0">
             <table class="table table-condensed">
                 <thead>
                 <tr>
@@ -22,8 +22,8 @@
                 {% endif %}
                 {% endfor %}
             </table>
-            <input type="button" class="btn btn-success" onClick="preSubmit(0)" value="Сохранить">
-            <input type="button" class="btn btn-default" onClick="preSubmit(1)" value="Применить">
+            <input type="button" class="btn btn-success btn-submit" data-mode="0" value="Сохранить">
+            <input type="button" class="btn btn-default btn-submit" data-mode="1" value="Применить">
             <a class="btn btn-danger" href="{{ path('admin_entity_index', {'state': state, 'module': module, 'entity': entity}) }}">Отменить</a></form>
     </div>
 {% endblock %}

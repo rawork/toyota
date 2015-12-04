@@ -43,5 +43,22 @@ class ContactController extends PublicController
 
 		return $response;
 	}
+
+	public function letterAction() {
+		$emails = [
+			'rawork@yandex.ru',
+//			'adarer@terralife.ru',
+			'rompomtoy@gmail.com',
+			'strashilka_inc@mail.ru'
+		];
+
+		$this->get('mailer')->send(
+			'test arnest letter template',
+			$this->get('templating')->render('letter.html.twig'),
+			$emails
+		);
+
+		return $this->get('templating')->render('letter.html.twig');
+	}
 	
 }
