@@ -10,10 +10,7 @@ class EnumType extends Type {
 	public function enum_getInput($value, $name) {
 		$value = $value ?: $this->dbValue;
 		$sel = '';
-		if ($this->getParam('name') == 'type' && $this->getParam('table') == 'table_field') {
-			$sel = ' onChange="setType(this)"';
-		}
-		$ret = '<select class="form-control" '.$sel.' name="'.$name.'">';
+		$ret = '<select class="form-control select-'.$name.'" '.$sel.' name="'.$name.'">';
 		if ($this->getParam('select_values')) {
 			$items = explode(';', $this->getParam('select_values'));
 			foreach ($items as $item) {

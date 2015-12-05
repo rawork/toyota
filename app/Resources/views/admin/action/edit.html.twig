@@ -17,7 +17,7 @@
                 </thead>
                 {% for name,field in table.fields %}
                 {% set ft = table.getFieldType(field, item) %}
-                <tr>
+                <tr id="add_{{ field.name }}">
                     <td width="150"><strong>{{ field.title }}</strong>
                         {% if field.help %}<i class="icon-exclamation-sign" alt="{{ field.help }}" title="{{ field.help }}"></i>{% endif %}{% if isRoot %}<div class="sfnt">[{{ field.name }}]</div>{% endif %}</td>
                     <td>{% if field.readonly %}{{ ft.getStatic() }}{% else %}{{ ft.getInput() }}{% endif %}</td>

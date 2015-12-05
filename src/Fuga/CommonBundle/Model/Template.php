@@ -24,8 +24,8 @@ class Template {
 			),
 			'template' => array (
 				'name' => 'template',
-				'title' => 'Шаблон HTML',
-				'type' => 'template'
+				'title' => 'Ссылка на Layout',
+				'type' => 'string'
 			)
 		));
 		$this->tables[] = array(

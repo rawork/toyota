@@ -179,10 +179,11 @@ class Table
 				case 'updated':
 					$values[$fieldType->getName()] = date('Y-m-d H:i:s');
 					break;
-				case 'gallery':
-					$fieldType->getSQLValue();
-					break;
 				default:
+					if ($field['type'] == 'gallery') {
+						$fieldType->getSQLValue();
+						break;
+					}
 					if (empty($field['readonly'])) {
 						$values[$fieldType->getName()] = $fieldType->getSQLValue();
 					}

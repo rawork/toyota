@@ -53,26 +53,6 @@ function choiceList(input_id) {
     hidePopup();
 }
 
-function changeTemplateWidget(name){
-	$('#'+name+'_template').toggleClass('hidden');
-	$('#'+name+'_file').toggleClass('hidden');
-}
-
-function changeTemplateState(name){
-	index = $('#'+name+'_version')[0].selectedIndex;
-	if (index) {
-		$('#'+name+'_delete').addClass('hidden');
-		$('#'+name+'_template').addClass('hidden');
-		$('#'+name+'_file').addClass('hidden');
-		$('#'+name+'_view').removeClass('hidden');
-	} else {
-		$('#'+name+'_delete').removeClass('hidden');
-		$('#'+name+'_template').removeClass('hidden');
-		$('#'+name+'_file').removeClass('hidden');
-		$('#'+name+'_view').addClass('hidden');
-	}
-}
-
 /* ajax */
 function showSelectDialog(inputId, tableName, fieldName, dbId, title){
 	$.post(prj_ref+"/admin/dialog/select", {input_id: inputId, table_name: tableName, field_name: fieldName, entity_id: dbId, title : title},
@@ -144,21 +124,6 @@ function showTemplateDialog(name) {
 	}
 }
 
-function addGalleryInput(el) {
-    $('#'+el+'_input').append('<br><input name="'+el+'[]" type="file">');
-}
-
-function deleteGalleryImage(id) {
-	$.post(prj_ref+"/admin/gallery/delete", {id: id},
-	function(data){
-		if (data.error) {
-			alert(data.error);
-		} else {
-            $('#file_'+id).remove();
-        }
-	}, "json");
-}
-
 /* end ajax */
 
 
@@ -182,17 +147,6 @@ function emptyDateSearch(name){
 	$('#'+name+'_beg').val('');
 	$('#'+name+'_end').val('');
 	return false;
-}
-
-function setFieldType(it){
-	tname = it.options[it.selectedIndex].value;
-	if (tname == 'enum' || tname == 'select' || tname == 'select_list' || tname == 'select_tree') {
-		$('#add_select_values').css('display', 'table-row');
-		$('#add_params').css('display', 'table-row');
-	} else {
-		$('#add_select_values').hide();
-		$('#add_params').hide();
-	}
 }
 
 (function($) {
@@ -419,6 +373,42 @@ function setFieldType(it){
                     $("#cache_info").html(data.content).removeClass('closed');
                     $('#waiting').hide();
                 }, "json");
+        });
+
+        $(document).on('click', '.delete', function (e) {
+            e.preventDefault();
+
+            var id = $(this).attr('data-id');
+            var url = $(this).attr('data-url');
+
+            console.log(id, url);
+
+            $.post(url, {id: id},
+                function(data){
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        $('#file_'+id).remove();
+                    }
+                }, "json");
+        });
+
+        $('.btn-add-input').bind('click', function() {
+            var name = $(this).attr('data-name');
+            $('#'+name+'_input').append('<br><input name="'+name+'[]" type="file">');
+        });
+
+        $('.select-type').bind('change', function (){
+            var types = ['image', 'gallery', 'enum', 'select', 'select_list', 'select_tree'];
+            var type = $(this).val();
+            console.log(type, $.inArray(type, types));
+            if ($.inArray(type, types) > -1) {
+                $('#add_select_values').css('display', 'table-row');
+                $('#add_params').css('display', 'table-row');
+            } else {
+                $('#add_select_values').hide();
+                $('#add_params').hide();
+            }
         });
 
 

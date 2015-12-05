@@ -12,9 +12,9 @@ class GalleryType extends ImageType {
 		$files = $this->getNativeValue();
 		foreach ($files as $file) {
 			if (isset($file['extra']['default'])) {
-				$content[] = '<div id="file_'.$file['id'].'"><a target="_blank" href="'.$file['file'].'"><img width="50" src="'.$file['extra']['default']['path'].'"></a><a class="delete" href="javascript:deleteGalleryImage('.$file['id'].')"><img src="'.PRJ_REF.'/bundles/admin/img/close.png" /></a></div>';
+				$content[] = '<div id="file_'.$file['id'].'"><a target="_blank" href="'.$file['file'].'"><img width="50" src="'.$file['extra']['default']['path'].'"></a><a class="delete" href="#" data-url="'.$this->get('routing')->getGenerator()->generate('admin_gallery_delete').'" data-id="'.$file['id'].'"><img src="'.PRJ_REF.'/bundles/admin/img/close.png" /></a></div>';
 			} else {
-				$content[] = '<div id="file_'.$file['id'].'"><a target="_blank" href="'.$file['file'].'"><img width="50" src="'.$file['file'].'"></a><a class="delete" href="javascript:deleteGalleryImage('.$file['id'].')"><img src="'.PRJ_REF.'/bundles/admin/img/close.png" /></a></div>';
+				$content[] = '<div id="file_'.$file['id'].'"><a target="_blank" href="'.$file['file'].'"><img width="50" src="'.$file['file'].'"></a><a class="delete" href="#" data-url="'.$this->get('routing')->getGenerator()->generate('admin_gallery_delete').'" data-id="'.$file['id'].'"><img src="'.PRJ_REF.'/bundles/admin/img/close.png" /></a></div>';
 			}
 		}
 		$content[] = '</div><div class="clearfix"></div>';
@@ -79,7 +79,7 @@ class GalleryType extends ImageType {
 			$name = $name ?: $this->getName();
 			$content = $this->getStatic().'
 <div id="'.$name.'_input"><input name="'.$name.'[]" type="file"></div>
-<input class="btn btn-default btn-xs" onclick="addGalleryInput(\''.$name.'\')" value="Еще" type="button" />';
+<input class="btn btn-default btn-xs btn-add-input" data-name="'.$name.'" value="Еще" type="button" />';
 
 			return $content;
 		} else {

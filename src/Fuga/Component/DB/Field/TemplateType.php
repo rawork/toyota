@@ -9,11 +9,11 @@ class TemplateType extends Type {
 	}
 	
 	protected function getPath($filename = '') {
-		return PRJ_REF.SMARTY_PATH.$filename;
+		return PRJ_REF.TWIG_PATH.$filename;
 	}
 	
 	protected function getRealPath($filename = '') {
-		return PRJ_DIR.SMARTY_PATH.$filename;
+		return PRJ_DIR.TWIG_PATH.$filename;
 	}
 	
 	public function getBackupPath($filename) {
