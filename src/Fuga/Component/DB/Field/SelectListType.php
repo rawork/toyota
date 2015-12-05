@@ -63,10 +63,10 @@ class SelectListType extends Type
 		$table = $this->getParam('table');
 		$id = $this->dbId ?: '0';
 		$input_id = strtr($name, '[]', '__');
-		$empty = $value ? ' <a href="javascript:void(0)" onClick="emptySelect(\''.$input_id.'\')"><i class="icon-remove"></i></a>' : '';
+		$empty = $value ? ' <a href="#" class="selected-remove" data-input="'.$input_id.'"><span class="glyphicon glyphicon-remove"></span></a>' : '';
 		$content = '
 <div id="'.$input_id.'_title">'.$this->getStatic($value).$empty.'</div>
-<button class="btn btn-success" href="javascript:void(0)" type="button" onClick="showSelectDialog(\''.$input_id.'\',\''.$table.'\',\''.$name.'\', \''.$id.'\', \''.$this->getStatic($value).'\');">Выбрать</button>
+<button class="btn btn-success btn-select-dialog" data-url="'.$this->get('routing')->getGenerator()->generate('admin_dialog_select').'" data-input="'.$input_id.'" data-table="'.$table.'" data-field="'.$name.'" data-value="'.$id.'" data-title="'.htmlspecialchars($this->getStatic($value)).'">Выбрать</button>
 <input type="hidden" name="'.$name.'" value="'.$value.'" id="'.$input_id.'">
 <input type="hidden" name="'.$name.'_type" value="'.$this->getParam('link_type').'" id="'.$input_id.'_type">
 ';

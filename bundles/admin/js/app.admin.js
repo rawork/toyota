@@ -6,17 +6,12 @@ function hidePopup() {
 	$('#modalDialog').modal('hide');
 }
 
-function emptySelect(inputId) {
-	$('#'+inputId).val(0);
-	$('#'+inputId+'_title').html('Не выбрано');
-}
-
 function makePopupChoice(inputId) {
 	value = $('#popupChoiceId').val();
 	valueTitle = $('#popupChoiceTitle').html();
 	type = $('#'+inputId+'_type').val();
 	if (type == 'many') {
-		text = '<div>'+valueTitle+' <input type="radio" name="'+inputId+'_default" value="'+value+'" class="selected-default" data-input-id="'+inputId+'"> По умолчанию <a href="#" class="selected-remove" data-input-id="'+inputId+'"><i class="glyphicon glyphicon-remove"></i></a></div>';
+		text = '<div>'+valueTitle+' <input type="radio" name="'+inputId+'_default" value="'+value+'" class="selected-default" data-input-id="'+inputId+'"> По умолчанию <a href="#" class="selected-remove" data-input="'+inputId+'"><span class="glyphicon glyphicon-remove"></span></a></div>';
 		if ($('input[name|="'+inputId+'_default"]').length == 0) {
 			$('#'+inputId+'_title').html(text);
 			$('#'+inputId).val(value);
@@ -33,7 +28,7 @@ function makePopupChoice(inputId) {
 		$('#'+inputId+'_extra').val(ids.join());
 	} else {
 		$('#'+inputId).val(value);
-		text = '<div>'+valueTitle+' <a href="#" class="selected-remove" data-input-id="'+inputId+'"><i class="glyphicon glyphicon-remove"></i></a></div>';
+		text = '<div>'+valueTitle+' <a href="#" class="selected-remove" data-input="'+inputId+'"><i class="glyphicon glyphicon-remove"></i></a></div>';
 		$('#'+inputId+'_title').html(text);
 	}
 	hidePopup();
@@ -53,21 +48,6 @@ function choiceList(input_id) {
     hidePopup();
 }
 
-/* ajax */
-function showSelectDialog(inputId, tableName, fieldName, dbId, title){
-	$.post(prj_ref+"/admin/dialog/select", {input_id: inputId, table_name: tableName, field_name: fieldName, entity_id: dbId, title : title},
-	function(data){
-		$('#popupTitle').html(data.title);
-		$('#popupButtons').html(data.button);
-		$('#popupContent').html(data.content);
-		$('.popup-item').on("click", function(event){
-			$('#popupChoiceId').val($(this).prop('rel'));
-			$('#popupChoiceTitle').html($(this).html());
-		});	
-		showPopup();
-	}, "json");
-}
-
 function showPage(divId, tableName, fieldName, entityId, page) {
 	$.post(prj_ref+"/admin/dialog/selectpage", {div_id: divId, table_name: tableName, field_name: fieldName, entity_id: entityId, page: page},
 	function(data){
@@ -79,26 +59,7 @@ function showPage(divId, tableName, fieldName, entityId, page) {
 	}, "json");
 }
 
-function showTreeDialog(inputId, tableName, fieldName, dbId, title){
-	checkedId = dbId;
-	$.post(prj_ref + "/admin/dialog/tree", {input_id: inputId, table_name: tableName, field_name: fieldName, entity_id: dbId, title : title},
-	function(data){
-		$('#popupTitle').html(data.title);
-		$('#popupButtons').html(data.button);
-		$('#popupContent').html(data.content);
-		$("#navigation").treeview({
-			persist: "location",
-			collapsed: true,
-			unique: true
-		});
-		$('.popup-item').on("click", function(event){
-			$('#popupChoiceId').val($(this).prop('rel'));
-			$('#popupChoiceTitle').html($(this).html());
-		});
-		showPopup();
-	}, "json");
-}
-
+// @deprecated
 function showListDialog(inputId, table_name, field_name, value){
     $.post(prj_ref + "/admin/dialog/list", {input_id: inputId, table_name: table_name, field_name: field_name, value: value},
         function(data){
@@ -108,24 +69,6 @@ function showListDialog(inputId, table_name, field_name, value){
             showPopup();
         }, "json");
 }
-
-function showTemplateDialog(name) {
-	id = $('#'+name+'_version')[0].options[$('#'+name+'_version')[0].selectedIndex].value;
-	if (id) {
-		$.post(prj_ref + "/admin/dialog/template", {version_id: id},
-		function(data){
-			$('#popupTitle').html(data.title);
-			$('#popupButtons').html(data.button);
-			$('#popupContent').html(data.content);
-			showPopup();
-		}, "json");
-	} else {
-		alert('Не выбрана версия!');
-	}
-}
-
-/* end ajax */
-
 
 function setupCalendar() {
 	for (var name in calendars) {
@@ -197,6 +140,73 @@ function emptyDateSearch(name){
             $('#state-menu-icon').trigger('click');
         });
 
+        $(document).on('click', '.btn-select-dialog', function (e){
+            e.preventDefault();
+
+            var that = $(this);
+            var input = that.attr('data-input');
+            var table = that.attr('data-table');
+            var field = that.attr('data-field');
+            var value = that.attr('data-value');
+            var title = that.attr('data-title');
+            var url = that.attr('data-url');
+
+            $.post(url, {input: input, table: table, field: field, value: value, title : title},
+                function(data){
+                    $('#popupTitle').html(data.title);
+                    $('#popupButtons').html(data.button);
+                    $('#popupContent').html(data.content);
+                    $('.popup-item').on("click", function(event){
+                        $('#popupChoiceId').val($(this).prop('rel'));
+                        $('#popupChoiceTitle').html($(this).html());
+                    });
+                    showPopup();
+                }, "json");
+        });
+
+        $(document).on('click', '.btn-tree-dialog', function (e){
+            e.preventDefault();
+
+            var that = $(this);
+            var input = that.attr('data-input');
+            var table = that.attr('data-table');
+            var field = that.attr('data-field');
+            var value = that.attr('data-value');
+            var title = that.attr('data-title');
+            var url = that.attr('data-url');
+
+            $.post(url, {input: input, table: table, field: field, value: value, title : title},
+                function(data){
+                    $('#popupTitle').html(data.title);
+                    $('#popupButtons').html(data.button);
+                    $('#popupContent').html(data.content);
+                    $("#navigation").treeview({
+                        persist: "location",
+                        collapsed: true,
+                        unique: true
+                    });
+                    $('.popup-item').on("click", function(event){
+                        $('#popupChoiceId').val($(this).prop('rel'));
+                        $('#popupChoiceTitle').html($(this).html());
+                    });
+                    showPopup();
+                }, "json");
+        });
+
+        // TODO not work now
+        $(document).on('click', ',modal-body .pagination a', function (e) {
+            e.preventDefault();
+            //, divId, tableName, fieldName, entityId, page
+            $.post(prj_ref+"/admin/dialog/selectpage", {div_id: divId, table_name: tableName, field_name: fieldName, entity_id: entityId, page: page},
+                function(data){
+                    $('#' + divId).html(data.content);
+                    $('.popup-item').on("click", function(event){
+                        $('#popupChoiceId').val($(this).prop('rel'));
+                        $('#popupChoiceTitle').html($(this).html());
+                    });
+                }, "json");
+        });
+
         $(document).on('click', '#btn-filter-cancel', function(e) {
             e.preventDefault();
             $('#filter-type').val($(this).attr('data-type'));
@@ -252,17 +262,16 @@ function emptyDateSearch(name){
 
         $(document).on('click', 'a.state', function () {
             $('#waiting').show(0);
-            var state = $(this).attr('data-state');
-            var module = $(this).attr('data-module');
+            var url = $(this).attr('data-url');
 
-            $.post(prj_ref + "/admin/statemenu/"+ state + (module ? "/" + module : ''), {},
+            $.post(url, {},
                 function(data){
                     if (data.error) {
                         window.location.reload();
                         return;
                     }
 
-                    $('#moduleMenu').html(data.content);
+                    $('#module-menu').html(data.content);
                     $('#waiting').hide(0);
                     if ($('.statebar').css('left') == '-260px') {
                         $('.container').css('position', 'absolute')
@@ -278,12 +287,14 @@ function emptyDateSearch(name){
                 }, "json");
         });
 
-        $(document).on('click', 'a.module', function () {
+        $(document).on('click', 'a.module', function (e) {
+            e.preventDefault();
+
             $('#waiting').show();
-            var module = $(this).attr('data-module');
-            tablelist = $('#table-menu-'+module);
+            var url = $(this).attr('data-url');
+            tablelist = $(this).siblings('.admin-submenu');
             if (tablelist.html() == '') {
-                $.post(prj_ref + "/admin/modulemenu/" + module, {},
+                $.post(url, {},
                     function(data){
                         if (data.alertText) {
                             window.location.reload();
@@ -381,8 +392,6 @@ function emptyDateSearch(name){
             var id = $(this).attr('data-id');
             var url = $(this).attr('data-url');
 
-            console.log(id, url);
-
             $.post(url, {id: id},
                 function(data){
                     if (data.error) {
@@ -401,7 +410,7 @@ function emptyDateSearch(name){
         $('.select-type').bind('change', function (){
             var types = ['image', 'gallery', 'enum', 'select', 'select_list', 'select_tree'];
             var type = $(this).val();
-            console.log(type, $.inArray(type, types));
+
             if ($.inArray(type, types) > -1) {
                 $('#add_select_values').css('display', 'table-row');
                 $('#add_params').css('display', 'table-row');
@@ -494,27 +503,34 @@ function emptyDateSearch(name){
 
         $(document).on('click', 'a.selected-remove', function(e){
             e.preventDefault();
-            var inputId = $(this).attr('data-input-id');
+
+            var inputId = $(this).attr('data-input');
             var checked = $(this).prev().prop('checked');
+
+            console.log(inputId, checked);
+
             $(this).parent().remove();
-            if (checked) {
-                if (firstElement = $('input[name|="'+inputId+'_default"]').first()) {
-                    firstElement.prop('checked', true);
-                    $('#'+inputId).val(firstElement.val());
-                }
-            }
-            ids = new Array();
-            $('input[name|="'+inputId+'_default"]').each(function (index, domElement){
-                if ($(domElement).val() != $('#'+inputId).val()) {
-                    ids.push($(domElement).val());
-                }
-            });
-            if ($('input[name|="'+inputId+'_default"]').length == 0) {
+            var ids = [];
+            var inputs = $('input[name|="'+inputId+'_default"]');
+
+            if (inputs.length == 0) {
                 $('#'+inputId).val(0);
                 $('#'+inputId+'_title').html('Не выбрано');
                 $('#'+inputId+'_extra').val('');
+            } else {
+                firstElement = inputs.first();
+                if (checked != undefined && checked && firstElement != undefined) {
+                    firstElement.prop('checked', true);
+                    $('#'+inputId).val(firstElement.val());
+                }
+                inputs.each(function (index, domElement){
+                    if ($(domElement).val() != $('#'+inputId).val()) {
+                        ids.push($(domElement).val());
+                    }
+                });
+                $('#'+inputId+'_extra').val(ids.join());
             }
-            $('#'+inputId+'_extra').val(ids.join());
+
         });
 
     });

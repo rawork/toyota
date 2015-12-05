@@ -35,7 +35,7 @@
 
 			<li class="divider"></li>
 			{% for stateName,stateTitle in states %}
-			<li><a class="state pointer" data-state="{{ stateName }}" data-module="{{ module }}">{{ stateTitle }}</a></li>
+			<li><a class="state pointer" data-url="{{ path('admin_statemenu', {state: stateName, module: module}) }}">{{ stateTitle }}</a></li>
 			{#<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ stateTitle }} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
@@ -85,7 +85,7 @@
 	</div>
 	<div class="statebar">
 		<a class="close">&times;</a>
-		<div id="moduleMenu">{{ render('Fuga:Admin:Menu:state', {'state': state, 'module': module}) }}</div>
+		<div id="module-menu">{{ render('Fuga:Admin:Menu:state', {'state': state, 'module': module}) }}</div>
 	</div>
 	<div id="waiting"><img src="{{ theme_ref }}/admin/img/loading.gif">Операция выполняется&hellip;</div>
 	<div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="popupTitle" aria-hidden="true">

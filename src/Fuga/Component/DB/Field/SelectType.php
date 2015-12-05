@@ -28,20 +28,20 @@ class SelectType extends LookUpType {
 			$stmt->execute();
 			$entities = $stmt->fetchAll();
 			foreach ($entities as $entity) {
-				$extraElements[] = '<div>'.$this->getStatic($entity['id']).' <input type="radio" name="'.$input_id.'_default" value="'.$entity['id'].'" class="selected-default" data-input-id="'.$input_id.'">  По умолчанию <a href="#" class="selected-remove" data-input-id="'.$input_id.'"><i class="glyphicon glyphicon-remove"></i></a></div>';
+				$extraElements[] = '<div>'.$this->getStatic($entity['id']).' <input type="radio" name="'.$input_id.'_default" value="'.$entity['id'].'" class="selected-default" data-input="'.$input_id.'">  По умолчанию <a href="#" class="selected-remove" data-input="'.$input_id.'"><span class="glyphicon glyphicon-remove"></span></a></div>';
 				$extra[] = $entity['id'];
 			}
 		}
 		$extra = implode(',', $extra);
 		$extraElements = implode('', $extraElements);
 		$staticValue = $this->getStatic($value);
-		$defaultValue = $value ? ('many' == $this->getParam('link_type') ? '  <input type="radio" name="'.$input_id.'_default" value="'.$value.'" class="selected-default" data-input-id="'.$input_id.'" checked> По умолчанию' : '').' <a href="#" class="selected-remove" data-input-id="'.$input_id.'"><i class="glyphicon glyphicon-remove"></i></a>' : '';
+		$defaultValue = $value ? ('many' == $this->getParam('link_type') ? '  <input type="radio" name="'.$input_id.'_default" value="'.$value.'" class="selected-default" data-input-id="'.$input_id.'" checked> По умолчанию' : '').' <a href="#" class="selected-remove" data-input="'.$input_id.'"><span class="glyphicon glyphicon-remove"></span></a>' : '';
 		$ret = '
 <div id="'.$input_id.'_title">
 <div>'.$staticValue.$defaultValue.'</div>
 '.$extraElements.'
 </div>
-<button class="btn btn-success" href="javascript:void(0)" type="button" onClick="showSelectDialog(\''.$input_id.'\',\''.$table.'\',\''.$name.'\', \''.$id.'\', \''.htmlspecialchars($this->getStatic($value)).'\',\''.$value.'\');">Выбрать</button>
+<button class="btn btn-success btn-select-dialog" data-url="'.$this->get('routing')->getGenerator()->generate('admin_dialog_select').'" data-input="'.$input_id.'" data-table="'.$table.'" data-field="'.$name.'" data-value="'.$id.'" data-title="'.htmlspecialchars($this->getStatic($value)).'">Выбрать</button>
 <input type="hidden" name="'.$name.'" value="'.$value.'" id="'.$input_id.'">
 <input type="hidden" name="'.$name.'_extra" value="'.$extra.'" id="'.$input_id.'_extra">
 <input type="hidden" name="'.$name.'_type" value="'.$this->getParam('link_type').'" id="'.$input_id.'_type">

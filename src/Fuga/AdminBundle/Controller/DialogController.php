@@ -10,10 +10,10 @@ class DialogController extends Controller
 {
 	public function selectAction()
 	{
-		$inputId   = $this->get('request')->request->get('input_id');
-		$tableName = $this->get('request')->request->get('table_name');
-		$fieldName = $this->get('request')->request->get('field_name');
-		$entityId  = $this->get('request')->request->get('entity_id');
+		$inputId   = $this->get('request')->request->get('input');
+		$tableName = $this->get('request')->request->get('table');
+		$fieldName = $this->get('request')->request->get('field');
+		$entityId  = $this->get('request')->request->getInt('value');
 		$title 	   = $this->get('request')->request->get('title');
 		$table = $this->get('container')->getTable($tableName);
 		$fieldName = str_replace($entityId, '', $fieldName);
@@ -112,10 +112,10 @@ class DialogController extends Controller
 
 	public function treeAction()
 	{
-		$inputId = $this->get('request')->request->get('input_id');
-		$tableName = $this->get('request')->request->get('table_name');
-		$fieldName = $this->get('request')->request->get('field_name');
-		$entityId = $this->get('request')->request->get('entity_id');
+		$inputId = $this->get('request')->request->get('input');
+		$tableName = $this->get('request')->request->get('table');
+		$fieldName = $this->get('request')->request->get('field');
+		$entityId = $this->get('request')->request->get('value');
 		$title = $this->get('request')->request->get('title');
 		$locale = $this->get('session')->get('locale');
 		$table = $this->get('container')->getTable($tableName);

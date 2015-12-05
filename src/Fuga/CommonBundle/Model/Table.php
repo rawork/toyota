@@ -95,7 +95,7 @@ class Table {
 
 	$this->tables[] = array(
 			'name'		=> 'field',
-			'module' => 'table',
+			'module' 	=> 'table',
 			'title'		=> 'Поля',
 			'order_by'	=> 'table_id,sort',
 			'is_sort'	=> true,
@@ -130,20 +130,20 @@ class Table {
 				'name'		=> 'type',
 				'title'		=> 'Тип поля',
 				'type'		=> 'enum',
-				'select_values' => 'HTML|html;Выбор|select;Выбор из дерева|select_tree;Выбор (мульти)|select_list;Выбор цвета|color;Галерея|gallery;Дата|date;Дата и время|datetime;Деньги|currency;Изображение|image;Пароль|password;Перечисление|enum;Строка|string;Текст|text;Файл|file;Флажок|checkbox;Целое число|number;Шаблон|template',
+				'select_values' => 'HTML|html;Выбор|select;Выбор из дерева|select_tree;Выбор (мульти)|select_list;Выбор цвета|color;Галерея|gallery;Дата|date;Дата и время|datetime;Деньги|currency;Изображение|image;Пароль|password;Перечисление|enum;Строка|string;Текст|text;Файл|file;Флажок|checkbox;Целое число|number',
 				'defvalue'	=> 'string',
 				'width'		=> '21%'
 			),
 			'select_values' => array (
 				'name'  => 'select_values',
 				'title' => 'Значения',
-				'type'  => 'string',
+				'type'  => 'text',
 				'help'  => 'Знак-раздельтель &laquo;;&raquo;'
 			),
 			'params' => array (
 				'name'  => 'params',
 				'title' => 'Параметры',
-				'type'  => 'string'
+				'type'  => 'text'
 			),
 			'width' => array (
 				'name'  => 'width',
