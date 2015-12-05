@@ -1,11 +1,3 @@
-function showPopup() {
-	$('#modalDialog').modal('show');
-}
-
-function hidePopup() {
-	$('#modalDialog').modal('hide');
-}
-
 function makePopupChoice(inputId) {
 	value = $('#popupChoiceId').val();
 	valueTitle = $('#popupChoiceTitle').html();
@@ -48,17 +40,6 @@ function choiceList(input_id) {
     hidePopup();
 }
 
-function showPage(divId, tableName, fieldName, entityId, page) {
-	$.post(prj_ref+"/admin/dialog/selectpage", {div_id: divId, table_name: tableName, field_name: fieldName, entity_id: entityId, page: page},
-	function(data){
-		$('#' + divId).html(data.content);
-		$('.popup-item').on("click", function(event){
-			$('#popupChoiceId').val($(this).prop('rel'));
-			$('#popupChoiceTitle').html($(this).html());
-		});
-	}, "json");
-}
-
 // @deprecated
 function showListDialog(inputId, table_name, field_name, value){
     $.post(prj_ref + "/admin/dialog/list", {input_id: inputId, table_name: table_name, field_name: field_name, value: value},
@@ -70,6 +51,8 @@ function showListDialog(inputId, table_name, field_name, value){
         }, "json");
 }
 
+
+// TODO find calendars on the fly by data-cal="1"
 function setupCalendar() {
 	for (var name in calendars) {
 		time = (calendars[name] ? ' ' + calendars[name] : '')
@@ -86,14 +69,16 @@ function setupCalendar() {
 	}
 }
 
-function emptyDateSearch(name){
-	$('#'+name+'_beg').val('');
-	$('#'+name+'_end').val('');
-	return false;
-}
-
 (function($) {
     $(function() {
+
+        var showPopup = function() {
+            $('#modalDialog').modal('show');
+        };
+
+        var hidePopup = function() {
+            $('#modalDialog').modal('hide');
+        };
 
         $(document).on('click', '.btn-submit', function (e) {
             var mode = parseInt($(this).attr('data-mode'));
@@ -194,12 +179,14 @@ function emptyDateSearch(name){
         });
 
         // TODO not work now
-        $(document).on('click', ',modal-body .pagination a', function (e) {
+        $(document).on('click', '.modal-body .pagination a', function (e) {
             e.preventDefault();
-            //, divId, tableName, fieldName, entityId, page
-            $.post(prj_ref+"/admin/dialog/selectpage", {div_id: divId, table_name: tableName, field_name: fieldName, entity_id: entityId, page: page},
+
+            var url = $(this).attr('href');
+
+            $.get(url,
                 function(data){
-                    $('#' + divId).html(data.content);
+                    $('#selectlist').html(data.content);
                     $('.popup-item').on("click", function(event){
                         $('#popupChoiceId').val($(this).prop('rel'));
                         $('#popupChoiceTitle').html($(this).html());
@@ -211,6 +198,15 @@ function emptyDateSearch(name){
             e.preventDefault();
             $('#filter-type').val($(this).attr('data-type'));
             $('#form-filter').submit();
+        });
+
+        $(document).on('click', '.btn-date-empty', function emptyDateSearch(e){
+            e.preventDefault();
+
+            var name = $(this).attr('data-name');
+
+            $('#'+name+'_beg').val('');
+            $('#'+name+'_end').val('');
         });
 
         $(document).on('click', '#btn-group-delete', function(e) {
@@ -506,8 +502,6 @@ function emptyDateSearch(name){
 
             var inputId = $(this).attr('data-input');
             var checked = $(this).prev().prop('checked');
-
-            console.log(inputId, checked);
 
             $(this).parent().remove();
             var ids = [];

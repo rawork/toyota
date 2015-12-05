@@ -60,7 +60,7 @@ class DateType extends Type {
 		} else {
 			$date_end = '';//date('Y-m-d');
 		}
-		return '<div class="form-inline">c '.$this->dateType_getInput(parent::getSearchName('beg'), $date_beg, false).' по '.$this->dateType_getInput(parent::getSearchName('end'), $date_end, false).' <a href="javascript:void(0)" onClick="emptyDateSearch(\''.parent::getSearchName().'\')">Обнулить</a></div>';
+		return '<div class="form-inline">c '.$this->dateType_getInput(parent::getSearchName('beg'), $date_beg, false).' по '.$this->dateType_getInput(parent::getSearchName('end'), $date_end, false).' <a href="#" class="btn-date-empty" data-name="'.parent::getSearchName().'">Обнулить</a></div>';
 	}
 
 	public function getSearchSQL() {

@@ -27,9 +27,9 @@ admin_modulemenu:
 admin_dialog_select:
   path: /admin/dialog/select
   defaults: { _controller: 'Fuga:Admin:Dialog:select' }
-admin_dialog_select_page:
-  path: /admin/dialog/selectpage
-  defaults: { _controller: 'Fuga:Admin:Dialog:selectpage' }
+admin_dialog_pagination:
+  path: /admin/dialog/pagination/{table}/{field}/{entity}/{page}
+  defaults: { _controller: 'Fuga:Admin:Dialog:pagination', page: 1}
 admin_dialog_tree:
   path: /admin/dialog/tree
   defaults: { _controller: 'Fuga:Admin:Dialog:tree' }

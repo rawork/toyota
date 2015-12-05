@@ -29,7 +29,7 @@ class DialogController extends Controller
 		$paginator = $this->get('paginator');
 		$paginator->paginate(
 			$this->get('container')->getTable($field['l_table']),
-			'javascript:showPage(\'selectlist\',\''.$tableName.'\', \''.$fieldName.'\', '.$entityId.', ###)',
+			rawurldecode($this->generateUrl('admin_dialog_pagination', array('table' => $tableName, 'field' => $fieldName, 'entity' => $entityId, 'page' => '###'))),
 			$criteria,
 			10,
 			1,
@@ -57,31 +57,26 @@ class DialogController extends Controller
 		return $response;
 	}
 
-	public function selectpageAction()
+	public function paginationAction($table, $field, $entity, $page)
 	{
-		$divId = $this->get('request')->request->get('div_id');
-		$tableName = $this->get('request')->request->get('table_name');
-		$fieldName = $this->get('request')->request->get('field_name');
-		$entityId = $this->get('request')->request->get('entity_id');
-		$page  = $this->get('request')->request->get('page');
 		$locale = $this->get('session')->get('locale');
-		$table = $this->get('container')->getTable($tableName);
-		$field = $table->fields[$fieldName];
+		$tableEntity = $this->get('container')->getTable($table);
+		$fieldData = $tableEntity->fields[$field];
 		$criteria = '';
-		if (!empty($field['l_lang'])) {
+		if (!empty($fieldData['l_lang'])) {
 			$criteria = "locale='".$locale."'";
 		}
 		$paginator = $this->get('paginator');
 		$paginator->paginate(
-			$this->get('container')->getTable($field['l_table']),
-			'javascript:showPage(\''.$divId.'\',\''.$tableName.'\', \''.$fieldName.'\', '.$entityId.', ###)',
+			$this->get('container')->getTable($fieldData['l_table']),
+			rawurldecode($this->generateUrl('admin_dialog_pagination', array('table' => $table, 'field' => $field, 'entity' => $entity, 'page' => '###'))),
 			$criteria,
 			10,
 			$page,
 			6
 		);
-		$items = $this->get('container')->getItems($field['l_table'], $criteria, $field['l_field'], $paginator->limit);
-		$fields = explode(',', $field['l_field']);
+		$items = $this->get('container')->getItems($fieldData['l_table'], $criteria, $fieldData['l_field'], $paginator->limit);
+		$fields = explode(',', $fieldData['l_field']);
 		$text = '<table class="table table-condensed">
 <thead><tr>
 <th>Название</th>
