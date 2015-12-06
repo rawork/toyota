@@ -173,7 +173,7 @@ class FormBuilder {
 		$fields = array();
 		foreach ($this->items as $field){
 			$value = strip_tags($this->get('request')->request->get($field['name']));
-			if ($field['not_empty'] && empty($value)) {
+			if ($field['is_required'] && empty($value)) {
 				$ftitle = $field['title'];
 				$error = $params['field_error'];
 				$errors[] = $this->get('templating')->render('form/error.html.twig', compact('ftitle', 'error'));
