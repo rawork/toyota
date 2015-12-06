@@ -1,7 +1,7 @@
 <?php
 
-define('LIB_VERSION', '6.1.0');
-define('LIB_DATE', '2015.06.15');
+define('LIB_VERSION', '7.0.0');
+define('LIB_DATE', '2015.12.06');
 
 mb_http_input('UTF-8'); 
 mb_http_output('UTF-8'); 

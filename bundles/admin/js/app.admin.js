@@ -1,45 +1,3 @@
-function makePopupChoice(inputId) {
-	value = $('#popupChoiceId').val();
-	valueTitle = $('#popupChoiceTitle').html();
-	type = $('#'+inputId+'_type').val();
-	if (type == 'many') {
-		text = '<div>'+valueTitle+' <input type="radio" name="'+inputId+'_default" value="'+value+'" class="selected-default" data-input-id="'+inputId+'"> По умолчанию <a href="#" class="selected-remove" data-input="'+inputId+'"><span class="glyphicon glyphicon-remove"></span></a></div>';
-		if ($('input[name|="'+inputId+'_default"]').length == 0) {
-			$('#'+inputId+'_title').html(text);
-			$('#'+inputId).val(value);
-			$('input[name|="'+inputId+'_default"]').first().prop('checked', true);
-		} else {
-			$('#'+inputId+'_title').append(text);
-		}
-		ids = new Array();
-		$('input[name|="'+inputId+'_default"]').each(function (index, domElement){
-			if ($(domElement).val() != $('#'+inputId).val()) {
-				ids.push($(domElement).val());
-			}
-		});
-		$('#'+inputId+'_extra').val(ids.join());
-	} else {
-		$('#'+inputId).val(value);
-		text = '<div>'+valueTitle+' <a href="#" class="selected-remove" data-input="'+inputId+'"><i class="glyphicon glyphicon-remove"></i></a></div>';
-		$('#'+inputId+'_title').html(text);
-	}
-	hidePopup();
-}
-
-function choiceList(input_id) {
-    ids = new Array();
-    titles = new Array();
-    $("input.popup-item:checked").each(function (index, domElement) {
-        id = $(domElement).val();
-        title = $('#itemTitle' + id).html();
-        ids.push(id);
-        titles.push(title);
-    });
-    $('#'+input_id).val(ids.join());
-    $('#'+input_id+'_title').val(titles.join(', '));
-    hidePopup();
-}
-
 // @deprecated
 function showListDialog(inputId, table_name, field_name, value){
     $.post(prj_ref + "/admin/dialog/list", {input_id: inputId, table_name: table_name, field_name: field_name, value: value},
@@ -52,25 +10,27 @@ function showListDialog(inputId, table_name, field_name, value){
 }
 
 
-// TODO find calendars on the fly by data-cal="1"
-function setupCalendar() {
-	for (var name in calendars) {
-		time = (calendars[name] ? ' ' + calendars[name] : '')
-		Calendar.setup({
-			inputField : name, 
-			ifFormat : "%d.%m.%Y" + time, 
-			showsTime : time ? true : false, 
-			button : "trigger_" + name, 
-			align : "Br", 
-			singleClick : true,
-			timeFormat : 24,
-			firstDay : 1
-		});
-	}
-}
-
 (function($) {
     $(function() {
+
+        jQuery.cachedScript = function( url, options ) {
+
+            // Allow user to set any option except for dataType, cache, and url
+            options = $.extend( options || {}, {
+                dataType: "script",
+                cache: true,
+                url: url
+            });
+
+            // Use $.ajax() since it is more flexible than $.getScript
+            // Return the jqXHR object so we can chain callbacks
+            return jQuery.ajax( options );
+        };
+
+        var $body = $('body');
+        window.state = $body.attr('data-state');
+        window.theme_ref = $body.attr('data-theme');
+        window.prj_ref = $body.attr('data-ref');
 
         var showPopup = function() {
             $('#modalDialog').modal('show');
@@ -178,7 +138,53 @@ function setupCalendar() {
                 }, "json");
         });
 
-        // TODO not work now
+        $(document).on('click', '.btn-popup-choice', function (e) {
+            e.preventDefault();
+
+            var inputId = $(this).attr('data-input');
+            value = $('#popupChoiceId').val();
+            valueTitle = $('#popupChoiceTitle').html();
+            type = $('#'+inputId+'_type').val();
+            if (type == 'many') {
+                text = '<div>'+valueTitle+' <input type="radio" name="'+inputId+'_default" value="'+value+'" class="selected-default" data-input-id="'+inputId+'"> По умолчанию <a href="#" class="selected-remove" data-input="'+inputId+'"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                if ($('input[name|="'+inputId+'_default"]').length == 0) {
+                    $('#'+inputId+'_title').html(text);
+                    $('#'+inputId).val(value);
+                    $('input[name|="'+inputId+'_default"]').first().prop('checked', true);
+                } else {
+                    $('#'+inputId+'_title').append(text);
+                }
+                ids = new Array();
+                $('input[name|="'+inputId+'_default"]').each(function (index, domElement){
+                    if ($(domElement).val() != $('#'+inputId).val()) {
+                        ids.push($(domElement).val());
+                    }
+                });
+                $('#'+inputId+'_extra').val(ids.join());
+            } else {
+                $('#'+inputId).val(value);
+                text = '<div>'+valueTitle+' <a href="#" class="selected-remove" data-input="'+inputId+'"><i class="glyphicon glyphicon-remove"></i></a></div>';
+                $('#'+inputId+'_title').html(text);
+            }
+            hidePopup();
+        });
+
+        $(document).on('click', '.btn-list-choice', function (e) {
+            e.preventDefault();
+            input_id = $(this).attr('data-input');
+            ids = [];
+            titles = [];
+            $("input.popup-item:checked").each(function (index, domElement) {
+                id = $(domElement).val();
+                title = $('#itemTitle' + id).html();
+                ids.push(id);
+                titles.push(title);
+            });
+            $('#'+input_id).val(ids.join());
+            $('#'+input_id+'_title').val(titles.join(', '));
+            hidePopup();
+        });
+
         $(document).on('click', '.modal-body .pagination a', function (e) {
             e.preventDefault();
 
@@ -452,8 +458,6 @@ function setupCalendar() {
             }
         });
 
-        setupCalendar();
-
         $('#list-checker').on('click', function () {
             if ($(this).prop('checked')) {
                 $(".list-checker").prop('checked', true);
@@ -527,6 +531,41 @@ function setupCalendar() {
 
         });
 
+        var cals = $('.field-date');
+        if (cals.length > 0) {
+            $.cachedScript( prj_ref + '/bundles/calendar/calendar.js' ).done(function( script, textStatus ) {
+                //console.log('calendar.js');
+            });
+            $.cachedScript( prj_ref + '/bundles/calendar/calendar-ru.js' ).done(function( script, textStatus ) {
+                //console.log('calendar-ru.js');
+            });;
+            $.cachedScript( prj_ref + '/bundles/calendar/calendar-setup.js' ).done(function( script, textStatus ) {
+                //console.log('calendar-setup.js');
+                cals.each(function() {
+                    var name = $(this).attr('data-name');
+                    var time = $(this).attr('data-time');
+                    time = (time ? ' ' + time : '');
+                    Calendar.setup({
+                        inputField : name,
+                        ifFormat : "%d.%m.%Y" + time,
+                        showsTime : time ? true : false,
+                        button : "trigger_" + name,
+                        align : "Br",
+                        singleClick : true,
+                        timeFormat : 24,
+                        firstDay : 1
+                    });
+                });
+            });
+        }
+
+        var editors = $('.tinymce');
+        if (editors.length > 0) {
+            $.cachedScript( prj_ref + '/bundles/tinymce/tinymce.min.js' ).done(function( script, textStatus ) {
+                $.cachedScript( prj_ref + '/bundles/tinymce/tinymce.init.js?2015120601' ).done(function( script, textStatus ) {})
+            });
+
+        }
     });
 
 })(jQuery);

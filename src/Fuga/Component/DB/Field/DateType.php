@@ -95,12 +95,12 @@ class DateType extends Type {
 		
 		return '
 <div class="input-group">
-	<input class="form-control" type="text" readonly="true" value="'.$date.'" name="'.$name.'" id="'.$name.'">
+	<input class="form-control field-date" type="text" data-name="'.$name.'" data-time="" readonly="true" value="'.$date.'" name="'.$name.'" id="'.$name.'">
 	<span class="input-group-btn">
 		<a class="btn btn-warning" href="javascript:void(0)" id="trigger_'.$name.'"><span class="glyphicon glyphicon-calendar icon-white"></span></a>
 	</span>
 </div>			
-<script type="text/javascript">addCalendar(\''.$name.'\')</script>';
+';
 	}
 	
 	public function getType() {

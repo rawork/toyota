@@ -6,6 +6,7 @@ use Fuga\Component\Container;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SecurityHandler
 {
@@ -111,6 +112,7 @@ class SecurityHandler
 		$this->container->get('session')->invalidate();
 		$response = new Response();
 		$response->headers->clearCookie('fuga_key');
+		$response->headers->clearCookie('fuga_user');
 
 		return $response;
 	}

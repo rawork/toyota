@@ -50,7 +50,7 @@ class DialogController extends Controller
 		$response = new JsonResponse();
 		$response->setData(array(
 			'title' => 'Выбор: '.$field['title'],
-			'button' => '<a class="btn btn-success" onclick="makePopupChoice(\''.$inputId.'\')">Выбрать</a>',
+			'button' => '<a class="btn btn-success btn-popup-choice" data-input="'.$inputId.'">Выбрать</a>',
 			'content' => $this->render('admin/dialog/select.html.twig', $params),
 		));
 
@@ -157,7 +157,7 @@ class DialogController extends Controller
 		$response = new JsonResponse();
 		$response->setData( array(
 			'title' => 'Выбор: '.$field['title'],
-			'button' => '<a class="btn btn-success" onclick="makePopupChoice(\''.$inputId.'\')">Выбрать</a>',
+			'button' => '<a class="btn btn-success btn-popup-choice" data-input="'.$inputId.'">Выбрать</a>',
 			'content' => $this->render('admin/dialog/tree.html.twig', $params),
 		));
 
@@ -191,7 +191,7 @@ class DialogController extends Controller
 		$response = new JsonResponse();
 		$response->setData( array(
 			'title' => 'Выбор: '.$field['title'],
-			'button' => '<a class="btn btn-success" onclick="choiceList('."'".$inputId."'".')">Выбрать</a>',
+			'button' => '<a class="btn btn-success btn-list-choice" data-input="'.$inputId.'">Выбрать</a>',
 			'content' => $this->render('admin/dialog/list.html.twig', $params),
 		));
 

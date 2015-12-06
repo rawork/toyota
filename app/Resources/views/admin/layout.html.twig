@@ -8,17 +8,8 @@
 	<link href="{{ theme_ref }}/admin/css/colorpicker.css" type="text/css" rel="stylesheet">
 	<link href="{{ theme_ref }}/calendar/calendar.css" type="text/css" rel="stylesheet">
 	<link href="{{ theme_ref }}/treeview/jquery.treeview.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript">
-	var state = '{{ state }}';
-	var theme_ref = '{{ theme_ref }}';
-	var prj_ref = '{{ prj_ref }}';
-	var calendars = {};
-	function addCalendar(name, time) {
-		calendars[name] = time;
-	}
-	</script>
 </head>
-<body>
+<body data-state="{{ state }}" data-theme="{{ theme-ref }}" data-ref="{{ prj_ref }}">
 	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
 		<div class="navbar-header">
 		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -100,19 +91,14 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-	<script type="text/javascript" src="{{ theme_ref }}/jquery/jquery.js"></script>
-    <script type="text/javascript" src="{{ theme_ref }}/bootstrap3/js/bootstrap.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/treeview/lib/jquery.cookie.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/treeview/jquery.treeview.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/multifile/jquery.MultiFile.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/multifile/jquery.form.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/multifile/jquery.blockUI.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/admin/js/jquery.colorpicker.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/admin/js/app.admin.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/tinymce/tinymce.min.js"></script> 
-	<script type="text/javascript" src="{{ theme_ref }}/tinymce/tinymce_init.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/calendar/calendar.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/calendar/calendar-ru.js"></script>
-	<script type="text/javascript" src="{{ theme_ref }}/calendar/calendar-setup.js"></script>
+	<script src="{{ theme_ref }}/jquery/jquery.js"></script>
+    <script src="{{ theme_ref }}/bootstrap3/js/bootstrap.js"></script>
+	<script src="{{ theme_ref }}/treeview/lib/jquery.cookie.js"></script>
+	<script src="{{ theme_ref }}/treeview/jquery.treeview.js"></script>
+	<script src="{{ theme_ref }}/multifile/jquery.MultiFile.js"></script>
+	<script src="{{ theme_ref }}/multifile/jquery.form.js"></script>
+	<script src="{{ theme_ref }}/multifile/jquery.blockUI.js"></script>
+	<script src="{{ theme_ref }}/admin/js/jquery.colorpicker.js"></script>
+	<script src="{{ theme_ref }}/admin/js/app.admin.js"></script>
 </body>
 </html>
