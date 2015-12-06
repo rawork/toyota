@@ -177,8 +177,8 @@ class Table {
 				'group_update' => true,
 				'help' => 'Поиск'
 			),
-			'not_empty' => array (
-				'name' => 'not_empty',
+			'is_required' => array (
+				'name' => 'is_requred',
 				'title' => 'Обяз.',
 				'type' => 'checkbox',
 				'group_update'  => true,

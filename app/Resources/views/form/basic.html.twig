@@ -8,25 +8,25 @@
 	<div class="control-group">
 		<div class="controls">
 			{% if i.type == 'string' %}
-			<input type="text" title="{% if i.not_empty %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}" value="{{ i.value }}" placeholder="{{ i.title }}{% if i.not_empty %} *{% endif %}">
+			<input type="text" title="{% if i.is_required %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}" value="{{ i.value }}" placeholder="{{ i.title }}{% if i.is_required %} *{% endif %}">
 			{% elseif i.type == 'text' %}
-			<textarea rows="7" title="{% if i.not_empty %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}" placeholder="{{ i.title }}{% if i.not_empty %} *{% endif %}">{{ i.value }}</textarea>
+			<textarea rows="7" title="{% if i.is_required %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}" placeholder="{{ i.title }}{% if i.is_required %} *{% endif %}">{{ i.value }}</textarea>
 			{% elseif i.type == 'checkbox' %}
-			<input type="checkbox" title="{% if i.not_empty %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}" {% if i.value %}checked{% endif %} /> {{ i.title }}{% if i.not_empty %} *{% endif %}
+			<input type="checkbox" title="{% if i.is_required %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}" {% if i.value %}checked{% endif %} /> {{ i.title }}{% if i.is_required %} *{% endif %}
 			{% elseif i.type == 'file' %}
-			<input type="file" title="{% if i.not_empty %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}" />
+			<input type="file" title="{% if i.is_required %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}" />
 			{% elseif i.type == 'password' %}
-			<input type="password" id="input{{ i.name }}" placeholder="{{ i.title }}{% if i.not_empty %} *{% endif %}">
+			<input type="password" id="input{{ i.name }}" placeholder="{{ i.title }}{% if i.is_required %} *{% endif %}">
 			{% elseif i.type == 'select' %}
-			<select title="{% if i.not_empty %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}"{{ i.more }}>
-			<option value="0">Выберите {{ i.title }}{% if i.not_empty %} *{% endif %}</option>
+			<select title="{% if i.is_required %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}"{{ i.more }}>
+			<option value="0">Выберите {{ i.title }}{% if i.is_required %} *{% endif %}</option>
 			{% for op in i.select_values %}
 			<option value="{{ op.value }}"{{ op.sel }}>{{ op.name }}</option>
 			{% endfor %}
 			</select>
 			{% elseif i.type == 'enum' %}
-			<select title="{% if i.not_empty %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}"{{ i.more }}>
-			<option value="0">Выберите {{ i.title }}{% if i.not_empty %} *{% endif %}</option>
+			<select title="{% if i.is_required %}{{ i.title }}{% endif %}" id="input{{ i.name }}" name="{{ i.name }}"{{ i.more }}>
+			<option value="0">Выберите {{ i.title }}{% if i.is_required %} *{% endif %}</option>
 			{% for op in i.select_values %}
 			<option value="{{ op.value }}"{{ op.sel }}>{{ op.name }}</option>
 			{% endfor %}
@@ -52,7 +52,7 @@
     {% endif %}
 	<div>
 		<div>
-			{% if dbform.not_empty %}<label>Поля, отмеченные <span class="r==uired">*</span> &ndash; обязательны для заполнения.</label>{% endif %}
+			{% if dbform.is_required %}<label>Поля, отмеченные <span class="r==uired">*</span> &ndash; обязательны для заполнения.</label>{% endif %}
 			<input type="submit" class="btn btn-large" value="{{ dbform.submit_text }}" />
 		</div>
 	</div>

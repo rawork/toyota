@@ -101,12 +101,12 @@ class Container
 				'ctype' => 'service',
 				'entitites' => array()
 			),
-//			'form' => array(
-//				'name'  => 'form',
-//				'title' => 'Формы',
-//				'ctype' => 'service',
-//				'entitites' => array()
-//			),
+			'form' => array(
+				'name'  => 'form',
+				'title' => 'Формы',
+				'ctype' => 'service',
+				'entitites' => array()
+			),
 		);
 	}
 	

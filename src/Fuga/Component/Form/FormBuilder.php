@@ -118,8 +118,8 @@ class FormBuilder {
 		if (count($this->items)) {
 			foreach ($this->items as &$item) {
 				$item = $this->parseItem($item);
-				if (!empty($item['not_empty'])) {
-					$this->form['not_empty'] = true;
+				if (!empty($item['is_required'])) {
+					$this->form['is_required'] = true;
 				}	
 			}
 			unset($item);
@@ -152,7 +152,7 @@ class FormBuilder {
 
 	public function getIncorrectFieldTitle() {
 		foreach ($this->items as $i) {
-			if (!empty($i['not_empty']) && !$this->getFieldValue($i['name'])) {
+			if (!empty($i['is_required']) && !$this->getFieldValue($i['name'])) {
 				return $i['title'];
 			}
 		}

@@ -116,8 +116,8 @@ class Form {
 				'title' => 'Значения',
 				'type' => 'string'
 			),
-			'not_empty' => array (
-				'name' => 'not_empty',
+			'is_required' => array (
+				'name' => 'is_required',
 				'title' => 'Обяз.',
 				'type' => 'checkbox',
 				'group_update'  => true,
