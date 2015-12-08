@@ -26,6 +26,7 @@
                             {% for menuitem in links %}
                                 <li{% if menuitem.id == curnode.id  %} class="active"{% endif %}><a href="{{ menuitem.ref }}">{{ menuitem.title }}</a></li>
                             {% endfor %}
+                            <li class="logo-small"><a href="/"><img src="/bundles/public/img/logo_small.png"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -38,10 +39,11 @@
 
                 {{ maincontent }}
 
+                <div class="social">
+                    {{ render('Fuga:Public:Common:block', {name: 'social'}) }}
+                </div>
             </div>
-            <div class="social">
-                {{ render('Fuga:Public:Common:block', {name: 'social'}) }}
-            </div>
+
         </div>
     </div>
     <div class="footer">
@@ -55,7 +57,7 @@
     <script src="/bundles/jquery/jquery.js"></script>
     <script src="/bundles/selectize/js/standalone/selectize.min.js"></script>
     <script src="/bundles/scrollto/jquery.scrollTo.min.js"></script>
-    <script src="/bundles/public/js/app.js?2015113001"></script>
-    <script src="/bundles/public/js/{{ curnode.name }}.js?2015113001"></script>
+    <script src="/bundles/public/js/app.js?2015120801"></script>
+    <script src="/bundles/public/js/{{ curnode.name }}.js?2015120801"></script>
 </body>
 </html>

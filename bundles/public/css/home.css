@@ -31,18 +31,6 @@ ul.slider img {
     right: 3px;
 }
 
-.slider-gradient {
-    position: absolute;
-    left: 0;
-    top: 48px;
-    width: 100%;
-    height: 5px;
-    background-image: url('../img/header_gradient.png');
-    background-position: top left;
-    background-repeat: repeat-x;
-    z-index: 20;
-}
-
 .slider-grass {
     position: absolute;
     left: 0;

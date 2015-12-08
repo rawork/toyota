@@ -1,7 +1,7 @@
 (function($) {
     $(function() {
 
-        var canvasOffsetX = 0;
+        var canvasOffsetX = -40;
         var canvasOffsetY = 224;
         var canvasOffsetX1200 = 150;
 
@@ -41,14 +41,11 @@
             var that = $(this);
             var cityId = that.attr('data-id');
 
-            console.log('map-dot click', cityId);
-
             var dataUrl = $('#dealer').attr('data-url');
             if (dealers[cityId] != undefined) {
                 buildList('#dealer', cityId);
                 $('#myModal').show();
                 $("body").addClass("modal-open");
-                $.scrollTo('.modal', 1000);
                 return;
             }
             $.post(dataUrl, {id: cityId},
@@ -58,7 +55,6 @@
                         buildList('#modal-dealers ul', cityId);
                         $('#myModal').show();
                         $("body").addClass("modal-open");
-                        $.scrollTo('.search-form', 1000);
                     }
                 });
         });
@@ -94,6 +90,7 @@
                         if (dealers[value] != undefined) {
                             buildList('#dealer', value);
                             $('ul#dealer').show();
+                            $.scrollTo('ul#dealer', 1000);
                             return;
                         }
                         $.post(dataUrl, {id: value},
@@ -102,6 +99,7 @@
                                     dealers[value] = data.dealers;
                                     buildList('#dealer', value);
                                     $('ul#dealer').show();
+                                    $.scrollTo('ul#dealer', 1000);
                                 }
                             });
 

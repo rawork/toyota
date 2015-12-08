@@ -42,7 +42,15 @@ function getTimer(deadline) {
             if (1044 >= $(this).width()) {
                 $('#map-dot').hide();
             }
-        })
+        });
+
+        $( window ).scroll(function() {
+            if ($(this).scrollTop() >= 125) {
+                $('.logo-small').fadeIn(800);
+            } else {
+                $('.logo-small').fadeOut(500);
+            }
+        });
 
         if (typeof $.fn.jcarousel !== 'undefined') {
 

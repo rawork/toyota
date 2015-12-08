@@ -170,7 +170,7 @@ h2 {
     position: relative;
     margin-right: -20px;
     margin-left: -20px;
-    min-height: 36px;
+    min-height: 48px;
     background-color: #fff;
 }
 
@@ -212,6 +212,15 @@ h2 {
     max-width: 100% !important;
     height: auto;
 }
+
+.logo-small {
+    display: none;
+    position: absolute;
+    right: 15px;
+    z-index: 30;
+    width: 63px;
+}
+
 
 .logo-dreamcar {
     position: absolute;
@@ -263,6 +272,18 @@ h2 {
 
 .mainmenu ul li.active a, .mainmenu ul li a:hover {
     color: #cf142b;
+}
+
+.slider-gradient {
+    position: absolute;
+    left: 0;
+    top: 48px;
+    width: 100%;
+    height: 5px;
+    background-image: url('../img/header_gradient.png');
+    background-position: top left;
+    background-repeat: repeat-x;
+    z-index: 20;
 }
 
 .content {
@@ -348,12 +369,12 @@ p.video iframe {
 }
 
 @media (min-width: 600px) {
+
     .social {
         background-image: url('../img/pencil_md.png');
         min-height: 84px;
         padding-top: 20px;
         margin-top: 50px;
-        margin-bottom: 0;
     }
 
     .social a {
@@ -415,8 +436,8 @@ p.video iframe {
 
     .logo {
         top: 0;
-        right: -3px;
-        width: 99px;
+        right: 17px;
+        width: 79px;
         z-index: 100;
     }
 
@@ -435,9 +456,10 @@ p.video iframe {
 
     .mainmenu ul {
         list-style: none;
+        position: relative;
         margin: 0;
         padding: 0;
-        margin-top: 0;
+        height: 48px;
     }
 
     .mainmenu ul li {
@@ -445,8 +467,26 @@ p.video iframe {
         padding: 12px 10px 0;
         /*background-color: #bbb;*/
         margin: 0 3px;
+        height: 48px;
         border-bottom: 0;
         border-top: 3px solid transparent;
+    }
+
+    .mainmenu ul li.logo-small {
+        position: absolute;
+        top: -3px;
+        right: 22px;
+        display: block;
+        height: 48px;
+        width: 70px;
+        overflow: hidden;
+        padding-top: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .mainmenu ul li.logo-small img {
+        max-width: 100% !important;
     }
 
     .mainmenu ul li.active {
@@ -477,8 +517,14 @@ p.video iframe {
     }
 
     .content {
-        background: url('../img/bg-pattern.jpg') top left;
+        background-color: #fff;
+        /*background: url('../img/bg-pattern.jpg') top left;*/
         padding: 40px 70px 70px;
+    }
+
+    .social {
+        margin-top: 64px;
+        margin-bottom: 0;
     }
 
     .footer {

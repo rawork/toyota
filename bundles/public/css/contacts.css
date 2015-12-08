@@ -22,12 +22,17 @@ h2 {
     display: none;
 }
 
+.content ul.dealer li {
+    padding-left: 0;
+}
+
 ul.dealer {
     list-style: none;
     margin: 0;
     padding: 0;
     font-size: 14px;
     line-height: 20px;
+    margin-top: 20px;
 }
 
 ul.dealer li {
@@ -38,6 +43,7 @@ ul.dealer .title {
     text-transform: uppercase;
     color: #cf142b;
     margin-bottom: 15px;
+    font-weight: 700;
 }
 
 ul.dealer .roadmap-link {
@@ -72,7 +78,7 @@ ul.dealer .site-link {
 }
 
 .social {
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 .selectize-control.single .selectize-input:after {
@@ -138,25 +144,21 @@ ul.dealer .site-link {
     }
 }
 
-@media (min-width: 1140px) {
+@media (min-width: 900px) {
     .content {
-        background: none;
-        padding: 40px 23px 0 23px;
+        -moz-box-shadow: 0px 3px 40px rgb(100,100,100);
+        -webkit-box-shadow: 0px 3px 40px rgb(100,100,100);
+        box-shadow: 0px 3px 40px rgb(100,100,100);
     }
 
-    .content > p {
-        padding-right: 97px;
-    }
-
-    h2 {
-        font-size: 34px;
-        line-height: 34px;
+    .social {
+        margin-top: 64px;
     }
 
     .map {
         margin-top: 58px;
         position: relative;
-        min-height: 830px;
+        min-height: 760px;
     }
 
     .map-bg {
@@ -167,30 +169,20 @@ ul.dealer .site-link {
         width: 952px;
         height: 830px;
         top: 0;
-        left: -49px;
+        left: -96px;
         z-index: 1;
-    }
-
-    .map h2 {
-        position: absolute;
-        top: 120px;
-        width: 100%;
-        z-index: 2;
     }
 
     .map-link-helper {
         position: absolute;
-        font-family: "ToyotaDisplay", "Helvetica Neue", Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        line-height: 20px;
         display: block;
-        width: 290px;
+        width: 340px;
         text-align: center;
         z-index: 2;
-        top: 210px;
+        top: 225px;
+        line-height: 21px;
         left: 50%;
-        margin-left: -145px;
-        letter-spacing: 1px;
+        margin-left: -170px;
     }
 
     .search-form {
@@ -205,37 +197,6 @@ ul.dealer .site-link {
     .search-form select {
         width: 290px;
         text-align: left;
-    }
-
-    .modal {
-        /*display: block;*/
-        position: absolute;
-        top: 200px;
-        left: -23px;
-        width: 900px;
-        height: 600px;
-        background-color: #fff;
-        background-image: url('../img/modal_bg.png');
-        background-position: center center;
-        border-radius: 11px;
-        z-index: 10;
-    }
-
-    .modal-dialog {
-        position: relative;
-    }
-
-    .modal-close {
-        display: block;
-        position: absolute;
-        top: -15px;
-        right: -35px;
-        background-image: url('../img/close.png');
-        background-position: center center;
-        background-repeat: no-repeat;
-        width: 64px;
-        height: 64px;
-        z-index: 11;
     }
 
     .map-canvas {
@@ -257,6 +218,10 @@ ul.dealer .site-link {
         width: 260px;
         overflow: hidden;
         /*border: 1px solid #ff0;*/
+    }
+
+    .map-dot2 {
+        width: 200px;
     }
 
     .map-dot3 {
@@ -310,6 +275,43 @@ ul.dealer .site-link {
         margin: 10px 0 0;
     }
 
+    .modal {
+        /*display: block;*/
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255,255,255, 0.8);
+        z-index: 10;
+    }
+
+    .modal-dialog {
+        width: 900px;
+        height: 600px;
+        left: 50%;
+        top: 65px;
+        margin-left: -450px;
+        position: absolute;
+        background-image: url('../img/modal_bg.png');
+        background-position: center center;
+        background-color: #fff;
+        border-radius: 11px;
+    }
+
+    .modal-close {
+        display: block;
+        position: absolute;
+        top: -15px;
+        right: -35px;
+        background-image: url('../img/close.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        width: 64px;
+        height: 64px;
+        z-index: 11;
+    }
+
     #modal-dealers {
         margin: 40px;
         /*border: 1px solid #f00;*/
@@ -317,20 +319,22 @@ ul.dealer .site-link {
         overflow-x: hidden;
         overflow-y: scroll;
     }
+}
 
+@media (min-width: 1140px) {
+    .content > p {
+        padding-right: 100px;
+    }
 }
 
 @media (min-width: 1200px) {
 
     .map-bg {
-        left: 101px;
+        left: 60px;
     }
 
     .map-canvas {
         left: 150px;
     }
 
-    .modal {
-        left: 127px;
-    }
 }
