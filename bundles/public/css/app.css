@@ -102,8 +102,8 @@ h2 {
     font-family: "ToyotaDisplay", "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-weight: 700;
     color: #cf142b;
-    margin-top: 20px;
-    margin-bottom: 15px;
+    margin-top: 40px;
+    margin-bottom: 25px;
 }
 
 
@@ -131,7 +131,7 @@ h2 {
     display: block;
 }
 
-.visible-sm, .visible-md, .visible-lg {
+.hidden-xs {
     display: none;
 }
 
@@ -192,9 +192,9 @@ h2 {
     display: block;
     background-color: #cf142b;
     width: 103px;
-    height: 36px;
+    height: 48px;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 16px;
     text-transform: uppercase;
     text-decoration: none;
     color: #fff;
@@ -231,7 +231,7 @@ h2 {
     display: none;
     position: absolute;
     left: 0;
-    top: 36px;
+    top: 48px;
     width: 100%;
     background-color: #c0c0c0;
     z-index: 40;
@@ -271,8 +271,8 @@ h2 {
 
 .content  p {
     margin: 0;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .content ul {
@@ -282,12 +282,15 @@ h2 {
 
 .content ul li {
     list-style: none;
+    padding-left: 25px;
+    position: relative;
 }
 
 .content ul li:before {
     content: "\2022";
     color: #cf142b;
-    margin-right: 8px;
+    position: absolute;
+    left: 5px;
 }
 
 .content a {
@@ -307,11 +310,12 @@ h2 {
     background-image: url('../img/pencil_xs.png');
     background-position: bottom center;
     background-repeat: no-repeat;
-    margin-top: 135px;
+    margin-top: 100px;
+    margin-bottom: 54px;
     margin-left: -20px;
     margin-right: -20px;
     text-align: center;
-    min-height: 124px;
+    min-height: 67px;
     padding-top: 12px;
 }
 
@@ -346,30 +350,40 @@ p.video iframe {
 @media (min-width: 600px) {
     .social {
         background-image: url('../img/pencil_md.png');
-        min-height: 145px;
+        min-height: 84px;
         padding-top: 20px;
+        margin-top: 50px;
+        margin-bottom: 0;
     }
 
     .social a {
-        margin: 0 18px;
+        margin: 0 15px;
     }
 }
 
 @media (min-width: 900px) {
     body {
-        font-size: 16.67px;
+        font-size: 17px;
         letter-spacing: -0.07px;
         line-height: 20px;
     }
 
     h1 {
-        font-size: 36px;
-        line-height: 36px;
+        font-size: 21px;
+        line-height: 23px;
     }
 
     h2 {
-        font-size: 30px;
-        line-height: 30px;
+        font-size: 21px;
+        line-height: 23px;
+    }
+
+    .hidden-md {
+        display: none;
+    }
+
+    .visible-md {
+        display: block;
     }
 
     .bg-wrapper {
@@ -394,22 +408,22 @@ p.video iframe {
     }
 
     .header {
-        min-height: 36px;
+        min-height: 48px;
         margin-right: 0;
         margin-left: 0;
     }
 
     .logo {
         top: 0;
-        right: -5px;
+        right: -3px;
         width: 99px;
         z-index: 100;
     }
 
     .logo-dreamcar {
-        left: 20px;
-        top: 57px;
-        width: 101px;
+        left: -20px;
+        top: 72px;
+        width: 130px;
     }
 
     .mainmenu {
@@ -428,9 +442,9 @@ p.video iframe {
 
     .mainmenu ul li {
         float: left;
-        padding: 6px 10px 7px;
+        padding: 12px 10px 0;
         /*background-color: #bbb;*/
-        margin: 0 2px;
+        margin: 0 3px;
         border-bottom: 0;
         border-top: 3px solid transparent;
     }

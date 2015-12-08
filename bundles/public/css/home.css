@@ -13,12 +13,9 @@ ul.slider li {
     background-color: #fff;
 }
 
-li#slide1 {
-    background-image: url('../img/slide1_xs.jpg');
-}
-
-li#slide2 {
-    background-image: url('../img/slide2_dream_car_xs.jpg');
+ul.slider img {
+    max-width: 100% !important;
+    margin: 0 auto;
 }
 
 .slider-prev, .slider-next {
@@ -37,9 +34,9 @@ li#slide2 {
 .slider-gradient {
     position: absolute;
     left: 0;
-    top: 36px;
+    top: 48px;
     width: 100%;
-    height: 11px;
+    height: 5px;
     background-image: url('../img/header_gradient.png');
     background-position: top left;
     background-repeat: repeat-x;
@@ -168,14 +165,7 @@ p.video iframe {
 
     ul.slider li {
         height: 487px;
-    }
-
-    li#slide1 {
-        background-image: url('../img/slide1_lg.jpg');
-    }
-
-    li#slide2 {
-        background-image: url('../img/slide22_dreamcar_lg.jpg');
+        text-align: center;
     }
 
     .slider-prev, .slider-next {
@@ -184,7 +174,7 @@ p.video iframe {
     }
 
     .slider-grass {
-        top: 494px;
+        top: 506px;
     }
 
     .counter .day, .counter .hour {
@@ -233,6 +223,21 @@ p.video iframe {
         margin-bottom: 10px;
     }
 
+    p.paragraph1 {
+        padding-right: 30px;
+        margin-bottom: 0;
+    }
+
+    .content ul.category {
+        position: static;
+        line-height: 26px;
+    }
+
+    .content ul.category li:before {
+        position: static;
+        margin-right: 8px;
+    }
+
     #pictures {
         display: none;
     }
@@ -243,13 +248,17 @@ p.video iframe {
         margin-left: 40px;
     }
 
+    p.paragraph2 {
+        margin-bottom: 0;
+    }
+
     ul.rules {
         padding-right: 200px;
         margin-bottom: 10px;
     }
 
     .content ul.rules li {
-        margin-bottom: 15px;
+        margin-bottom: 0;
     }
 
     img#picture2 {
@@ -259,7 +268,7 @@ p.video iframe {
     img#envelope {
         float: left;
         margin-top: 5px;
-        margin-right: 50px;
+        margin-right: 100px;
         margin-bottom: 50px;
     }
 
@@ -267,7 +276,7 @@ p.video iframe {
         float: right;
         margin-top: 0;
         margin-left: 40px;
-        margin-bottom: 40px;
+        margin-bottom: 10px;
     }
 
     img#boy {
