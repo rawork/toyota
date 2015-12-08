@@ -10,10 +10,13 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class AppController extends Controller
 {
-	public function handle(Request $request)
+	public function handle()
 	{
+		$request = Request::createFromGlobals();
+
 		$session = new Session();
 		$session->start();
+
 		$this->get('container')->register('session', $session);
 		$this->get('container')->register('request', $request);
 

@@ -80,14 +80,7 @@ class SecurityController extends Controller
 	
 	public function logoutAction()
 	{
-		$this->get('security')->logout();
-		if (empty($_SERVER['HTTP_REFERER']) || preg_match('/^'.(PRJ_REF ? '\\'.PRJ_REF : '').'\/admin\/logout/', $_SERVER['HTTP_REFERER'])) {
-			$uri = $this->generateUrl('admin_index');
-		} else {
-			$uri = $_SERVER['HTTP_REFERER'];
-		}
-
-		return $this->redirect($uri);
+		return $this->get('security')->logout();
 	}
 	
 	public function passwordAction($key)

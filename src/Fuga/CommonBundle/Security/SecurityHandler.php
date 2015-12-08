@@ -5,7 +5,6 @@ namespace Fuga\CommonBundle\Security;
 use Fuga\Component\Container;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class SecurityHandler
 {
@@ -109,7 +108,14 @@ class SecurityHandler
 	public function logout()
 	{
 		$this->container->get('session')->invalidate();
-		$response = new Response();
+
+		if (empty($_SERVER['HTTP_REFERER']) || preg_match('/^'.(PRJ_REF ? '\\'.PRJ_REF : '').'\/admin\/logout/', $_SERVER['HTTP_REFERER'])) {
+			$uri = $this->generateUrl('admin_index');
+		} else {
+			$uri = $_SERVER['HTTP_REFERER'];
+		}
+
+		$response = new RedirectResponse($uri);
 		$response->headers->clearCookie('fuga_key');
 		$response->headers->clearCookie('fuga_user');
 
