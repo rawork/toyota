@@ -13,7 +13,7 @@ class AboutController extends PublicController
 
 	public function indexAction()
 	{
-		$tabs = $this->get('container')->getItem('about_tab', 'publish=1');
+		$tabs = $this->get('container')->getItems('about_tab', 'publish=1');
 
 		return $this->render('about/index.html.twig', compact('tabs'));
 	}
