@@ -63,7 +63,7 @@ function getTimer(deadline) {
 
         if (typeof $.fn.jcarousel !== 'undefined') {
 
-            $('.slider-wrapper .jcarousel')
+            var carousel = $('.jcarousel')
                 .on('jcarousel:create jcarousel:reload', function() {
                     var element = $(this),
                         width = element.innerWidth();
@@ -74,9 +74,21 @@ function getTimer(deadline) {
                     element.jcarousel('items').css('width', width + 'px');
                 });
 
-            $('.jcarousel').jcarousel({
+            carousel.jcarousel({
                 wrap: 'both'
-            });
+            }).touchwipe({
+                wipeLeft: function() {
+                    carousel.jcarousel('next');
+                },
+                wipeRight: function() {
+                    carousel.jcarousel('prev');
+                },
+                wipeUp: function() { return; },
+                wipeDown: function() { return; },
+                min_move_x: 50,
+                min_move_y: 50,
+                preventDefaultEvents: false
+            });;
 
             $('.slider-wrapper>.jcarousel').jcarouselAutoscroll({
                 interval: 5000

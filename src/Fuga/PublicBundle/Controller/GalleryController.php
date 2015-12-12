@@ -13,11 +13,11 @@ class GalleryController extends PublicController
 
 	public function indexAction()
 	{
-		$categories = $this->get('container')->getItems('gallery_age', 'publish=1');
-//		$category =
-		$pictures = $this->get('container')->getItems('gallery_picture', 'publish=1');
+		$ages = $this->get('container')->getItems('gallery_age', 'publish=1');
+		$firstAge = reset($ages);
+//		$pictures = $this->get('container')->getItems('gallery_picture', 'publish=1');
 
-		return $this->render('gallery/index.html.twig', compact('ages', 'pictures'));
+		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge'));
 	}
 
 	public function archiveAction()
