@@ -204,6 +204,10 @@ p.video iframe {
         height: 15px;
     }
 
+    .girl-header {
+        margin-top: 20px;
+    }
+
     img#girl-paints {
         float: left;
         margin: 0;
