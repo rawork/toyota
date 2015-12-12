@@ -257,7 +257,7 @@ p.video iframe {
         float: left;
         margin-top: 5px;
         margin-right: 100px;
-        margin-bottom: 50px;
+        margin-bottom: 0;
     }
 
     img#prizes {
