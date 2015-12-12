@@ -60,6 +60,8 @@
                 });
         });
 
+        $(".nano").nanoScroller();
+
         if(jQuery().selectize) {
             $('.map select').selectize({
                 allowEmptyOption: true,

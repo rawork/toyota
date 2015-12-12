@@ -45,8 +45,10 @@ function getTimer(deadline) {
         $(window).on('resize', function(e){
             if (900 <= $(this).width()) {
                 $('.mainmenu').show();
-            }
-            if (1044 >= $(this).width()) {
+                $('ul#dealer').hide();
+            } else {
+                $('ul#dealer').show();
+                $('.modal').hide();
                 $('#map-dot').hide();
             }
         });
