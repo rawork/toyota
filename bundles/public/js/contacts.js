@@ -46,6 +46,7 @@
             if (dealers[cityId] != undefined) {
                 buildList('#dealer', cityId);
                 $('#myModal').show();
+                $('.nano').nanoScroller();
                 $("body").addClass("modal-open");
                 return;
             }
@@ -55,6 +56,7 @@
                         dealers[cityId] = data.dealers;
                         buildList('#modal-dealers ul', cityId);
                         $('#myModal').show();
+                        $('.nano').nanoScroller();
                         $("body").addClass("modal-open");
                     }
                 });
