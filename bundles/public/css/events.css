@@ -16,6 +16,26 @@
     height: 30px;
 }
 
+.content a.calendar-year-prev, .content a.calendar-year-next {
+    display: block;
+    color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 18px;
+}
+
+a.calendar-year-prev {
+    background-image: url('../img/calendar-prev.png');
+    float: left;
+    margin-left: 10px;
+}
+a.calendar-year-next {
+    background-image: url('../img/calendar-next.png');
+    float: right;
+    margin-right: 10px;
+}
+
 .calendar {
     height: 170px;
     border: 1px solid #e1e1e1;
@@ -58,7 +78,8 @@
 
 .month.active {
     color: #fff;
-    background: url('../img/blots160.png') top left no-repeat;
+    background-image: url('../img/blots160.png');
+    background-repeat: no-repeat;
     z-index: 4;
 }
 
