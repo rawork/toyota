@@ -178,7 +178,7 @@ class Table {
 				'help' => 'Поиск'
 			),
 			'is_required' => array (
-				'name' => 'is_requred',
+				'name' => 'is_required',
 				'title' => 'Обяз.',
 				'type' => 'checkbox',
 				'group_update'  => true,
