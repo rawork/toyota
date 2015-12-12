@@ -14,14 +14,26 @@ class NewsController extends PublicController
 
 	public function indexAction($year = 0, $month = 0)
 	{
+		$date = new \DateTime();
+		if (0 == $year) {
+			$year = $date->format('Y');
+		}
+
+		if (0 == $month) {
+			$month = $date->format('n');
+		}
+
 		$news = $this->get('container')->getItems('news_news', 'publish=1');
 
-		return $this->render('news/index.html.twig', compact('news'));
+		return $this->render('news/index.html.twig', compact('news', 'year', 'month'));
 	}
 
 	public function detailAction($id)
 	{
-		$news = $this->get('container')->getItem('news_news', 'publish=1');
+		$news = $this->get('container')->getItem('news_news', $id);
+		if (!$news) {
+			throw $this->createNotFoundException('Событие '.$id.'  не найдено.');
+		}
 
 		return $this->render('news/detail.html.twig', compact('news'));
 	}
@@ -31,7 +43,7 @@ class NewsController extends PublicController
 		$date = new \DateTime();
 		$years = array('min' => '2015', 'max' => $date->format('Y'));
 
-		return $this->render('news/calendar.html.twig', compact('years'));
+		return $this->render('news/calendar.html.twig', compact('years', 'year', 'month'));
 	}
 
 	public function addAction()

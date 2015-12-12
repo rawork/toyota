@@ -175,6 +175,12 @@ contact_cities_data:
 contact_dealers_data:
   path: /ajax/contact/dealer/
   defaults: { _controller: 'Fuga:Public:Contact:dealer'}
+event_list:
+    path: /events/{year}/{month}
+    defaults: { _controller: 'Fuga:Public:Common:index', node: 'events', action: 'index', year: 0, month: 0}
+event_detail:
+  path: /events/detail/{id}
+  defaults: { _controller: 'Fuga:Public:News:detail'}
 
 public_page:
   path: /{node}

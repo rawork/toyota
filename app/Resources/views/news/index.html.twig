@@ -1,22 +1,22 @@
 {{ render('Fuga:Public:News:calendar', {year: year, month: month}) }}
 
 <ul class="events">
-    <li>
-        <div><img src="/bundles/public/img/event1.jpg"></div>
+    <li class="clearfix">
+        <div class="picture"><img src="/bundles/public/img/event1.jpg"></div>
         <div>
-            <div class="title"><a href="">Lorem ipsum</a></div>
+            <div class="title"><a href="{{ path('event_detail', {id: 1}) }}">Lorem ipsum</a></div>
             <div class="date">28.11.2015</div>
             <div class="preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo. Lorem ipsеum dolor sit amet, consectetur adipisic</div>
-            <div class="link"><a href="">подробно</a></div>
+            <div class="link"><a href="{{ path('event_detail', {id: 1}) }}">подробно</a></div>
         </div>
     </li>
-    <li>
-        <div><img src="/bundles/public/img/event1.jpg"></div>
+    <li class="clearfix">
+        <div class="picture"><img src="/bundles/public/img/event1.jpg"></div>
         <div>
-            <div class="title"><a href="">Lorem ipsum</a></div>
+            <div class="title"><a href="{{ path('event_detail', {id: 1}) }}">Lorem ipsum</a></div>
             <div class="date">28.11.2015</div>
             <div class="preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo. Lorem ipsеum dolor sit amet, consectetur adipisic</div>
-            <div class="link"><a href="">подробно</a></div>
+            <div class="link"><a href="{{ path('event_detail', {id: 1}) }}">подробно</a></div>
         </div>
     </li>
 </ul>
