@@ -1,9 +1,9 @@
 (function($) {
     $(function() {
 
-        var canvasOffsetX = -40;
+        var canvasOffsetX = -20;
         var canvasOffsetY = 224;
-        var canvasOffsetX1200 = 150;
+        var canvasOffsetX1200 = -20; //150
 
         var cities = {};
         var dealers = {};
@@ -25,7 +25,8 @@
             $.each(currentDealers, function(key, value) {
                 $container
                     .append($('<li></li>')
-                        .html('<div class="title">'+value.name+'</div><div class="info">ВРЕМЯ РАБОТЫ<br>'+value.openhour+'<br><strong>Тел.</strong>: '+value.phone+'<br><strong>Адрес</strong>: '+value.address+'<br><strong>E-mail</strong>: <a href="'+value.email+'">'+value.email+'</a></div><a class="roadmap-link" href="'+value.site+'">Схема проезда</a><div class="service">Предоставляемые услуги:<br>- продажа новых а/м Toyota<br>- тюнинг<br>- слесарный ремонт<br>- trade-in<br>- аренда авто<br>- страхование<br>- кредит<br></div><a class="site-link" href="'+value.site+'">Перейти на сайт дилерского центра</a>'));
+                        .html('<div class="title">'+value.name+'</div><div class="info">ВРЕМЯ РАБОТЫ<br>'+value.openhour+'<br><strong>Тел.</strong>: '+value.phone+'<br><strong>Адрес</strong>: '+value.address+'<br><strong>E-mail</strong>: <a href="'+value.email+'">'+value.email+'</a></div><a class="site-link" href="'+value.site+'">Перейти на сайт дилерского центра</a>'));
+                    var text = '<a class="roadmap-link" href="'+value.site+'">Схема проезда</a><div class="service">Предоставляемые услуги:<br>- продажа новых а/м Toyota<br>- тюнинг<br>- слесарный ремонт<br>- trade-in<br>- аренда авто<br>- страхование<br>- кредит<br></div>';
             });
         };
 

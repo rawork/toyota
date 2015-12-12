@@ -12,7 +12,7 @@ class NewsController extends PublicController
 		parent::__construct('news');
 	}
 
-	public function indexAction()
+	public function indexAction($year = 0, $month = 0)
 	{
 		$news = $this->get('container')->getItems('news_news', 'publish=1');
 
@@ -26,12 +26,12 @@ class NewsController extends PublicController
 		return $this->render('news/detail.html.twig', compact('news'));
 	}
 
-	public function archiveAction()
+	public function calendarAction($year = 0, $month = 0)
 	{
-		$years = $this->get('container')->getItems('news_news', 'publish=1');
-		$months = $this->get('container')->getItems('news_news', 'publish=1');
+		$date = new \DateTime();
+		$years = array('min' => '2015', 'max' => $date->format('Y'));
 
-		return $this->render('news/archive.html.twig', compact('years', 'months'));
+		return $this->render('news/calendar.html.twig', compact('years'));
 	}
 
 	public function addAction()

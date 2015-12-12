@@ -276,12 +276,12 @@ p.video iframe {
     }
 }
 
-@media (min-width: 1200px){
-    img#envelope {
-        margin-bottom: 40px;
-    }
+/*@media (min-width: 1200px){*/
+    /*img#envelope {*/
+        /*margin-bottom: 40px;*/
+    /*}*/
 
-    img#boy {
-        margin-bottom: 40px;
-    }
-}
+    /*img#boy {*/
+        /*margin-bottom: 40px;*/
+    /*}*/
+/*}*/

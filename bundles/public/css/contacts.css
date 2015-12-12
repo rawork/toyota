@@ -321,20 +321,20 @@ ul.dealer .site-link {
     }
 }
 
-@media (min-width: 1140px) {
-    .content > p {
-        padding-right: 100px;
-    }
-}
+/*@media (min-width: 1140px) {*/
+    /*.content > p {*/
+        /*padding-right: 100px;*/
+    /*}*/
+/*}*/
 
-@media (min-width: 1200px) {
+/*@media (min-width: 1200px) {*/
 
-    .map-bg {
-        left: 60px;
-    }
+    /*.map-bg {*/
+        /*left: 60px;*/
+    /*}*/
 
-    .map-canvas {
-        left: 150px;
-    }
+    /*.map-canvas {*/
+        /*left: 150px;*/
+    /*}*/
 
-}
+/*}*/

@@ -1,8 +1,10 @@
+{% if tabs|length > 1 %}
 <ul class="tabs">
     {% for tab in tabs %}
     <li{% if 1 == tab.id %} class="active"{% endif %} data-id="{{ tab.id }}">{{ tab.name }}</li>
     {% endfor %}
 </ul>
+{% endif %}
 
 <div class="tab-text-container">
     <div id="tab1" class="active">

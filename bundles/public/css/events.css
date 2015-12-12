@@ -1,0 +1,186 @@
+.content {
+    padding-top: 90px;
+}
+
+.calendar-container {
+    width: 160px;
+    margin: 0 auto;
+    background-color: #fff;
+
+}
+
+.calendar-help {
+    font-size: 14px;
+    font-family: "ToyotaDisplay", Arial, sans-serif;
+    text-align: center;
+}
+
+.calendar {
+    height: 240px;
+    /*border: 1px solid #ccc;*/
+    border-radius: 0 0 5px 5px;
+    -webkit-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.calendar > div.months {
+    position: relative;
+    width: 160px;
+    height: 130px;
+    background: url('../img/calendar_bg.png') center center no-repeat;
+}
+
+div.month {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 700;
+    position: absolute;
+    width: 53px;
+    height: 40px;
+    background: url('../img/blots160.png') top left no-repeat;
+    z-index: 5;
+    padding-top: 14px;
+    padding-left: 16px;
+}
+
+div.month.active {
+    color: #fff;
+    z-index: 4;
+}
+
+div.month1 {
+    top: 0;
+    left: -1px;
+    background-position: 0 0;
+}
+
+div.month2 {
+    top: 0;
+    left: 50px;
+    background-position: -53px 0;
+}
+
+div.month3 {
+    top: 0;
+    left: 102px;
+    background-position: -106px 0;
+}
+
+div.month4 {
+    top: 33px;
+    left: -1px;
+    background-position: 0 -42px;
+}
+
+div.month5 {
+    top: 33px;
+    left: 50px;
+    background-position: -53px -42px;
+}
+
+div.month6 {
+    top: 33px;
+    left: 102px;
+    background-position: -106px -42px;
+}
+
+div.month7 {
+    top: 66px;
+    left: -1px;
+    background-position: 0 -84px;
+}
+
+div.month8 {
+    top: 66px;
+    left: 50px;
+    background-position: -53px -84px;
+}
+
+div.month9 {
+    top: 66px;
+    left: 102px;
+    background-position: -106px -84px;
+}
+
+div.month10 {
+    top: 99px;
+    left: -1px;
+    background-position: 0 -126px;
+}
+
+div.month11 {
+    top: 120px;
+    left: 40px;
+    background-position: -53px -126px;
+}
+
+div.month12 {
+    top: 120px;
+    left: 80px;
+    background-position: -106px -126px;
+}
+
+.calendar .title {
+    background-color: #cf142b;
+    height: 30px;
+    width: 164px;
+    color: #fff;
+    text-align: center;
+    padding-top: 3px;
+}
+
+.content ul.events {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content ul.events li {
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.content ul.events li:before {
+    content: "";
+}
+
+ul.events img {
+    display:  block;
+    max-width: 100% !important;
+    margin-bottom: 10px;
+}
+
+ul.events .title {
+    font-size: 20px;
+    line-height: 26px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+ul.events .title a {
+    color: #2e3a41;
+}
+
+ul.events .date {
+    font-size: 14px;
+    line-height: 14px;
+    color: #d0112b;
+    margin-bottom: 5px;
+}
+
+ul.events .text {
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 10px;
+}
+
+ul.events .link a{
+    display: block;
+    font-size: 13px;
+    line-height: 25px;
+    color: #b0b3af;
+}
