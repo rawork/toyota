@@ -73,6 +73,11 @@ ul.slider img {
     max-width: 100% !important;
 }
 
+.girl {
+    content: "";
+    height: 0;
+}
+
 img#girl-paints {
     display: block;
     max-width: 60% !important;
