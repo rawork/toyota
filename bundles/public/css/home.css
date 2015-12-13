@@ -201,7 +201,7 @@ p.video iframe {
 
     .girl {
         content: " ";
-        height: 15px;
+        height: 5px;
     }
 
     .girl-header {
@@ -213,6 +213,7 @@ p.video iframe {
         margin: 0;
         margin-right: 30px;
         margin-bottom: 10px;
+        max-width: 253px !important;
     }
 
     p.paragraph1 {
@@ -260,8 +261,10 @@ p.video iframe {
     img#envelope {
         float: left;
         margin-top: 5px;
+        margin-left: 20px;
         margin-right: 100px;
         margin-bottom: 0;
+        max-width: 165px !important;
     }
 
     img#prizes {
@@ -269,14 +272,16 @@ p.video iframe {
         margin-top: 0;
         margin-left: 40px;
         margin-bottom: 10px;
+        max-width: 185px !important;
     }
 
     img#boy {
         float: left;
-        margin-top: 20px;
-        margin-left: 0;
-        margin-right: 30px;
+        margin-top: 5px;
+        margin-left: 40px;
+        margin-right: 66px;
         margin-bottom: 40px;
+        max-width: 180px !important;
     }
 }
 

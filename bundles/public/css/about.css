@@ -168,6 +168,8 @@ img#girl-rules {
         float: right;
         margin-left: 150px;
         margin-bottom: 30px;
+        margin-right: 40px;
+        max-width: 200px !important;
     }
 
     .sizes {
@@ -182,6 +184,7 @@ img#girl-rules {
 
     #pictures-rules {
         margin-top: 30px;
+        margin-bottom: 20px;
     }
 
     #tools-rules {
