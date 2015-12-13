@@ -100,6 +100,7 @@
                         $('.map-dot').remove();
                         $('<div></div>')
                             .addClass('map-dot map-dot'+value)
+                            .attr('data-id', value)
                             .html('<div class="dot"></div><div class="title"><span>'+cityData['name']+'</span></div>')
                             .css({
                             'left': canvasOffsetX + (1200 <= $(window).width() ? canvasOffsetX1200 : 0) + parseInt(cityData.offsetx),
