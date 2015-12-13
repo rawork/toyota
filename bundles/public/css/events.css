@@ -247,6 +247,7 @@ a.next-event {
 .event-source {
     color: #999;
     font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .event-links {
