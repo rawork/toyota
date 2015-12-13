@@ -225,7 +225,7 @@ ul.events .link a{
     }
 
     ul.events .picture {
-        max-width: 200px !important;
+        width: 200px;
     }
 }
 
@@ -257,6 +257,10 @@ ul.events .link a{
 
     .content ul.events li {
         margin-bottom: 40px;
+    }
+
+    ul.events {
+        min-height: 200px;
     }
 
     ul.events .title{

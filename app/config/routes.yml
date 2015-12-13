@@ -178,9 +178,12 @@ contact_dealers_data:
 event_list:
     path: /events/{year}/{month}
     defaults: { _controller: 'Fuga:Public:Common:index', node: 'events', action: 'index', year: 0, month: 0}
+    requirements:
+        year: \d+
+        month: \d+
 event_detail:
   path: /events/detail/{id}
-  defaults: { _controller: 'Fuga:Public:News:detail'}
+  defaults: { _controller: 'Fuga:Public:Common:index', node: 'events', action: 'detail'}
 
 ajax_picture_list:
   path: /ajax/picture

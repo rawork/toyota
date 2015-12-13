@@ -23,7 +23,17 @@ class NewsController extends PublicController
 			$month = $date->format('n');
 		}
 
-		$news = $this->get('container')->getItems('news_news', 'publish=1');
+		$criteria = 'publish=1';
+
+		if ($year > 0) {
+			$criteria .= ' AND YEAR(created) = '.$year;
+		}
+
+		if ($month > 0) {
+			$criteria .= ' AND MONTH(created) = '.$month;
+		}
+
+		$news = $this->get('container')->getItems('news_news', $criteria);
 
 		return $this->render('news/index.html.twig', compact('news', 'year', 'month'));
 	}
@@ -40,54 +50,10 @@ class NewsController extends PublicController
 
 	public function calendarAction($year = 0, $month = 0)
 	{
-		$date = new \DateTime();
-		$years = array('min' => '2015', 'max' => $date->format('Y'));
+		$sql = 'SELECT min(YEAR(created)) as min, max(YEAR(created)) as max FROM news_news';
+		$years = $this->get('connection')->fetchAssoc($sql);
 
 		return $this->render('news/calendar.html.twig', compact('years', 'year', 'month'));
 	}
 
-	public function addAction()
-	{
-		if ($this->isXmlHttpRequest()) {
-
-			$data = array(
-				'name' => $this->get('request')->request->get('name', ''),
-				'email' => $this->get('request')->request->get('email', ''),
-				'position' => '',
-				'feedback' => $this->get('request')->request->get('message'),
-				'created' => date('Y-m-d H-i:s'),
-				'updated' => '0000-00-00 00:00:00',
-				'sort' => 500,
-				'publish' => 0,
-			);
-
-			$this->get('container')->addItem(
-				'book_feedback',
-				$data
-			);
-
-			$text = 'Новый отзыв на сайте '.$_SERVER['SERVER_NAME']."\n";
-			$text .= '------------------------------------------'."\n";
-			$text .= 'Имя: '.$data['name']."\n";
-			$text .= 'E-mail: '.$data['email']."\n";
-			$text .= 'E-mail: '.$data['feedback']."\n\n";
-			$text .= 'Сообщение сгенерировано автоматически.'."\n";
-
-			$this->get('mailer')->send(
-				'Новый отзыв. Сайт '.$_SERVER['SERVER_NAME'],
-				nl2br($text),
-				ADMIN_EMAIL
-			);
-
-			$response = new JsonResponse();
-			$response->setData(array(
-				'content' => $this->render('book/add.html.twig'),
-			));
-
-			return $response;
-		}
-
-		return $this->redirect($this->generateUrl('public_page'));
-	}
-	
 }
