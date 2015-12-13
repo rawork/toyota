@@ -181,7 +181,7 @@
 @media (min-width: 600px) {
     .content ul.tabs {
         width: 460px;
-        margin: 70px auto 50px;
+        margin: 40px auto 50px;
     }
 
     .content ul.tabs li:last-child {
