@@ -26,11 +26,11 @@ class NewsController extends PublicController
 		$criteria = 'publish=1';
 
 		if ($year > 0) {
-			$criteria .= ' AND YEAR(created) = '.$year;
+			$criteria .= ' AND YEAR(date) = '.$year;
 		}
 
 		if ($month > 0) {
-			$criteria .= ' AND MONTH(created) = '.$month;
+			$criteria .= ' AND MONTH(date) = '.$month;
 		}
 
 		$news = $this->get('container')->getItems('news_news', $criteria);
@@ -45,8 +45,8 @@ class NewsController extends PublicController
 			throw $this->createNotFoundException('Событие '.$id.'  не найдено.');
 		}
 
-		$prev = $this->get('container')->getItem('news_news', 'id<'.$id);
-		$next = $this->get('container')->getItem('news_news', 'id>'.$id, 'id ASC');
+		$prev = $this->get('container')->getItem('news_news', 'date<"'.$news['date'].'"');
+		$next = $this->get('container')->getItem('news_news', 'date>"'.$news['date'].'"', 'date ASC');
 
 		return $this->render('news/detail.html.twig', compact('news', 'prev', 'next'));
 	}

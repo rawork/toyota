@@ -299,7 +299,7 @@ a.next-event {
 
     .calendar-help, .calendar {
         position: absolute;
-        right: 0;
+        right: 30px;
     }
 
     .calendar {
