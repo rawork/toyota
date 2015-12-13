@@ -288,7 +288,8 @@
 
     .picture {
         padding-top: 0;
-        padding-bottom: 50px;
+        height: 400px;
+        overflow: hidden;
     }
 
     .slick-prev, .slick-next {
