@@ -49,8 +49,6 @@
 
             var path = '/events/'+selectedYear+'/'+selectedMonth;
 
-            console.log(path);
-
             window.location.href = path;
         })
 

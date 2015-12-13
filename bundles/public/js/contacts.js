@@ -15,15 +15,12 @@
                 if (data.cities) {
                     cities = data.cities;
 
-                    console.log(cities);
                     for (var i in cities) {
-                        console.log(cities[i]);
                         if (cities[i].is_default == '1') {
                             defaultCities.push(cities[i]);
                         }
                     }
 
-                    console.log(defaultCities);
                     if ($(window).width() >= 900) {
                         $('.map-dot').remove();
                         for (var i in defaultCities) {
@@ -44,7 +41,6 @@
 
         var buildList = function (container, cityId) {
             var currentDealers = dealers[cityId];
-            console.log(currentDealers);
             var $container = $(container);
             $container.empty();
             $.each(currentDealers, function(key, value) {

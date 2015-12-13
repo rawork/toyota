@@ -25,9 +25,6 @@
             var person = $('#person').val();
             var city = $('#city').val();
 
-            console.log('build', windowWidth);
-            console.log(category, name, city);
-
             if (currentCategory != category || currentPerson != person || currentCity != city) {
                 filterChanged = true;
                 currentCategory = category;
@@ -42,9 +39,6 @@
             } else if (windowWidth < 600 && galleryType == 320 && !filterChanged) {
                 return;
             }
-
-            console.log('build', windowWidth);
-
 
             $.post('/ajax/picture', {category: category, person: person, city: city},
                 function(data){
@@ -124,8 +118,6 @@
         };
 
         var initSliderPlugin = function(windowWidth) {
-            console.log('startinit', windowWidth);
-
             if (windowWidth >= 900) {
                 var prevArrow = '<button type="button" class="slick-prev"><img src="/bundles/public/img/prev.png"></button>';
                 var nextArrow = '<button type="button" class="slick-next"><img src="/bundles/public/img/next.png"></button>';

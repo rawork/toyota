@@ -45,7 +45,10 @@ class NewsController extends PublicController
 			throw $this->createNotFoundException('Событие '.$id.'  не найдено.');
 		}
 
-		return $this->render('news/detail.html.twig', compact('news'));
+		$prev = $this->get('container')->getItem('news_news', 'id<'.$id);
+		$next = $this->get('container')->getItem('news_news', 'id>'.$id, 'id ASC');
+
+		return $this->render('news/detail.html.twig', compact('news', 'prev', 'next'));
 	}
 
 	public function calendarAction($year = 0, $month = 0)

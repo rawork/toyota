@@ -31,7 +31,6 @@ function getTimer(deadline) {
 
         $(document).on('click', '.menu-button a', function(e) {
             e.preventDefault();
-            console.log('menu-button click');
             $('.mainmenu').slideToggle('slow');
         });
 

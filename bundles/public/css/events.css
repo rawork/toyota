@@ -218,6 +218,47 @@ ul.events .link a{
     color: #b0b3af;
 }
 
+a.prev-event, a.next-event {
+    font-weight: 700;
+    line-height: 18px;
+    white-space: nowrap;
+    display: block;
+    width: 140px;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    position: absolute;
+}
+
+a.prev-event {
+    background-image: url('../img/event_prev.png');
+    background-position: left center;
+    padding-left: 20px;
+    left: 0;
+}
+
+a.next-event {
+    text-align: right;
+    background-image: url('../img/event_next.png');
+    background-position: right center;
+    padding-right: 20px;
+    right: 0;
+}
+
+.event-source {
+    color: #999;
+    font-weight: 700;
+}
+
+.event-links {
+    margin-top: 30px;
+    height: 30px !important;
+    position: relative;
+}
+
+.event-prev-text-md, .event-next-text-md {
+    display: none;
+}
+
 @media (min-width: 600px) {
     ul.events .picture {
         float: left;
@@ -227,6 +268,19 @@ ul.events .link a{
     ul.events .picture {
         width: 200px;
     }
+
+    .event-prev-text-xs, .event-next-text-xs {
+        display: none;
+    }
+
+    .event-prev-text-md, .event-next-text-md {
+        display: inline-block;
+    }
+
+    a.prev-event, a.next-event {
+        width: 300px;
+    }
+
 }
 
 @media (min-width: 900px) {
