@@ -35,13 +35,6 @@ function getTimer(deadline) {
             $('.mainmenu').slideToggle('slow');
         });
 
-        $(document).on('click', '.tabs li', function(e) {
-            var that = $(this);
-            var id = that.attr('data-id');
-            that.addClass('active').siblings().removeClass('active');
-            $('#tab'+id).addClass('active').siblings().removeClass('active');
-        });
-
         $(window).on('resize', function(e){
             if (900 <= $(this).width()) {
                 $('.mainmenu').show();

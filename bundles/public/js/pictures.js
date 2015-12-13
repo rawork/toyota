@@ -5,6 +5,10 @@
         var galleryType = 0;
         var galleryContainer = $('.pictures');
         var gallerySlick = false;
+        var currentCategory = 0;
+        var currentPerson = '';
+        var currentCity = '';
+        var filterChanged = true;
 
         var currentSlide = 0;
         var totalSlides = 0;
@@ -13,24 +17,41 @@
             return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><img data-lazy="'+ item.picture_value.extra.main.path +'"></div><div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">&laquo;'+item.name+'&raquo;</div></div>';
         };
 
-        var buildGallery = function(windowWidth) {
+        var buildGallery = function() {
+
+            var windowWidth = $(this).width();
+
+            var category = parseInt(galleryContainer.attr('data-category'));
+            var person = $('#person').val();
+            var city = $('#city').val();
 
             console.log('build', windowWidth);
+            console.log(category, name, city);
 
-            if (windowWidth >= 900 && galleryType == 900) {
+            if (currentCategory != category || currentPerson != person || currentCity != city) {
+                filterChanged = true;
+                currentCategory = category;
+                currentPerson = person;
+                currentCity = city;
+            }
+
+            if (windowWidth >= 900 && galleryType == 900 && !filterChanged)  {
                 return;
-            } else if (windowWidth >= 600 && windowWidth < 900 && galleryType == 600) {
+            } else if (windowWidth >= 600 && windowWidth < 900 && galleryType == 600 && !filterChanged) {
                 return;
-            } else if (windowWidth < 600 && galleryType == 320) {
+            } else if (windowWidth < 600 && galleryType == 320 && !filterChanged) {
                 return;
             }
 
-            $.post('/ajax/picture', {category: 1, name: '', city: ''},
+            console.log('build', windowWidth);
+
+
+            $.post('/ajax/picture', {category: category, person: person, city: city},
                 function(data){
                     if (data.pictures != undefined) {
 
                         if (gallerySlick) {
-                            $('.pictures').slick('unslick');
+                            galleryContainer.slick('unslick');
                         }
                         galleryContainer.empty();
 
@@ -40,7 +61,6 @@
                         if (windowWidth > 900) {
                             maxElement = 6;
                             totalSlides =  Math.ceil(Object.keys(data.pictures).length / maxElement);
-                            console.log(data.pictures, maxElement, totalSlides);
                             currentSlide = 1;
                             for (var i in data.pictures) {
                                 if (currentElement == 1) {
@@ -92,7 +112,12 @@
 
                             galleryType = 320;
                         }
-
+                        if (totalSlides > 0) {
+                            $('#picture-counter').show();
+                        } else {
+                            $('#picture-counter').hide();
+                        }
+                        filterChanged = false;
                         initSliderPlugin(windowWidth);
                     }
                 });
@@ -109,7 +134,7 @@
                 var nextArrow = '';
             }
 
-            $('.pictures').slick({
+            galleryContainer.slick({
                 dots : false,
                 lazyLoad: 'progressive',
                 slidesToShow: 1,
@@ -117,11 +142,8 @@
                 prevArrow: prevArrow,
                 nextArrow: nextArrow
             }).on('afterChange', function(event, slick, currentSlide){
-                console.log(currentSlide);
                 $('#slide-current').html(currentSlide+1);
             });;
-
-            console.log(currentSlide, totalSlides);
 
             $('#slide-current').html(currentSlide);
             $('#slide-total').html(totalSlides);
@@ -130,11 +152,24 @@
         }
 
         $(window).on('resize', function(e){
-            buildGallery($(this).width());
+            buildGallery();
         });
 
-        buildGallery($(window).width());
+        $(document).on('click', '.tabs li', function(e) {
+            var that = $(this);
+            var id = that.attr('data-id');
+            that.addClass('active').siblings().removeClass('active');
+            galleryContainer.attr('data-category', id);
+            buildGallery();
+        });
 
+        $(document).on('click', '.btn-picture-search', function(e) {
+            e.preventDefault();
+            buildGallery();
+        });
+
+
+        buildGallery();
     });
 
 })(jQuery);

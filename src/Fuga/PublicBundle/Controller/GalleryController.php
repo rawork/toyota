@@ -15,13 +15,29 @@ class GalleryController extends PublicController
 	public function indexAction()
 	{
 		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
+			$criteria = 'publish=1';
+
 			$category = $this->get('request')->request->getInt('category');
-			$name = $this->get('request')->request->get('name');
+			$person = $this->get('request')->request->get('person');
 			$city = $this->get('request')->request->get('city');
+
+			if ($category > 0) {
+				$criteria .= ' AND age_id='.$category;
+			}
+
+			if (trim($city) != '') {
+				$criteria .= ' AND city="'.$city.'"';
+			}
+
+			if (trim($person) != '') {
+				$criteria .= ' AND person LIKE("%'.$person.'%")';
+			}
+
+//			$this->get('log')->addError($criteria);
 
 			$response = new JsonResponse();
 			$response->setData(array(
-				'pictures' => $pictures = $this->get('container')->getItems('gallery_picture', 'publish=1')
+				'pictures' => $this->get('container')->getItems('gallery_picture', $criteria)
 			));
 
 			return $response;
