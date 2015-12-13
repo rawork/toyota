@@ -227,6 +227,7 @@ h2 {
 }
 
 .logo {
+    display: none;
     position: absolute;
     right: 15px;
     z-index: 30;
@@ -240,7 +241,15 @@ h2 {
 }
 
 .logo-small {
-    display: none;
+    display: block;
+    position: absolute;
+    right: 15px;
+    z-index: 30;
+    width: 63px;
+}
+
+.logo-small-xs {
+    display: block;
     position: absolute;
     right: 15px;
     z-index: 30;
@@ -463,10 +472,19 @@ p.video iframe {
     }
 
     .logo {
+        display: block;
         top: 0;
         right: 17px;
         width: 79px;
         z-index: 100;
+    }
+
+    .logo-small {
+        display: none;
+    }
+
+    .logo-small-xs {
+        display: none;
     }
 
     .logo-dreamcar {
