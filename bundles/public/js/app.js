@@ -46,10 +46,11 @@ function getTimer(deadline) {
             if (900 <= $(this).width()) {
                 $('.mainmenu').show();
                 $('ul#dealer').hide();
+                $('.map-dot').show();
             } else {
                 $('ul#dealer').show();
                 $('.modal').hide();
-                $('#map-dot').hide();
+                $('.map-dot').hide();
             }
         });
 

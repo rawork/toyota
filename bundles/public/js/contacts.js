@@ -24,17 +24,19 @@
                     }
 
                     console.log(defaultCities);
-                    $('.map-dot').remove();
-                    for (var i in defaultCities) {
-                        var cityData = defaultCities[i];
-                        $('<div></div>')
-                            .addClass('map-dot map-dot'+cityData.id)
-                            .attr('data-id', cityData.id)
-                            .html('<div class="dot"></div><div class="title"><span>'+cityData['name']+'</span></div>')
-                            .css({
-                                'left': canvasOffsetX + (1200 <= $(window).width() ? canvasOffsetX1200 : 0) + parseInt(cityData.offsetx),
-                                'top': canvasOffsetY + parseInt(cityData.offsety)
-                            }).show().appendTo('.map');
+                    if ($(window).width() >= 900) {
+                        $('.map-dot').remove();
+                        for (var i in defaultCities) {
+                            var cityData = defaultCities[i];
+                            $('<div></div>')
+                                .addClass('map-dot map-dot'+cityData.id)
+                                .attr('data-id', cityData.id)
+                                .html('<div class="dot"></div><div class="title"><span>'+cityData['name']+'</span></div>')
+                                .css({
+                                    'left': canvasOffsetX + (1200 <= $(window).width() ? canvasOffsetX1200 : 0) + parseInt(cityData.offsetx),
+                                    'top': canvasOffsetY + parseInt(cityData.offsety)
+                                }).show().appendTo('.map');
+                        }
                     }
                 }
             });
