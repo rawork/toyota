@@ -251,7 +251,8 @@
         float: left;
         width: 33.33333333%;
         padding-top: 20px;
-        padding-bottom: 30px;
+        padding-bottom: 0;
+        heoght: 400px;
         overflow: hidden;
     }
 
@@ -288,8 +289,8 @@
 
     .picture {
         padding-top: 0;
-        height: 400px;
-        overflow: hidden;
+        height: 370px;
+        padding-bottom: 0;
     }
 
     .slick-prev, .slick-next {
