@@ -5,7 +5,7 @@
     {% if news|length > 0 %}
     {% for item in news %}
     <li class="clearfix">
-        <div class="picture"><img src="{{ item.photo_value.value }}"></div>
+        <div class="picture"><img src="{{ item.photo_value.extra.main.path }}"></div>
         <div>
             <div class="title"><a href="{{ path('event_detail', {id: item.id}) }}">{{ item.name }}</a></div>
             <div class="date">{{ item.date|format_date('d.m.Y') }}</div>
