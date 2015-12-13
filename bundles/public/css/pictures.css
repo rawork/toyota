@@ -293,6 +293,8 @@
 
     .slick-prev, .slick-next {
         display: block;
+        width: 52px;
+        height: 49px;
     }
 
     .slick-prev {
@@ -305,7 +307,7 @@
     }
 
     .slick-next {
-        right: 0;
+        right: -30px;
     }
 
     .slick-next:before{
