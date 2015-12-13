@@ -100,7 +100,7 @@
                         $('.map-dot').remove();
                         $('<div></div>')
                             .addClass('map-dot map-dot'+value)
-                            .html('<div class="map-dot"><div class="dot"></div><div class="title"><span>'+cityData['name']+'</span></div></div>')
+                            .html('<div class="dot"></div><div class="title"><span>'+cityData['name']+'</span></div>')
                             .css({
                             'left': canvasOffsetX + (1200 <= $(window).width() ? canvasOffsetX1200 : 0) + parseInt(cityData.offsetx),
                             'top': canvasOffsetY + parseInt(cityData.offsety)

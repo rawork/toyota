@@ -195,7 +195,7 @@ h2 {
     height: 48px;
     text-align: center;
     padding-top: 16px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     text-decoration: none;
     color: #fff;
 }
