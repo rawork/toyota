@@ -138,6 +138,14 @@
     margin-bottom: 10px;
 }
 
+.slick-list {
+    outline: none !important;
+}
+
+.slick-slide {
+    outline: none !important;
+}
+
 .picture-counter {
     text-align: center;
     font-size: 14px;

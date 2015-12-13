@@ -429,6 +429,7 @@ p.video iframe {
         /*line-height: 23px;*/
         font-size: 36px;
         line-height: 38px;
+        margin-top: 0;
     }
 
     h2 {
