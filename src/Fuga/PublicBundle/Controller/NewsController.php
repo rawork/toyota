@@ -14,7 +14,9 @@ class NewsController extends PublicController
 
 	public function indexAction($year = 0, $month = 0)
 	{
-		$date = new \DateTime();
+
+		$item = $this->get('container')->getItem('news_news', '1=1');
+		$date = new \DateTime($item['date'].' 00:00:00');
 		if (0 == $year) {
 			$year = $date->format('Y');
 		}
@@ -32,6 +34,8 @@ class NewsController extends PublicController
 		if ($month > 0) {
 			$criteria .= ' AND MONTH(date) = '.$month;
 		}
+
+
 
 		$news = $this->get('container')->getItems('news_news', $criteria);
 
