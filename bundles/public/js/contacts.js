@@ -6,6 +6,7 @@
         var canvasOffsetX1200 = -20; //150
 
         var cities = {};
+        var defaultCities = [];
         var dealers = {};
 
 
@@ -13,6 +14,28 @@
             function(data){
                 if (data.cities) {
                     cities = data.cities;
+
+                    console.log(cities);
+                    for (var i in cities) {
+                        console.log(cities[i]);
+                        if (cities[i].is_default == '1') {
+                            defaultCities.push(cities[i]);
+                        }
+                    }
+
+                    console.log(defaultCities);
+                    $('.map-dot').remove();
+                    for (var i in defaultCities) {
+                        var cityData = defaultCities[i];
+                        $('<div></div>')
+                            .addClass('map-dot map-dot'+cityData.id)
+                            .attr('data-id', cityData.id)
+                            .html('<div class="dot"></div><div class="title"><span>'+cityData['name']+'</span></div>')
+                            .css({
+                                'left': canvasOffsetX + (1200 <= $(window).width() ? canvasOffsetX1200 : 0) + parseInt(cityData.offsetx),
+                                'top': canvasOffsetY + parseInt(cityData.offsety)
+                            }).show().appendTo('.map');
+                    }
                 }
             });
 
@@ -36,7 +59,7 @@
             $("body").removeClass("modal-open")
         });
 
-        $(document).on('click', '#map-dot', function(e) {
+        $(document).on('click', '.map-dot', function(e) {
             e.preventDefault();
 
             var that = $(this);
@@ -76,17 +99,25 @@
                     var cityData = cities[value];
 
                     if ($('.map-canvas').is(':visible')) {
-                        $('#map-dot')
-                            .removeClass()
-                            .addClass('map-dot')
-                            .addClass('map-dot'+value)
-                            .attr('data-id', value)
+                        $('.map-dot').remove();
+                        $('<div></div>')
+                            .addClass('map-dot map-dot'+value)
+                            .html('<div class="map-dot"><div class="dot"></div><div class="title"><span>'+cityData['name']+'</span></div></div>')
                             .css({
-                                'left': canvasOffsetX + (1200 <= $(window).width() ? canvasOffsetX1200 : 0) + parseInt(cityData.offsetx),
-                                'top': canvasOffsetY + parseInt(cityData.offsety)
-                        })
-                            .show()
-                            .find('span').html(cityData['name']);
+                            'left': canvasOffsetX + (1200 <= $(window).width() ? canvasOffsetX1200 : 0) + parseInt(cityData.offsetx),
+                            'top': canvasOffsetY + parseInt(cityData.offsety)
+                        }).show().appendTo('.map');
+                        //$('#map-dot')
+                        //    .removeClass()
+                        //    .addClass('map-dot')
+                        //    .addClass('map-dot'+value)
+                        //    .attr('data-id', value)
+                        //    .css({
+                        //        'left': canvasOffsetX + (1200 <= $(window).width() ? canvasOffsetX1200 : 0) + parseInt(cityData.offsetx),
+                        //        'top': canvasOffsetY + parseInt(cityData.offsety)
+                        //})
+                        //    .show()
+                        //    .find('span').html(cityData['name']);
                             $.scrollTo('.map-canvas', 1000);
 
                     } else {

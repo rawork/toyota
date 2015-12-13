@@ -6,44 +6,50 @@
     </ul>
 {% endif %}
 
-<div class="form-search">
+<div class="form-search clearfix">
     <input class="form-control form-control-city" type="text" name="city" placeholder="Введите название города">
     <input class="form-control form-control-name" type="text" name="name" placeholder="Имя и фамилию">
     <button class="btn-picture-search"></button>
 </div>
 
-<div class="picture-help">Листайте  для перемещения по работам</div>
+<div class="picture-help">Листайте для перемещения по работам</div>
 
-<div class="tab-text-container">
-    {% for age in ages %}
-    <div id="tab{{ age.id }}"{% if firstAge.id == age.id %} class="active"{% endif %}>
-        <div class="picture-wrapper">
-            <div class="jcarousel">
-                <ul class="pictures">
-                    <li>
-                        <div class="picture">
-                            <img src="/bundles/public/img/orange.jpg">
-                            <div class="person">Иванова Лена, 14 лет</div>
-                            <div class="city">Москва</div>
-                            <div class="name">&laquo;Летающая тачка&raquo;</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="picture">
-                            <img src="/bundles/public/img/orange.jpg">
-                            <div class="person">Иванова Лена, 14 лет</div>
-                            <div class="city">Москва</div>
-                            <div class="name">&laquo;Летающая тачка&raquo;</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="picture-vote">Голосовать</div>
-            <div class="picture-counter">1/200</div>
-        </div>
+<div class="pictures-container">
+    <div class="pictures" data-category="{{ firstAge.id }}">
+        {#<div class="picture">#}
+            {#<div class="img">#}
+                {#<div class="picture-vote">Голосовать</div>#}
+                {#<img src="/bundles/public/img/orange.jpg">#}
+            {#</div>#}
+            {#<div class="person">Иванова Лена, 14 лет</div>#}
+            {#<div class="city">Москва</div>#}
+            {#<div class="name">&laquo;Летающая тачка&raquo;</div>#}
+        {#</div>#}
+        {#<div class="picture">#}
+            {#<div class="picture-vote">Голосовать</div>#}
+            {#<img src="/bundles/public/img/orange.jpg">#}
+            {#<div class="person">Иванова Лена, 14 лет</div>#}
+            {#<div class="city">Москва</div>#}
+            {#<div class="name">&laquo;Летающая тачка&raquo;</div>#}
+        {#</div>#}
+        {#<div class="picture">#}
+            {#<div class="picture-vote">Голосовать</div>#}
+            {#<img src="/bundles/public/img/orange.jpg">#}
+            {#<div class="person">Иванова Лена, 14 лет</div>#}
+            {#<div class="city">Москва</div>#}
+            {#<div class="name">&laquo;Летающая тачка&raquo;</div>#}
+        {#</div>#}
+        {#<div class="picture">#}
+            {#<div class="picture-vote">Голосовать</div>#}
+            {#<img src="/bundles/public/img/orange.jpg">#}
+            {#<div class="person">Иванова Лена, 14 лет</div>#}
+            {#<div class="city">Москва</div>#}
+            {#<div class="name">&laquo;Летающая тачка&raquo;</div>#}
+        {#</div>#}
     </div>
-    {% endfor %}
+    <div id="picture-counter" class="picture-counter"><span id="slide-current"></span>/<span id="slide-total"></span></div>
 </div>
+
 
 <div class="red-line">
     <div>Здесь вы можете посмотреть работы участников<br>9-го конкурса &laquo;Автомобиль мечты&raquo;</div>

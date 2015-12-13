@@ -182,6 +182,10 @@ event_detail:
   path: /events/detail/{id}
   defaults: { _controller: 'Fuga:Public:News:detail'}
 
+ajax_picture_list:
+  path: /ajax/picture
+  defaults: { _controller: 'Fuga:Public:Gallery:index'}
+
 public_page:
   path: /{node}
   defaults: { _controller: 'Fuga:Public:Common:index', node: '', action: '' }
