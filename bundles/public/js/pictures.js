@@ -12,10 +12,11 @@
 
         var currentSlide = 0;
         var totalSlides = 0;
-        var pictures = {};
+        var picturesObj = {};
+        var picturesArray = [];
 
-        var elementHtml = function(item) {
-            return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><img data-lazy="'+ item.picture_value.extra.main.path +'"></div><div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name"><a href="" data-id="'+item.id+'" data-category="'+item.age_id+'">'+item.name+'</a></div>'+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea">Идея:<br>' + item.idea + '</div></div>';
+        var elementHtml = function(item, pos) {
+            return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><img data-lazy="'+ item.picture_value.extra.main.path +'"></div><div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name"><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'">'+item.name+'</a></div>'+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea">Идея:<br>' + item.idea + '</div></div>';
         };
 
         var buildGallery = function() {
@@ -45,7 +46,12 @@
                 function(data){
                     if (data.pictures != undefined) {
 
-                        pictures = data.pictures;
+                        picturesObj = data.pictures;
+                        picturesArray = [];
+
+                        for (i in picturesObj) {
+                            picturesArray.push(picturesObj[i]);
+                        }
 
                         //console.log(pictures[1]);
 
@@ -61,12 +67,12 @@
                             maxElement = 6;
                             totalSlides =  Math.ceil(Object.keys(data.pictures).length / maxElement);
                             currentSlide = 1;
-                            for (var i in data.pictures) {
+                            for (var i in picturesArray) {
                                 if (currentElement == 1) {
                                     var newBlock = $('<div></div>');
                                 }
 
-                                newBlock.append(elementHtml(data.pictures[i]));
+                                newBlock.append(elementHtml(picturesArray[i], i));
 
                                 if (currentElement >= maxElement) {
                                     galleryContainer.append(newBlock.get(0).outerHTML);
@@ -83,12 +89,12 @@
                             maxElement = 2;
                             totalSlides =  Math.ceil(Object.keys(data.pictures).length / maxElement);
                             currentSlide = 1;
-                            for (var i in data.pictures) {
+                            for (var i in picturesArray) {
                                 if (currentElement == 1) {
                                     var newBlock = $('<div></div>');
                                 }
 
-                                newBlock.append(elementHtml(data.pictures[i]));
+                                newBlock.append(elementHtml(picturesArray[i], i));
 
                                 if (currentElement >= maxElement) {
                                     galleryContainer.append(newBlock.get(0).outerHTML);
@@ -105,8 +111,8 @@
                         } else {
                             totalSlides =  Object.keys(data.pictures).length;
                             currentSlide = 1;
-                            for (var i in data.pictures) {
-                                galleryContainer.append(elementHtml(data.pictures[i]));
+                            for (var i in picturesArray) {
+                                galleryContainer.append(elementHtml(picturesArray[i], i));
                             }
 
                             galleryType = 320;
@@ -187,16 +193,19 @@
             buildGallery();
         });
 
-        $(document).on('click', '.picture .name a', function(e) {
+        $(document).on('click', '.picture .name a, a.popup-prev, a.popup-next', function(e) {
             e.preventDefault();
+
+            console.log('click picture a');
 
             if ($(window).width() < 900) {
                 return;
             }
 
-            var id = $(this).attr('data-id');
+            var pos = parseInt($(this).attr('data-position'));
 
-            var picture = pictures[id];
+            var picture = picturesArray[pos];
+
 
             $('.modal-picture img').attr('src', picture.picture_value.extra.big.path);
             $('.modal-picture .title').html(picture.name);
@@ -209,6 +218,19 @@
 
             $('.modal-picture .person').html(picture.person+'('+picture.city+'), '+picture.age);
             $('.modal-picture .idea').html('Идея:<br>'+ picture.idea);
+            if (pos <= 0) {
+                $('.popup-prev').hide();
+            } else {
+                $('.popup-prev').show();
+            }
+            if (pos >= picturesArray.length-1) {
+                $('.popup-next').hide();
+            } else {
+                $('.popup-next').show();
+            }
+
+            $('.popup-prev').attr('data-position', pos-1);
+            $('.popup-next').attr('data-position', pos+1);
 
             $('body').addClass('modal-open');
             $('.modal').show();

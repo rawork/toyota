@@ -460,6 +460,26 @@ body.modal-open {
         z-index: 11;
     }
 
+    a.popup-prev, a.popup-next {
+        position: absolute;
+        display: block;
+        top: 0;
+        width: 30px;
+        height: 42px;
+        background-position: top left;
+        background-repeat: no-repeat;
+    }
+
+    a.popup-prev {
+        background-image: url('../img/popup_prev.png');
+        left: -90px;
+    }
+
+    a.popup-next {
+        background-image: url('../img/popup_next.png');
+        right: -90px;
+    }
+
     .modal-picture img{
         display: block;
         max-width: 574px !important;
