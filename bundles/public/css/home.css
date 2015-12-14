@@ -14,7 +14,7 @@ ul.slider li {
 }
 
 ul.slider img {
-    max-width: 100% !important;
+    max-width: 320px !important;
     margin: 0 auto;
 }
 
@@ -159,6 +159,11 @@ p.video iframe {
     ul.slider li {
         height: 487px;
         text-align: center;
+    }
+
+    ul.slider img {
+        max-width: 100% !important;
+        margin: 0 auto;
     }
 
     .slider-prev, .slider-next {

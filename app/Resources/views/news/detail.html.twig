@@ -2,7 +2,7 @@
 <div class="event-source">{{ news.source }} {{ news.date|format_date('d.m.Y') }}</div>
 <div>{{ news.content }}</div>
 
-<p><a href="{{ path('public_page', {node: curnode.name}) }}"><strong>Назад</strong></a></p>
+<p><a href="{{ path('public_page', {node: curnode.name}) }}"><strong>Назад к календарю событий</strong></a></p>
 
 <div class="event-links clearfix">
     {% if prev %}

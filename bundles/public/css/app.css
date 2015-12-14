@@ -550,10 +550,8 @@ p.video iframe {
     }
 
     .mainmenu ul li a {
-        font-family: "ToyotaDisplay", "Helvetica Neue", Arial, Helvetica, sans-serif;
         font-size: 17px;
         line-height: 17px;
-        /*color: #fff;*/
         color: #000;
         text-decoration: none;
     }

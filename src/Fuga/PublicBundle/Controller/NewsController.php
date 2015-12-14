@@ -16,16 +16,14 @@ class NewsController extends PublicController
 	{
 
 		$item = $this->get('container')->getItem('news_news', '1=1');
+
 		$date = new \DateTime($item['date'].' 00:00:00');
+		$criteria = 'publish=1';
+
 		if (0 == $year) {
 			$year = $date->format('Y');
+			$criteria .= ' AND (YEAR(date) = '.$year.' OR YEAR(date) = '.($year-1).')';
 		}
-
-		if (0 == $month) {
-			$month = $date->format('n');
-		}
-
-		$criteria = 'publish=1';
 
 		if ($year > 0) {
 			$criteria .= ' AND YEAR(date) = '.$year;
