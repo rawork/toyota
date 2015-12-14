@@ -284,17 +284,19 @@
     .social {
         margin-top: 25px;
     }
-}
 
-@media (min-width: 920px) {
     .pictures-container {
-        border-radius: 16px;
-        padding: 35px 55px 0;
-        margin-left: -80px;
-        width: 919px;
+        margin-left: -70px;
+        width: 900px;
         height: 800px;
-        background-color: #000;
-        background: url('../img/gallery_bg.png') center center no-repeat;
+        background-color: #fff;
+        padding: 20px 0;
+        border-radius: 16px;
+        box-shadow: 0 0 10px rgba(0,0,0, 0.4);
+    }
+
+    .pictures {
+        margin: 0 30px;
     }
 
     .picture {
@@ -325,5 +327,69 @@
     .slick-next:before{
         content: "";
         font-size: 0;
+    }
+
+    /* popup */
+    .pop-up_wrap {
+        padding: 20px 0;
+        border-radius: 16px;
+        box-shadow: 0 0 10px rgba(0,0,0, 0.4);
+        max-width: 900px;
+        margin: 100px auto;
+    }
+    .pop-up {
+        padding: 30px 30px 15px;
+        position: relative;
+        background: #fff;
+        background: url('../img/border-l.png') repeat-y left top, url('../img/border-r.png') repeat-y right top;
+    }
+    .bdr-b:before, .bdr-b:after, .bdr-t:before, .bdr-t:after {
+        position: absolute;
+        display: block;
+        content: '';
+        background: #000;
+        height: 36px;
+        width: 36px;
+    }
+    .bdr-t:before {
+        left: -20px;
+        background: url('../img/lt.png') no-repeat;
+    }
+    .bdr-t:after {
+        right: -20px;
+        background: url('../img/rt.png') no-repeat;
+    }
+    /*.pop-up:after {*/
+        /*height: 44px;*/
+        /*bottom: -20px;*/
+        /*background: url(border-bottom.png) no-repeat;*/
+    /*}*/
+    .bdr-t {
+        height: 36px;
+        top: -20px;
+        left: 20px;
+        right: 20px;
+        position: absolute;
+        background: url('../img/bt.png') repeat-x;
+        z-index: 10;
+    }
+    .bdr-b {
+        height: 36px;
+        bottom: -20px;
+        left: 20px;
+        right: 20px;
+        position: absolute;
+        background: url('../img/bb.png') repeat-x bottom center;
+        z-index: 10;
+    }
+    .bdr-b:after {
+        right: -20px;
+        bottom: 2px;
+        background: url('../img/rb.png') no-repeat;
+    }
+    .bdr-b:before {
+        left: -20px;
+        bottom: 2px;
+        background: url('../img/lb.png') no-repeat;
     }
 }
