@@ -12,9 +12,10 @@
 
         var currentSlide = 0;
         var totalSlides = 0;
+        var pictures = {};
 
         var elementHtml = function(item) {
-            return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><img data-lazy="'+ item.picture_value.extra.main.path +'"></div><div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>'+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea">Идея:<br>' + item.idea + '</div></div>';
+            return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><img data-lazy="'+ item.picture_value.extra.main.path +'"></div><div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name"><a href="" data-id="'+item.id+'" data-category="'+item.age_id+'">'+item.name+'</a></div>'+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea">Идея:<br>' + item.idea + '</div></div>';
         };
 
         var buildGallery = function() {
@@ -43,6 +44,10 @@
             $.post('/ajax/picture', {category: category, person: person, city: city},
                 function(data){
                     if (data.pictures != undefined) {
+
+                        pictures = data.pictures;
+
+                        //console.log(pictures[1]);
 
                         if (gallerySlick) {
                             galleryContainer.slick('unslick');
@@ -180,6 +185,42 @@
         $(document).on('click', '.btn-picture-search', function(e) {
             e.preventDefault();
             buildGallery();
+        });
+
+        $(document).on('click', '.picture .name a', function(e) {
+            e.preventDefault();
+
+            if ($(window).width() < 900) {
+                return;
+            }
+
+            var id = $(this).attr('data-id');
+
+            var picture = pictures[id];
+
+            console.log(id, picture);
+
+            // TODO fullfill modal-dialog
+            $('.modal-picture img').attr('src', picture.picture_value.extra.big.path);
+            $('.modal-picture .title').html(picture.name);
+            if (0 < parseInt(picture.position)) {
+                $('.modal-picture .place span').html(picture.position+' место').show();
+                $('.modal-picture .place').show();
+            } else {
+                $('.modal-picture .place').hide();
+            }
+
+            $('.modal-picture .person').html(picture.person+'('+picture.city+'), '+picture.age);
+            $('.modal-picture .idea').html('Идея:<br>'+ picture.idea);
+
+            $('body').addClass('modal-open');
+            $('.modal').show();
+        });
+
+        $(document).on('click', 'a.modal-close', function(e){
+            e.preventDefault();
+            $(this).parents('.modal').hide();
+            $("body").removeClass("modal-open");
         });
 
 

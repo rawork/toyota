@@ -1,3 +1,7 @@
+body.modal-open {
+    overflow: hidden;
+}
+
 .content ul.tabs {
     display: block;
     list-style: none;
@@ -419,6 +423,7 @@
     .modal {
         display: none;
         position: fixed;
+        overflow: scroll;
         top: 0;
         left: 0;
         right: 0;
@@ -432,6 +437,7 @@
         left: 50%;
         top: 50px;
         margin-left: -320px;
+        margin-bottom: 50px;
         position: absolute;
         /*background-image: url('../img/modal_bg.png');*/
         /*background-position: center center;*/
@@ -471,25 +477,36 @@
         font-size: 18px;
         line-height: 23px;
         color: #999;
+        margin-top: 3px;
     }
 
     .modal-picture .idea {
         font-size: 18px;
         line-height: 23px;
         color: #54565b;
+        margin-top: 30px;
     }
 
     .modal-picture .place {
+        float: left;
         position: absolute;
-        top: 0;
-        right: -5px;
+        top: 41px;
+        right: -45px;
         height: 46px;
-        width: 100px;
-        background-color: #eb3731;
+        width: 115px;
         color: #fff;
         font-size: 18px;
         line-height: 18px;
         font-weight: 700;
+    }
+
+    .modal-picture .place span {
+        float: right;
+        display: inline-block;
+        padding: 13px 0 0 15px;
+        height: 46px;
+        width: 100px;
+        background-color: #eb3731;
     }
 
     .modal-picture .place:before {
