@@ -234,7 +234,7 @@
 
             $('body').addClass('modal-open');
             $('.modal').show(0, function(){
-                console.log($('.modal-dialog').position(), $('.modal-dialog').outerHeight(),  $('.popup-prev').position());
+                setTimeout(function(){console.log($('.modal-dialog').position(), $('.modal-dialog').outerHeight(),  $('.popup-prev').position())}, 20);
             });
 
         });
