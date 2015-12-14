@@ -206,6 +206,8 @@
 
             var picture = picturesArray[pos];
 
+            var img = new Image();
+            img.src = picture.picture_value.extra.big.path;
 
             $('.modal-picture img').attr('src', picture.picture_value.extra.big.path);
             $('.modal-picture .title').html(picture.name);
