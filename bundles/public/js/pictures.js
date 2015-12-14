@@ -229,22 +229,11 @@
 
             var pos = parseInt($(this).attr('data-position'));
 
+            popupSlick.empty();
+
             for (i in picturesArray) {
                 popupSlick.append(modalElementHtml(picturesArray[i]))
             }
-
-            popupSlick.slick({
-                infinite: false,
-                dots : false,
-                lazyLoad: 'progressive',
-                slidesToShow: 1,
-                initialSlide: pos,
-                adaptiveHeight: true,
-                prevArrow: '<button class="slick-prev popup-prev"></button>',
-                nextArrow: '<button class="slick-next popup-next"></button>'
-            }).on('afterChange', function(event, slick, currentSlide){
-                setModalArrowVibibility(currentSlide, picturesArray.length);
-            });
 
             //var picture = picturesArray[pos];
 
@@ -278,12 +267,25 @@
 
             $('body').addClass('modal-open');
             $('.modal').show();
+            popupSlick.slick({
+                infinite: false,
+                dots : false,
+                lazyLoad: 'progressive',
+                slidesToShow: 1,
+                initialSlide: pos,
+                adaptiveHeight: true,
+                prevArrow: '<button type="button" class="slick-prev popup-prev"><img src="/bundles/public/img/popup_prev.png"></button>',
+                nextArrow: '<button type="button" class="slick-next popup-next"><img src="/bundles/public/img/popup_next.png"></button>'
+            }).on('afterChange', function(event, slick, currentSlide){
+                setModalArrowVibibility(currentSlide, picturesArray.length);
+            });
 
         });
 
         $(document).on('click', 'a.modal-close', function(e){
             e.preventDefault();
             $(this).parents('.modal').hide();
+            popupSlick.slick('unslick');
             $("body").removeClass("modal-open");
         });
 
