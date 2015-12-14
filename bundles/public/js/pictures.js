@@ -198,9 +198,6 @@
 
             var picture = pictures[id];
 
-            console.log(id, picture);
-
-            // TODO fullfill modal-dialog
             $('.modal-picture img').attr('src', picture.picture_value.extra.big.path);
             $('.modal-picture .title').html(picture.name);
             if (0 < parseInt(picture.position)) {
