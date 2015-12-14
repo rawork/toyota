@@ -460,7 +460,7 @@ body.modal-open {
         z-index: 11;
     }
 
-    a.popup-prev, a.popup-next {
+    .popup-prev, .popup-next {
         position: absolute;
         display: block;
         top: 0;
@@ -470,12 +470,12 @@ body.modal-open {
         background-repeat: no-repeat;
     }
 
-    a.popup-prev {
+    .popup-prev {
         background-image: url('../img/popup_prev.png');
         left: -90px;
     }
 
-    a.popup-next {
+    .popup-next {
         background-image: url('../img/popup_next.png');
         right: -90px;
     }
@@ -518,6 +518,7 @@ body.modal-open {
         font-size: 18px;
         line-height: 18px;
         font-weight: 700;
+        z-index: 100;
     }
 
     .modal-picture .place span {
