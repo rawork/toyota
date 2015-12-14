@@ -233,7 +233,10 @@
             $('.popup-next').attr('data-position', pos+1);
 
             $('body').addClass('modal-open');
-            $('.modal').show();
+            $('.modal').show(0, function(){
+                console.log($('.modal-dialog').position(), $('.modal-dialog').outerHeight(),  $('.popup-prev').position());
+            });
+
         });
 
         $(document).on('click', 'a.modal-close', function(e){
