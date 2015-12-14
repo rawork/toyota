@@ -290,15 +290,17 @@ ul.dealer .site-link {
 
     .modal-dialog {
         width: 900px;
-        height: 600px;
         left: 50%;
         top: 60px;
         margin-left: -450px;
         position: absolute;
-        background-image: url('../img/modal_bg.png');
-        background-position: center center;
+        /*background-image: url('../img/modal_bg.png');*/
+        /*background-position: center center;*/
+        /*background-color: #fff;*/
+        padding: 20px 0;
+        border-radius: 16px;
+        box-shadow: 0 0 10px rgba(0,0,0, 0.4);
         background-color: #fff;
-        border-radius: 11px;
     }
 
     .modal-close {
@@ -316,10 +318,6 @@ ul.dealer .site-link {
 
     #modal-dealers {
 
-        /*border: 1px solid #f00;*/
-        height: 520px;
-        /*overflow-x: hidden;*/
-        /*overflow-y: scroll;*/
     }
 
     #modal-dealers ul.dealer li {
@@ -327,18 +325,86 @@ ul.dealer .site-link {
     }
 
     .nano {
-        margin: 40px;
+        margin: 0;
         width: 820px;
-        height: 520px;
+        /*height: 520px;*/
+        min-height: 300px;
+        max-height: 520px;
     }
 
-    .nano .nano-content { padding: 10px; }
+    .nano .nano-content { padding: 0; }
     .nano > .nano-pane   {
         background: rgba(0,0,0,0.05);
         width: 8px;
         right: 0;
     }
     .nano > .nano-pane > .nano-slider { background: rgba(0,0,0,0.3); }
+
+
+    /* popup */
+    .pop-up_wrap {
+        padding: 20px 0;
+        border-radius: 16px;
+        box-shadow: 0 0 10px rgba(0,0,0, 0.4);
+        max-width: 860px;
+        margin: 100px auto;
+    }
+    .pop-up {
+        padding: 30px;
+        position: relative;
+        background: #fff;
+        background: url('../img/border-l.png') repeat-y left top, url('../img/border-r.png') repeat-y right top;
+    }
+    .bdr-b:before, .bdr-b:after, .bdr-t:before, .bdr-t:after {
+        position: absolute;
+        display: block;
+        content: '';
+        background: #000;
+        height: 36px;
+        width: 36px;
+    }
+    .bdr-t:before {
+        left: -20px;
+        background: url('../img/lt.png') no-repeat;
+    }
+    .bdr-t:after {
+        right: -20px;
+        background: url('../img/rt.png') no-repeat;
+    }
+    .pop-up:after {
+        height: 44px;
+        bottom: -20px;
+        background: url(border-bottom.png) no-repeat;
+    }
+    .bdr-t {
+        height: 36px;
+        top: -20px;
+        left: 20px;
+        right: 20px;
+        position: absolute;
+        background: url('../img/bt.png') repeat-x;
+        z-index: 10;
+    }
+    .bdr-b {
+        height: 36px;
+        bottom: -20px;
+        left: 20px;
+        right: 20px;
+        position: absolute;
+        background: url('../img/bb.png') repeat-x bottom center;
+        z-index: 10;
+    }
+    .bdr-b:after {
+        right: -20px;
+        bottom: 2px;
+        background: url('../img/rb.png') no-repeat;
+    }
+    .bdr-b:before {
+        left: -20px;
+        bottom: 2px;
+        background: url('../img/lb.png') no-repeat;
+    }
+
 }
 
 /*@media (min-width: 1140px) {*/
