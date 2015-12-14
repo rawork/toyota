@@ -288,10 +288,12 @@
 
 @media (min-width: 920px) {
     .pictures-container {
+        border-radius: 16px;
         padding: 35px 55px 0;
         margin-left: -80px;
         width: 919px;
         height: 800px;
+        background-color: #000;
         background: url('../img/gallery_bg.png') center center no-repeat;
     }
 
