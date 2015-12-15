@@ -232,11 +232,11 @@ body.modal-open {
 }
 
 @media (min-width: 900px) {
-    .content {
-        -moz-box-shadow: 0px 3px 40px rgb(100,100,100);
-        -webkit-box-shadow: 0px 3px 40px rgb(100,100,100);
-        box-shadow: 0px 3px 40px rgb(100,100,100);
-    }
+    /*.content {*/
+        /*-moz-box-shadow: 0px 3px 40px rgb(100,100,100);*/
+        /*-webkit-box-shadow: 0px 3px 40px rgb(100,100,100);*/
+        /*box-shadow: 0px 3px 40px rgb(100,100,100);*/
+    /*}*/
 
     .form-search {
         width: 620px;

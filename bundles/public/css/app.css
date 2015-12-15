@@ -93,6 +93,7 @@ body {
 #content-toyota {
     padding-bottom:160px;
     position: relative;
+    overflow-y: hidden;
 }
 #footer-toyota {
     /*background:#ffab62;*/
@@ -106,10 +107,6 @@ body {
 .container.content-container {
     height: 100%;
     min-height: 100%;
-}
-
-.content {
-    height: 100%;
 }
 
 body {
@@ -427,6 +424,13 @@ p.video iframe {
 }
 
 @media (min-width: 900px) {
+    .container.content-container {
+        -moz-box-shadow: 0px 3px 40px rgb(100,100,100);
+        -webkit-box-shadow: 0px 3px 40px rgb(100,100,100);
+        box-shadow: 0px 3px 40px rgb(100,100,100);
+        background-color: #fff;
+    }
+
     body {
         font-size: 17px;
         letter-spacing: -0.07px;

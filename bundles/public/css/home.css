@@ -193,12 +193,6 @@ p.video iframe {
         margin-left: 31px;
     }
 
-    .content {
-        -moz-box-shadow: 0px 3px 40px rgb(100,100,100);
-        -webkit-box-shadow: 0px 3px 40px rgb(100,100,100);
-        box-shadow: 0px 3px 40px rgb(100,100,100);
-    }
-
     p.video {
         margin-left: 0;
         margin-right: 0;
