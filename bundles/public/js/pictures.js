@@ -17,7 +17,7 @@
         var popupSlick = $('.modal-pictures');
 
         var elementHtml = function(item, pos) {
-            return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><img data-lazy="'+ item.picture_value.extra.main.path +'"></div><div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name"><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'">'+item.name+'</a></div>'+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea">Идея:<br>' + item.idea + '</div></div>';
+            return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'"><img data-lazy="'+ item.picture_value.extra.main.path +'"></a></div><div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>'+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея:</span><br>' + item.idea + '</div></div>';
         };
 
         var modalElementHtml = function (item) {
@@ -218,7 +218,7 @@
             buildGallery();
         });
 
-        $(document).on('click', '.picture .name a', function(e) {
+        $(document).on('click', '.picture .img a', function(e) {
             e.preventDefault();
 
             console.log('click picture a');
