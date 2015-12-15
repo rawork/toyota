@@ -442,7 +442,7 @@ body.modal-open {
         /*background-image: url('../img/modal_bg.png');*/
         /*background-position: center center;*/
         /*background-color: #fff;*/
-        padding: 30px 37px;
+        padding: 0;
         border-radius: 16px;
         background-color: #fff;
     }
@@ -472,17 +472,25 @@ body.modal-open {
 
     .popup-prev {
         background-image: url('../img/popup_prev.png');
-        left: -90px;
+        left: -53px;
     }
 
     .popup-next {
         background-image: url('../img/popup_next.png');
-        right: -90px;
+        right: -53px;
+    }
+
+    .modal-picture {
+        padding: 30px 37px;
+        min-height: 300px;
     }
 
     .modal-picture img{
         display: block;
+        width: auto;
+        height: 402px;
         max-width: 574px !important;
+        margin: 0 auto;
     }
 
     .modal-picture .title {
@@ -508,10 +516,10 @@ body.modal-open {
     }
 
     .modal-picture .place {
-        float: left;
+
         position: absolute;
         top: 41px;
-        right: -45px;
+        right: -37px;
         height: 46px;
         width: 115px;
         color: #fff;
