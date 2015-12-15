@@ -241,7 +241,7 @@ h2 {
 }
 
 .logo-small {
-    display: block;
+    display: none;
     position: absolute;
     right: 15px;
     z-index: 30;
