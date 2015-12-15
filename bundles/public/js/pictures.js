@@ -211,6 +211,7 @@
             that.addClass('active').siblings().removeClass('active');
             galleryContainer.attr('data-category', id);
             buildGallery();
+            $.scrollTo('#pictures', 1000);
         });
 
         $(document).on('click', '.btn-picture-search', function(e) {
