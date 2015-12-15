@@ -5,7 +5,7 @@ body.modal-open {
 .content ul.tabs {
     display: block;
     list-style: none;
-    margin: 70px -20px 50px;
+    margin: 10px -20px 50px;
     padding: 0;
     height: 40px;
     text-align: center;
@@ -71,6 +71,11 @@ body.modal-open {
     background-image: url('../img/btn-search.png');
     background-position: center center;
     background-repeat: no-repeat;
+}
+
+.picture-category-help {
+    text-align: center;
+    margin-top: 70px;
 }
 
 .picture-help {
@@ -261,6 +266,15 @@ body.modal-open {
 
     .form-search button {
         float: left;
+    }
+
+    .picture-category-help {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    .picture-category-help span {
+        padding-right: 65px;
     }
 
     .picture-help {
