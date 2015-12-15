@@ -488,8 +488,8 @@ body.modal-open {
     .modal-picture img{
         display: block;
         width: auto;
-        height: 402px;
-        max-width: 574px !important;
+        height: 571px;
+        max-width: 800px !important;
         margin: 0 auto;
     }
 

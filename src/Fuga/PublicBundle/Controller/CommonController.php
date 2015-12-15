@@ -72,6 +72,7 @@ class CommonController extends Controller {
 			'curnode'   => $nodeItem,
 			'curuser'   => $this->get('security')->getCurrentUser(),
 			'locale'    => $this->get('session')->get('locale'),
+			'asset'		=> 'dev' == PRJ_ENV ? date('YmdHis') : 'prodaction'
 		);
 		$this->get('templating')->assign($params);
 
