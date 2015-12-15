@@ -429,21 +429,21 @@ body.modal-open {
         right: 0;
         bottom: 0;
         background-color: rgba(0,0,0, 0.5);
-        z-index: 10;
+        z-index: 20;
     }
 
     .modal-dialog {
-        width: 640px;
+        width: 900px;
         left: 50%;
         top: 50px;
-        margin-left: -320px;
+        margin-left: -450px;
         margin-bottom: 50px;
         position: absolute;
         /*background-image: url('../img/modal_bg.png');*/
         /*background-position: center center;*/
         /*background-color: #fff;*/
         padding: 0;
-        border-radius: 16px;
+        /*border-radius: 16px;*/
         background-color: #fff;
     }
 
@@ -452,12 +452,12 @@ body.modal-open {
         position: absolute;
         top: -50px;
         right: -50px;
-        background-image: url('../img/popup_close.png');
+        background-image: url('../img/close.png');
         background-position: center center;
         background-repeat: no-repeat;
         width: 64px;
         height: 64px;
-        z-index: 11;
+        z-index: 25;
     }
 
     .popup-prev, .popup-next {
