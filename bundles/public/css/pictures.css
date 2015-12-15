@@ -393,7 +393,7 @@ body.modal-open {
         right: 20px;
         position: absolute;
         background: url('../img/bt.png') repeat-x;
-        z-index: 10;
+        z-index: 6;
     }
     .bdr-b {
         height: 36px;
@@ -402,7 +402,7 @@ body.modal-open {
         right: 20px;
         position: absolute;
         background: url('../img/bb.png') repeat-x bottom center;
-        z-index: 10;
+        z-index: 6;
     }
     .bdr-b:after {
         right: -20px;
@@ -463,7 +463,6 @@ body.modal-open {
     .popup-prev, .popup-next {
         position: absolute;
         display: block;
-        top: 0;
         width: 30px;
         height: 42px;
         background-position: top left;
@@ -483,12 +482,11 @@ body.modal-open {
     .modal-picture {
         padding: 30px 37px;
         min-height: 300px;
+        position: relative;
     }
 
     .modal-picture img{
         display: block;
-        width: auto;
-        height: 402px;
         max-width: 574px !important;
         margin: 0 auto;
     }
@@ -516,7 +514,6 @@ body.modal-open {
     }
 
     .modal-picture .place {
-
         position: absolute;
         top: 41px;
         right: -37px;

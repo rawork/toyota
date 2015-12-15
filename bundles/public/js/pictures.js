@@ -266,7 +266,6 @@
             //$('.popup-next').attr('data-position', pos+1);
 
             $('body').addClass('modal-open');
-            $('.modal').show();
             popupSlick.slick({
                 infinite: false,
                 dots : false,
@@ -279,6 +278,9 @@
             }).on('afterChange', function(event, slick, currentSlide){
                 setModalArrowVibibility(currentSlide, picturesArray.length);
             });
+            $('.modal').show();
+
+            popupSlick.slick('setPosition');
 
         });
 
