@@ -77,31 +77,39 @@
     box-sizing: border-box;
 }
 
-/*html,*/
-/*body {*/
-    /*margin:0;*/
-    /*padding:0;*/
-    /*height:100%;*/
-/*}*/
-/*#wrapper-toyota {*/
-    /*min-height:100%;*/
-    /*position:relative;*/
-/*}*/
-/*#header-toyota {*/
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+#wrapper-toyota {
+    min-height:100%;
+    position:relative;
+}
+#header-toyota {
     /*background:#ededed;*/
-    /*padding:10px;*/
-/*}*/
-/*#content-toyota {*/
-    /*padding-bottom:160px; *//* Height of the footer element */
-/*}*/
-/*#footer-toyota {*/
+}
+#content-toyota {
+    padding-bottom:160px;
+    position: relative;
+}
+#footer-toyota {
     /*background:#ffab62;*/
-    /*width:100%;*/
-    /*height:100px;*/
-    /*position:absolute;*/
-    /*bottom:0;*/
-    /*left:0;*/
-/*}*/
+    width:100%;
+    height:160px;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+.container.content-container {
+    height: 100%;
+}
+
+.content {
+    height: 100%;
+}
 
 body {
     font-family: "ToyotaText", "Helvetica Neue", Arial, Helvetica, sans-serif;
