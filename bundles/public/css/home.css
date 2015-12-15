@@ -78,10 +78,14 @@ ul.slider img {
     height: 0;
 }
 
-img#girl-paints {
+img#girl-paints-xs {
     display: block;
     max-width: 60% !important;
     margin: 20px auto;
+}
+
+img#girl-paints {
+    display: none;
 }
 
 #pictures2 {
@@ -212,7 +216,12 @@ p.video iframe {
         margin-top: 20px;
     }
 
+    img#girl-paints-xs {
+        display: none;
+    }
+
     img#girl-paints {
+        display: block;
         float: left;
         margin: 0;
         margin-right: 30px;
