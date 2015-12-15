@@ -270,6 +270,10 @@ a.next-event {
         width: 200px;
     }
 
+    ul.events .title, ul.events .date {
+        padding-left: 222px;
+    }
+
     .event-prev-text-xs, .event-next-text-xs {
         display: none;
     }
