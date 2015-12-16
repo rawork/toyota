@@ -61,10 +61,11 @@
             e.preventDefault();
 
             var that = $(this);
-            var cityId = that.attr('data-id');
+            var cityId = parseInt(that.attr('data-id'));
 
             var dataUrl = $('#dealer').attr('data-url');
-            if (dealers[cityId] != undefined) {
+
+            if (dealers.cityId != undefined) {
                 buildList('#dealer', cityId);
                 $('#myModal').show();
                 $('.nano').nanoScroller();
@@ -91,7 +92,7 @@
                 placeholder: 'Начните вводить название города',
                 onChange: function(value) {
                     if (!value.length) {
-                        $('#map-dot').hide();
+                        $('.map-dot').hide();
                         return;
                     }
                     var cityData = cities[value];
@@ -124,10 +125,11 @@
                         var dataUrl = $('#dealer').empty().attr('data-url');
                         if (dealers[value] != undefined) {
                             buildList('#dealer', value);
-                            $('ul#dealer').show();
+                            $('#dealer').show();
                             $.scrollTo('ul#dealer', 1000);
                             return;
                         }
+
                         $.post(dataUrl, {id: value},
                             function(data){
                                 if (data.dealers) {
