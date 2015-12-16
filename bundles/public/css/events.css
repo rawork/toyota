@@ -292,6 +292,7 @@ a.next-event {
 
 .event-content img {
     max-width: 100% !important;
+    height: auto !important;
 }
 
 @media (min-width: 600px) {
