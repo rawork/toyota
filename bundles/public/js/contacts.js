@@ -46,7 +46,7 @@
             $.each(currentDealers, function(key, value) {
                 $container
                     .append($('<li></li>')
-                        .html('<div class="title">'+value.name+'</div><div class="info">'+(value.openhour ? 'ВРЕМЯ РАБОТЫ<br>'+value.openhour+'<br>' : '')+(value.phone ? '<strong>Тел.</strong>: '+value.phone+'<br>' : '')+'<strong>Адрес</strong>: '+value.address+'</div>'+(value.site ? '<a class="site-link" href="'+value.site+'">Перейти на сайт дилерского центра</a>' : '') ));
+                        .html('<div class="title">'+value.name+'</div><div class="info">'+(value.openhour ? 'ВРЕМЯ РАБОТЫ<br>'+value.openhour+'<br>' : '')+(value.phone ? '<strong>Тел.</strong>: '+value.phone+'<br>' : '')+'<strong>Адрес</strong>: '+value.address+'</div>'+(value.site ? '<a target="_blank" class="site-link" href="'+value.site+'">Перейти на сайт дилерского центра</a>' : '') ));
                     var text = '<br><strong>E-mail</strong>: <a href="'+value.email+'">'+value.email+'</a><a class="roadmap-link" href="'+value.site+'">Схема проезда</a><div class="service">Предоставляемые услуги:<br>- продажа новых а/м Toyota<br>- тюнинг<br>- слесарный ремонт<br>- trade-in<br>- аренда авто<br>- страхование<br>- кредит<br></div>';
             });
         };
