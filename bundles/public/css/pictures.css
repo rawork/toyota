@@ -520,6 +520,7 @@ body.modal-open {
         line-height: 24px;
         font-weight: 700;
         color: #d0112b;
+        text-align: center;
     }
 
     .modal-picture .person {
@@ -527,6 +528,7 @@ body.modal-open {
         line-height: 23px;
         color: #999;
         margin-top: 3px;
+        text-align: center;
     }
 
     .modal-picture .idea {
@@ -538,7 +540,12 @@ body.modal-open {
 
     .modal-picture .idea .red {
         display: block;
-        text-align: center;
+        text-align: left;
+        margin-left: 20px;
+        font-size: 21px;
+        line-height: 26px;
+        text-decoration: underline;
+        margin-bottom: 10px;
     }
 
     .modal-picture .place {
