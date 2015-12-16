@@ -290,6 +290,10 @@ a.next-event {
     content: '';
 }
 
+.event-content img {
+    max-width: 100% !important;
+}
+
 @media (min-width: 600px) {
     ul.events .picture {
         float: left;

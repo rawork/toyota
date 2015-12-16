@@ -1,6 +1,6 @@
 <h1>{{ news.name }}</h1>
 <div class="event-source">{{ news.source }} {{ news.date|format_date('d.m.Y') }}</div>
-<div>{{ news.content }}</div>
+<div class="event-content">{{ news.content }}</div>
 
 <div class="gallery">
     {% for item in news.gallery_value %}
