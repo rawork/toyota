@@ -208,6 +208,14 @@ body.modal-open {
     display: none;
 }
 
+.slick-slide img.display-xs {
+    display: block;
+}
+
+.slick-slide img.display-md {
+    display: none;
+}
+
 @media (min-width: 480px) {
     .red-line > div {
         width: 300px;
@@ -581,5 +589,12 @@ body.modal-open {
         border-left: 15px solid transparent;
     }
 
+    .slick-slide img.display-xs {
+        display: none;
+    }
+
+    .slick-slide img.display-md {
+        display: block;
+    }
 
 }
