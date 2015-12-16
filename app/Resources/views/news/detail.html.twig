@@ -2,6 +2,12 @@
 <div class="event-source">{{ news.source }} {{ news.date|format_date('d.m.Y') }}</div>
 <div>{{ news.content }}</div>
 
+<div class="gallery">
+    {% for item in news.gallery_value %}
+    <div class="photo"><img src="{{ item.extra.main.path }}"></div>
+    {% endfor %}
+</div>
+
 <p><a href="{{ path('public_page', {node: curnode.name}) }}"><strong>Назад к календарю событий</strong></a></p>
 
 <div class="event-links clearfix">

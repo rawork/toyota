@@ -53,6 +53,33 @@
         })
 
 
+        $('.gallery').slick({
+            infinite: false,
+            dots : false,
+            lazyLoad: 'progressive',
+            slidesToShow: 1,
+            prevArrow: '<button type="button" class="slick-prev gallery-prev"><img src="/bundles/public/img/prev.png"></button>',
+            nextArrow: '<button type="button" class="slick-next gallery-next"><img src="/bundles/public/img/next.png"></button>',
+            responsive: [
+                {
+                    breakpoint: 900,
+                    settings: {
+
+                    }
+                },
+                {
+                    breakpoint: 899,
+                    settings: {
+                        arrows: false,
+                        dots: true
+                    }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
+        })
+
 
     });
 
