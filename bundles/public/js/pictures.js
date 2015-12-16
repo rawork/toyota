@@ -292,7 +292,6 @@
             $("body").removeClass("modal-open");
         });
 
-
         buildGallery();
     });
 
