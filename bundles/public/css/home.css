@@ -108,10 +108,14 @@ img#prizes {
     margin: 25px auto;
 }
 
-img#boy {
+img#boy-xs {
     display: block;
     max-width: 70% !important;
     margin: 20px auto;
+}
+
+img#boy {
+    display: none;
 }
 
 p.video {
@@ -288,7 +292,12 @@ p.video iframe {
         max-width: 185px !important;
     }
 
+    img#boy-xs {
+        display: none;
+    }
+
     img#boy {
+        display: block;
         float: left;
         margin-top: 5px;
         margin-left: 40px;

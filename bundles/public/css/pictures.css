@@ -575,7 +575,7 @@ body.modal-open {
         padding: 13px 0 0 15px;
         height: 46px;
         width: 100px;
-        background-color: #eb3731;
+        background-color: #d0112b;
     }
 
     .modal-picture .place:before {
@@ -584,8 +584,8 @@ body.modal-open {
         height: 0;
         width: 0;
         border: 0;
-        border-top: 23px solid #eb3731;
-        border-bottom: 23px solid #eb3731;
+        border-top: 23px solid #d0112b;
+        border-bottom: 23px solid #d0112b;
         border-left: 15px solid transparent;
     }
 
