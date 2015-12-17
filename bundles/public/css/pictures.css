@@ -574,7 +574,7 @@ body.modal-open {
     .modal-picture .place {
         position: absolute;
         top: 41px;
-        right: -55px;
+        right: 0;
         height: 46px;
         width: 115px;
         color: #fff;
