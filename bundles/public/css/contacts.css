@@ -223,6 +223,7 @@ ul.dealer .site-link {
         width: 260px;
         height: 36px;
         overflow: hidden;
+        cursor: pointer;
         /*border: 1px solid #ff0;*/
     }
 
