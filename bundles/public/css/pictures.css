@@ -232,7 +232,6 @@ body.modal-open {
     .content ul.tabs {
         width: 460px;
         margin: 10px auto 50px;
-        margin-left: 117px;
     }
 
     .content ul.tabs li:last-child {
@@ -262,6 +261,10 @@ body.modal-open {
         /*-webkit-box-shadow: 0px 3px 40px rgb(100,100,100);*/
         /*box-shadow: 0px 3px 40px rgb(100,100,100);*/
     /*}*/
+
+    .content ul.tabs {
+        margin-left: 117px;
+    }
 
     .form-search {
         width: 620px;
@@ -323,6 +326,7 @@ body.modal-open {
     .picture-counter {
         font-size: 18px;
         line-height: 18px;
+        display: none;
     }
 
     .red-line {

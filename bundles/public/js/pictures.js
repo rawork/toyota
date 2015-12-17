@@ -1,10 +1,10 @@
 (function($) {
     $(function() {
 
-        if (navigator.appVersion.indexOf("Win")!=-1)
-        {
-            $('.modal-dialog').css('margin-left','-442px');
-        }
+        //if (navigator.appVersion.indexOf("Win")!=-1)
+        //{
+        //    $('.modal-dialog').css('margin-left','-442px');
+        //}
 
         var startBuildGallery = false;
         var galleryType = 0;
@@ -202,6 +202,7 @@
             $('#slide-current').html(currentSlide);
             $('#slide-total').html(totalSlides);
             setArrowVibibility(0, totalSlides);
+            $('.picture-counter').show();
 
             gallerySlick = true;
         }
