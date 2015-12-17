@@ -321,18 +321,21 @@ ul.dealer .site-link {
     }
 
     #modal-dealers {
+    }
 
+    #modal-dealers ul.dealer {
+        margin-top: 0;
     }
 
     #modal-dealers ul.dealer li {
-        min-height: 250px;
+        min-height: 220px;
     }
 
     .nano {
         margin: 0;
         width: 820px;
         /*height: 520px;*/
-        min-height: 300px;
+        min-height: 220px;
         max-height: 520px;
     }
 

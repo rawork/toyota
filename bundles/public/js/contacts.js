@@ -133,7 +133,11 @@
                         $.post(dataUrl, {id: value},
                             function(data){
                                 if (data.dealers) {
-                                    dealers[value] = data.dealers;
+                                    dealers[value] = [];
+                                    for(var i in data.dealers) {
+                                        dealers[value].push(data.dealers[i]);
+                                    }
+
                                     buildList('#dealer', value);
                                     $('ul#dealer').show();
                                     $.scrollTo('ul#dealer', 1000);
