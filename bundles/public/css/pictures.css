@@ -157,11 +157,11 @@ body.modal-open {
     background-image: url('../img/star.png');
     background-repeat: no-repeat;
     background-position: 95% 45%;
+    cursor: pointer;
 }
 
 .picture-vote:hover {
     cursor: pointer;
-    cursor: hand;
 }
 
 .slick-slider {
