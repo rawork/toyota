@@ -3,7 +3,7 @@
 
         if (navigator.appVersion.indexOf("Win")!=-1)
         {
-            $('.modal-dialog').css('margin-left','-442px');
+            $('.modal-dialog').css('margin-left','-440px');
         }
 
         var startBuildGallery = false;
