@@ -548,11 +548,11 @@ body.modal-open {
 
     .modal-picture .idea .red {
         display: block;
-        text-align: left;
+        text-align: center;
         margin-left: 20px;
         font-size: 21px;
         line-height: 26px;
-        text-decoration: underline;
+        /*text-decoration: underline;*/
         margin-bottom: 10px;
     }
 
