@@ -271,18 +271,18 @@
             //$('.popup-next').attr('data-position', pos+1);
 
             $('body').addClass('modal-open');
-            popupSlick.slick({
-                infinite: false,
-                dots : false,
-                lazyLoad: 'progressive',
-                slidesToShow: 1,
-                initialSlide: pos,
-                adaptiveHeight: true,
-                prevArrow: '<button type="button" class="slick-prev popup-prev"><img src="/bundles/public/img/popup_prev.png"></button>',
-                nextArrow: '<button type="button" class="slick-next popup-next"><img src="/bundles/public/img/popup_next.png"></button>'
-            }).on('afterChange', function(event, slick, currentSlide){
-                setModalArrowVibibility(currentSlide, picturesArray.length);
-            });
+            //popupSlick.slick({
+            //    infinite: false,
+            //    dots : false,
+            //    lazyLoad: 'progressive',
+            //    slidesToShow: 1,
+            //    initialSlide: pos,
+            //    adaptiveHeight: true,
+            //    prevArrow: '<button type="button" class="slick-prev popup-prev"><img src="/bundles/public/img/popup_prev.png"></button>',
+            //    nextArrow: '<button type="button" class="slick-next popup-next"><img src="/bundles/public/img/popup_next.png"></button>'
+            //}).on('afterChange', function(event, slick, currentSlide){
+            //    setModalArrowVibibility(currentSlide, picturesArray.length);
+            //});
             $('.modal').show();
 
             popupSlick.slick('setPosition');
