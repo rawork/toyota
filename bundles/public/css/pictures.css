@@ -472,11 +472,13 @@ body.modal-open {
 
     .modal-dialog {
         width: 900px;
-        /*left: 50%;*/
-        /*top: 50px;*/
-        margin: 50px auto;
-        /*margin-left: -450px;*/
-        position: relative;
+        left: 50%;
+        top: 50px;
+        /*margin: 50px auto;*/
+        margin-left: -450px;
+        /*position: relative;*/
+        position: absolute;
+        margin-bottom: 50px;
         /*background-image: url('../img/modal_bg.png');*/
         /*background-position: center center;*/
         /*background-color: #fff;*/

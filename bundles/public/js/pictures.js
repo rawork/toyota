@@ -1,10 +1,10 @@
 (function($) {
     $(function() {
 
-        //if (navigator.appVersion.indexOf("Win")!=-1)
-        //{
-        //    $('.modal-dialog').css('margin-left','-442px');
-        //}
+        if (navigator.appVersion.indexOf("Win")!=-1)
+        {
+            $('.modal-dialog').css('margin-left','-442px');
+        }
 
         var startBuildGallery = false;
         var galleryType = 0;
