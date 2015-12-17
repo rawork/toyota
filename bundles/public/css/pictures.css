@@ -118,6 +118,11 @@ body.modal-open {
     max-width: 100% !important;
 }
 
+.picture .nomination {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
 .picture .person {
     margin-top: 15px;
     color: #cf142b;
@@ -297,7 +302,7 @@ body.modal-open {
         width: 200px;
     }
 
-    .picture .idea, .picture .place {
+    .picture .idea, .picture .place, .picture .nomination {
         display: none;
     }
 
@@ -522,8 +527,14 @@ body.modal-open {
         margin: 0 auto;
     }
 
+    .modal-picture .nomination {
+        margin-top: 50px;
+        font-weight: 700;
+        text-align: center;
+    }
+
     .modal-picture .title {
-        margin-top: 40px;
+        margin-top: 20px;
         font-size: 24px;
         line-height: 24px;
         font-weight: 700;

@@ -130,7 +130,7 @@
                         if (dealers[value] != undefined) {
                             buildList('#dealer', value);
                             $('#dealer').show();
-                            $.scrollTo('ul#dealer', 1000);
+                            $.scrollTo('#map-city', 1000);
                             return;
                         }
 
@@ -144,7 +144,7 @@
 
                                     buildList('#dealer', value);
                                     $('ul#dealer').show();
-                                    $.scrollTo('ul#dealer', 1000);
+                                    $.scrollTo('#map-city', 1000);
                                 }
                             });
 

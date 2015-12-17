@@ -17,12 +17,12 @@
         var popupSlick = $('.modal-pictures');
 
         var elementHtml = function(item, pos) {
-            return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'"><img class="display-xs" data-lazy="'+ item.picture_value.extra.big.path +'"><img class="display-md" data-lazy="'+ item.picture_value.extra.main.path +'"></a></div><div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>'+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
+            return '<div class="picture"><div class="img"><div class="picture-vote">Голосовать</div><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'"><img class="display-xs" data-lazy="'+ item.picture_value.extra.big.path +'"><img class="display-md" data-lazy="'+ item.picture_value.extra.main.path +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>'+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
         };
 
         var modalElementHtml = function (item) {
             var text = '<a href="#" class="popup-prev"></a> <a href="#" class="popup-next"></a>';
-            return '<div class="modal-picture"><img src="'+item.picture_value.extra.big.path+'">'+(parseInt(item.position) > 0 ? '<div class="relative"><div class="place"><span>'+item.position+' место</span></div></div>' : '') + '<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
+            return '<div class="modal-picture"><img src="'+item.picture_value.extra.big.path+'">'+(parseInt(item.position) > 0 ? '<div class="relative"><div class="place"><span>'+item.position+' место</span></div></div>' : '') + (item.nomination ? '<div class="nomination">'+item.nomination+'</div>': '')+'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
         };
 
         var buildGallery = function() {
