@@ -222,8 +222,6 @@
         $(document).on('click', '.picture .img a', function(e) {
             e.preventDefault();
 
-            console.log('click picture a');
-
             if ($(window).width() < 900) {
                 return;
             }

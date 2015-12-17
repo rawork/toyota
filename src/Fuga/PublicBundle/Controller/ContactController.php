@@ -16,6 +16,9 @@ class ContactController extends PublicController
 	{
 		$cities = $this->get('container')->getItems('contact_city', 'publish=1');
 
+//		$dealer = $this->get('container')->getItems('contact_dealer', 'city_id=1 AND publish=1');
+//		var_dump($dealer);
+
 		return $this->render('contact/index.html.twig', compact('cities'));
 	}
 
@@ -26,7 +29,7 @@ class ContactController extends PublicController
 			'cities' => $this->get('container')->getItems('contact_city', 'publish=1'),
 		));
 
-		$response->headers->set('Access-Control-Allow-Origin', '*');
+//		$response->headers->set('Access-Control-Allow-Origin', '*');
 
 		return $response;
 	}
@@ -36,10 +39,10 @@ class ContactController extends PublicController
 		$response = new JsonResponse();
 
 		$response->setData(array(
-			'dealers' => $this->get('container')->getItems('contact_dealer', 'city_id='.$id.' AND publish=1'),
+			'dealers' => array_values($this->get('container')->getItems('contact_dealer', 'city_id='.$id.' AND publish=1')),
 		));
 
-		$response->headers->set('Access-Control-Allow-Origin', '*');
+//		$response->headers->set('Access-Control-Allow-Origin', '*');
 
 		return $response;
 	}

@@ -75,7 +75,11 @@
             $.post(dataUrl, {id: cityId},
                 function(data){
                     if (data.dealers) {
-                        dealers[cityId] = data.dealers;
+                        dealers[cityId] = [];
+                        for(var i in data.dealers) {
+                            dealers[cityId].push(data.dealers[i]);
+                        }
+
                         buildList('#modal-dealers ul', cityId);
                         $('#myModal').show();
                         $('.nano').nanoScroller();

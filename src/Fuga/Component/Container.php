@@ -474,7 +474,7 @@ class Container
 						'host'		=> defined('DB_HOST') ? DB_HOST : 'localhost',
 						'driver'	=> defined('DB_TYPE') ? DB_TYPE : 'pdo_mysql',
 						'charset'	=> 'utf8',
-						'collate'   => 'utf8_general_ci',
+						'collate'   => 'utf8_unicode_ci',
 						'driverOptions' => array(
 							1002 => 'SET NAMES utf8'
 						)
@@ -492,7 +492,7 @@ class Container
 						'host'		=> defined('DB_HOST') ? DB_HOST : 'localhost',
 						'driver'	=> defined('DB_TYPE') ? DB_TYPE : 'pdo_mysql',
 						'charset'	=> 'utf8',
-						'collate'   => 'utf8_general_ci',
+						'collate'   => 'utf8_unicode_ci',
 						'driverOptions' => array(
 							1002=>'SET NAMES utf8'
 						)

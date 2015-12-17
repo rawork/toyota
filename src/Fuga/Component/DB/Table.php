@@ -527,6 +527,8 @@ class Table
 				' LIMIT '.$options['limit'];
 			$this->stmt = $this->container->get('connection')->prepare($sql);
 			$this->stmt->execute();
+
+//			$this->container->get('log')->addError($sql);
 			
 			return true;	
 		} catch (\Exception $e) {
