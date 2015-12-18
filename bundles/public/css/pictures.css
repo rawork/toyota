@@ -573,25 +573,30 @@ body.modal-open {
         margin-bottom: 10px;
     }
 
+    .modal-picture .place-container {
+        position: relative;
+        height: 86px;
+    }
+
     .modal-picture .place {
         position: absolute;
-        top: 41px;
+        top: 30px;
         right: -55px;
         height: 46px;
-        width: 115px;
         color: #fff;
         font-size: 18px;
         line-height: 18px;
         font-weight: 700;
         z-index: 100;
+
     }
 
     .modal-picture .place span {
         float: right;
         display: inline-block;
-        padding: 13px 0 0 15px;
+        padding: 13px 35px 0 20px;
         height: 46px;
-        width: 100px;
+        white-space: nowrap;
         background-color: #d0112b;
     }
 

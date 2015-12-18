@@ -26,8 +26,9 @@
         };
 
         var modalElementHtml = function (item) {
+            //console.log(item.nomination);
             var text = '<a href="#" class="popup-prev"></a> <a href="#" class="popup-next"></a>';
-            return '<div class="modal-picture"><img src="'+item.picture_value.extra.big.path+'">'+(parseInt(item.position) > 0 ? '<div class="relative"><div class="place"><span>'+item.position+' место</span></div></div>' : '') + (item.nomination ? '<div class="nomination">'+item.nomination+'</div>': '')+'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
+            return '<div class="modal-picture"><img src="'+item.picture_value.extra.big.path+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
         };
 
         var buildGallery = function() {
