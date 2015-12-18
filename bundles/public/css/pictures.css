@@ -365,7 +365,7 @@ body.modal-open {
         padding-bottom: 0;
     }
 
-    .slick, .slick-next {
+    .slick-prev, .slick-next {
         display: block;
         width: 52px;
         height: 49px;
