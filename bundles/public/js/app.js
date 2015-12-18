@@ -111,15 +111,15 @@ function getTimer(deadline) {
             //        }
             //    });
 
-            var setTimer = function(){
-                timerData = getTimer(deadline);
-
-                $('#day').html((timerData.day < 10 ? "0" : "") + timerData.day);
-                $('#hour').html((timerData.hour < 10 ? "0" : "") + timerData.hour);
-            };
-
-            setTimer();
-            setInterval(setTimer(), 600000);
+            //var setTimer = function(){
+            //    timerData = getTimer(deadline);
+            //
+            //    $('#day').html((timerData.day < 10 ? "0" : "") + timerData.day);
+            //    $('#hour').html((timerData.hour < 10 ? "0" : "") + timerData.hour);
+            //};
+            //
+            //setTimer();
+            //setInterval(setTimer(), 600000);
 
         }
 
