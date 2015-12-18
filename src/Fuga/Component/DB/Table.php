@@ -84,7 +84,7 @@ class Table
 				$this->fields[$field['name']] = $field;
 			}
 		} else {
-			throw new \Exception('В таблице '.$this->dbName().' не настроены поля');
+//			throw new \Exception('В таблице '.$this->dbName().' не настроены поля');
 		}
 	}
 	
