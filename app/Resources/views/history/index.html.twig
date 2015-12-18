@@ -1,0 +1,51 @@
+<h2>История конкурса</h2>
+
+<p>Десятки стран, километры карандашных линий, тонны красок, миллионы счастливых улыбок и, превыше всего, исполнившиеся детские мечты! Это конкурс «Автомобиль мечты» от TOYOTAMOTOR CORPORATION в год своего десятилетия. Глобальная инициатива, объединившая талантливых детей изо всех уголков мира. Тех, кому принадлежит будущее, и кто делает его ярче!</p>
+
+<p>Кто в далеком 2003 году мог подумать, что локальный японский конкурс ждет такой успех? Но уже через 5 лет он вышел на международный уровень, и с каждым годом становится все масштабнее и успешнее.</p>
+
+<p>Уже в 2014 году в нем участвовали 81 страна. В том числе, впервые, Россия. И сразу победа! Юный художник из нашей страны занял второе место на международном этапе конкурса и вместе со своей семьей отправился в настоящее путешествие мечты в страну Восходящего солнца.</p>
+
+<p>Обычно в юбилей поздравляют именинника. Но мы хотим поздравить и поблагодарить вас. Спасибо, что вы с нами. Спасибо, что продолжаете мечтать. Присоединяйтесь к конкурсу, и пусть мечты ваших детей воплотятся в жизнь!В этом году «Автомобиль мечты» празднует свой десятилетний юбилей. Это удивительная дата, которой мы искренне гордимся. Мы верим: наш конкурс будет существовать, пока дети умеют мечтать. И мы с нетерпением ждем момента, когда их удивительные изобретения заполнят улицы всех городов мира.Присоединяйтесь к конкурсу, и пусть мечты ваших детей воплотятся в жизнь!</p>
+
+
+<div class="history-container">
+    <ul class="selector">
+        <li class="active">2014-2015</li>
+        <li>2015-2016</li>
+    </ul>
+
+    <div class="video">
+        <iframe src="https://www.youtube.com/embed/oe_2ZTH4RHU" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+    </div>
+
+    <div class="gallery">
+        <div class="photo">
+            <img src="/bundles/public/img/photo1.jpg">
+            <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing sed do eiusmod tempo.</div>
+        </div>
+        <div class="photo">
+            <img src="/bundles/public/img/photo2.jpg">
+            <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing sed do eiusmod tempo.</div>
+        </div>
+        <div class="photo">
+            <img src="/bundles/public/img/photo2.jpg">
+            <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing sed do eiusmod tempo.</div>
+        </div>
+    </div>
+
+    <ul class="events">
+        {% for item in news %}
+            <li class="clearfix">
+                <div class="picture"><img src="{{ item.photo_value.extra.main.path }}"></div>
+                <div>
+                    <div class="title"><a href="{{ path('event_detail', {id: item.id}) }}">{{ item.name }}</a></div>
+                    <div class="date">{{ item.date|format_date('d.m.Y') }}</div>
+                    <div class="preview">{{ item.preview }}</div>
+                    <div class="link"><a href="{{ path('event_detail', {id: item.id}) }}">подробно</a></div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
