@@ -2,16 +2,12 @@
 
 namespace Fuga\PublicBundle\Controller;
 
-use Fuga\CommonBundle\Controller\PublicController;
+use Fuga\CommonBundle\Controller\Controller;
 
 // TODO Cache of search results
 
-class SearchController extends PublicController {
+class SearchController extends Controller {
 	
-	function __construct() {
-		parent::__construct('search');
-	}
-
 	function indexAction() {
 		$searchText = $this->get('request')->query->get('text');
 		

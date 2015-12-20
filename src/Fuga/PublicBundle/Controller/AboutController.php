@@ -2,15 +2,10 @@
 
 namespace Fuga\PublicBundle\Controller;
 
-use Fuga\CommonBundle\Controller\PublicController;
+use Fuga\CommonBundle\Controller\Controller;
 
-class AboutController extends PublicController
+class AboutController extends Controller
 {
-	public function __construct()
-	{
-		parent::__construct('about');
-	}
-
 	public function indexAction()
 	{
 		$tabs = $this->get('container')->getItems('about_tab', 'publish=1');

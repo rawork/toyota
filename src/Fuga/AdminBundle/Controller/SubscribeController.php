@@ -13,7 +13,7 @@ class SubscribeController extends AdminController
 		$state = 'service';
 		$module = 'subscribe';
 		$rubrics = $this->get('container')->getItems('subscribe_rubric');
-		$last_update = $this->getManager('Fuga:Common:Param')->findByName('subscribe', 'last_update');
+		$last_update = $this->getManager('Fuga:Common:Param')->getValue('subscribe', 'last_update');
 		if ($last_update == '0000-00-00 00:00:00') {
 			$last_update = 'Никогда';
 		} else {
@@ -32,7 +32,7 @@ class SubscribeController extends AdminController
 		$time = time();
 		$filepath = PRJ_DIR . '/app/cache/subscribe.txt';
 		$filename = 'subscribe'.date('YmdHis', $time).'.txt';
-		$last_update = $this->getManager('Fuga:Common:Param')->findByName('subscribe', 'last_update');
+		$last_update = $this->getManager('Fuga:Common:Param')->getValue('subscribe', 'last_update');
 		if ($this->get('request')->query->get('all')) {
 			$last_update = '0000-00-00 00:00:00';
 		}

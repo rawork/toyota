@@ -1,0 +1,55 @@
+<h2>Как проходил конкурс в {{ competition.name }} году</h2>
+
+<ul class="breadcrumb">
+    <li><a href="{{ path('public_page', {node: curnode.name}) }}">{{ curnode.title }}</a></li>
+    <li>{{ competition.name }}</Li>
+</ul>
+
+<div class="history-content">
+    {{ competition.content }}
+</div>
+
+<div class="history">
+    <div class="video-detail clearfix">
+        <div>
+            {{ competition.video1 }}
+            <div class="video-description">{{ competition.video1_text }}</div>
+        </div>
+        <div>
+            {{ competition.video2 }}
+            <div class="video-description">{{ competition.video2_text }}</div>
+        </div>
+        <div>
+            {{ competition.video3 }}
+            <div class="video-description">{{ competition.video3_text }}</div>
+        </div>
+    </div>
+    {% if competition.gallery|length > 0 %}
+    <div class="gallery-help">Листайте для просмотра фото</div>
+    <div class="gallery">
+        {% for picture in competition.gallery %}
+        <div class="photo">
+            <img src="{{ picture.photo_value.extra.big.path }}">
+            <div class="description">{{ picture.name }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if news|length > 0 %}
+    <h2>События этого года</h2>
+    <ul class="events">
+            {% for item in news %}
+                <li class="clearfix">
+                    <div class="picture"><img src="{{ item.photo_value.extra.main.path }}"></div>
+                    <div>
+                        <div class="title"><a href="{{ path('event_detail', {id: item.id}) }}">{{ item.name }}</a></div>
+                        <div class="date">{{ item.date|format_date('d.m.Y') }}</div>
+                        <div class="preview">{{ item.preview }}</div>
+                        <div class="link"><a href="{{ path('event_detail', {id: item.id}) }}">подробно</a></div>
+                    </div>
+                </li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</div>

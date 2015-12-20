@@ -144,7 +144,6 @@ body.modal-open {
 }
 
 .picture-vote {
-    visibility: hidden;
     text-align: left;
     margin-left: 160px;
     width: 120px;

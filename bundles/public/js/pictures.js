@@ -129,6 +129,12 @@
 
                             galleryType = 320;
                         }
+
+                        // hide vote block
+                        if (data.vote_disabled) {
+                            $('.picture-vote').css({visibility: 'hidden'});
+                        }
+
                         if (totalSlides > 0) {
                             $('#picture-counter').show();
                         } else {

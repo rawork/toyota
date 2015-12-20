@@ -2,16 +2,11 @@
 
 namespace Fuga\PublicBundle\Controller;
 
-use Fuga\CommonBundle\Controller\PublicController;
+use Fuga\CommonBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class GalleryController extends PublicController
+class GalleryController extends Controller
 {
-	public function __construct()
-	{
-		parent::__construct('gallery');
-	}
-
 	public function indexAction()
 	{
 		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
@@ -33,11 +28,10 @@ class GalleryController extends PublicController
 				$criteria .= ' AND person LIKE("%'.$person.'%")';
 			}
 
-//			$this->get('log')->addError($criteria);
-
 			$response = new JsonResponse();
 			$response->setData(array(
-				'pictures' => $this->get('container')->getItems('gallery_picture', $criteria)
+				'pictures' => $this->get('container')->getItems('gallery_picture', $criteria),
+				'vote_disabled' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled'),
 			));
 
 			return $response;

@@ -2,16 +2,10 @@
 
 namespace Fuga\PublicBundle\Controller;
 
-use Fuga\CommonBundle\Controller\PublicController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Fuga\CommonBundle\Controller\Controller;
 
-class NewsController extends PublicController
+class NewsController extends Controller
 {
-	public function __construct()
-	{
-		parent::__construct('news');
-	}
-
 	public function indexAction($year = 0, $month = 0)
 	{
 

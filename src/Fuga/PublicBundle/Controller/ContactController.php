@@ -2,16 +2,11 @@
 
 namespace Fuga\PublicBundle\Controller;
 
-use Fuga\CommonBundle\Controller\PublicController;
+use Fuga\CommonBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ContactController extends PublicController
+class ContactController extends Controller
 {
-	public function __construct()
-	{
-		parent::__construct('read');
-	}
-
 	public function indexAction()
 	{
 		$cities = $this->get('container')->getItems('contact_city', 'publish=1');
