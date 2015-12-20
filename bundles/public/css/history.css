@@ -70,6 +70,7 @@ img#girl-lg{
 .slick-slide img {
     display: block;
     max-width: 100% !important;
+    height: 156px;
     margin: 0 auto;
 
 }
