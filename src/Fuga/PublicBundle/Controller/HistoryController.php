@@ -12,7 +12,7 @@ class HistoryController extends Controller
 		$firstCompetition = reset($competitions);
 		foreach ($competitions as &$competition) {
 			$competition['gallery'] = $this->get('container')->getItems('history_gallery', 'publish=1 AND competition_id='.$competition['id']);
-			$competition['news'] = $this->get('container')->getItems('news_news', 'publish=1 AND competition_id='.$competition['id']);
+			$competition['news'] = $this->get('container')->getItems('news_news', 'publish=1 AND competition_id='.$competition['id'], 'date DESC', 2);
 		}
 		unset($competition);
 
