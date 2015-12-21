@@ -50,5 +50,48 @@ class GalleryController extends Controller
 
 		return $this->render('gallery/index.html.twig', compact('ages', 'pictures'));
 	}
+
+	public function voteAction()
+	{
+		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
+
+			$voteIsDisabled = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled');
+			$votePeriod = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_period');
+
+			$pictureId = $this->get('request')->request->getInt('picture');
+			$sessionId = $this->get('session')->getId();
+			$ip = $_SERVER['REMOTE_ADDR'];
+			$time = time()-$votePeriod;
+			$date = new \DateTime();
+			$date->setTimestamp($time);
+
+			if ($voteIsDisabled) {
+				return array(
+					'voted' => false,
+					'error' => 'Голосование закрыто'
+				);
+			}
+			$vote = $this->get('container')->getItem('gallery_vote', 'picture_id='.$pictureId.' AND ( session_id="'.$sessionId.'" OR ip_address="'.$ip.'") AND created > "'.$date->format('Y-m-d H:i:s').'"');
+			if($votePeriod > 0 && $vote) {
+				return array(
+					'voted' => false,
+					'error' => 'Вы уже голосовали в ближайшее время. Попробуйте повторить позже.'
+				);
+			} else {
+				$this->get('container')->addItem('gallery_vote', array(
+					'picture_id' => $pictureId,
+					'session_id' => $sessionId,
+					'ip_address' => $ip
+				));
+
+				return array(
+					'voted' => true,
+					'message' => 'Спасибо. Ваш голос учтен.'
+				);
+			}
+		}
+
+		return $this->redirect($this->generateUrl('public_page' ,array('node' => 'pictures')), 301);
+	}
 	
 }
