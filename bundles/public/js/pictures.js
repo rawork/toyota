@@ -302,7 +302,6 @@
             var picture = $(this).attr('data-id');
 
             $.post('/pictures/vote', {picture: picture}, function(data) {
-                console.log(data);
                 if (data.voted ) {
                     $('.picture-vote').css({visibility: 'hidden'});
                     alert(data.message);
