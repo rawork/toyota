@@ -65,7 +65,7 @@
                             picturesArray.push(picturesObj[i]);
                         }
 
-                        //console.log(pictures[1]);
+                        console.log(picturesArray);
 
                         if (gallerySlick) {
                             galleryContainer.slick('unslick');
