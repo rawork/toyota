@@ -25,7 +25,7 @@
     {% for competition in competitions %}
     <div class="year{% if competition.id == firstCompetition.id %} active{% endif %}" id="year{{ competition.id }}">
         <div class="video">
-            {{ competition.video1 }}
+            {{ competition.video.code }}
         </div>
 
         <div class="gallery">

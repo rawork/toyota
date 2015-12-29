@@ -12,6 +12,7 @@ class HistoryController extends Controller
 		$firstCompetition = reset($competitions);
 		foreach ($competitions as &$competition) {
 			$competition['gallery'] = $this->get('container')->getItems('history_gallery', 'publish=1 AND competition_id='.$competition['id']);
+			$competition["video"] = $this->get('container')->getItem('history_video', 'publish=1 AND competition_id='.$competition['id']);
 			$competition['news'] = $this->get('container')->getItems('news_news', 'publish=1 AND competition_id='.$competition['id'], 'date DESC', 2);
 		}
 		unset($competition);
@@ -28,9 +29,10 @@ class HistoryController extends Controller
 		}
 
 		$gallery = $this->get('container')->getItems('history_gallery', 'publish=1 AND competition_id='.$id);
+		$videos = $this->get('container')->getItems('history_video', 'publish=1 AND competition_id='.$id);
 		$news = $this->get('container')->getItems('news_news', 'publish=1 AND competition_id='.$id);
 
-		return $this->render('history/detail.html.twig', compact('competition', 'gallery', 'news'));
+		return $this->render('history/detail.html.twig', compact('competition', 'gallery', 'news', 'videos'));
 	}
 	
 }

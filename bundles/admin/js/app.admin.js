@@ -410,7 +410,7 @@ function showListDialog(inputId, table_name, field_name, value){
         });
 
         $('.select-type').bind('change', function (){
-            var types = ['image', 'gallery', 'enum', 'select', 'select_list', 'select_tree'];
+            var types = ['image', 'gallery', 'enum', 'select', 'select_list', 'select_tree', 'structure'];
             var type = $(this).val();
 
             if ($.inArray(type, types) > -1) {

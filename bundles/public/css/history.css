@@ -261,7 +261,7 @@ ul.events .link a{
 
     .content ul.events {
         width: 90%;
-        margin-top: 100px;
+        margin-top: 30px;
     }
 
     .content ul.events li {
@@ -317,6 +317,10 @@ ul.events .link a{
     .gallery {
         margin-left: -15px;
         margin-right: -15px;
+    }
+
+    .gallery-detail {
+        margin-bottom: 80px;
     }
 
     .gallery-help {

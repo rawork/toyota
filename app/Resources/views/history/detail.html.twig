@@ -11,23 +11,17 @@
 
 <div class="history">
     <div class="video-detail clearfix">
+        {% for item in videos %}
         <div>
-            {{ competition.video1 }}
-            <div class="video-description">{{ competition.video1_text }}</div>
+            {{ item.code }}
+            <div class="video-description">{{ item.name }}</div>
         </div>
-        <div>
-            {{ competition.video2 }}
-            <div class="video-description">{{ competition.video2_text }}</div>
-        </div>
-        <div>
-            {{ competition.video3 }}
-            <div class="video-description">{{ competition.video3_text }}</div>
-        </div>
+        {% endfor %}
     </div>
-    {% if competition.gallery|length > 0 %}
+    {% if gallery|length > 0 %}
     <div class="gallery-help">Листайте для просмотра фото</div>
-    <div class="gallery">
-        {% for picture in competition.gallery %}
+    <div class="gallery gallery-detail">
+        {% for picture in gallery %}
         <div class="photo">
             <img src="{{ picture.photo_value.extra.big.path }}">
             <div class="description">{{ picture.name }}</div>
