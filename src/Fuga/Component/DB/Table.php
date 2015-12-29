@@ -73,17 +73,17 @@ class Table
 				$field['search'] = $field['search'] == 1;
 				$field['table_name'] = $this->dbName();
 				if (!empty($field['params'])) {
-					$params = explode(';', trim($field['params']));
-					foreach ($params as $param) {
-						if (!empty($param) && stristr($param, ':')) {
-							$values = explode(':', $param);
-							$field[$values[0]] = str_replace("`", "'", $values[1]);
+					$params = json_decode(trim($field['params']), true);
+					if (is_array($params)){
+						foreach ($params as $key => $param) {
+							$field[$key] = $param;
 						}
 					}
 				}
 				$this->fields[$field['name']] = $field;
 			}
 		} else {
+			$this->get('log')->addError('В таблице '.$this->dbName().' не настроены поля');
 //			throw new \Exception('В таблице '.$this->dbName().' не настроены поля');
 		}
 	}
@@ -253,15 +253,41 @@ class Table
 		}
 		return true;
 	}
+
+	public function getOptions($type) {
+		$options = array();
+		switch ($type) {
+			case 'money':
+				$options['default'] = 0;
+				return $options;
+			case 'integer':
+				$options['default'] = 0;
+				return $options;
+			case 'boolean':
+				$options['default'] = 0;
+				return $options;
+			case 'datetime':
+				$options['default'] = '0000-00-00 00:00:00';
+				return $options;
+			case 'date':
+				$options['default'] = '0000-00-00';
+				return $options;
+			default:
+				$options['default'] = '';
+				return $options;
+		}
+	}
 	
 	public function getSchema()
 	{
 		$schema = new \Doctrine\DBAL\Schema\Schema();
 		$table = $schema->createTable($this->dbName());
-		$column = $table->addColumn('id', 'integer', array('unsigned' => true));
-		$column->setAutoincrement(true);
+		$table->addColumn('id', 'integer', array('unsigned' => true, 'autoincrement' => true));
 		foreach ($this->fields as $field) {
-			$table->addColumn($field['name'], $this->getFieldType($field)->getType());
+			$type = $this->getFieldType($field)->getType();
+			$options = $this->getOptions($type);
+
+			$table->addColumn($field['name'], $type, $options);
 		}
 		$table->setPrimaryKey(array('id'));
 		return $schema;
@@ -271,11 +297,16 @@ class Table
 	{
 		try {
 			$queries = $this->getSchema()->toSql($this->container->get('connection')->getDatabasePlatform());
+
 			foreach ($queries as $sql) {
 				$this->container->get('connection')->query($sql);
 			}
+
 			return true;
 		} catch (\Exception $e) {
+			$this->container->get('log')->addError($e->getMessage());
+			$this->container->get('log')->addError($e->getTraceAsString());
+
 			return false;
 		}	
 	}
@@ -291,17 +322,18 @@ class Table
 				if (in_array($field['type'], array('gallery'))) {
 					continue;
 				}
+				$type = $this->getFieldType($field)->getType();
 				try {
 					$column = $table->getColumn($field['name']);
-					if ($column->getType()->getName() != $this->getFieldType($field)->getType()) {
+					if ($column->getType()->getName() != $type && 'id' != $column->getName()) {
 						$this->container->get('log')->addError($field['type']);
 						$table->changeColumn(
 							$field['name'], 
-							array('Type' => \Doctrine\DBAL\Types\Type::getType($this->getFieldType($field)->getType())
-						));
+							array_merge(array('type' => \Doctrine\DBAL\Types\Type::getType($type), $this->getOptions($type)))
+						);
 					}
 				} catch (\Exception $e) {
-					$table->addColumn($field['name'], $this->getFieldType($field)->getType());
+					$table->addColumn($field['name'], $type, $this->getOptions($type));
 				}
 			}
 			$columns = $table->getColumns();
@@ -330,9 +362,9 @@ class Table
 		} catch (\Exception $e) {
 			$this->container->get('log')->addError($e->getMessage());
 			$this->container->get('log')->addError($e->getTraceAsString());
-			
+
 			return false;
-		}	
+		}
 		
 	}
 	

@@ -19,7 +19,7 @@ class TextType extends Type {
 		$value = $value ? $value : $this->dbValue;
 		$name = $name ? $name : $this->getName();
 		
-		return '<textarea name="'.$name.'" class="form-control " rows="4">'.htmlspecialchars($value).'</textarea>';
+		return '<textarea name="'.$name.'" class="form-control" rows="4">'.htmlspecialchars($value).'</textarea>';
 	}
 	
 	public function getType() {

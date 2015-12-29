@@ -84,7 +84,7 @@ class Template {
 				'name' => 'type',
 				'title' => 'Тип условия',
 				'type' => 'enum',
-				'select_values' => 'Раздел|F;Параметр URL|U;Период времени|T',
+				'select_values' => '{"F":"Раздел","U":"Параметр URL","T":"Период времени"}',
 				'width' => '20%'
 			),
 			'cond' => array (

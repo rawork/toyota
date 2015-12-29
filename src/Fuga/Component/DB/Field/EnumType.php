@@ -12,13 +12,12 @@ class EnumType extends Type {
 		$sel = '';
 		$ret = '<select class="form-control select-'.$name.'" '.$sel.' name="'.$name.'">';
 		if ($this->getParam('select_values')) {
-			$items = explode(';', $this->getParam('select_values'));
-			foreach ($items as $item) {
-				$aitem = explode('|', $item);
-				if (count($aitem) == 2) {
-					$ret .= '<option '.($value == $aitem[1] ? 'selected ' : '').'value="'.$aitem[1].'">'.$aitem[0].'</option>';
-				} else {
+			$items = json_decode($this->getParam('select_values'), true);
+			foreach ($items as $key => $item) {
+				if (is_numeric($key)) {
 					$ret .= '<option '.($value == $item ? 'selected ' : '').'value="'.$item.'">'.$item.'</option>';
+				} else {
+					$ret .= '<option '.($value == $key ? 'selected ' : '').'value="'.$key.'">'.$item.'</option>';
 				}
 			}
 		}
@@ -28,11 +27,10 @@ class EnumType extends Type {
 
 	public function getStatic() {
 		if ($this->getParam('select_values')) {
-			$svalues = explode(';', $this->getParam('select_values'));
-			foreach ($svalues as $a) {
-				$aa = explode('|', $a);
-				if (count($aa)>1 && $aa[1] == $this->dbValue) {
-					return $aa[0];
+			$svalues = json_decode($this->getParam('select_values'), true);
+			foreach ($svalues as $key => $value) {
+				if ($key == $this->dbValue) {
+					return $value;
 				}
 			}	
 		}

@@ -52,7 +52,7 @@ class FormBuilder {
 		switch ($item['type']) {
 			case 'select':
 				if (!empty($item['select_values'])) {
-					$item['select_values'] = explode(';', $item['select_values']);
+					$item['select_values'] = json_decode($item['select_values'], true);
 					foreach ($item['select_values'] as $k => $v) {
 						if (!is_array($v)) {
 							$item['select_values'][$k] = array();
@@ -94,7 +94,7 @@ class FormBuilder {
 				break;
 			case 'enum':
 				if (!empty($item['select_values'])) {
-					$item['select_values'] = explode(',', $item['select_values']);
+					$item['select_values'] = json_decode($item['select_values'], true);
 					foreach ($item['select_values'] as $k => $v) {
 						if (!is_array($v)) {
 							$item['select_values'][$k] = array();

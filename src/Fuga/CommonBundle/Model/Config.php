@@ -96,7 +96,7 @@ class Config {
 					'title' => 'Язык',
 					'width' => '15%',
 					'type'  => 'enum',
-					'select_values' => 'ru;en;it',
+					'select_values' => '["ru","en"]',
 					'defvalue' => 'ru',
 				)
 			));

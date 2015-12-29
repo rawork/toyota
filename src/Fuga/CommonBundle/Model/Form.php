@@ -87,7 +87,7 @@ class Form {
 				'name' => 'type',
 				'title' => 'Тип',
 				'type' => 'enum',
-				'select_values' => 'Строка|string;Текст|text;Список|select;Флаг|checkbox;Файл|file;Пароль|password',
+				'select_values' => '{"string":"Строка","text":"Текст","select":"Список","checkbox":"Флаг","file":"Файл","password":"Пароль"}',
 				'width' => '15%'
 			),
 			'select_table' => array (

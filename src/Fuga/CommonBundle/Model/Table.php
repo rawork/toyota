@@ -130,7 +130,7 @@ class Table {
 				'name'		=> 'type',
 				'title'		=> 'Тип поля',
 				'type'		=> 'enum',
-				'select_values' => 'HTML|html;Выбор|select;Выбор из дерева|select_tree;Выбор (мульти)|select_list;Выбор цвета|color;Галерея|gallery;Дата|date;Дата и время|datetime;Деньги|currency;Изображение|image;Пароль|password;Перечисление|enum;Строка|string;Текст|text;Файл|file;Флажок|checkbox;Целое число|number',
+				'select_values' => '{"html":"HTML","select":"Выбор","select_tree":"Выбор из дерева","select_list":"Выбор (мульти)","color":"Выбор цвета","gallery":"Галерея","date":"Дата","datetime":"Дата и время","currency":"Деньги","image":"Изображение","password":"Пароль","enum":"Перечисление","string":"Строка","structure":"Структура","text":"Текст","file":"Файл","checkbox":"Флажок","number":"Целое число"}',
 				'defvalue'	=> 'string',
 				'width'		=> '21%'
 			),
@@ -138,7 +138,7 @@ class Table {
 				'name'  => 'select_values',
 				'title' => 'Значения',
 				'type'  => 'text',
-				'help'  => 'Знак-раздельтель &laquo;;&raquo;'
+				'help'  => 'JSON-type'
 			),
 			'params' => array (
 				'name'  => 'params',
