@@ -43,12 +43,12 @@ class ContactController extends Controller
 	}
 
 	public function letterAction() {
-		$emails = [
+		$emails = array(
 			'rawork@yandex.ru',
 //			'adarer@terralife.ru',
 			'rompomtoy@gmail.com',
 			'strashilka_inc@mail.ru'
-		];
+		);
 
 		$this->get('mailer')->send(
 			'test arnest letter template',
