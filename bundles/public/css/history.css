@@ -320,7 +320,7 @@ ul.events .link a{
     }
 
     .gallery .hover .window {
-        display: block;
+        display: inline-block;
         background-color: rgba(227,24,55,0.5);
         background-image: url('../img/lupa_plus.png');
         background-position: center center;
