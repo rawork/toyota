@@ -56,7 +56,8 @@ function showListDialog(inputId, table_name, field_name, value){
             var that = $(this);
 
             if ($('.statebar').css('left') == '-260px') {
-                $('.container').css('position', 'absolute')
+                $('.navbar-fixed-top,.navbar-fixed-bottom').css({position: 'static', 'margin-left': '-15px', 'margin-right': '-15px'});
+                $('.container').css({'position': 'absolute', 'padding-top': '0', 'padding-bottom': '0'})
                     .animate({
                         right: '-260px'
                     }, 200);
@@ -64,18 +65,19 @@ function showListDialog(inputId, table_name, field_name, value){
                 $('.statebar').animate({
                     left: '0px'
                 }, 200);
-                that.hide();
+                //that.hide();
             } else {
+                $('.navbar-fixed-top,.navbar-fixed-bottom').css({position: 'fixed', 'margin-left': '0', 'margin-right': '0'});
                 $('.container')
                     .animate({
                         right: 'auto'
                     }, 200)
-                    .css('position', 'static');
+                    .css({'position': 'static', 'padding-top': '70px', 'padding-bottom': '40px'});
 
                 $('.statebar').animate({
                     left: '-260px'
                 }, 200);
-                that.show();
+                //that.show();
             }
         });
 
@@ -276,7 +278,7 @@ function showListDialog(inputId, table_name, field_name, value){
                     $('#module-menu').html(data.content);
                     $('#waiting').hide(0);
                     if ($('.statebar').css('left') == '-260px') {
-                        $('.container').css('position', 'absolute')
+                        $('body').css('position', 'absolute')
                             .animate({
                                 right: '-260px'
                             }, 200);
