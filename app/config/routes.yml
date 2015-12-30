@@ -196,6 +196,9 @@ competition_detail:
 ajax_picture_list:
   path: /ajax/picture
   defaults: { _controller: 'Fuga:Public:Gallery:index'}
+ajax_picture_archive_list:
+  path: /ajax/picture/archive
+  defaults: { _controller: 'Fuga:Public:Gallery:archive'}
 
 public_page:
   path: /{node}

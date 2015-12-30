@@ -55,7 +55,7 @@
                 return;
             }
 
-            $.post('/ajax/picture', {category: category, person: person, city: city},
+            $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city},
                 function(data){
                     if (data.pictures != undefined) {
 
@@ -136,6 +136,8 @@
                             $('.picture-vote').css({visibility: 'hidden'});
                         }
 
+                        //console.log(totalSlides, typeof totalSlides, totalSlides > 0);
+
                         if (totalSlides > 0) {
                             $('#picture-counter').show();
                         } else {
@@ -210,7 +212,7 @@
             $('#slide-current').html(currentSlide);
             $('#slide-total').html(totalSlides);
             setArrowVibibility(0, totalSlides);
-            $('.picture-counter').show();
+            //$('.picture-counter').show();
 
             gallerySlick = true;
         }
