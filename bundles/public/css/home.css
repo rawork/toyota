@@ -161,7 +161,7 @@ p.video iframe {
     .slider-wrapper {
         position: relative;
         margin: 0 auto;
-        width: 100%;
+        width: 900px;
         height: 487px;
     }
 
@@ -176,8 +176,9 @@ p.video iframe {
     }
 
     .slider-prev, .slider-next {
-        display: block;
+        /*display: block;*/
         width: 52px;
+        top: 200px;
     }
 
     .slider-grass {

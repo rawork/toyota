@@ -71,6 +71,10 @@ function getTimer(deadline) {
                 wrap: 'both'
             });
 
+            if (carousel.find('li').length > 1 && $(window).width() >= 900) {
+                $('.slider-prev, .slider-next').show();
+            }
+
             $('.slider-wrapper>.jcarousel').jcarouselAutoscroll({
                 interval: 5000
             });
