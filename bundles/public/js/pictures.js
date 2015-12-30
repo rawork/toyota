@@ -14,6 +14,7 @@
         var currentPerson = '';
         var currentCity = '';
         var filterChanged = true;
+        var isArchive = parseInt($('#pictures').attr('data-archive'));
 
         var currentSlide = 0;
         var totalSlides = 0;
@@ -65,7 +66,7 @@
                             picturesArray.push(picturesObj[i]);
                         }
 
-                        console.log(picturesArray);
+                        //console.log(picturesArray);
 
                         if (gallerySlick) {
                             galleryContainer.slick('unslick');
@@ -131,7 +132,7 @@
                         }
 
                         // hide vote block
-                        if (data.vote_disabled) {
+                        if (data.vote_disabled || isArchive) {
                             $('.picture-vote').css({visibility: 'hidden'});
                         }
 
