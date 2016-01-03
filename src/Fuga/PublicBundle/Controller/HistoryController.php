@@ -25,7 +25,7 @@ class HistoryController extends Controller
 		$competition = $this->get('container')->getItem('history_competition', $id);
 
 		if (!$competition) {
-			throw $this->createNotFoundException('Отсутствуют подробности выбранного года');
+			throw $this->createNotFoundException('Несуществующая страница');
 		}
 
 		$gallery = $this->get('container')->getItems('history_gallery', 'publish=1 AND competition_id='.$id);

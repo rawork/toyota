@@ -388,6 +388,11 @@ body.modal-open {
         font-size: 0;
     }
 
+    .mainmenu {
+        position: fixed;
+        z-index: 9;
+    }
+
     /* popup */
     .pop-up_wrap {
         padding: 20px 0;
@@ -452,10 +457,7 @@ body.modal-open {
         background: url('../img/lb.png') no-repeat;
     }
 
-    .mainmenu {
-        position: fixed;
-        z-index: 9;
-    }
+
 
     .modal {
         display: none;

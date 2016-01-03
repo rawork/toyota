@@ -1,8 +1,39 @@
+
 (function($) {
     $(function() {
 
+        var videos = $('.video-detail > div');
+        var popupSlick = $('.modal-pictures');
+        var picturesArray = [];
 
+        if (videos.length > 1 && $(window).width() >= 900) {
+            if (videos.length % 2 == 0) {
+                videos.css({'width': '49.6%'});
+            }
+        }
 
+        var modalElementHtml = function (item) {
+            return '<div class="modal-picture"><img src="'+item.path+'"><div class="idea">'+item.name+'</div></div>';
+        };
+
+        var setModalArrowVibibility = function(currentSlide, totalSlides) {
+            if (currentSlide+1 >= totalSlides) {
+                $('.popup-next').hide();
+            } else {
+                $('.popup-next').show();
+            }
+
+            if (0 >= currentSlide) {
+                $('.popup-prev').hide();
+            } else {
+                $('.popup-prev').show();
+            }
+
+            if (1 == totalSlides) {
+                $('.popup-prev').hide();
+                $('.popup-next').hide();
+            }
+        };
 
         $('.gallery').slick({
             infinite: false,
@@ -25,7 +56,8 @@
                         arrows: false,
                         dots: true,
                         slidesToShow: 1,
-                        slidesToScroll: 1
+                        slidesToScroll: 1,
+                        adaptiveHeight: true
                     }
                 }
                 // You can unslick at a given breakpoint now by adding:
@@ -84,6 +116,56 @@
             that.addClass('active').siblings().removeClass('active');
             $('#year'+id).addClass('active').siblings().removeClass('active');
 
+        });
+
+        $(document).on('click', '.photo a', function(e) {
+            e.preventDefault();
+
+            if ($(window).width() < 900) {
+                return;
+            }
+
+            if (picturesArray.length == 0) {
+                var images = $('.photo');
+
+                images.each(function(index) {
+                    picturesArray.push({'name': $(this).find('.description').html(),'path': $(this).find('a').attr('href')})
+                });
+
+            }
+
+            var pos = parseInt($(this).attr('data-position'));
+
+            popupSlick.empty();
+
+            for (i in picturesArray) {
+                popupSlick.append(modalElementHtml(picturesArray[i]))
+            }
+
+            $('body').addClass('modal-open');
+            popupSlick.slick({
+                infinite: false,
+                dots : false,
+                lazyLoad: 'progressive',
+                slidesToShow: 1,
+                initialSlide: pos,
+                adaptiveHeight: true,
+                prevArrow: '<button type="button" class="slick-prev popup-prev"><img src="/bundles/public/img/popup_prev.png"></button>',
+                nextArrow: '<button type="button" class="slick-next popup-next"><img src="/bundles/public/img/popup_next.png"></button>'
+            }).on('afterChange', function(event, slick, currentSlide){
+                setModalArrowVibibility(currentSlide, picturesArray.length);
+            });
+            $('.modal').show();
+
+            popupSlick.slick('setPosition');
+
+        });
+
+        $(document).on('click', 'a.modal-close', function(e){
+            e.preventDefault();
+            $(this).parents('.modal').hide();
+            popupSlick.slick('unslick');
+            $("body").removeClass("modal-open");
         });
 
     });
