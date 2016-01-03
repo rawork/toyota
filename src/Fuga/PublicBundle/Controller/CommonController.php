@@ -69,6 +69,7 @@ class CommonController extends Controller {
 			'meta'      => $this->getManager('Fuga:Common:Meta')->getMeta(),
 			'links'     => $links,
 			'action'    => $action,
+			'options'   => $options,
 			'curnode'   => $nodeItem,
 			'curuser'   => $this->get('security')->getCurrentUser(),
 			'locale'    => $this->get('session')->get('locale'),

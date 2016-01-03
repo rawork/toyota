@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <title>Конкурс Toyota Автомобиль мечты - {{ title }}</title>
     <link type="text/css" rel="stylesheet" href="/bundles/public/css/normalize.css" media="screen">
+    <link type="text/css" rel="stylesheet" href="/bundles/jcarousel/jcarousel.css" media="screen">
     <link type="text/css" rel="stylesheet" href="/bundles/selectize/css/selectize.css" media="screen">
     <link type="text/css" rel="stylesheet" href="/bundles/nanoscroller/nanoscroller.css" media="screen">
     <link type="text/css" rel="stylesheet" href="/bundles/slick/slick.css" media="screen">
@@ -22,6 +23,7 @@
     <div id="header-toyota" class="header-container">
         <div class="relative">
             <div class="slider-gradient"></div>
+            {% if curnode.name == 'history' and action == 'detail' %}<div class="slider-grass"></div>{% endif %}
         </div>
         <div class="container">
             <div class="header">
@@ -41,6 +43,11 @@
             </div>
         </div>
     </div>
+    {% if curnode.name == 'history' and action == 'detail' %}
+    <div class="container container0">
+        {{ render('Fuga:Public:History:visual', {id: options.id}) }}
+    </div>
+    {% endif %}
     <div id="content-toyota" class="bg-wrapper">
         <div class="container content-container">
             <div class="content">
@@ -69,6 +76,7 @@
 <script src="/bundles/nanoscroller/jquery.nanoscroller.js"></script>
 <script src="/bundles/scrollto/jquery.scrollTo.min.js"></script>
 <script src="/bundles/slick/slick.min.js"></script>
+<script type="text/javascript" src="/bundles/jcarousel/jquery.jcarousel.min.js"></script>
 <script src="/bundles/public/js/app.js?{{ asset }}"></script>
 <script src="/bundles/public/js/{{ curnode.name }}.js?{{ asset }}"></script>
 <script>

@@ -192,6 +192,53 @@ ul.events .link a{
     margin-bottom: 15px;
 }
 
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 315px;
+    overflow-y: hidden;
+}
+
+ul.slider li {
+    height: 315px;
+    text-align: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #fff;
+}
+
+ul.slider img {
+    max-width: 320px !important;
+    margin: 0 auto;
+}
+
+.slider-prev, .slider-next {
+    display: none;
+    width: 46px;
+}
+
+.slider-prev {
+    left: 3px;
+}
+
+.slider-next {
+    right: 3px;
+}
+
+.slider-grass {
+    position: absolute;
+    left: 0;
+    top: 338px;
+    width: 100%;
+    height: 26px;
+    background-image: url('../img/grass_new.png');
+    background-position: top left;
+    background-repeat: repeat-x;
+    background-size: 125px 26px;
+    z-index: 21;
+}
+
 @media (min-width: 600px) {
     ul.events .picture {
         float: left;
@@ -350,5 +397,37 @@ ul.events .link a{
         display: inline-block;
         width: 33%;
         padding: 0 15px;
+    }
+
+    .container0 {
+        background-color: #fff;
+        max-width: 100% !important;
+    }
+
+    .slider-wrapper {
+        position: relative;
+        margin: 0 auto;
+        width: 900px;
+        height: 487px;
+    }
+
+    ul.slider li {
+        height: 487px;
+        text-align: center;
+    }
+
+    ul.slider img {
+        max-width: 900px !important;
+        margin: 0 auto;
+    }
+
+    .slider-prev, .slider-next {
+        /*display: block;*/
+        width: 52px;
+        top: 200px;
+    }
+
+    .slider-grass {
+        top: 509px;
     }
 }

@@ -34,5 +34,12 @@ class HistoryController extends Controller
 
 		return $this->render('history/detail.html.twig', compact('competition', 'gallery', 'news', 'videos'));
 	}
-	
+
+
+	public function visualAction($id)
+	{
+		$competition = $this->get('container')->getItem('history_competition', $id);
+
+		return $this->render('history/visual.html.twig', compact('competition'));
+	}
 }
