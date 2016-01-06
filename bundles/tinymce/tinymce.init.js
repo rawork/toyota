@@ -22,7 +22,9 @@ tinymce.init({
 	external_plugins: { "filemanager" : window.prj_ref+"/bundles/filemanager/plugin.min.js"},
 	content_css: [
 		'/bundles/public/css/app.css',
-		'/bundles/public/css/home.css'
+		'/bundles/public/css/home.css',
+		'/bundles/public/css/about.css',
+		'/bundles/public/css/history.css'
 	]
 });
 
