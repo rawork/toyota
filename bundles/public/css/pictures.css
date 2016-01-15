@@ -220,6 +220,24 @@ body.modal-open {
     display: none;
 }
 
+.content a.btn-archive {
+    background-color: #cf142b;
+    /*background-image: url('../img/btn_archive.png');*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+    /*letter-spacing: 1px;*/
+    font-size: 15px;
+    width: 280px;
+    height: 57px;
+    line-height: 57px;
+    margin: 65px auto 0;
+    text-align: center;
+    text-decoration: none;
+}
+
 @media (min-width: 480px) {
     .red-line > div {
         width: 300px;
@@ -620,4 +638,20 @@ body.modal-open {
         display: block;
     }
 
+    .content a.btn-archive {
+        background-image: url('../img/btn_archive.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: block;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 18px;
+        width: 375px;
+        height: 57px;
+        line-height: 57px;
+        margin: 65px auto 0;
+        text-align: center;
+        text-decoration: none;
+    }
 }

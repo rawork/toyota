@@ -40,8 +40,10 @@ class GalleryController extends Controller
 		$ages = $this->get('container')->getItems('gallery_age', 'publish=1');
 		$firstAge = reset($ages);
 		$isArchive = false;
+		$link = $this->generateUrl('public_page_dinamic', array('node' => 'pictures', 'action' => 'archive'));
+		$button = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_archive_title');
 
-		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive'));
+		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive', 'link', 'button'));
 	}
 
 	public function archiveAction()
@@ -77,8 +79,10 @@ class GalleryController extends Controller
 		$ages = $this->get('container')->getItems('gallery_age', 'publish=1');
 		$firstAge = reset($ages);
 		$isArchive = true;
+		$link = $this->generateUrl('public_page', array('node' => 'pictures'));
+		$button = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_index_title');
 
-		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive'));
+		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive', 'button', 'link'));
 	}
 
 	public function voteAction()
