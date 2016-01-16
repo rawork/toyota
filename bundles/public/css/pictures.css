@@ -221,8 +221,8 @@ body.modal-open {
 }
 
 .content a.btn-archive {
-    background-color: #cf142b;
-    /*background-image: url('../img/btn_archive.png');*/
+    background-size: 280px 43px;
+    background-image: url('../img/btn_archive.png');
     background-repeat: no-repeat;
     background-position: center center;
     display: block;
@@ -231,8 +231,8 @@ body.modal-open {
     /*letter-spacing: 1px;*/
     font-size: 15px;
     width: 280px;
-    height: 57px;
-    line-height: 57px;
+    height: 43px;
+    line-height: 43px;
     margin: 65px auto 0;
     text-align: center;
     text-decoration: none;
@@ -639,20 +639,11 @@ body.modal-open {
     }
 
     .content a.btn-archive {
-        background-color: transparent;
-        background-image: url('../img/btn_archive.png');
-        background-repeat: no-repeat;
-        background-position: center center;
-        display: block;
-        color: #fff;
-        text-transform: uppercase;
+        background-size: 375px 57px;
         letter-spacing: 1px;
         font-size: 18px;
         width: 375px;
         height: 57px;
         line-height: 57px;
-        margin: 65px auto 0;
-        text-align: center;
-        text-decoration: none;
     }
 }
