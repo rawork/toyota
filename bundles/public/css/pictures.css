@@ -639,6 +639,7 @@ body.modal-open {
     }
 
     .content a.btn-archive {
+        background-color: transparent;
         background-image: url('../img/btn_archive.png');
         background-repeat: no-repeat;
         background-position: center center;
