@@ -19,6 +19,8 @@ function getTimer(deadline) {
     return {day: days, hour: hours};
 }
 
+
+
 (function($) {
     $(function() {
 
