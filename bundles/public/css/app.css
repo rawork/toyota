@@ -366,11 +366,11 @@ h2 {
     line-height: 18px;
     text-align: center;
     padding: 30px 0;
-    color: #000;
+    color: #fff;
 }
 
 .footer a {
-    color: #fff;
+    color: #000;
 }
 
 p.video iframe {
