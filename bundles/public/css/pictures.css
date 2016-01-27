@@ -144,19 +144,37 @@ body.modal-open {
 }
 
 .picture-vote {
-    text-align: left;
-    margin-left: 160px;
-    width: 120px;
-    height: 27px;
-    background-color: #ddd;
-    border-radius: 6px 6px 0 0;
+    text-align: center;
+    margin: 15px auto;
+    background-image: url('../img/btn_vote.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 169px 39px;
+    width: 169px;
+    height: 39px;
+
     font-size: 14px;
     line-height: 14px;
-    padding: 7px 0 0 11px;
-    background-image: url('../img/star.png');
-    background-repeat: no-repeat;
-    background-position: 95% 45%;
+    /*padding: 7px 0 0 11px;*/
+    /*background-image: url('../img/star.png');*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: 95% 45%;*/
+    /*background-color: #ddd;*/
+    /*border-radius: 6px 6px 0 0;*/
+    /*width: 120px;*/
+    /*height: 27px;*/
     cursor: pointer;
+}
+
+.picture-vote-res {
+    text-align: center;
+    margin: 15px auto;
+    background-image: url('../img/btn_vote_result.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 188px 38px;
+    width: 188px;
+    height: 38px;
 }
 
 .picture-vote:hover {
@@ -332,7 +350,7 @@ body.modal-open {
     }
 
     .picture-vote {
-        margin-left: 80px;
+        /*margin-left: 80px;*/
     }
 
     .picture {
@@ -341,7 +359,7 @@ body.modal-open {
         width: 33.33333333%;
         padding-top: 20px;
         padding-bottom: 0;
-        heoght: 400px;
+        height: 400px;
         overflow: hidden;
     }
 
@@ -384,7 +402,7 @@ body.modal-open {
 
     .picture {
         padding-top: 0;
-        height: 350px;
+        height: 370px;
         padding-bottom: 0;
     }
 
