@@ -26,7 +26,8 @@
     </div>
 </div>
 
-{#<a class="btn-archive" href="{{ link }}">{{ button }}</a>#}
+{% if action == 'index' %}<div class="archive-text">Вдохновитесь работами победителей 9-го конкурса «Автомобиль мечты».<br> Самые фантастические и красочные машины помогут придумать собственное изобретение!</div>{% endif %}
+<a class="btn-archive" href="{{ link }}">{{ button }}</a>
 
 <div class="modal">
     <div class="modal-dialog">

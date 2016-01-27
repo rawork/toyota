@@ -220,9 +220,14 @@ body.modal-open {
     display: none;
 }
 
+.content .archive-text {
+    margin-top: 75px;
+    text-align: center;
+}
+
 .content a.btn-archive {
     background-size: 280px 43px;
-    background-image: url('../img/btn_archive.png');
+    background-image: url('../img/btn_archive2.png');
     background-repeat: no-repeat;
     background-position: center center;
     display: block;
@@ -233,7 +238,7 @@ body.modal-open {
     width: 280px;
     height: 43px;
     line-height: 43px;
-    margin: 65px auto 0;
+    margin: 40px auto 0;
     text-align: center;
     text-decoration: none;
 }
