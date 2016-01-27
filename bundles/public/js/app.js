@@ -36,7 +36,7 @@ function getTimer(deadline) {
             $('.mainmenu').slideToggle('slow');
         });
 
-        $(document).on('click', "a[href$='rules2015_2016.pdf']", function(e, options) {
+        $(document).on('click', "a[href$='.pdf']", function(e, options) {
             options = options || {};
 
             if ( !options.ga_complete ) {
