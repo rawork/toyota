@@ -8,18 +8,15 @@ class NewsController extends Controller
 {
 	public function indexAction($year = 0, $month = 0)
 	{
-
-		$item = $this->get('container')->getItem('news_news', '1=1');
-
-		$date = new \DateTime($item['date'].' 00:00:00');
 		$criteria = 'publish=1';
 
 		if (0 == $year) {
+			$item = $this->get('container')->getItem('news_news', '1=1');
+
+			$date = new \DateTime($item['date'].' 00:00:00');
 			$year = $date->format('Y');
 			$criteria .= ' AND (YEAR(date) = '.$year.' OR YEAR(date) = '.($year-1).')';
-		}
-
-		if ($year > 0) {
+		} elseif ($year > 0) {
 			$criteria .= ' AND YEAR(date) = '.$year;
 		}
 
