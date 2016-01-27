@@ -101,6 +101,8 @@
                     }
                     var cityData = cities[value];
 
+                    ga('send', 'event', 'dealer', 'search');
+
                     if ($('.map-canvas').is(':visible')) {
                         $('.map-dot').remove();
                         $('<div></div>')

@@ -36,6 +36,18 @@ function getTimer(deadline) {
             $('.mainmenu').slideToggle('slow');
         });
 
+        $(document).on('click', "a[href$='rules2015_2016.pdf']", function(e, options) {
+            options = options || {};
+
+            if ( !options.ga_complete ) {
+                e.preventDefault();
+                ga('send', 'event', 'download', 'pdf');
+                //console.log('ga pdf');
+                window.location = $(this).attr('href');
+            }
+
+        });
+
         $(window).on('resize', function(e){
             if (900 <= $(this).width()) {
                 $('.mainmenu').show();

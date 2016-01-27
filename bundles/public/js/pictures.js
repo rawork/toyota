@@ -238,6 +238,8 @@
         $(document).on('click', '.picture .img a', function(e) {
             e.preventDefault();
 
+            ga('send', 'event', 'gallery', 'popup');
+
             if ($(window).width() < 900) {
                 return;
             }
