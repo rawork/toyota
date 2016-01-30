@@ -117,6 +117,14 @@ img#girl-rules {
 }
 
 
+/* prizes tab */
+.prizes-container {
+    display: none;
+}
+
+
+
+
 .content ul.juri {
     margin: 0;
     padding: 0;
@@ -522,6 +530,22 @@ ul.juri li {
         max-width: 350px !important;
     }
 
+
+    .prizes-container {
+        display: block;
+        margin-left: -70px;
+        margin-right: -70px;
+    }
+
+    .prizes {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    .prizes h2 {
+        margin-top: 0;
+    }
+
     /* prizes slider border */
     /* popup */
     .pop-up_wrap {
@@ -586,6 +610,9 @@ ul.juri li {
         bottom: 2px;
         background: url('../img/lb.png') no-repeat;
     }
+
+
+
 
     .modal-dialog {
         width: 900px;
@@ -659,6 +686,15 @@ ul.juri li {
     .popup-next {
         background-image: url('../img/popup_next.png');
         right: -53px;
+    }
+
+
+    .gallery-prev {
+        left: -57px;
+    }
+
+    .gallery-next {
+        right: -57px;
     }
 
 }

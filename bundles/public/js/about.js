@@ -4,6 +4,28 @@
         var popupSlick = $('.modal-members');
         var juriArray = [];
 
+        var galleryContainer = $('.prizes');
+        var gallerySlick = false;
+
+        var setArrowVibibility = function(currentSlide, totalSlides) {
+            if (currentSlide+1 >= totalSlides) {
+                $('.gallery-next').hide();
+            } else {
+                $('.gallery-next').show();
+            }
+
+            if (0 >= currentSlide) {
+                $('.gallery-prev').hide();
+            } else {
+                $('.gallery-prev').show();
+            }
+
+            if (1 == totalSlides) {
+                $('.gallery-prev').hide();
+                $('.gallery-next').hide();
+            }
+        };
+
         var modalElementHtml = function (item) {
             return '<div class="juri modal-juri clearfix"><div class="foto modal-foto"><img src="'+item.img+'"></div><div class="modal-info"><div class="name">'+item.name+'</div><div class="activity">'+item.activity+'</div><div class="bio">Биография:<div>'+item.bio+'</div></div><div class="quotation"><div class="quote-pop"><div class="quote-top"></div><div class="quote-content">'+item.quotation+'</div><div class="quote-bottom"></div></div></div></div></div>';
         };
@@ -93,6 +115,30 @@
             popupSlick.slick('unslick');
             $("body").removeClass("modal-open");
         });
+
+        if ($(window).width() >= 900) {
+            var prevArrow = '<button type="button" class="slick-prev gallery-prev"><img src="/bundles/public/img/prev.png"></button>';
+            var nextArrow = '<button type="button" class="slick-next gallery-next"><img src="/bundles/public/img/next.png"></button>';
+        } else {
+            var prevArrow = '';
+            var nextArrow = '';
+        }
+
+        galleryContainer.slick({
+            infinite: false,
+            dots : false,
+            lazyLoad: 'progressive',
+            slidesToShow: 1,
+            adaptiveHeight: true,
+            prevArrow: prevArrow,
+            nextArrow: nextArrow
+        }).on('afterChange', function(event, slick, currentSlide){
+            setArrowVibibility(currentSlide, 3);
+        });
+
+        setArrowVibibility(0, 3);
+
+        gallerySlick = true;
 
     });
 
