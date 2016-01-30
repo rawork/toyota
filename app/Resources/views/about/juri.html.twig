@@ -1,0 +1,44 @@
+<ul class="juri">
+    {% for member in people %}
+    <li class="clearfix">
+        <div class="foto">
+            <img src="{{ member.foto_value.value }}">
+            <a href="#" data-position="{{ loop.index0 }}">Подробно</a>
+        </div>
+        <div class="info">
+            <div class="name">{{ member.name }}</div>
+            <div class="activity">{{ member.activity }}</div>
+            <div class="bio">Биография:
+                <div>{{ member.bio }}</div>
+            </div>
+            <div class="quotation">
+                {{ member.quotation }}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<div class="modal">
+    <div class="modal-dialog">
+        <a href="#" class="modal-close"></a>
+        <div class="modal-members">
+            <div class="juri modal-juri clearfix">
+                <div class="foto modal-foto">
+                    <img src="">
+                </div>
+                <div class="modal-info">
+                    <div class="name"></div>
+                    <div class="activity"></div>
+                    <div class="bio">Биография:<div></div></div>
+                    <div class="quotation">
+                        <div class="quote-pop">
+                            <div class="quote-top"></div>
+                            <div class="quote-content"></div>
+                            <div class="quote-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

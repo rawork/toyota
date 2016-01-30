@@ -19,5 +19,12 @@ class AboutController extends Controller
 
 		return $this->render('about/slider.html.twig', compact('slides'));
 	}
+
+	public function juriAction()
+	{
+		$people = $this->get('container')->getItems('about_juri', 'publish=1');
+
+		return $this->render('about/juri.html.twig', compact('people'));
+	}
 	
 }
