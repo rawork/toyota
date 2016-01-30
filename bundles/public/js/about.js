@@ -57,6 +57,13 @@
             var id = that.attr('data-id');
             that.addClass('active').siblings().removeClass('active');
             $(id).addClass('active').siblings().removeClass('active');
+            galleryContainer.slick('setPosition');
+            if (id.indexOf('prize') > -1) {
+                var num = that.attr('data-num');
+                galleryContainer.get(num).slick.slickGoTo(0, true);
+                setArrowVibibility(0,3);
+            }
+
         });
 
 
