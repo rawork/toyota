@@ -28,9 +28,17 @@ class GalleryController extends Controller
 				$criteria .= ' AND person LIKE("%'.$person.'%")';
 			}
 
+			$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+			$ip = $_SERVER['REMOTE_ADDR'];
+
+			foreach ($pictures as &$picture) {
+				$picture['vote'] = $this->get('container')->getItem('gallery_vote', 'picture_id='.$picture['id'].' AND ip_address="'.$ip.'"');
+			}
+			unset($picture);
+
 			$response = new JsonResponse();
 			$response->setData(array(
-				'pictures' => $this->get('container')->getItems('gallery_picture', $criteria),
+				'pictures' => $pictures,
 				'vote_disabled' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled'),
 			));
 
@@ -70,7 +78,7 @@ class GalleryController extends Controller
 			$response = new JsonResponse();
 			$response->setData(array(
 				'pictures' => $this->get('container')->getItems('gallery_picture', $criteria),
-				'vote_disabled' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled'),
+				'vote_disabled' => true,
 			));
 
 			return $response;
@@ -105,11 +113,12 @@ class GalleryController extends Controller
 					'error' => 'Голосование закрыто'
 				);
 			}
-			$vote = $this->get('container')->getItem('gallery_vote', 'picture_id='.$pictureId.' AND ( session_id="'.$sessionId.'" OR ip_address="'.$ip.'") AND created > "'.$date->format('Y-m-d H:i:s').'"');
-			if($votePeriod > 0 && $vote) {
+			//$vote = $this->get('container')->getItem('gallery_vote', 'picture_id='.$pictureId.' AND ( session_id="'.$sessionId.'" OR ip_address="'.$ip.'") AND created > "'.$date->format('Y-m-d H:i:s').'"');
+			$vote = $this->get('container')->getItem('gallery_vote', 'picture_id='.$pictureId.' AND ip_address="'.$ip.'"');
+			if($vote) {
 				return array(
-					'voted' => false,
-					'error' => 'Вы уже голосовали в ближайшее время. Попробуйте повторить позже.'
+					'voted' => true,
+					'message' => 'Вы уже голосовали за эту работу.'
 				);
 			} else {
 				$this->get('container')->addItem('gallery_vote', array(
