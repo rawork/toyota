@@ -27,7 +27,7 @@
         };
 
         var modalElementHtml = function (item) {
-            return '<div class="juri modal-juri clearfix"><div class="foto modal-foto"><img src="'+item.img+'"></div><div class="modal-info"><div class="name">'+item.name+'</div><div class="activity">'+item.activity+'</div><div class="bio">Биография:<div>'+item.bio+'</div></div><div class="quotation"><div class="quote-pop"><div class="quote-top"></div><div class="quote-content">'+item.quotation+'</div><div class="quote-bottom"></div></div></div></div></div>';
+            return '<div class="juri modal-juri clearfix"><div class="foto modal-foto"><img src="'+item.img+'"></div><div class="modal-info"><div class="name">'+item.name+'</div><div class="activity">'+item.activity+'</div><div class="bio"><div>'+item.bio+'</div></div><div class="quotation"><div class="quote-pop"><div class="quote-top"></div><div class="quote-content">'+item.quotation+'</div><div class="quote-bottom"></div></div></div></div></div>';
         };
 
         var setModalArrowVibibility = function(currentSlide, totalSlides) {
