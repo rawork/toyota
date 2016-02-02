@@ -148,6 +148,7 @@
 
                 setArrowVibibility(0, galleryContainer.slideCount);
 
+                galleryContainer.slick('setPosition');
             } else {
                 console.log();
                 galleryMobileContainer.slick({
@@ -160,6 +161,7 @@
                     nextArrow: ''
                 });
 
+                galleryContainer.slick('setPosition');
             }
 
         }).resize();
