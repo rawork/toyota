@@ -195,20 +195,15 @@ ul.juri li {
 
 .juri .activity {
     font-weight: 700;
-    font-size: 17px;
-    line-height: 24px;
     margin-bottom: 25px;
 }
 
 .juri .bio {
     display: none;
-    font-size: 17px;
-    line-height: 28px;
 }
 
 .juri .quotation {
-    font-size: 17px;
-    line-height: 28px;
+
 }
 
 .slick-list {
@@ -260,6 +255,7 @@ ul.juri li {
 
 .modal-members {
     padding: 20px;
+    padding-top: 50px;
 }
 
 .modal-juri .bio {
@@ -277,8 +273,6 @@ ul.juri li {
 
 .modal-juri .bio {
     display: block;
-    font-size: 17px;
-    line-height: 28px;
 }
 
 
@@ -358,6 +352,10 @@ ul.juri li {
 }
 /* quotation block end */
 
+
+.prizes-mobile {
+    display: none;
+}
 
 
 @media (min-width: 480px) {
