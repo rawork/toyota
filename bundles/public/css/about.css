@@ -118,14 +118,8 @@ img#girl-rules {
 }
 
 
-/* prizes tab */
-.prizes-container {
-    display: none;
-}
 
-
-
-
+/* juri tab */
 .content ul.juri {
     margin: 0;
     padding: 0;
@@ -354,7 +348,74 @@ ul.juri li {
 
 
 .prizes-mobile {
+    display: block;
+    background-color: #fff;
+}
+
+.prizes-desktop {
     display: none;
+}
+
+.prizes-help {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+/* prizes tab*/
+
+.prizes-container {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+h3 {
+    font-size: 15px;
+    text-align: center;
+}
+
+.prizes-mobile h2 {
+    text-align: center;
+}
+
+.content ul.fotos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content ul.fotos li {
+    padding-left: 0;
+    float: left;
+    width: 33.3333%;
+}
+
+.content ul.fotos li div {
+    color: #cf142b;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.content ul.fotos li img {
+    max-width: 100% !important;
+    margin: 0 auto;
+}
+
+.content ul.fotos li:before {
+    content: '';
+}
+
+.content ul.fotos li.foto1-2 {
+    width: 50%;
+}
+
+.content ul.fotos li.foto2-2 {
+    width: 50%;
+}
+
+.content ul.fotos li.foto1-1 {
+    width: 100%;
 }
 
 
@@ -530,6 +591,10 @@ ul.juri li {
     }
 
 
+    .prizes-help {
+        display: none;
+    }
+
     .prizes-container {
         display: block;
         margin-left: -70px;
@@ -697,4 +762,33 @@ ul.juri li {
         right: -57px;
     }
 
+
+    /* prizes slider */
+
+    h3 {
+        font-size: 17px;
+    }
+
+    .prizes-mobile {
+        display: none;
+    }
+
+    .prizes-desktop {
+        display: block;
+    }
+
+
+
+
+    /*.content ul.fotos li.foto1-3 {*/
+        /*width: 40%;*/
+    /*}*/
+
+    /*.content ul.fotos li.foto2-3 {*/
+        /*width: 35%;*/
+    /*}*/
+
+    /*.content ul.fotos li.foto3-3 {*/
+        /*width: 25%;*/
+    /*}*/
 }

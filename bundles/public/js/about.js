@@ -4,8 +4,8 @@
         var popupSlick = $('.modal-members');
         var juriArray = [];
 
-        var galleryContainer = $('.prizes');
-        var gallerySlick = false;
+        var galleryContainer = $('.prizes-desktop');
+        var galleryMobileContainer = $('.prizes-mobile');
 
         var setArrowVibibility = function(currentSlide, totalSlides) {
             if (currentSlide+1 >= totalSlides) {
@@ -52,16 +52,24 @@
         $(document).on('click', '.tabs li', function(e) {
             e.preventDefault();
 
-            console.log('click tab');
+            //console.log('click tab');
             var that = $(this);
             var id = that.attr('data-id');
             that.addClass('active').siblings().removeClass('active');
             $(id).addClass('active').siblings().removeClass('active');
-            galleryContainer.slick('setPosition');
-            if (id.indexOf('prize') > -1) {
-                var num = that.attr('data-num');
-                galleryContainer.get(num).slick.slickGoTo(0, true);
-                setArrowVibibility(0,3);
+            if ($(window).width() >= 900) {
+                galleryContainer.slick('setPosition');
+                if (id.indexOf('prize') > -1) {
+                    var num = that.attr('data-num');
+                    galleryContainer.get(num).slick.slickGoTo(0, true);
+                    setArrowVibibility(0,galleryContainer.slideCount);
+                }
+            } else {
+                galleryMobileContainer.slick('setPosition');
+                if (id.indexOf('prize') > -1) {
+                    var num = that.attr('data-num');
+                    galleryMobileContainer.get(num).slick.slickGoTo(0, true);
+                }
             }
 
         });
@@ -123,29 +131,40 @@
             $("body").removeClass("modal-open");
         });
 
-        if ($(window).width() >= 900) {
-            var prevArrow = '<button type="button" class="slick-prev gallery-prev"><img src="/bundles/public/img/prev.png"></button>';
-            var nextArrow = '<button type="button" class="slick-next gallery-next"><img src="/bundles/public/img/next.png"></button>';
-        } else {
-            var prevArrow = '';
-            var nextArrow = '';
-        }
 
-        galleryContainer.slick({
-            infinite: false,
-            dots : false,
-            lazyLoad: 'progressive',
-            slidesToShow: 1,
-            adaptiveHeight: true,
-            prevArrow: prevArrow,
-            nextArrow: nextArrow
-        }).on('afterChange', function(event, slick, currentSlide){
-            setArrowVibibility(currentSlide, 3);
-        });
+        $(window).resize( function(){
+            if ($(window).width() >= 900) {
+                galleryContainer.slick({
+                    infinite: false,
+                    dots : false,
+                    lazyLoad: 'progressive',
+                    slidesToShow: 1,
+                    adaptiveHeight: true,
+                    prevArrow: '<button type="button" class="slick-prev gallery-prev"><img src="/bundles/public/img/prev.png"></button>',
+                    nextArrow: '<button type="button" class="slick-next gallery-next"><img src="/bundles/public/img/next.png"></button>'
+                }).on('afterChange', function(event, slick, currentSlide){
+                    setArrowVibibility(currentSlide, slick.slideCount);
+                });
 
-        setArrowVibibility(0, 3);
+                setArrowVibibility(0, galleryContainer.slideCount);
 
-        gallerySlick = true;
+            } else {
+                console.log();
+                galleryMobileContainer.slick({
+                    infinite: false,
+                    dots : false,
+                    lazyLoad: 'progressive',
+                    slidesToShow: 1,
+                    adaptiveHeight: true,
+                    prevArrow: '',
+                    nextArrow: ''
+                });
+
+            }
+
+        }).resize();
+
+        $(window).trigger('resize');
 
     });
 
