@@ -148,9 +148,19 @@ ul.juri li {
     padding-left: 20px;
 }
 
+.juri .info.full {
+    float: none;
+    width: 100%;
+    padding-left: 0;
+}
+
 .juri .foto img {
     max-width: 150px !important;
     width: 100%;
+}
+
+.juri .foto.full {
+    margin-right: 20px;
 }
 
 .juri .foto a {
