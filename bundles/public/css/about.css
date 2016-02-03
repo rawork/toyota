@@ -133,6 +133,10 @@ img#girl-rules {
     content: '';
 }
 
+ul.juri.full {
+    margin-top: 60px;
+}
+
 ul.juri li {
     margin-bottom: 40px;
 }
