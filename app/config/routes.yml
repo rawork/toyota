@@ -191,6 +191,12 @@ competition_detail:
   defaults: { _controller: 'Fuga:Public:Common:index', node: 'history', action: 'detail'}
   requirements:
     id: \d+
+juri_member:
+  path: /about/juri/member/{id}
+  defaults: { _controller: 'Fuga:Public:Common:index', node: 'about', action: 'member'}
+  requirements:
+    id: \d+
+
 
 
 ajax_picture_list:

@@ -3,14 +3,17 @@
     <li class="clearfix">
         <div class="foto">
             <img src="{{ member.foto_value.value }}">
-            <a href="#" data-position="{{ loop.index0 }}">Подробно</a>
+            <a href="{{ path('juri_member', {id: member.id}) }}" data-position="{{ loop.index0 }}">Подробно</a>
         </div>
         <div class="info">
             <div class="name">{{ member.name }}</div>
             <div class="activity">{{ member.activity }}</div>
             <div class="bio"><div>{{ member.bio }}</div></div>
-            <div class="quotation">
+            <div class="quotation quotation-mobile">
                 {{ member.quotation }}
+            </div>
+            <div class="quotation quotation-desktop">
+                {{ member.quotation_desktop }}
             </div>
         </div>
     </li>

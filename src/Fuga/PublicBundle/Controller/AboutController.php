@@ -26,5 +26,16 @@ class AboutController extends Controller
 
 		return $this->render('about/juri.html.twig', compact('people'));
 	}
+
+	public function memberAction($id)
+	{
+		$member = $this->get('container')->getItem('about_juri', 'id='.$id.' AND publish=1');
+
+		if (!$member) {
+			throw $this->createNotFoundException('Несушествующая ссылка');
+		}
+
+		return $this->render('about/member.html.twig', compact('member'));
+	}
 	
 }

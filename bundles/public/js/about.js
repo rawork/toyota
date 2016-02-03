@@ -52,7 +52,6 @@
         $(document).on('click', '.tabs li', function(e) {
             e.preventDefault();
 
-            //console.log('click tab');
             var that = $(this);
             var id = that.attr('data-id');
             that.addClass('active').siblings().removeClass('active');
@@ -76,51 +75,49 @@
 
 
         $(document).on('click', 'ul.juri .foto a', function(e){
-            e.preventDefault();
+            if ($(window).width() >= 600) {
+                e.preventDefault();
 
-            if (juriArray.length == 0) {
-                $('ul.juri li').each(function(){
-                    var member = {};
-                    var that  = $(this);
-                    member.img = that.find('.foto img').attr('src');
-                    member.name = that.find('.info .name').html();
-                    member.activity = that.find('.info .activity').html();
-                    member.bio = that.find('.info .bio div').html();
-                    member.quotation = that.find('.info .quotation').html();
-                    juriArray.push(member);
-                })
+                if (juriArray.length == 0) {
+                    $('ul.juri li').each(function(){
+                        var member = {};
+                        var that  = $(this);
+                        member.img = that.find('.foto img').attr('src');
+                        member.name = that.find('.info .name').html();
+                        member.activity = that.find('.info .activity').html();
+                        member.bio = that.find('.info .bio div').html();
+                        member.quotation = that.find('.info .quotation-desktop').html();
+                        juriArray.push(member);
+                    })
 
-                console.log(juriArray);
+                }
 
+                var pos = parseInt($(this).attr('data-position'));
+
+                popupSlick.empty();
+
+                for (var i in juriArray) {
+                    popupSlick.append(modalElementHtml(juriArray[i]))
+                }
+
+                $('body').addClass('modal-open');
+                popupSlick.slick({
+                    infinite: false,
+                    dots : false,
+                    lazyLoad: 'progressive',
+                    slidesToShow: 1,
+                    initialSlide: pos,
+                    adaptiveHeight: true,
+                    prevArrow: '<button type="button" class="slick-prev popup-prev"><img src="/bundles/public/img/popup_prev.png"></button>',
+                    nextArrow: '<button type="button" class="slick-next popup-next"><img src="/bundles/public/img/popup_next.png"></button>'
+                }).on('afterChange', function(event, slick, currentSlide){
+                    setModalArrowVibibility(currentSlide, juriArray.length);
+                });
+                setModalArrowVibibility(pos, juriArray.length);
+                $('.modal').show();
+
+                popupSlick.slick('setPosition');
             }
-
-            console.log('open modal');
-
-            var pos = parseInt($(this).attr('data-position'));
-
-            popupSlick.empty();
-
-            for (var i in juriArray) {
-                popupSlick.append(modalElementHtml(juriArray[i]))
-            }
-
-            $('body').addClass('modal-open');
-            popupSlick.slick({
-                infinite: false,
-                dots : false,
-                lazyLoad: 'progressive',
-                slidesToShow: 1,
-                initialSlide: pos,
-                adaptiveHeight: true,
-                prevArrow: '<button type="button" class="slick-prev popup-prev"><img src="/bundles/public/img/popup_prev.png"></button>',
-                nextArrow: '<button type="button" class="slick-next popup-next"><img src="/bundles/public/img/popup_next.png"></button>'
-            }).on('afterChange', function(event, slick, currentSlide){
-                setModalArrowVibibility(currentSlide, juriArray.length);
-            });
-            setModalArrowVibibility(pos, juriArray.length);
-            $('.modal').show();
-
-            popupSlick.slick('setPosition');
 
         });
 
@@ -150,7 +147,6 @@
 
                 galleryContainer.slick('setPosition');
             } else {
-                console.log();
                 galleryMobileContainer.slick({
                     infinite: false,
                     dots : false,

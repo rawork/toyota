@@ -196,8 +196,16 @@ ul.juri li {
     display: none;
 }
 
-.juri .quotation {
+.juri .bio.active {
+    display: block;
+}
 
+.juri .quotation-mobile {
+    display: block;
+}
+
+.juri .quotation-desktop {
+    display: none;
 }
 
 .slick-list {
@@ -512,6 +520,14 @@ h3 {
 
     .juri .modal-foto img {
         margin-bottom: 30px;
+    }
+
+    .juri .quotation-mobile {
+        display: none;
+    }
+
+    .juri .quotation-desktop {
+        display: block;
     }
 }
 
