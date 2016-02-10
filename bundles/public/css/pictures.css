@@ -98,7 +98,7 @@ body.modal-open {
 }
 
 .pictures-container {
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
 }
 
 .picture {
@@ -259,6 +259,13 @@ body.modal-open {
     margin: 40px auto 0;
     text-align: center;
     text-decoration: none;
+}
+
+.remark {
+    margin-top: 15px;
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
 }
 
 @media (min-width: 480px) {
