@@ -36,12 +36,24 @@ function getTimer(deadline) {
             $('.mainmenu').slideToggle('slow');
         });
 
-        $(document).on('click', "a[href$='.pdf']", function(e, options) {
+        $(document).on('click', "a[href$='Rules_10.pdf']", function(e, options) {
             options = options || {};
 
             if ( !options.ga_complete ) {
                 e.preventDefault();
-                ga('send', 'event', 'download', 'pdf');
+                ga('send', 'event', 'download', 'pdf', 'rules');
+                //console.log('ga pdf');
+                window.location = $(this).attr('href');
+            }
+
+        });
+
+        $(document).on('click', "a[href$='anketa2015.pdf']", function(e, options) {
+            options = options || {};
+
+            if ( !options.ga_complete ) {
+                e.preventDefault();
+                ga('send', 'event', 'download', 'pdf', 'anketa');
                 //console.log('ga pdf');
                 window.location = $(this).attr('href');
             }

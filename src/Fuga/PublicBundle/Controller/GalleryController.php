@@ -136,5 +136,55 @@ class GalleryController extends Controller
 
 		return $this->redirect($this->generateUrl('public_page' ,array('node' => 'pictures')), 301);
 	}
+
+	public function authAction()
+	{
+		if ('POST' == $_SERVER['REQUEST_URI'] && $this->isXmlHttpRequest()) {
+
+			$network = $_POST['network'];
+			$firstName = $_POST['first_name'];
+			$lastName = $_POST['last_name'];
+			$email = $_POST['email'];
+
+
+			$member = $this->get($network)->member();
+
+			if($member === false) {
+				/* Пользователь неавторизован в Open API */
+
+				return array(
+					'status' => false,
+					'message' => 'Пользователь не авторизован',
+				);
+			}
+
+			$user = $this->get('container')->getItem('gallery_user', 'network="'.$network.'" AND mid='.$member['id']);
+
+			if (!$user) {
+				$this->get('container')->addItem(
+					'gallery_user',
+					array(
+						'network'       => $network,
+						'mid'           => $member['id'],
+						'email'         => $email,
+						'name'          => $firstName,
+						'lastname'      => $lastName,
+						'password'      => md5($this->get('util')->genKey(8)),
+						'auto'          => '',
+						'birthdate'     => '0000-00-00',
+						'is_subscribed' => 0,
+						'publish'       => 0,
+				));
+			}
+
+			return array(
+				'status' => true,
+				'message' => 'Пользователь авторизован',
+				'user' => $user,
+			);
+		}
+
+		throw $this->createNotFoundException('Несуществующая страница');
+	}
 	
 }

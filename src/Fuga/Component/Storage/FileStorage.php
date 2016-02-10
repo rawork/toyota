@@ -2,12 +2,14 @@
 
 namespace Fuga\Component\Storage;
 
-class FileStorage implements StorageInterface {
+class FileStorage implements StorageInterface
+{
 	
 	private $uploadref;
 	private $uploadpath;
 	
-	public function __construct($uploadref, $uploadpath) {
+	public function __construct($uploadref, $uploadpath)
+	{
 		$this->uploadref = $uploadref;
 		$this->uploadpath = $uploadpath;
 	}
