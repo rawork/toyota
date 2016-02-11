@@ -19,5 +19,11 @@ define('AUTH_TTL', 86400000);
 define('TWIG_PATH', '/app/Resources/views');
 define('TWIG_CACHE_PATH', '/app/cache/twig');
 
+define('VK_APP_ID', '');
+define('VK_APP_SHARED_SECRET', '');
+
+define('FB_APP_ID', '');
+define('FB_APP_SHARED_SECRET', '');
+
 require_once('database.php');
 require_once('parameters.php');
