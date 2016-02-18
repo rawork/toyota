@@ -463,5 +463,5 @@ Share = {
 };
 
 function openProfileForm() {
-    $('.picture-vote button').trigger('click');
+    $('.picture-vote button:not(.inactive):first').trigger('click');
 }
