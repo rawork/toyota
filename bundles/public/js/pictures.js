@@ -391,10 +391,10 @@
             $.post(url, params, function(data){
                 console.log(data);
                 if (data.status) {
-                    $('#modal-auth .social-title').remove();
-                    $('#modal-auth .social-selector').remove();
-                    $('#modal-auth form').remove();
-                    $('#modal-auth .modal-content').append('<div class="text-center">' + data.message + '</div>');
+                    //$('#modal-auth .social-title').remove();
+                    //$('#modal-auth .social-selector').remove();
+                    //$('#modal-auth form').remove();
+                    $('#modal-auth .modal-content').html('<div class="text-center">' + data.message + '</div>');
                     if (data.redirect) {
                         $.get(data.redirect, { "_": $.now() }, function(data){
                             $('#modal-auth .modal-content').html(data);
