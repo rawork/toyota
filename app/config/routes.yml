@@ -197,7 +197,14 @@ juri_member:
   requirements:
     id: \d+
 
-
+oauth_verify:
+  path: /pictures/verify/{network}
+  defaults: { _controller: 'Fuga:Public:Gallery:verify'}
+  requirements:
+      network: (vk|fb)
+gallery_logout:
+  path: /pictures/logout
+  defaults: { _controller: 'Fuga:Public:Gallery:logout'}
 
 ajax_picture_list:
   path: /ajax/picture

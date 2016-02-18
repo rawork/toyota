@@ -3,7 +3,7 @@
 
         if (navigator.appVersion.indexOf("Win")!=-1)
         {
-            $('.modal-dialog').css('margin-left','-438px');
+            $('#modal-gallery .modal-dialog').css('margin-left','-438px');
         }
 
         var startBuildGallery = false;
@@ -23,7 +23,7 @@
         var popupSlick = $('.modal-pictures');
 
         var elementHtml = function(item, pos) {
-            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'"><img class="display-xs" data-lazy="'+ item.picture_value.extra.big.path +'"><img class="display-md" data-lazy="'+ item.picture_value.extra.main.path +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>'+(item.vote ? '<div class="picture-vote-res"></div>' : '<div data-id="'+item.id+'" class="picture-vote"></div>')+(parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
+            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'"><img class="display-xs" data-lazy="'+ item.picture_value.extra.big.path +'"><img class="display-md" data-lazy="'+ item.picture_value.extra.main.path +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
         };
 
         var modalElementHtml = function (item) {
@@ -295,37 +295,145 @@
             }).on('afterChange', function(event, slick, currentSlide){
                 setModalArrowVibibility(currentSlide, picturesArray.length);
             });
-            $('.modal').show();
+            $('#modal-gallery').show();
 
             popupSlick.slick('setPosition');
 
         });
 
-        $(document).on('click', '.picture-vote', function(e) {
+        //$(document).on('click', '.picture-vote', function(e) {
+        //    e.preventDefault();
+        //    var that = $(this);
+        //    var picture = that.attr('data-id');
+        //
+        //    $.post('/pictures/vote', {picture: picture}, function(data) {
+        //        if (data.voted ) {
+        //            //$('.picture-vote').css({display: 'none'});
+        //            that.hide();
+        //            //alert(data.message);
+        //            that.parent().find('.name').after('<div class="picture-vote-res"></div>');
+        //        } else {
+        //            console.log(data.message);
+        //        }
+        //    });
+        //});
+
+        $(document).on('click', 'a.modal-close', function(e){
+            e.preventDefault();
+            $(this).parents('.modal').hide();
+            $("body").removeClass("modal-open");
+            if ($(this).parents('.modal').get(0).id == 'modal-gallery') {
+                popupSlick.slick('unslick');
+            }
+        });
+
+        buildGallery();
+
+
+        // auth functions
+
+        $(document).on('click', '.picture-vote button', function(e) {
             e.preventDefault();
             var that = $(this);
             var picture = that.attr('data-id');
 
+            console.log('vote click');
+
             $.post('/pictures/vote', {picture: picture}, function(data) {
                 if (data.voted ) {
-                    //$('.picture-vote').css({display: 'none'});
-                    that.hide();
-                    //alert(data.message);
-                    that.parent().find('.name').after('<div class="picture-vote-res"></div>');
+                    that.addClass('inactive');
+                    that.siblings('.likes').html(data.likes);
+                } else if (data.redirect) {
+                    console.log(data);
+                    var url = data.redirect;
+                    $.get(url, { "_": $.now() },function(data){
+                        $('#modal-auth .modal-content').html(data);
+                        $('body').addClass('modal-open');
+                        $('#modal-auth').show();
+                    })
+
                 } else {
                     console.log(data.message);
                 }
             });
         });
 
-        $(document).on('click', 'a.modal-close', function(e){
+        var popupwindow = function(url, title, w, h) {
+            var left = (screen.width/2)-(w/2);
+            var top = (screen.height/2)-(h/2);
+            return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+        };
+
+        $(document).on('click', '.modal-dialog-auth form a', function(e){
             e.preventDefault();
-            $(this).parents('.modal').hide();
-            popupSlick.slick('unslick');
-            $("body").removeClass("modal-open");
+
+            var that = $(this);
+
+            var url = that.attr('href');
+
+            $.get(url, { "_": $.now() }, function(data){
+                $('#modal-auth .modal-content').html(data);
+            })
         });
 
-        buildGallery();
+        $(document).on('submit', '.modal-dialog-auth form', function(e){
+            e.preventDefault();
+
+            var that = $(this);
+            var url = that.attr('action');
+            var params = {};
+            var formdata = that.serializeArray();
+
+            $.each(formdata, function(i, field) {
+                params[field.name] = field.value;
+            });
+
+            $.post(url, params, function(data){
+                console.log(data);
+                if (data.status) {
+                    $('#modal-auth .social-title').remove();
+                    $('#modal-auth .social-selector').remove();
+                    $('#modal-auth form').remove();
+                    $('#modal-auth .modal-content').append('<div class="text-center">' + data.message + '</div>');
+                    if (data.redirect) {
+                        $.get(data.redirect, { "_": $.now() }, function(data){
+                            $('#modal-auth .modal-content').html(data);
+                        })
+                    } else if (data.reload) {
+                        window.location.reload();
+                    }
+                } else {
+                    console.log(data.message);
+                }
+            });
+        });
+
+        $(document).on('click', '.modal-dialog-auth .social-selector a', function(e){
+            e.preventDefault();
+
+            var that = $(this);
+            var url = that.attr('href');
+
+            popupwindow(url, 'Social OAuth', 640, 420);
+        });
+
+        $(document).on('click', 'input[type=checkbox]+label', function(e){
+            var that = $(this);
+            var checkbox = that.prev();
+
+            checkbox.prop('checked', !checkbox.prop('checked'));
+            if (checkbox.attr('name') == 'is_driver') {
+                if (checkbox.prop('checked')) {
+                    $('input[name=auto_brand]').show();
+                    $('input[name=auto_model]').show();
+                } else {
+                    $('input[name=auto_brand]').hide();
+                    $('input[name=auto_model]').hide();
+                }
+            }
+        });
+
+
     });
 
 })(jQuery);

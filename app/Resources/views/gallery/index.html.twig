@@ -30,7 +30,7 @@
 {#{% if action == 'index' %}<div class="archive-text">Вдохновитесь работами победителей 9-го конкурса «Автомобиль мечты».<br> Самые фантастические и красочные машины помогут придумать собственное изобретение!</div>{% endif %}
 <a class="btn-archive" href="{{ link }}">{{ button }}</a>#}
 
-<div class="modal">
+<div class="modal" id="modal-gallery">
     <div class="modal-dialog">
         <a href="#" class="modal-close"></a>
         <div class="modal-pictures">
@@ -46,6 +46,13 @@
                 <div class="idea"></div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-auth">
+    <div class="modal-dialog modal-dialog-auth">
+        <a href="#" class="modal-close"></a>
+        <div class="modal-content"></div>
     </div>
 </div>
 

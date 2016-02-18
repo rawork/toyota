@@ -19,11 +19,15 @@ define('AUTH_TTL', 86400000);
 define('TWIG_PATH', '/app/Resources/views');
 define('TWIG_CACHE_PATH', '/app/cache/twig');
 
-define('VK_APP_ID', '');
-define('VK_APP_SHARED_SECRET', '');
+define('VK_APP_ID', '5283052');
+define('VK_APP_SHARED_SECRET', 'c0DaYtGofQykbVvPo3KS');
+define('VK_APP_REDIRECT_URI', 'http://toyota.local/pictures/verify');
+define('VK_OAUTH_URL', 'http://oauth.vk.com/authorize');
 
-define('FB_APP_ID', '');
-define('FB_APP_SHARED_SECRET', '');
+define('FB_APP_ID', '976103942484311');
+define('FB_APP_SHARED_SECRET', 'd175409174d570f83e90bb264026979d');
+define('FB_APP_REDIRECT_URI', 'http://toyota.local/pictures/verify');
+define('FB_OAUTH_URL', 'javascript: checkLoginState();');
 
 require_once('database.php');
 require_once('parameters.php');

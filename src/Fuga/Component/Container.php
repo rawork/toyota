@@ -557,13 +557,13 @@ class Container
 					//$router->getRouteCollection()->addPrefix(PRJ_REF);
 					$this->services[$name] = $router;
 					break;
-				case 'vk_auth':
-					$vk = new Social\VK\Auth($this, VK_APP_ID, VK_APP_SHARED_SECRET);
+				case 'vk':
+					$vk = new Social\VK\Auth($this, VK_APP_ID, VK_APP_SHARED_SECRET, VK_APP_REDIRECT_URI, VK_OAUTH_URL);
 					$this->services[$name] = $vk;
 					break;
-				case 'fb_auth':
-					$vk = new Social\VK\Auth($this, FB_APP_ID, FB_APP_SHARED_SECRET);
-					$this->services[$name] = $vk;
+				case 'fb':
+					$fb = new Social\FB\Auth($this, FB_APP_ID, FB_APP_SHARED_SECRET, FB_APP_REDIRECT_URI, FB_OAUTH_URL);
+					$this->services[$name] = $fb;
 					break;
 				case 'security':
 					$this->services[$name] = new SecurityHandler($this);
