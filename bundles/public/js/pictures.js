@@ -199,7 +199,7 @@
             galleryContainer.slick({
                 infinite: false,
                 dots : false,
-                lazyLoad: 'progressive',
+                lazyLoad: 'ondemand', //progressive
                 slidesToShow: 1,
                 adaptiveHeight: true,
                 prevArrow: prevArrow,
@@ -286,7 +286,7 @@
             popupSlick.slick({
                 infinite: false,
                 dots : false,
-                lazyLoad: 'progressive',
+                lazyLoad: 'ondemand', //progressive
                 slidesToShow: 1,
                 initialSlide: pos,
                 adaptiveHeight: true,
