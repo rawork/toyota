@@ -144,12 +144,17 @@ class Auth
 						$result['status'] = true;
 						$result['message'] = "Success";
 
-						$userInfo['network'] = 'fb';
-						$userInfo['age'] = '';
+						$network = 'fb';
+						$age = '';
 
-						if (isset($userInfo['birthday'])) {
-							$dateArray = explode('/', $userInfo['birthday']);
-							$userInfo['age'] = isset($dateArray[2]) ? intval(date('Y')) - intval($dateArray[2]) : '';
+						$birthday = $userInfo->getBirthday();
+
+						$this->container->get('log')->addError('birthday');
+						$this->container->get('log')->addError(serialize($birthday));
+
+						if ($birthday) {
+							$year = $birthday->format('Y');
+							$age = date('Y') - $year;
 						}
 
 						$result['user'] = $userInfo;
@@ -158,14 +163,27 @@ class Auth
 						if ($localUser) {
 							unset($localUser['password']);
 						} else {
+
+							$password = $this->container->get('util')->genKey(8);
+
+							$this->container->get('log')->addError(json_encode(array(
+								'email' => $userInfo->getEmail(),
+								'password' => md5($password),
+								'name' => $userInfo->getFirstName(),
+								'lastname' => $userInfo->getLststName(),
+								'age' => $age,
+								'social_name' => $network,
+								'social_user_id' => $userInfo->getId(),
+							)));
+
 							$userId = $this->container->addItem('gallery_user', array(
-								'email' => $userInfo['email'],
-								'password' => md5($this->container->get('util')->genKey(8)),
-								'name' => $userInfo['first_name'],
-								'lastname' => $userInfo['last_name'],
-								'age' => $userInfo['age'],
-								'social_name' => $userInfo['network'],
-								'social_user_id' => $userInfo['id'],
+								'email' => $userInfo->getEmail(),
+								'password' => md5($password),
+								'name' => $userInfo->getFirstName(),
+								'lastname' => $userInfo->getLststName(),
+								'age' => $age,
+								'social_name' => $network,
+								'social_user_id' => $userInfo->getId(),
 							));
 							$localUser = $this->container->getItem('gallery_user', 'social_user_id="'.$userInfo['id'].'"');
 						}
