@@ -29,7 +29,7 @@
         var modalElementHtml = function (item) {
             //console.log(item.nomination);
             var text = '<a href="#" class="popup-prev"></a> <a href="#" class="popup-next"></a>';
-            return '<div class="modal-picture"><img src="'+item.picture_value.extra.big.path+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
+            return '<div class="modal-picture"><img src="'+item.picture_value.extra.big.path+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' +'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
         };
 
         var buildGallery = function() {
@@ -332,7 +332,7 @@
 
         // auth functions
 
-        $(document).on('click', '.picture-vote button', function(e) {
+        $(document).on('click', '.picture-vote button:not(.inactive)', function(e) {
             e.preventDefault();
             var that = $(this);
             var picture = that.attr('data-id');
@@ -438,3 +438,26 @@
 
 })(jQuery);
 
+Share = {
+    vkontakte: function(purl, ptitle, pimg, text) {
+        url  = 'http://vkontakte.ru/share.php?';
+        url += 'url='          + encodeURIComponent(purl);
+        url += '&title='       + encodeURIComponent(ptitle);
+        url += '&description=' + encodeURIComponent(text);
+        url += '&image='       + encodeURIComponent(pimg);
+        url += '&noparse=true';
+        Share.popup(url);
+    },
+    facebook: function(purl, ptitle, pimg, text) {
+        url  = 'http://www.facebook.com/sharer.php?s=100';
+        url += '&p[title]='     + encodeURIComponent(ptitle);
+        url += '&p[summary]='   + encodeURIComponent(text);
+        url += '&p[url]='       + encodeURIComponent(purl);
+        url += '&p[images][0]=' + encodeURIComponent(pimg);
+        Share.popup(url);
+    },
+
+    popup: function(url) {
+        window.open(url,'','toolbar=0,status=0,width=626,height=436');
+    }
+};

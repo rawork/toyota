@@ -143,7 +143,8 @@ class GalleryController extends Controller
 			if($vote) {
 				return array(
 					'voted' => true,
-					'message' => 'Вы уже голосовали за эту работу.'
+					'message' => 'Вы уже голосовали за эту работу.',
+					'likes' => $this->get('container')->count('gallery_vote', 'picture_id='.$pictureId),
 				);
 			} else {
 				$this->get('container')->addItem('gallery_vote', array(

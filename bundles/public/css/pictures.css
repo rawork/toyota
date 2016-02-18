@@ -742,6 +742,17 @@ body.modal-open {
         right: -53px;
     }
 
+    .modal .share {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .modal .share a {
+        display: inline-block;
+        margin: 0 40px;
+        cursor: pointer;
+    }
+
     .modal-picture {
         padding: 30px 55px;
         min-height: 300px;
@@ -762,13 +773,17 @@ body.modal-open {
         text-align: center;
     }
 
+    .modal-picture .picture-vote {
+        float: right;
+    }
+
     .modal-picture .title {
         margin-top: 20px;
         font-size: 24px;
         line-height: 24px;
         font-weight: 700;
         color: #d0112b;
-        text-align: center;
+        /*text-align: center;*/
     }
 
     .modal-picture .person {
@@ -776,7 +791,7 @@ body.modal-open {
         line-height: 23px;
         color: #999;
         margin-top: 3px;
-        text-align: center;
+        /*text-align: center;*/
     }
 
     .modal-picture .idea {
@@ -788,7 +803,7 @@ body.modal-open {
 
     .modal-picture .idea .red {
         display: block;
-        text-align: center;
+        /*text-align: center;*/
         /*margin-left: 20px;*/
         font-size: 21px;
         line-height: 26px;
