@@ -67,7 +67,7 @@ class Auth
 			'status' => false,
 			'user' => null,
 			'user_local' => null,
-			'message' => 'Error',
+			'message' => 'Not authenticated',
 		);
 		$params = array(
 			'client_id' => $this->appId,

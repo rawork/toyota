@@ -77,7 +77,7 @@ class Auth
 			'status' => false,
 			'user' => null,
 			'user_local' => null,
-			'message' => 'Error',
+			'message' => 'Not authenticated',
 		);
 
 		if (isset($_GET['code'])) {
