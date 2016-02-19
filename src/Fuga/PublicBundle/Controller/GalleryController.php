@@ -224,8 +224,9 @@ class GalleryController extends Controller
 			$password = $this->get('request')->request->get('password');
 			if (empty($email) || empty($password)) {
 				return array(
-					'status' => false,
-					'message' => 'Пустой e-mail или пароль',
+					'status' => true,
+					'reload' => false,
+					'message' => $this->render('gallery/nologin.html.twig'),
 				);
 			}
 
@@ -242,10 +243,9 @@ class GalleryController extends Controller
 
 			if (!$user) {
 				return array(
-					'status' => false,
+					'status' => true,
 					'reload' => false,
-					'message' => 'Ошибка авторизации: неправильные учетные данные '.$email.'_'.$password.'_'.$passwordHash,
-					'user' => $user,
+					'message' => $this->render('gallery/nologin.html.twig'),
 				);
 			}
 
@@ -275,6 +275,7 @@ class GalleryController extends Controller
 
 			$email = $this->get('request')->request->get('login');
 			$password = $this->get('request')->request->get('password');
+			$password2 = $this->get('request')->request->get('password_again');
 
 			if (empty($email) || empty($password)) {
 				return array(
@@ -289,6 +290,14 @@ class GalleryController extends Controller
 					'status' => false,
 					'reload' => false,
 					'message' => 'Некорректный формат e-mail',
+				);
+			}
+
+			if ($password != $password2) {
+				return array(
+					'status' => false,
+					'reload' => false,
+					'message' => 'Пароли не совпадают',
 				);
 			}
 
@@ -396,9 +405,9 @@ class GalleryController extends Controller
 			$user = $this->get('container')->getItem('gallery_user', 'email="'.$email.'"');
 			if (!$user) {
 				return array(
-					'status' => false,
+					'status' => true,
 					'reload' => false,
-					'message' => 'С указанным e-mail пользователь не зарегистрирован'
+					'message' => $this->render('gallery/noforgot.html.twig'),
 				);
 			}
 
@@ -419,7 +428,7 @@ class GalleryController extends Controller
 			return array(
 				'status' => true,
 				'reload' => false,
-				'message' => 'На указанный e-mail отправлены новые регистрационные данные',
+				'message' => 'Спасибо! Новый пароль был выслан на указанный e-mail',
 			);
 		}
 

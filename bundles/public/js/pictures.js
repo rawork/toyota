@@ -364,7 +364,7 @@
             return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
         };
 
-        $(document).on('click', '.modal-dialog-auth form a', function(e){
+        $(document).on('click', '.modal-dialog-auth form a, .nologin-controls a', function(e){
             e.preventDefault();
 
             var that = $(this);

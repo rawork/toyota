@@ -433,6 +433,11 @@ body.modal-open {
     text-decoration: none;
 }
 
+.nologin-controls a {
+    display: inline-block;
+    margin: 0 20px;
+}
+
 @media (min-width: 480px) {
     .red-line > div {
         width: 300px;
