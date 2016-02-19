@@ -250,13 +250,13 @@ class IndexAction extends AdminController
 					default:
 						$this->search_url = $this->table->getSearchURL($this->get('request'));
 						parse_str($this->search_url, $this->tableParams);
-						$this->get('session')->set($this->table->dbName(), serialize($this->tableParams));
+						$this->get('session')->set('cms_table_'.$this->table->dbName(), serialize($this->tableParams));
 				}
 
 				return true;
 			}
 
-			$this->tableParams = unserialize($this->get('session')->get($this->table->dbName()));
+			$this->tableParams = unserialize($this->get('session')->get('cms_table_'.$this->table->dbName()));
 
 			if (is_array($this->tableParams)) {
 				foreach ($this->tableParams as $key => $value) {

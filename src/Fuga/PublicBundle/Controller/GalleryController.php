@@ -46,6 +46,7 @@ class GalleryController extends Controller
 			$response->setData(array(
 				'pictures' => $pictures,
 				'vote_disabled' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled'),
+				'gallery_disabled' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'gallery_disabled'),
 			));
 
 			return $response;
@@ -304,11 +305,14 @@ class GalleryController extends Controller
 
 				$this->get('session')->set('gallery_user', $user);
 
+				$server_link = 'http://'.$_SERVER['SERVER_NAME'];
+
 				$this->get('mailer')->send(
 					'Регистрация на сайте dreamcar.toyota.ru',
-					$this->render('mail/register.html.twig'),
+					$this->render('mail/register.html.twig', compact('server_link')),
 					$email
 				);
+
 			} catch (\Exception $e) {
 				return array(
 					'status' => false,
@@ -442,6 +446,14 @@ class GalleryController extends Controller
 
 		if ($result['status']) {
 			$this->get('session')->set('gallery_user', $result['user_local']);
+
+			$server_link = 'http://'.$_SERVER['SERVER_NAME'];
+
+			$this->get('mailer')->send(
+				'Регистрация на сайте dreamcar.toyota.ru',
+				$this->render('mail/register.html.twig', compact('server_link')),
+				$result['user_local']['email']
+			);
 		}
 
 
