@@ -235,10 +235,10 @@ class GalleryController extends Controller
 			$password = $this->get('request')->request->get('password');
 			$password2 = $this->get('request')->request->get('password_again');
 
-			if (empty($email) || empty($password)) {
+			if (empty($email) || empty($password) || empty($password2)) {
 				return array(
 					'status' => false,
-					'message' => 'Не заполнены e-mail или пароль',
+					'message' => 'Заполните E-mail и пароль',
 				);
 			}
 
