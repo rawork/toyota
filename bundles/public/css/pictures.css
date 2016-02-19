@@ -352,7 +352,9 @@ body.modal-open {
     background-image: url('../img/modal_fb.png');
 }
 
-.modal-content input[type=text], .modal-content input[type=password]{
+.modal-content input[type=text],
+.modal-content input[type=password],
+.modal-content input[type=number] {
     width: 100%;
     display: block;
     height: 40px;
@@ -436,6 +438,12 @@ body.modal-open {
 .nologin-controls a {
     display: inline-block;
     margin: 0 20px;
+}
+
+.message.message-error {
+    display: none;
+    color: #cf142b;
+    padding: 0 0 30px;
 }
 
 @media (min-width: 480px) {

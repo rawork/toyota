@@ -353,18 +353,52 @@ class GalleryController extends Controller
 			if (!$user) {
 				return array(
 					'status' => false,
-					'reload' => false,
+					'reload' => true,
 					'message' => 'Вы не авторизованы',
 				);
 			}
 
 			try {
+				$name = $this->get('request')->request->get('name');
+				$lastname = $this->get('request')->request->get('lastname');
+				$age = $this->get('request')->request->getInt('age');
+
+				$emptyFields = array();
+
+				if (empty($name)) {
+					$emptyFields[] = 'Имя';
+				}
+
+				if (empty($lastname)) {
+					$emptyFields[] = 'Фамилия';
+				}
+
+				if (empty($age)) {
+					$emptyFields[] = 'Возраст';
+				}
+
+				if (count($emptyFields) > 0 ) {
+					return array(
+						'status' => false,
+						'reload' => false,
+						'message' => 'Не заполнены обязательные поля: '.implode(', ', $emptyFields),
+					);
+				}
+
+				if (!is_numeric($age)) {
+					return array(
+						'status' => false,
+						'reload' => false,
+						'message' => 'Поле "Возраст" должно содержать только цифры',
+					);
+				}
+
 				$this->get('container')->updateItem(
 					'gallery_user',
 					array(
-						'name' => $this->get('request')->request->get('name'),
-						'lastname' => $this->get('request')->request->get('lastname'),
-						'age' => $this->get('request')->request->get('age'),
+						'name' => $name,
+						'lastname' => $lastname,
+						'age' => $age,
 						'is_driver' => $this->get('request')->request->getInt('is_driver', 0),
 						'auto_brand' => $this->get('request')->request->get('auto_brand'),
 						'auto_model' => $this->get('request')->request->get('auto_model'),
@@ -382,7 +416,7 @@ class GalleryController extends Controller
 				return array(
 					'status' => false,
 					'reload' => false,
-					'message' => $e->getMessage(),
+					'message' => 'Ошибка регистрации. Напишите нам  info@toyota.ru.',
 				);
 			}
 

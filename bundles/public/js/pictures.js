@@ -383,6 +383,7 @@
             var url = that.attr('action');
             var params = {};
             var formdata = that.serializeArray();
+            that.find('.message.message-error').hide();
 
             $.each(formdata, function(i, field) {
                 params[field.name] = field.value;
@@ -403,6 +404,8 @@
                         window.location.reload();
                     }
                 } else {
+                    that.find('.message.message-error').html(data.message);
+                    that.find('.message.message-error').show();
                     console.log(data.message);
                 }
             });

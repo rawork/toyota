@@ -1,14 +1,15 @@
 <h4>Последний шаг!<br> Заполните анкету перед голосованием</h4>
 
 <form id="form-forgot" action="/pictures/profile" method="post">
+    <div class="message message-error"></div>
     <input type="text" name="name" placeholder="Имя" value="{{ user.name }}">
     <input type="text" name="lastname" placeholder="Фамилия" value="{{ user.lastname }}">
-    <input type="text" name="age" placeholder="Возраст" value="{{ user.age }}">
+    <input type="number" name="age" placeholder="Возраст" value="{{ user.age }}">
     <div class="form-checkbox"><input type="checkbox" name="is_driver" value="1"><label>Автомобиль во владении</label></div>
     <input type="text" name="auto_brand" placeholder="Марка автомобиля">
     <input type="text" name="auto_model" placeholder="Модель автомобиля">
     <div class="form-checkbox"><input type="checkbox" name="is_subscribed" checked="checked" value="1"><label>Получать рассылку от Toyota</label></div>
-    <div class="form-controls"><a target="_blank" href="https://www.toyota.ru/legal/personal-information.json">Согласие на обработку персональных данных</a></div>
+    <div class="form-controls"><a target="_blank" href="https://www.toyota.ru/legal/personal-information.json">Нажав кнопку «Отправить», вы подтверждаете свое согласие на обработку персональных данных</a></div>
     <br>
     <div class="form-controls"><button>Отправить</button></div>
 </form>
