@@ -11,7 +11,7 @@
     {{ maincontent }}
     <script type="text/javascript">
         {% if profile %}
-        window.opener.openProfileForm();
+        window.opener.openProfileForm('{{ picture }}');
         window.close();
         {% elseif close %}
         window.opener.closeAuthForm('{{ picture }}');

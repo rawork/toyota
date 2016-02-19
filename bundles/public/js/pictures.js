@@ -501,8 +501,12 @@ Share = {
     }
 };
 
-function openProfileForm() {
-    $('.picture-vote button:not(.inactive):first').trigger('click');
+function openProfileForm(picture) {
+    if (picture) {
+        $('.picture-vote button[data-id='+picture+']').trigger('click');
+    } else {
+        $('.picture-vote button:not(.inactive):first').trigger('click');
+    }
 }
 
 function closeAuthForm(picture) {

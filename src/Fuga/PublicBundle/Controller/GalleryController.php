@@ -453,10 +453,10 @@ class GalleryController extends Controller
 
 		$profile = false;
 		$close = false;
-		$picture = false;
+		$picture = '';
 
 		if ($result['status'] && $result['register'] ) {
-
+			$picture = $this->get('session')->get('picture_voted');
 			$profile = true;
 		} else {
 			if ($result['status']) {
