@@ -342,7 +342,7 @@
             var that = $(this);
             var picture = that.attr('data-id');
 
-            console.log('vote click');
+            console.log('vote click', 'picture - ' + picture);
 
             $.post('/pictures/vote', {picture: picture}, function(data) {
                 if (data.voted ) {
