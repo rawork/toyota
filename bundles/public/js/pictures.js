@@ -136,6 +136,10 @@
                             $('.picture-vote').css({visibility: 'hidden'});
                         }
 
+                        if (data.gallery_disabled && !isArchive) {
+                            $('#modal-closed').show();
+                        }
+
                         //console.log(totalSlides, typeof totalSlides, totalSlides > 0);
 
                         if (totalSlides > 0) {
