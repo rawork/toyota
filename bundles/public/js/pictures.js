@@ -433,6 +433,8 @@
                         $('.picture-vote button[data-id='+data.picture+']').trigger('click');
                     }
 
+                    $('.account-control').trigger('check');
+
                 } else {
                     that.find('.message.message-error').html(data.message);
                     that.find('.message.message-error').show();
@@ -472,6 +474,15 @@
             }
         });
 
+        $(document).on('check', '.account-control', function(e){
+
+            var that = $(this);
+
+            $.get('/pictures/user', { "_": $.now() }, function(data){
+                that.after(data.content).remove();
+            })
+        })
+
 
     });
 
@@ -502,14 +513,17 @@ Share = {
 };
 
 function openProfileForm(picture) {
+    $('.account-control').trigger('check');
     if (picture) {
         $('.picture-vote button[data-id='+picture+']').trigger('click');
     } else {
         $('.picture-vote button:not(.inactive):first').trigger('click');
     }
+
 }
 
 function closeAuthForm(picture) {
+    $('.account-control').trigger('check');
     $('#modal-auth a.modal-close').trigger('click');
     $('.picture-vote button[data-id='+picture+']').trigger('click');
 }

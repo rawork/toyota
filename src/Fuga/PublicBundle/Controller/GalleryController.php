@@ -477,7 +477,13 @@ class GalleryController extends Controller
 		$user = $this->get('session')->get('gallery_user');
 		$vote_disabled = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled');
 
-		return $this->render('gallery/user.html.twig', compact('user', 'vote_disabled'));
+		if ($this->isXmlHttpRequest()) {
+			return array(
+				'content' => $this->render('gallery/user.html.twig', compact('user', 'vote_disabled')),
+			);
+		} else {
+			return $this->render('gallery/user.html.twig', compact('user', 'vote_disabled'));
+		}
 	}
 
 	public function logoutAction()
