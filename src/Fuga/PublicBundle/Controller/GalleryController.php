@@ -183,9 +183,8 @@ class GalleryController extends Controller
 			$password = $this->get('request')->request->get('password');
 			if (empty($email) || empty($password)) {
 				return array(
-					'status' => true,
-					'task' => 'message',
-					'message' => $this->render('gallery/nologin.html.twig'),
+					'status' => false,
+					'message' => 'Заполните E-mail и пароль',
 				);
 			}
 
