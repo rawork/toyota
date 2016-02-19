@@ -364,7 +364,7 @@
             return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
         };
 
-        $(document).on('click', '.modal-dialog-auth form a, .nologin-controls a', function(e){
+        $(document).on('click', '.modal-dialog-auth form a:not(.dynamic), .nologin-controls a', function(e){
             e.preventDefault();
 
             var that = $(this);
@@ -374,6 +374,17 @@
             $.get(url, { "_": $.now() }, function(data){
                 $('#modal-auth .modal-content').html(data);
             })
+        });
+
+        $(document).on('click', '.modal-dialog-auth form a.dynamic', function(e){
+            e.preventDefault();
+
+            var that = $(this);
+
+            var block = that.attr('href');
+
+            $(block).show();
+
         });
 
         $(document).on('submit', '.modal-dialog-auth form', function(e){
@@ -392,17 +403,31 @@
             $.post(url, params, function(data){
                 console.log(data);
                 if (data.status) {
-                    //$('#modal-auth .social-title').remove();
-                    //$('#modal-auth .social-selector').remove();
-                    //$('#modal-auth form').remove();
-                    $('#modal-auth .modal-content').html('<div class="text-center">' + data.message + '</div>');
-                    if (data.redirect) {
+
+                    if (data.task == 'redirect') {
                         $.get(data.redirect, { "_": $.now() }, function(data){
                             $('#modal-auth .modal-content').html(data);
-                        })
-                    } else if (data.reload) {
-                        window.location.reload();
+                        });
+                        return;
                     }
+
+                    if (data.task == 'reload') {
+                        window.location.reload();
+                        return;
+                    }
+
+                    if (data.task == 'message') {
+                        $('#modal-auth .modal-content').html('<div class="text-center">' + data.message + '</div>');
+                    }
+
+                    if (data.task == 'close') {
+                        $('#modal-auth a.modal-close').trigger('click');
+                    }
+
+                    if (data.picture) {
+                        $('.picture-vote button[data-id='+data.picture+']').trigger('click');
+                    }
+
                 } else {
                     that.find('.message.message-error').html(data.message);
                     that.find('.message.message-error').show();
@@ -467,4 +492,9 @@ Share = {
 
 function openProfileForm() {
     $('.picture-vote button:not(.inactive):first').trigger('click');
+}
+
+function closeAuthForm(picture) {
+    $('#modal-auth a.modal-close').trigger('click');
+    $('.picture-vote button[data-id='+picture+']').trigger('click');
 }

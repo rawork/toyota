@@ -446,6 +446,21 @@ body.modal-open {
     padding: 0 0 30px;
 }
 
+#personal-information {
+    display: none;
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 5px 0 20px;
+    padding: 3px;
+    border: 1px solid #999;
+}
+
+a.dynamic {
+    font-size: 14px;
+    line-height: 20px !important;
+}
+
 @media (min-width: 480px) {
     .red-line > div {
         width: 300px;

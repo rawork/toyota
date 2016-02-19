@@ -9,12 +9,14 @@
 </head>
 <body>
     {{ maincontent }}
-    {% if close %}
     <script type="text/javascript">
-        window.opener.location.reload();
-//        window.opener.openProfileForm();
+        {% if profile %}
+        window.opener.openProfileForm();
         window.close();
+        {% elseif close %}
+        window.opener.closeAuthForm('{{ picture }}');
+        window.close();
+        {% endif %}
     </script>
-    {% endif %}
 </body>
 </html>

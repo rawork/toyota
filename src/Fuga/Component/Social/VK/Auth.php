@@ -68,6 +68,7 @@ class Auth
 			'user' => null,
 			'user_local' => null,
 			'message' => 'Not authenticated',
+			'register' => false,
 		);
 		$params = array(
 			'client_id' => $this->appId,
@@ -126,6 +127,7 @@ class Auth
 								'social_user_id' => $userInfo['uid'],
 							));
 							$localUser = $this->container->getItem('gallery_user', 'social_user_id="'.$userInfo['uid'].'"');
+							$result['register'] = true;
 						}
 
 						$result['user_local'] = $localUser;

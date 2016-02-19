@@ -108,8 +108,11 @@ class GalleryController extends Controller
 		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
 
 			$user = $this->get('session')->get('gallery_user');
+			$pictureId = $this->get('request')->request->getInt('picture');
 
 			if (!$user) {
+				$this->get('session')->set('picture_voted', $pictureId);
+
 				return array(
 					'voted' => false,
 					'redirect' => '/pictures/login',
@@ -117,6 +120,8 @@ class GalleryController extends Controller
 			}
 
 			if ($user['publish'] == 0) {
+				$this->get('session')->set('picture_voted', $pictureId);
+
 				return array(
 					'voted' => false,
 					'redirect' => '/pictures/profile',
@@ -126,7 +131,7 @@ class GalleryController extends Controller
 			$voteIsDisabled = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled');
 			$votePeriod = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_period');
 
-			$pictureId = $this->get('request')->request->getInt('picture');
+
 			$sessionId = $this->get('session')->getId();
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$time = time()-$votePeriod;
@@ -138,6 +143,10 @@ class GalleryController extends Controller
 					'voted' => false,
 					'error' => 'Голосование закрыто'
 				);
+			}
+
+			if ($this->get('session')->has('picture_voted')){
+				$this->get('session')->remove('picture_voted');
 			}
 
 			$vote = $this->get('container')->getItem('gallery_vote', 'picture_id='.$pictureId.' AND user_id='.$user['id']);
@@ -166,56 +175,6 @@ class GalleryController extends Controller
 		return $this->redirect($this->generateUrl('public_page' ,array('node' => 'pictures')), 301);
 	}
 
-	public function authAction()
-	{
-		if ('POST' == $_SERVER['REQUEST_URI'] && $this->isXmlHttpRequest()) {
-
-			$network = $_POST['network'];
-			$firstName = $_POST['first_name'];
-			$lastName = $_POST['last_name'];
-			$email = $_POST['email'];
-
-
-			$member = $this->get($network)->member();
-
-			if($member === false) {
-				/* Пользователь неавторизован в Open API */
-
-				return array(
-					'status' => false,
-					'message' => 'Пользователь не авторизован',
-				);
-			}
-
-			$user = $this->get('container')->getItem('gallery_user', 'network="'.$network.'" AND mid='.$member['id']);
-
-			if (!$user) {
-				$this->get('container')->addItem(
-					'gallery_user',
-					array(
-						'network'       => $network,
-						'mid'           => $member['id'],
-						'email'         => $email,
-						'name'          => $firstName,
-						'lastname'      => $lastName,
-						'password'      => md5($this->get('util')->genKey(8)),
-						'auto'          => '',
-						'birthdate'     => '0000-00-00',
-						'is_subscribed' => 0,
-						'publish'       => 0,
-				));
-			}
-
-			return array(
-				'status' => true,
-				'message' => 'Пользователь авторизован',
-				'user' => $user,
-			);
-		}
-
-		throw $this->createNotFoundException('Несуществующая страница');
-	}
-
 	public function loginAction()
 	{
 		if ('POST' == $_SERVER['REQUEST_METHOD']) {
@@ -225,7 +184,7 @@ class GalleryController extends Controller
 			if (empty($email) || empty($password)) {
 				return array(
 					'status' => true,
-					'reload' => false,
+					'task' => 'message',
 					'message' => $this->render('gallery/nologin.html.twig'),
 				);
 			}
@@ -244,7 +203,7 @@ class GalleryController extends Controller
 			if (!$user) {
 				return array(
 					'status' => true,
-					'reload' => false,
+					'task' => 'message',
 					'message' => $this->render('gallery/nologin.html.twig'),
 				);
 			}
@@ -256,9 +215,9 @@ class GalleryController extends Controller
 
 			return array(
 				'status' => true,
-				'reload' => true,
+				'task' => 'close',
 				'message' => 'Вы авторизованы',
-				'user' => $user,
+				'picture' => $this->get('session')->get('picture_voted'),
 			);
 		}
 
@@ -280,15 +239,13 @@ class GalleryController extends Controller
 			if (empty($email) || empty($password)) {
 				return array(
 					'status' => false,
-					'reload' => false,
-					'message' => 'Пустой e-mail или пароль',
+					'message' => 'Не заполнены e-mail или пароль',
 				);
 			}
 
 			if (!$this->get('util')->isEmail($email)) {
 				return array(
 					'status' => false,
-					'reload' => false,
 					'message' => 'Некорректный формат e-mail',
 				);
 			}
@@ -296,7 +253,6 @@ class GalleryController extends Controller
 			if ($password != $password2) {
 				return array(
 					'status' => false,
-					'reload' => false,
 					'message' => 'Пароли не совпадают',
 				);
 			}
@@ -323,19 +279,17 @@ class GalleryController extends Controller
 				);
 
 			} catch (\Exception $e) {
+				$this->get('log')->addError($e->getMessage());
 				return array(
 					'status' => false,
-					'reload' => false,
-					'message' => 'Ошибка при регистрации пользователя: '.$e->getMessage(),
+					'message' => 'Ошибка при регистрации пользователя. Напишите нам на info@toyota.ru',
 				);
 			}
 
-
 			return array(
 				'status' => true,
-				'reload' => false,
+				'task' => 'redirect',
 				'redirect' => '/pictures/profile',
-				'message' => 'Благодарим за регистрацию!<br><br>Теперь Вы можете принять участие в голосовании!',
 			);
 		}
 
@@ -352,9 +306,8 @@ class GalleryController extends Controller
 
 			if (!$user) {
 				return array(
-					'status' => false,
+					'status' => true,
 					'reload' => true,
-					'message' => 'Вы не авторизованы',
 				);
 			}
 
@@ -380,15 +333,13 @@ class GalleryController extends Controller
 				if (count($emptyFields) > 0 ) {
 					return array(
 						'status' => false,
-						'reload' => false,
-						'message' => 'Не заполнены обязательные поля: '.implode(', ', $emptyFields),
+						'message' => 'Не заполнены обязательные поля:<br> '.implode(', ', $emptyFields),
 					);
 				}
 
 				if (!is_numeric($age)) {
 					return array(
 						'status' => false,
-						'reload' => false,
 						'message' => 'Поле "Возраст" должно содержать только цифры',
 					);
 				}
@@ -415,16 +366,15 @@ class GalleryController extends Controller
 				$this->get('log')->addError($e->getMessage());
 				return array(
 					'status' => false,
-					'reload' => false,
 					'message' => 'Ошибка регистрации. Напишите нам  info@toyota.ru.',
 				);
 			}
 
-
 			return array(
-				'status' => true,
-				'reload' => false,
+				'status'  => true,
+				'task'    => 'message',
 				'message' => 'Благодарим за регистрацию!<br><br>Теперь Вы можете принять участие в голосовании!',
+				'picture' => $this->get('session')->get('picture_voted'),
 			);
 		}
 
@@ -440,7 +390,7 @@ class GalleryController extends Controller
 			if (!$user) {
 				return array(
 					'status' => true,
-					'reload' => false,
+					'task' => 'message',
 					'message' => $this->render('gallery/noforgot.html.twig'),
 				);
 			}
@@ -461,7 +411,7 @@ class GalleryController extends Controller
 
 			return array(
 				'status' => true,
-				'reload' => false,
+				'task' => 'message',
 				'message' => 'Спасибо! Новый пароль был выслан на указанный e-mail',
 			);
 		}
@@ -471,19 +421,19 @@ class GalleryController extends Controller
 
 	public function verifyAction($network)
 	{
-		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
-
-			$response = new JsonResponse();
-			$result = $this->get($network)->verify();
-
-			if ($result['status']) {
-				$this->get('session')->set('gallery_user', $result['user_local']);
-			}
-
-			$response->setData($result);
-
-			return $response;
-		}
+//		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
+//
+//			$response = new JsonResponse();
+//			$result = $this->get($network)->verify();
+//
+//			if ($result['status']) {
+//				$this->get('session')->set('gallery_user', $result['user_local']);
+//			}
+//
+//			$response->setData($result);
+//
+//			return $response;
+//		}
 
 		$result = $this->get($network)->verify();
 
@@ -501,10 +451,24 @@ class GalleryController extends Controller
 
 
 		$maincontent = $result['message'];
-		$close = $result['status'];
+
+		$profile = false;
+		$close = false;
+		$picture = false;
+
+		if ($result['status'] && $result['register'] ) {
+
+			$profile = true;
+		} else {
+			if ($result['status']) {
+				$picture = $this->get('session')->get('picture_voted');
+			}
+			$close = $result['status'];
+
+		}
 
 		$response = new Response();
-		$response->setContent($this->render('page.empty.html.twig', compact('maincontent', 'close')));
+		$response->setContent($this->render('page.empty.html.twig', compact('maincontent', 'close', 'profile', 'picture')));
 
 		return $response;
 	}
@@ -513,10 +477,6 @@ class GalleryController extends Controller
 	{
 		$this->get('session')->remove('gallery_user');
 		return $this->redirect('/pictures', 301);
-	}
-
-	public function fblogoutAction() {
-		$this->get('fb')->logout();
 	}
 	
 }

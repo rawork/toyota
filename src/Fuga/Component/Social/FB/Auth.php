@@ -78,6 +78,7 @@ class Auth
 			'user' => null,
 			'user_local' => null,
 			'message' => 'Not authenticated',
+			'register' => false,
 		);
 
 		if (isset($_GET['code'])) {
@@ -186,6 +187,7 @@ class Auth
 								'social_user_id' => $userInfo->getId(),
 							));
 							$localUser = $this->container->getItem('gallery_user', 'social_user_id="'.$userInfo['id'].'"');
+							$result['register'] = true;
 						}
 
 						$result['user_local'] = $localUser;
