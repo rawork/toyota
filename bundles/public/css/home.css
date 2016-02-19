@@ -44,6 +44,10 @@ ul.slider img {
     z-index: 21;
 }
 
+.slider-vote-link {
+    display: none;
+}
+
 .counter {
     position: relative;
 }
@@ -183,6 +187,28 @@ p.video iframe {
 
     .slider-grass {
         top: 509px;
+    }
+
+    .slider-vote-link {
+        display: block;
+        position: absolute;
+        z-index: 2;
+        left: 268px;
+        top: 260px;
+    }
+
+    .slider-vote-link a {
+        display: block;
+        width: 328px;
+        height: 44px;
+        background-color: #cf142b;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 20px;
+        line-height: 20px;
+        padding-top: 11px;
     }
 
     .counter .day, .counter .hour {

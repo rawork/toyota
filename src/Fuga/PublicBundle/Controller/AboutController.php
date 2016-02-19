@@ -16,8 +16,9 @@ class AboutController extends Controller
 	public function sliderAction()
 	{
 		$slides = $this->get('container')->getItems('about_slide', 'publish=1');
+		$vote_button_active = $this->getManager('Fuga:Common:Param')->getValue('about', 'vote_button_active');
 
-		return $this->render('about/slider.html.twig', compact('slides'));
+		return $this->render('about/slider.html.twig', compact('slides', 'vote_button_active'));
 	}
 
 	public function juriAction()

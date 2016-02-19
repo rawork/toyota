@@ -336,10 +336,10 @@ class GalleryController extends Controller
 					);
 				}
 
-				if (!is_numeric($age)) {
+				if (!is_int($age) || intval($age) < 1) {
 					return array(
 						'status' => false,
-						'message' => 'Поле "Возраст" должно содержать только цифры',
+						'message' => 'Поле "Возраст" должно содержать только положительные цифры',
 					);
 				}
 
@@ -472,9 +472,18 @@ class GalleryController extends Controller
 		return $response;
 	}
 
+	public function userAction()
+	{
+		$user = $this->get('session')->get('gallery_user');
+		$vote_disabled = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled');
+
+		return $this->render('gallery/user.html.twig', compact('user', 'vote_disabled'));
+	}
+
 	public function logoutAction()
 	{
 		$this->get('session')->remove('gallery_user');
+
 		return $this->redirect('/pictures', 301);
 	}
 	

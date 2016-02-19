@@ -1,3 +1,5 @@
+{{ render('Fuga:Public:Gallery:user') }}
+
 <div class="picture-category-help"><span>Выберите возрастную категорию</span></div>
 {% if ages|length > 1 %}
     <ul class="tabs">
@@ -73,7 +75,8 @@
 
 <div class="modal" id="modal-closed">
     <div class="modal-dialog modal-dialog-close">
-        <img src="/bundles/public/img/gallery_closed.jpg">
+        <a href="#" class="modal-close"></a>
+        <img src="/bundles/public/img/message-sorry.png">
     </div>
 </div>
 

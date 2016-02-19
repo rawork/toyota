@@ -301,17 +301,23 @@ body.modal-open {
     background-color: #fff;
 }
 
-#modal-closed {
-    z-index: 8;
-}
+/*#modal-closed {*/
+    /*z-index: 8;*/
+/*}*/
 
 .modal-dialog-close {
     position: absolute;
-    width: 100%;
-    top: 0;
-    margin-bottom: 50px;
+    width: 280px;
+    top: 50%;
+    left: 50%;
+    margin-top: -63px;
+    margin-left: -140px;
     padding: 0;
-    background-color: #fff;
+    background-color: transparent;
+}
+
+.modal-dialog-close img {
+    max-width: 100% !important;
 }
 
 .modal-close {
@@ -326,6 +332,11 @@ body.modal-open {
     width: 48px;
     height: 48px;
     z-index: 60;
+}
+
+#modal-closed .modal-close {
+    top: -30px;
+    right: -10px;
 }
 
 .modal-content {
@@ -473,6 +484,54 @@ a.dynamic {
     line-height: 20px !important;
 }
 
+.account-control {
+    color: #7b7f87;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.account-control > span {
+    display: block;
+    margin-bottom: 15px;
+}
+
+a.btn-user {
+    background-color: #b0b5c2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 0;
+    padding: 7px 25px 7px;
+    font-size: 15px;
+    line-height: 17px;
+    margin-left: 15px;
+}
+
+span.icon-user {
+    position: relative;
+    top: 3px;
+    margin-right: 7px;
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background-image: url('../img/icon_user.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+span.icon-logout {
+    position: relative;
+    top: 3px;
+    margin-right: 7px;
+    display: inline-block;
+    width: 20px;
+    height: 17px;
+    background-image: url('../img/icon_logout.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
 @media (min-width: 480px) {
     .red-line > div {
         width: 300px;
@@ -486,6 +545,14 @@ a.dynamic {
         position: absolute;
         padding: 0;
         background-color: #fff;
+    }
+
+    .account-control {
+        text-align: right;
+    }
+
+    .account-control > span {
+        display: inline;
     }
 
 }
@@ -517,15 +584,15 @@ a.dynamic {
     }
 
     .modal-dialog-close {
-        width: 480px;
-        height: 231px;
+        background-color: transparent;
+        width: 558px;
+        height: 250px;
         top: 50%;
         left: 50%;
-        margin-left: -240px;
-        margin-top: -115px;
+        margin-left: -279px;
+        margin-top: -125px;
         position: absolute;
         padding: 0;
-        background-color: #fff;
         display: block;
     }
 }
@@ -765,15 +832,15 @@ a.dynamic {
     }
 
     .modal-dialog-close {
-        width: 480px;
-        height: 231px;
+        background-color: transparent;
+        width: 558px;
+        height: 250px;
         top: 50%;
         left: 50%;
-        margin-left: -240px;
-        margin-top: -115px;
+        margin-left: -279px;
+        margin-top: -125px;
         position: absolute;
         padding: 0;
-        background-color: #fff;
         display: block;
     }
 
@@ -932,4 +999,10 @@ a.dynamic {
         height: 57px;
         line-height: 57px;
     }
+
+    .account-control {
+        margin-top: -15px;
+        padding-right: 50px;
+    }
+
 }

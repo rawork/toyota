@@ -137,6 +137,7 @@
                         }
 
                         if (data.gallery_disabled && !isArchive) {
+                            $('body').addClass('modal-open');
                             $('#modal-closed').show();
                         }
 
@@ -447,6 +448,12 @@
             var url = that.attr('href');
 
             popupwindow(url, 'Social OAuth', 640, 420);
+        });
+
+        $(document).on('click', '.btn-user-login', function(e){
+            e.preventDefault()
+
+            $('.picture-vote button:not(.inactive):first').trigger('click');
         });
 
         $(document).on('click', 'input[type=checkbox]+label', function(e){
