@@ -437,7 +437,7 @@ class GalleryController extends Controller
 			return array(
 				'status' => true,
 				'task' => 'message',
-				'message' => 'Спасибо!<br>Новый пароль был выслан на указанный e-mail',
+				'message' => 'Спасибо!<br>Новый пароль был выслан на указанный e-mail.',
 			);
 		}
 
