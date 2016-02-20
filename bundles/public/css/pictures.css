@@ -190,9 +190,9 @@ body.modal-open {
     height: 27px;
 }
 
-.picture-vote:hover {
-    cursor: pointer;
-}
+/*.picture-vote:hover {*/
+    /*cursor: pointer;*/
+/*}*/
 
 .slick-slider {
     margin-bottom: 10px;
