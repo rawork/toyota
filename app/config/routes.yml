@@ -213,6 +213,9 @@ gallery_logout:
 gallery_regmail:
     path: /pictures/regmail
     defaults: { _controller: 'Fuga:Public:Gallery:regmail'}
+gallery_repair:
+  path: /pictures/repair
+  defaults: { _controller: 'Fuga:Public:Gallery:repair'}
 
 ajax_picture_list:
   path: /ajax/picture

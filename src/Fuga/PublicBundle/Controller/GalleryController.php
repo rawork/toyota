@@ -540,5 +540,77 @@ class GalleryController extends Controller
 
 		return $response;
 	}
+
+	public function repairAction() {
+
+//		UPDATE `gallery_picture` SET `publish`=0 WHERE is_archive=0
+
+		set_time_limit(0);
+
+		$sql = "SELECT id, picture FROM gallery_picture WHERE is_archive=0 AND picture NOT LIKE '/gallery/%' LIMIT 1";
+
+		$stmt = $this->get('connection')->prepare($sql);
+		$stmt->execute();
+		$pictures = $stmt->fetchAll();
+
+		$max = 30;
+		$i = 1;
+		$j = 1;
+
+		$basedir = PRJ_DIR.'/upload';
+		$text = '';
+
+		foreach ($pictures as $picture) {
+
+
+			$folder = '/g'.sprintf("%'.04d", strval($i));
+
+//			@mkdir($basedir.'/gallery'.$folder, 0755, true);
+
+			$path = $picture['picture'];
+
+			$realpath = $basedir.$path;
+			$realpath2 = $basedir.str_replace('.jpg', '_main.jpg', $path);
+			$realpath3 = $basedir.str_replace('.jpg', '_big.jpg', $path);
+
+			$arrayPath = pathinfo($realpath);
+			$arrayPath2 = pathinfo($realpath2);
+			$arrayPath3 = pathinfo($realpath3);
+
+			$newpath = $basedir.'/gallery'.$folder.'/'.$arrayPath['basename'];
+			$newpath2 = $basedir.'/gallery'.$folder.'/'.$arrayPath2['basename'];
+			$newpath3 = $basedir.'/gallery'.$folder.'/'.$arrayPath3['basename'];
+
+			var_dump($newpath, $newpath2, $newpath3);
+
+			$ret = @rename ($realpath, $newpath);
+			$ret2 = @rename ($realpath2, $newpath2);
+			$ret3 = @rename ($realpath3, $newpath3);
+
+			var_dump($ret, $ret2, $ret3, str_replace($basedir,'',$newpath));
+
+			$this->get('container')->updateItem(
+				'gallery_picture',
+				array('picture' => str_replace($basedir,'',$newpath)),
+				array('id' => $picture['id'])
+			);
+
+			if ($j >=30) {
+				$j = 1;
+				$i++;
+				$text .= 'folder'.$i.' is next'."<br>\n";
+			} else {
+				$j++;
+			}
+
+		}
+
+		$text .= 'ready';
+
+		$response = new Response();
+		$response->setContent($text);
+
+		return $response;
+	}
 	
 }
