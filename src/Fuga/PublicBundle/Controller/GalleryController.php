@@ -467,11 +467,13 @@ class GalleryController extends Controller
 
 			$server_link = 'http://'.$_SERVER['SERVER_NAME'];
 
-			$this->get('mailer')->send(
-				'Регистрация на сайте dreamcar.toyota.ru',
-				$this->render('mail/register.html.twig', compact('server_link')),
-				$result['user_local']['email']
-			);
+			if ($result['register']) {
+				$this->get('mailer')->send(
+					'Регистрация на сайте dreamcar.toyota.ru',
+					$this->render('mail/register.html.twig', compact('server_link')),
+					$result['user_local']['email']
+				);
+			}
 		}
 
 
