@@ -210,6 +210,9 @@ oauth_verify:
 gallery_logout:
   path: /pictures/logout
   defaults: { _controller: 'Fuga:Public:Gallery:logout'}
+gallery_regmail:
+    path: /pictures/regmail
+    defaults: { _controller: 'Fuga:Public:Gallery:regmail'}
 
 ajax_picture_list:
   path: /ajax/picture

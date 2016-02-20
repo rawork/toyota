@@ -520,5 +520,16 @@ class GalleryController extends Controller
 
 		return $this->redirect('/pictures', 301);
 	}
+
+	public function regmailAction()
+	{
+		$server_link = 'http://'.$_SERVER['SERVER_NAME'];
+		$isWeb = true;
+
+		$response = new Response();
+		$response->setContent($this->render('mail/register.html.twig', compact('server_link', 'isWeb')));
+
+		return $response;
+	}
 	
 }
