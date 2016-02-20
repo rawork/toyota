@@ -212,7 +212,7 @@ class Auth
 
 		$helper = $fb->getRedirectLoginHelper();
 
-		$permissions = array('email','user_birthday'); // Optional permissions
+		$permissions = array('email'); // Optional permissions
 		$loginUrl = $helper->getLoginUrl($this->redirectURI, $permissions);
 
 		return urldecode($loginUrl);
