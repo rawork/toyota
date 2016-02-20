@@ -28,8 +28,16 @@
     <link type="text/css" rel="stylesheet" href="/bundles/slick/slick-theme.css" media="screen">
     <link type="text/css" rel="stylesheet" href="/bundles/public/css/app.css?{{ asset }}" media="screen">
     <link type="text/css" rel="stylesheet" href="/bundles/public/css/{{ curnode.name }}.css?{{ asset }}" media="screen">
+    <!--[if lt IE 10]>
+    <link type="text/css" rel="stylesheet" href="/bundles/public/css/oldie.css?{{ asset }}" media="screen">
+    <![endif]-->
 </head>
 <body>
+<div class="ie">
+    <div class="container">
+        К сожалению, данная версия браузера устарела, в связи с чем некоторые элементы cайта могут отображаться и работать некорректно. Для полноценной работы с сайтом рекомендуем вам обновить версию вашего браузера или использовать другой браузер для просмотра cайта.
+    </div>
+</div>
 <div id="wrapper-toyota">
     <div class="menu-button"><a href="">Меню</a></div>
     <div id="header-toyota" class="header-container">
