@@ -571,22 +571,30 @@ class GalleryController extends Controller
 			$realpath = $basedir.$path;
 			$realpath2 = $basedir.str_replace('.jpg', '_main.jpg', $path);
 			$realpath3 = $basedir.str_replace('.jpg', '_big.jpg', $path);
+			$realpath4 = $basedir.str_replace('.jpg', '_default.jpg', $path);
+			$realpath5 = $basedir.str_replace('.jpg', '_small.jpg', $path);
 
 			$arrayPath = pathinfo($realpath);
 			$arrayPath2 = pathinfo($realpath2);
 			$arrayPath3 = pathinfo($realpath3);
+			$arrayPath4 = pathinfo($realpath4);
+			$arrayPath5 = pathinfo($realpath5);
 
 			$newpath = $basedir.'/gallery'.$folder.'/'.$arrayPath['basename'];
 			$newpath2 = $basedir.'/gallery'.$folder.'/'.$arrayPath2['basename'];
 			$newpath3 = $basedir.'/gallery'.$folder.'/'.$arrayPath3['basename'];
+			$newpath4 = $basedir.'/gallery'.$folder.'/'.$arrayPath4['basename'];
+			$newpath5 = $basedir.'/gallery'.$folder.'/'.$arrayPath5['basename'];
 
 //			var_dump($newpath, $newpath2, $newpath3);
 
 			$ret = @rename ($realpath, $newpath);
 			$ret2 = @rename ($realpath2, $newpath2);
 			$ret3 = @rename ($realpath3, $newpath3);
+			$ret4 = @rename ($realpath4, $newpath4);
+			$ret5 = @rename ($realpath5, $newpath5);
 
-			var_dump($ret, $ret2, $ret3, str_replace($basedir,'',$newpath));
+			var_dump($ret, $ret2, $ret3, $ret4, $ret5, str_replace($basedir,'',$newpath));
 
 			$this->get('container')->updateItem(
 				'gallery_picture',
