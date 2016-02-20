@@ -245,7 +245,7 @@ class IndexAction extends AdminController
 			if ($filterType = $this->get('request')->request->get('filter_type')) {
 				switch ($filterType) {
 					case 'cancel':
-						$this->get('session')->remove($this->table->dbName());
+						$this->get('session')->remove('cms_table_'.$this->table->dbName());
 						break;
 					default:
 						$this->search_url = $this->table->getSearchURL($this->get('request'));
