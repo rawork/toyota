@@ -554,7 +554,7 @@ class GalleryController extends Controller
 		$pictures = $stmt->fetchAll();
 
 		$max = 30;
-		$i = 1;
+		$i = 200;
 		$j = 1;
 
 		$basedir = PRJ_DIR.'/upload';
