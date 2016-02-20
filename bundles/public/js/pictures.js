@@ -135,6 +135,7 @@
                         // hide vote block
                         if (data.vote_disabled || isArchive) {
                             $('.picture-vote').css({visibility: 'hidden'});
+                            $('#modal-gallery .share').hide();
                         }
 
                         if (data.gallery_disabled && !isArchive) {
