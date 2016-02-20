@@ -301,9 +301,9 @@ body.modal-open {
     background-color: #fff;
 }
 
-/*#modal-closed {*/
-    /*z-index: 8;*/
-/*}*/
+#modal-closed {
+    z-index: 8;
+}
 
 .modal-dialog-close {
     position: absolute;
