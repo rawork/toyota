@@ -547,7 +547,7 @@ class GalleryController extends Controller
 
 		set_time_limit(0);
 
-		$sql = "SELECT id, picture FROM gallery_picture WHERE is_archive=0 AND picture NOT LIKE '/gallery/%' LIMIT 1";
+		$sql = "SELECT id, picture FROM gallery_picture WHERE is_archive=0 AND picture NOT LIKE '/gallery/%' LIMIT 90";
 
 		$stmt = $this->get('connection')->prepare($sql);
 		$stmt->execute();
@@ -562,12 +562,7 @@ class GalleryController extends Controller
 
 		foreach ($pictures as $picture) {
 
-
 			$folder = '/g'.sprintf("%'.04d", strval($i));
-
-			while (file_exists($basedir.'/gallery'.$folder)) {
-				$i++;
-			}
 
 			@mkdir($basedir.'/gallery'.$folder, 0755, true);
 
@@ -585,7 +580,7 @@ class GalleryController extends Controller
 			$newpath2 = $basedir.'/gallery'.$folder.'/'.$arrayPath2['basename'];
 			$newpath3 = $basedir.'/gallery'.$folder.'/'.$arrayPath3['basename'];
 
-			var_dump($newpath, $newpath2, $newpath3);
+//			var_dump($newpath, $newpath2, $newpath3);
 
 			$ret = @rename ($realpath, $newpath);
 			$ret2 = @rename ($realpath2, $newpath2);
