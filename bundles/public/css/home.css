@@ -213,6 +213,7 @@ p.video iframe {
         position: absolute;
         z-index: 2;
         left: 268px;
+        margin-left: 0;
         top: 260px;
     }
 
