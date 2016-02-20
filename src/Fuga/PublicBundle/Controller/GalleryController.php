@@ -565,7 +565,11 @@ class GalleryController extends Controller
 
 			$folder = '/g'.sprintf("%'.04d", strval($i));
 
-//			@mkdir($basedir.'/gallery'.$folder, 0755, true);
+			while (file_exists($basedir.'/gallery'.$folder)) {
+				$i++;
+			}
+
+			@mkdir($basedir.'/gallery'.$folder, 0755, true);
 
 			$path = $picture['picture'];
 
