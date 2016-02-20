@@ -15,7 +15,8 @@ ul.slider li {
 
 ul.slider img {
     max-width: 330px !important;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    margin: 40px auto 0;
 }
 
 .slider-prev, .slider-next {
@@ -50,7 +51,7 @@ ul.slider img {
     z-index: 2;
     left: 50%;
     margin-left: -109px;
-    top: 165px;
+    top: 205px;
 }
 
 .slider-vote-link a {
