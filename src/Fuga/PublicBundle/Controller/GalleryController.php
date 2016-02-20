@@ -545,6 +545,8 @@ class GalleryController extends Controller
 
 //		UPDATE `gallery_picture` SET `publish`=0 WHERE is_archive=0
 
+		return $this->redirect('/pictures');
+
 		set_time_limit(0);
 
 		$sql = "SELECT id, picture FROM gallery_picture WHERE is_archive=0 AND picture NOT LIKE '/gallery/%'";
