@@ -196,6 +196,11 @@ juri_member:
   defaults: { _controller: 'Fuga:Public:Common:index', node: 'about', action: 'member'}
   requirements:
     id: \d+
+gallery_picture:
+  path: /pictures/{id}
+  defaults: { _controller: 'Fuga:Public:Common:index', node: 'pictures', action: 'index'}
+  requirements:
+    id: \d+
 
 oauth_verify:
   path: /pictures/verify/{network}

@@ -37,6 +37,7 @@
             var windowWidth = $(this).width();
 
             var category = parseInt(galleryContainer.attr('data-category'));
+            var currentPicture = parseInt(galleryContainer.attr('data-picture'));
             var person = $('#person').val();
             var city = $('#city').val();
 
@@ -150,6 +151,9 @@
                         }
                         filterChanged = false;
                         initSliderPlugin(windowWidth);
+                        if (currentPicture) {
+                            $('.picture .img a[data-id='+currentPicture+']').trigger('click');
+                        }
                     }
                 });
         };
@@ -299,29 +303,22 @@
                 nextArrow: '<button type="button" class="slick-next popup-next"><img src="/bundles/public/img/popup_next.png"></button>'
             }).on('afterChange', function(event, slick, currentSlide){
                 setModalArrowVibibility(currentSlide, picturesArray.length);
+
+                var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures' +picturesArray[currentSlide]['id'];
+
+
+                var url = $('meta[property="og:url"]').attr('content', currentUrl);
+                var title = $('meta[property="og:title"]').attr('content', picturesArray[currentSlide]['name']);
+                var description = $('meta[property="og:description"]').attr('content', picturesArray[currentSlide]['person']+', '+picturesArray[currentSlide]['age']+', '+picturesArray[currentSlide]['city']);
+                var image = $('meta[property="og:image"]').attr('content', picturesArray[currentSlide]['picture_value']['extra']['main']['path']);
+
+                window.history.pushState({currentSlide:picturesArray[currentSlide]['id']},'', '/pictures/'+picturesArray[currentSlide]['id']);
             });
             $('#modal-gallery').show();
 
             popupSlick.slick('setPosition');
 
         });
-
-        //$(document).on('click', '.picture-vote', function(e) {
-        //    e.preventDefault();
-        //    var that = $(this);
-        //    var picture = that.attr('data-id');
-        //
-        //    $.post('/pictures/vote', {picture: picture}, function(data) {
-        //        if (data.voted ) {
-        //            //$('.picture-vote').css({display: 'none'});
-        //            that.hide();
-        //            //alert(data.message);
-        //            that.parent().find('.name').after('<div class="picture-vote-res"></div>');
-        //        } else {
-        //            console.log(data.message);
-        //        }
-        //    });
-        //});
 
         $(document).on('click', 'a.modal-close', function(e){
             e.preventDefault();
@@ -484,6 +481,27 @@
         })
 
 
+        $(document).on('click', '.btn-share-vk', function(e) {
+            e.preventDefault();
+
+            var url = $('meta[property="og:url"]').attr('content');
+            var title = $('meta[property="og:title"]').attr('content');
+            var description = $('meta[property="og:description"]').attr('content');
+            var image = $('meta[property="og:image"]').attr('content');
+
+            popupwindow(Share.vkontakte(url,title,image,description), 'VK Share Page', 626, 426);
+        });
+
+        $(document).on('click', '.btn-share-fb', function(e) {
+            e.preventDefault();
+
+            var that = $(this);
+            var url = $('meta[property="og:url"]').attr('content');
+            var title = $('meta[property="og:title"]').attr('content');
+
+            popupwindow(Share.facebook(url,title), 'Facebook Share Page', 626, 426);
+        })
+
     });
 
 })(jQuery);
@@ -496,20 +514,15 @@ Share = {
         url += '&description=' + encodeURIComponent(text);
         url += '&image='       + encodeURIComponent(pimg);
         url += '&noparse=true';
-        Share.popup(url);
+        return url;
     },
-    facebook: function(purl, ptitle, pimg, text) {
-        url  = 'http://www.facebook.com/sharer.php?s=100';
-        url += '&p[title]='     + encodeURIComponent(ptitle);
-        url += '&p[summary]='   + encodeURIComponent(text);
-        url += '&p[url]='       + encodeURIComponent(purl);
-        url += '&p[images][0]=' + encodeURIComponent(pimg);
-        Share.popup(url);
-    },
-
-    popup: function(url) {
-        window.open(url,'','toolbar=0,status=0,width=626,height=436');
+    facebook: function(purl, ptitle) {
+        url  = 'http://www.facebook.com/sharer.php?src=pluso';
+        url += '&u='       + encodeURIComponent(purl);
+        url += '&t='     + encodeURIComponent(ptitle);
+        return url;
     }
+
 };
 
 function openProfileForm(picture) {

@@ -4,7 +4,7 @@
 {% if ages|length > 1 %}
     <ul class="tabs">
         {% for age in ages %}
-            <li{% if 1 == age.id %} class="active"{% endif %} data-id="{{ age.id }}">{{ age.name }}</li>
+            <li{% if firstAge.id == age.id %} class="active"{% endif %} data-id="{{ age.id }}">{{ age.name }}</li>
         {% endfor %}
     </ul>
 {% endif %}
@@ -22,7 +22,7 @@
 <div class="pictures-container">
     <div class="pop-up">
         <div class="bdr-t"></div>
-            <div id="pictures" class="pictures" data-archive="{{ isArchive }}" data-category="{{ firstAge.id }}"></div>
+            <div id="pictures" class="pictures" data-picture="{{ currentPicture }}" data-archive="{{ isArchive }}" data-category="{{ firstAge.id }}"></div>
             <div id="picture-counter" class="picture-counter"><span id="slide-current"></span>/<span id="slide-total"></span></div>
         <div class="bdr-b"></div>
     </div>
@@ -48,19 +48,9 @@
                 <div class="idea"></div>
             </div>
         </div>
-        {#<script type="text/javascript">(function() {#}
-                {#if (window.pluso)if (typeof window.pluso.start == "function") return;#}
-                {#if (window.ifpluso==undefined) { window.ifpluso = 1;#}
-                    {#var d = document, s = d.createElement('script'), g = 'getElementsByTagName';#}
-                    {#s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;#}
-                    {#s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';#}
-                    {#var h=d[g]('body')[0];#}
-                    {#h.appendChild(s);#}
-                {#}})();</script>#}
-        {#<div class="pluso" data-background="none;" data-options="small,square,line,horizontal,nocounter,sepcounter=1,theme=14" data-services="facebook,vkontakte" data-url="http://dreamcar.toyota.ru/pictures#/1/1" data-title="Фото 1" data-description="Фото 2 выап вап ывап выап вап вап dfsg ывап ывап ывап ывап ывап ывап ывап ывап вап выап выап выап п"></div>#}
         <div class="share">
-            <a onclick="Share.vkontakte('http://cc88441.tmweb.ru/pictures#/1/45','Автомобиль Божья Коровка','http://cc88441.tmweb.ru/upload/2016/01/19/dc-260-80b8b81011_main.jpg','Павлова Степанида, 3 года, Бор')"><img src="/bundles/public/img/btn_like_vk.png"></a>
-            <a onclick="Share.facebook('http://cc88441.tmweb.ru/pictures#/1/45','Автомобиль Божья Коровка','http://cc88441.tmweb.ru/upload/2016/01/19/dc-260-80b8b81011_main.jpg','Павлова Степанида, 3 года, Бор')"><img src="/bundles/public/img/btn_like_fb.png"></a>
+            <a class="btn-share btn-share-vk" data-source="popupSlick"><img src="/bundles/public/img/btn_like_vk.png"></a>
+            <a class="btn-share btn-share-fb" data-source="popupSlick"><img src="/bundles/public/img/btn_like_fb.png"></a>
         </div>
 
     </div>

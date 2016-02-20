@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GalleryController extends Controller
 {
-	public function indexAction()
+	public function indexAction($id = null)
 	{
 		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
 			$criteria = 'publish=1 AND is_archive<>1';
@@ -61,7 +61,31 @@ class GalleryController extends Controller
 //		$this->get('log')->addError(json_encode($_COOKIE));
 //		var_dump($this->get('session')->get('gallery_user'));
 
-		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive', 'link', 'button'));
+		$currentPicture = false;
+
+		if ($id) {
+
+			$picture = $this->get('container')->getItem('gallery_picture', $id);
+
+			if ($picture) {
+
+				$currentPicture = $picture['id'];
+				//set active category
+				$firstAge = $this->get('container')->getItem('gallery_picture', $picture['age_id']);
+
+				// set meta og:
+				$currentUrl = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+				$this->get('container')->setVar('og_url', $currentUrl);
+				$this->get('container')->setVar('og_title', $picture['name']);
+				$this->get('container')->setVar('og_description', implode(', ', array($picture['person'], $picture['age'], $picture['city'])));
+				$this->get('container')->setVar('og_image', $picture['picture_value']['extra']['main']['path']);
+			} else {
+				return $this->redirect('/pictures');
+			}
+
+		}
+
+		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive', 'link', 'button', 'currentPicture'));
 	}
 
 	public function archiveAction()
@@ -402,9 +426,11 @@ class GalleryController extends Controller
 				array('email' => $email)
 			);
 
+			$server_link = 'http://'.$_SERVER['SERVER_NAME'];
+
 			$this->get('mailer')->send(
 				'Сброс пароля на сайте '.$_SERVER['SERVER_NAME'],
-				$this->render('mail/forgot.html.twig', compact('email', 'password')),
+				$this->render('mail/forgot.html.twig', compact('email', 'password', 'server_link')),
 				$email
 			);
 
