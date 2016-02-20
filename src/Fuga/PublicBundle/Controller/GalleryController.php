@@ -280,6 +280,15 @@ class GalleryController extends Controller
 				);
 			}
 
+			$user = $this->get('container')->getItem('gallery_user', 'email="'.$email.'"');
+			if ($user) {
+				return array(
+					'status' => false,
+					'message' => 'Данный e-mail уже зарегистрирован.',
+				);
+			}
+
+
 			try {
 				$userId = $this->get('container')->addItem('gallery_user', array(
 					'email' => $email,

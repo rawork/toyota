@@ -18,7 +18,7 @@ class Auth
 	private $redirectURI;
 	private $url;
 
-	public function __construct($container, $appId, $appSharedSecret, $redirectURI, $url)
+	public function __construct(\Fuga\Component\Container $container, $appId, $appSharedSecret, $redirectURI, $url)
 	{
 		$this->container = $container;
 		$this->appId = $appId;
@@ -160,9 +160,19 @@ class Auth
 
 						$result['user'] = $userInfo;
 
-						$localUser = $this->container->getItem('gallery_user', 'social_user_id="'.$userInfo['id'].'"');
+						$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
 						if ($localUser) {
+							$this->container->updateItem(
+								'gallery_user',
+								array(
+									'social_'.$network => $userInfo->getId()
+								),
+								array('id' => $localUser['id'])
+							);
+
+							$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
 							unset($localUser['password']);
+
 						} else {
 
 							$password = $this->container->get('util')->genKey(8);
@@ -173,8 +183,7 @@ class Auth
 								'name' => $userInfo->getFirstName(),
 								'lastname' => $userInfo->getLastName(),
 								'age' => $age,
-								'social_name' => $network,
-								'social_user_id' => $userInfo->getId(),
+								'social_'.$network => $userInfo->getId(),
 							)));
 
 							$userId = $this->container->addItem('gallery_user', array(
@@ -183,10 +192,9 @@ class Auth
 								'name' => $userInfo->getFirstName(),
 								'lastname' => $userInfo->getLastName(),
 								'age' => $age,
-								'social_name' => $network,
-								'social_user_id' => $userInfo->getId(),
+								'social_'.$network => $userInfo->getId(),
 							));
-							$localUser = $this->container->getItem('gallery_user', 'social_user_id="'.$userInfo['id'].'"');
+							$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
 							$result['register'] = true;
 						}
 

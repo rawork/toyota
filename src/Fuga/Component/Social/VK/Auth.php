@@ -113,8 +113,17 @@ class Auth
 						$result['message'] = "Success";
 						$result['user'] = $userInfo;
 
-						$localUser = $this->container->getItem('gallery_user', 'social_user_id="'.$userInfo['uid'].'"');
+						$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
 						if ($localUser) {
+							$this->container->updateItem(
+								'gallery_user',
+								array(
+									'social_'.$userInfo['network'] => $userInfo['uid'],
+								),
+								array('id' => $localUser['id'])
+							);
+
+							$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
 							unset($localUser['password']);
 						} else {
 							$userId = $this->container->addItem('gallery_user', array(
@@ -123,10 +132,9 @@ class Auth
 								'name' => $userInfo['first_name'],
 								'lastname' => $userInfo['last_name'],
 								'age' => $userInfo['age'],
-								'social_name' => $userInfo['network'],
-								'social_user_id' => $userInfo['uid'],
+								'social_'.$userInfo['network'] => $userInfo['uid'],
 							));
-							$localUser = $this->container->getItem('gallery_user', 'social_user_id="'.$userInfo['uid'].'"');
+							$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
 							$result['register'] = true;
 						}
 
