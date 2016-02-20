@@ -14,7 +14,7 @@ ul.slider li {
 }
 
 ul.slider img {
-    max-width: 320px !important;
+    max-width: 330px !important;
     margin: 0 auto;
 }
 
@@ -49,8 +49,8 @@ ul.slider img {
     position: absolute;
     z-index: 2;
     left: 50%;
-    margin-left: -105px;
-    top: 231px;
+    margin-left: -109px;
+    top: 165px;
 }
 
 .slider-vote-link a {
@@ -149,6 +149,12 @@ p.video {
 
 p.video iframe {
     height: 180px;
+}
+
+@media (min-width: 330px) {
+    .slider-vote-link {
+        margin-left: -114px;
+    }
 }
 
 @media (min-width: 480px) {
