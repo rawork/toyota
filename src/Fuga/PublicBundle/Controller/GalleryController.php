@@ -74,11 +74,11 @@ class GalleryController extends Controller
 				$firstAge = $this->get('container')->getItem('gallery_picture', $picture['age_id']);
 
 				// set meta og:
-				$currentUrl = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+				$currentUrl = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 				$this->get('container')->setVar('og_url', $currentUrl);
 				$this->get('container')->setVar('og_title', $picture['name']);
 				$this->get('container')->setVar('og_description', implode(', ', array($picture['person'], $picture['age'], $picture['city'])));
-				$this->get('container')->setVar('og_image', $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME'].$picture['picture_value']['extra']['main']['path']);
+				$this->get('container')->setVar('og_image', "http://".$_SERVER['SERVER_NAME'].$picture['picture_value']['extra']['main']['path']);
 			} else {
 				return $this->redirect('/pictures');
 			}
