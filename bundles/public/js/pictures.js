@@ -305,7 +305,7 @@
             }).on('afterChange', function(event, slick, currentSlide){
                 setModalArrowVibibility(currentSlide, picturesArray.length);
 
-                var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures' +picturesArray[currentSlide]['id'];
+                var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures/' +picturesArray[currentSlide]['id'];
 
 
                 var url = $('meta[property="og:url"]').attr('content', currentUrl);
@@ -319,7 +319,7 @@
 
             popupSlick.slick('setPosition');
 
-            var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures' +picturesArray[pos]['id'];
+            var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures/' +picturesArray[pos]['id'];
 
 
             var url = $('meta[property="og:url"]').attr('content', currentUrl);
