@@ -18,6 +18,8 @@ class Mailer
 	
 	function send($subject, $message, $emails) 
 	{
+		$subscribers = null;
+
 		if (!is_array($emails)) {
 			if (preg_match_all('/[a-z0-9]+([-_\.]?[a-z0-9])*@[a-z0-9]+([-_\.]?[a-z0-9])+\.[a-z]{2,4}/i', $emails, $finded)) {
 				$subscribers = array_unique($finded[0]);
@@ -25,11 +27,14 @@ class Mailer
 		} else {
 			$subscribers = $emails;
 		}
-		$this->engine->From(ADMIN_EMAIL);
-		$this->engine->Subject($subject);
-		$this->engine->Html($message, 'UTF-8');
-		$this->engine->To($subscribers);
-		$this->engine->Send();
+
+		if ($subscribers) {
+			$this->engine->From(ADMIN_EMAIL);
+			$this->engine->Subject($subject);
+			$this->engine->Html($message, 'UTF-8');
+			$this->engine->To($subscribers);
+			$this->engine->Send();
+		}
 	}
 
 }
