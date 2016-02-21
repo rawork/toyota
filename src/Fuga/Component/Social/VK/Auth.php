@@ -70,14 +70,15 @@ class Auth
 			'message' => 'Not authenticated',
 			'register' => false,
 		);
-		$params = array(
-			'client_id' => $this->appId,
-			'client_secret' => $this->appSharedSecret,
-			'code' => $_GET['code'],
-			'redirect_uri' => $this->redirectURI,
-		);
 
 		if (isset($_GET['code'])) {
+
+			$params = array(
+				'client_id' => $this->appId,
+				'client_secret' => $this->appSharedSecret,
+				'code' => $_GET['code'],
+				'redirect_uri' => $this->redirectURI,
+			);
 
 			try {
 
