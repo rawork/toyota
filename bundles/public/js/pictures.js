@@ -319,6 +319,16 @@
 
             popupSlick.slick('setPosition');
 
+            var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures' +picturesArray[pos]['id'];
+
+
+            var url = $('meta[property="og:url"]').attr('content', currentUrl);
+            var title = $('meta[property="og:title"]').attr('content', picturesArray[pos]['name']);
+            var description = $('meta[property="og:description"]').attr('content', picturesArray[pos]['person']+', '+picturesArray[pos]['age']+', '+picturesArray[pos]['city']);
+            var image = $('meta[property="og:image"]').attr('content', picturesArray[pos]['picture_value']['extra']['main']['path']);
+
+            window.history.pushState({currentSlide:picturesArray[pos]['id']},'', '/pictures/'+picturesArray[pos]['id']);
+
         });
 
         $(document).on('click', 'a.modal-close', function(e){
@@ -496,11 +506,9 @@
         $(document).on('click', '.btn-share-fb', function(e) {
             e.preventDefault();
 
-            var that = $(this);
             var url = $('meta[property="og:url"]').attr('content');
-            var title = $('meta[property="og:title"]').attr('content');
 
-            popupwindow(Share.facebook(url,title), 'Facebook Share Page', 626, 426);
+            popupwindow(Share.facebook(url), 'Facebook Share Page', 626, 426);
         })
 
     });
@@ -517,10 +525,9 @@ Share = {
         url += '&noparse=true';
         return url;
     },
-    facebook: function(purl, ptitle) {
-        url  = 'http://www.facebook.com/sharer.php?src=pluso';
+    facebook: function(purl) {
+        url  = 'http://www.facebook.com/sharer.php?src=100';
         url += '&u='       + encodeURIComponent(purl);
-        url += '&t='     + encodeURIComponent(ptitle);
         return url;
     }
 

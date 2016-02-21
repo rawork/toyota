@@ -78,7 +78,7 @@ class GalleryController extends Controller
 				$this->get('container')->setVar('og_url', $currentUrl);
 				$this->get('container')->setVar('og_title', $picture['name']);
 				$this->get('container')->setVar('og_description', implode(', ', array($picture['person'], $picture['age'], $picture['city'])));
-				$this->get('container')->setVar('og_image', $picture['picture_value']['extra']['main']['path']);
+				$this->get('container')->setVar('og_image', $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME'].$picture['picture_value']['extra']['main']['path']);
 			} else {
 				return $this->redirect('/pictures');
 			}
