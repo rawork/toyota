@@ -175,6 +175,9 @@ class GalleryController extends Controller
 
 			$vote = $this->get('container')->getItem('gallery_vote', 'picture_id='.$pictureId.' AND user_id='.$user['id']);
 			if($vote) {
+
+				$this->get('container')->getTable('gallery_vote')->delete('id='.$vote['id']);
+
 				return array(
 					'voted' => true,
 					'message' => 'Вы уже голосовали за эту работу.',

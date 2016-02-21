@@ -360,7 +360,7 @@
 
         // auth functions
 
-        $(document).on('click', '.picture-vote button:not(.inactive)', function(e) {
+        $(document).on('click', '.picture-vote button', function(e) {
             e.preventDefault();
             var that = $(this);
             var picture = that.attr('data-id');
@@ -369,7 +369,11 @@
 
             $.post('/pictures/vote', {picture: picture}, function(data) {
                 if (data.voted ) {
-                    that.addClass('inactive');
+                    if (that.hasClass('inactive')) {
+                        that.removeClass('inactive');
+                    } else {
+                        that.addClass('inactive');
+                    }
                     that.siblings('.likes').html(data.likes);
                 } else if (data.redirect) {
                     console.log(data);
@@ -476,9 +480,15 @@
         });
 
         $(document).on('click', '.btn-user-login', function(e){
-            e.preventDefault()
+            e.preventDefault();
 
-            $('.picture-vote button:not(.inactive):first').trigger('click');
+            var url = '/pictures/login';
+
+            $.get(url, { "_": $.now() }, function(data){
+                $('#modal-auth .modal-content').html(data);
+                $('body').addClass('modal-open');
+                $('#modal-auth').show();
+            });
         });
 
         $(document).on('click', 'input[type=checkbox]+label', function(e){
@@ -550,10 +560,18 @@ Share = {
 
 function openProfileForm(picture) {
     $('.account-control').trigger('check');
-    if (picture) {
+    try {
         $('.picture-vote button[data-id='+picture+']').trigger('click');
-    } else {
-        $('.picture-vote button:not(.inactive):first').trigger('click');
+    } catch (err) {
+        console.log(err);
+        var url = '/pictures/profile';
+
+        $.get(url, { "_": $.now() }, function(data){
+            $('#modal-auth .modal-content').html(data);
+            $('body').addClass('modal-open');
+            $('#modal-auth').show();
+        })
+
     }
 
 }
@@ -561,5 +579,9 @@ function openProfileForm(picture) {
 function closeAuthForm(picture) {
     $('.account-control').trigger('check');
     $('#modal-auth a.modal-close').trigger('click');
-    $('.picture-vote button[data-id='+picture+']').trigger('click');
+    try {
+        $('.picture-vote button[data-id=' + picture + ']').trigger('click');
+    } catch (err) {
+        console.log(err);
+    }
 }
