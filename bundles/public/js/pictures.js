@@ -68,6 +68,8 @@
 
             var windowWidth = $(this).width();
 
+            $('#picture-counter').hide();
+
             if (900 > windowWidth) {
                 buildMobileGallery();
                 return;
