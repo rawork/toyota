@@ -214,10 +214,17 @@
 
                         //console.log('mobile', mobilePageLimit, mobilePictures);
 
+                        if (mobilePictures.length == 0) {
+                            galleryContainer.html('Поиск не дал результатов');
+                            $('.preloader').hide();
+                            $('#pictures').show();
+                            return;
+                        }
+
                         mobileTotalPictures =  data.total;
                         mobileCurrentPicture = 0;
                         galleryContainer.empty();
-                        galleryContainer.append('<div class="picture">' + elementMobileHtml(mobilePictures[0], 0) +'</div>');
+                        galleryContainer.html('<div class="picture">' + elementMobileHtml(mobilePictures[0], 0) +'</div>');
 
                         var pic = mobilePictures[0];
                         setGraph(pic['id'], pic['name'], pic['person'], pic['age'], pic['city'], pic['picture_main']);
