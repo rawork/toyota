@@ -118,7 +118,7 @@
                             }
                             galleryType = 900;
                         } else if (windowWidth > 600) {
-                            maxElement = 2;
+                            maxElement = 1;
                             totalSlides =  Math.ceil(Object.keys(data.pictures).length / maxElement);
                             currentSlide = 1;
                             for (var i in picturesArray) {
@@ -244,7 +244,7 @@
             //$('.picture-counter').show();
 
             gallerySlick = true;
-        }
+        };
 
         $(window).on('resize', function(e){
             buildGallery();
