@@ -29,15 +29,33 @@ class GalleryController extends Controller
 				$criteria .= ' AND person LIKE("%'.$person.'%")';
 			}
 
+			// todo use cache 1h for pictures
+
 			$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
 			$user = $this->get('session')->get('gallery_user');
 
+			$votes = array();
+
+			if ($user) {
+				$sql = 'SELECT id,picture_id,user_id FROM gallery_vote WHERE user_id='.$user['id'];
+				$stmt = $this->get('connection')->prepare($sql);
+				$stmt->execute();
+				$votes0 = $stmt->fetchAll();
+
+				if (is_array($votes0)){
+					foreach ($votes0 as $vote) {
+						$votes[$vote['picture_id']] = true;
+					}
+				}
+			}
+
 			foreach ($pictures as &$picture) {
 				$picture['vote'] = false;
-				if ($user) {
-					$picture['vote'] = $this->get('container')->getItem('gallery_vote', 'picture_id='.$picture['id'].' AND user_id="'.$user['id'].'"');
+				if (isset($votes[$picture['id']])) {
+					$picture['vote'] = true;
 				}
 
+//				$picture['vote'] = $this->get('container')->getItem('gallery_vote', 'picture_id='.$picture['id'].' AND user_id="'.$user['id'].'"');
 				//$picture['likes'] = $this->get('container')->count('gallery_vote', 'picture_id='.$picture['id']);
 			}
 			unset($picture);
