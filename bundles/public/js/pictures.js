@@ -89,7 +89,7 @@
                         }
 
                         shuffle(picturesArray);
-                        console.log(picturesArray);
+                        //console.log(picturesArray);
 
                         if (gallerySlick) {
                             galleryContainer.slick('unslick');
