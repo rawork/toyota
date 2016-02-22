@@ -218,6 +218,9 @@
                         mobileCurrentPicture = 0;
                         galleryContainer.append('<div class="picture">' + elementMobileHtml(mobilePictures[0], 0) +'</div>');
 
+                        var pic = mobilePictures[0];
+                        setGraph(pic['id'], pic['name'], pic['person'], pic['age'], pic['city'], pic['picture_main']);
+
                         $('#slide-current').html(mobileCurrentPicture+1);
                         $('#slide-total').html(mobileTotalPictures);
 
