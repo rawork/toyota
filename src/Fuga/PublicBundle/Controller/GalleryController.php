@@ -29,9 +29,16 @@ class GalleryController extends Controller
 				$criteria .= ' AND person LIKE("%'.$person.'%")';
 			}
 
-			// todo use cache 1h for pictures
+			$cacheCriteria = md5($criteria);
 
-			$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+			// todo use cache 1h for pictures
+			if ($this->get('cache')->contains($cacheCriteria)) {
+				$pictures = $this->get('cache')->fetch($cacheCriteria);
+			} else {
+				$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+				$this->get('cache')->save($cacheCriteria, $pictures, 3600);
+			}
+
 			$user = $this->get('session')->get('gallery_user');
 
 			$votes = array();

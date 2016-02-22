@@ -572,7 +572,14 @@ class Container
 					$this->services[$name] = new Filesystem();
 					break;
 				case 'cache':
-					$this->services[$name] = new \Doctrine\Common\Cache\ApcCache();
+					$memcached = new \Memcached();
+					$memcached->addServer('localhost', 11211);
+
+					$cacheDriver = new \Doctrine\Common\Cache\MemcachedCache();
+					$cacheDriver->setMemcached($memcached);
+					$cacheDriver->setNamespace('dreamcar_');
+
+					$this->services[$name] = $cacheDriver;
 					break;
 			}	
 		}
