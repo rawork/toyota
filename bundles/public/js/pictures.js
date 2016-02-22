@@ -267,6 +267,9 @@
             if (!(mobileCurrentPicture in mobilePictures)) {
                 $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                     function(data){
+
+                        console.log(data);
+
                         var tempArray = [];
 
                         for (var i in data.pictures) {
