@@ -47,7 +47,7 @@
 
         var buildGallery = function() {
 
-            console.log('start build gallery');
+            console.log('start build gallery', Date.now());
 
             $('.preloader').show();
             $('#pictures').empty();
@@ -74,12 +74,12 @@
                 return;
             }
 
-            console.log('ajax request');
+            console.log('ajax request ', Date.now());
 
             $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city},
                 function(data){
 
-                    console.log('ajax responce');
+                    console.log('ajax responce',  Date.now());
 
                     if (data.pictures != undefined) {
 
@@ -102,7 +102,7 @@
                         var currentElement = 1;
                         var maxElement = 0;
 
-                        console.log('start build html');
+                        console.log('start build html',  Date.now());
 
                         if (windowWidth > 900) {
                             maxElement = 6;
@@ -159,7 +159,7 @@
                             galleryType = 320;
                         }
 
-                        console.log('end build html');
+                        console.log('end build html', Date.now());
 
                         // hide vote block
                         if (data.vote_disabled || isArchive) {
@@ -180,13 +180,13 @@
                             $('#picture-counter').hide();
                         }
                         filterChanged = false;
-                        console.log('start init slick');
+                        console.log('start init slick',  Date.now());
                         initSliderPlugin(windowWidth);
                         if (currentPicture) {
                             $('.picture .img a[data-id='+currentPicture+']').trigger('click');
                         }
                         $('.preloader').hide();
-                        console.log('stop init slick');
+                        console.log('stop init slick',  Date.now());
                     }
                 });
         };
