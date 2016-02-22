@@ -81,6 +81,13 @@ body.modal-open {
 .picture-help {
     text-align: center;
     margin: 25px 0 45px;
+    color: #cf142b;
+}
+
+.picture-search-result {
+    text-align: center;
+    margin: 45px 0 45px;
+    color: #cf142b;
 }
 
 .content ul.pictures {

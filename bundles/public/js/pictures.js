@@ -217,7 +217,7 @@
                         //console.log('mobile', mobilePageLimit, mobilePictures);
 
                         if (mobilePictures.length == 0) {
-                            galleryContainer.html('Поиск по заданным параметрам не дал результатов.');
+                            galleryContainer.html('<div class="picture-search-result">Поиск по заданным параметрам не дал результатов.</div>');
                             $('.preloader').hide();
                             $('#pictures').show();
                             $('#picture-counter').hide();
@@ -331,7 +331,10 @@
 
         };
 
-        var setGraph = function(picture_id, picture_name, person, age, city, picture) {
+        var setGraph = function(picture_id, picture_name, person, age, city, picture, history) {
+
+            if (typeof(history)==='undefined') history = false;
+
             var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures/' +picture_id;
 
 
@@ -340,8 +343,11 @@
             var description = $('meta[property="og:description"]').attr('content', person+', '+age+', '+city);
             var image = $('meta[property="og:image"]').attr('content', window.location.protocol + '//' + window.location.host + picture);
 
-            window.history.pushState({currentSlide: picture_id},'', '/pictures/' + picture_id);
-        }
+            if (history) {
+                window.history.pushState({currentSlide: picture_id},'', '/pictures/' + picture_id);
+            }
+
+        };
 
         var setArrowVibibility = function(currentSlide, totalSlides) {
             if (currentSlide+1 >= totalSlides) {
