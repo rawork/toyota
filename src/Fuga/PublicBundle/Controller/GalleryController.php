@@ -56,16 +56,16 @@ class GalleryController extends Controller
 				}
 			}
 
-			foreach ($pictures as &$picture) {
-				$picture['vote'] = false;
-				if (isset($votes[$picture['id']])) {
-					$picture['vote'] = true;
-				}
-
-//				$picture['vote'] = $this->get('container')->getItem('gallery_vote', 'picture_id='.$picture['id'].' AND user_id="'.$user['id'].'"');
-				//$picture['likes'] = $this->get('container')->count('gallery_vote', 'picture_id='.$picture['id']);
-			}
-			unset($picture);
+//			foreach ($pictures as &$picture) {
+//				$picture['vote'] = false;
+//				if (isset($votes[$picture['id']])) {
+//					$picture['vote'] = true;
+//				}
+//
+////				$picture['vote'] = $this->get('container')->getItem('gallery_vote', 'picture_id='.$picture['id'].' AND user_id="'.$user['id'].'"');
+//				//$picture['likes'] = $this->get('container')->count('gallery_vote', 'picture_id='.$picture['id']);
+//			}
+//			unset($picture);
 
 			$response = new JsonResponse();
 			$response->setData(array(
