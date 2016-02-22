@@ -623,6 +623,11 @@ a.btn-single-link {
     font-family: "ToyotaDisplay", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
+.modal-picture-page img {
+    max-width: 100% !important;
+    height: auto;
+}
+
 @media (min-width: 900px) {
     /*.content {*/
         /*-moz-box-shadow: 0px 3px 40px rgb(100,100,100);*/
