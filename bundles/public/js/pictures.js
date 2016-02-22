@@ -217,7 +217,7 @@
                         //console.log('mobile', mobilePageLimit, mobilePictures);
 
                         if (mobilePictures.length == 0) {
-                            galleryContainer.html('поиск по заданным параметрам не дал результатов.');
+                            galleryContainer.html('Поиск по заданным параметрам не дал результатов.');
                             $('.preloader').hide();
                             $('#pictures').show();
                             $('#picture-counter').hide();

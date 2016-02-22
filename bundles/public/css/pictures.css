@@ -673,6 +673,10 @@ a.btn-single-link {
     margin-bottom: 10px;
 }
 
+.pictures {
+    text-align: center;
+}
+
 @media (min-width: 900px) {
     /*.content {*/
         /*-moz-box-shadow: 0px 3px 40px rgb(100,100,100);*/
