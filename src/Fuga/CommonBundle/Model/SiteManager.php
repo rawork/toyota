@@ -8,7 +8,9 @@ class SiteManager extends ModelManager
 	{
 		if ($this->get('cache')->contains('global_sites')) {
 			$sites = $this->get('cache')->fetch('global_sites');
-		} else {
+		}
+
+		if (!$sites) {
 			$sites = $this->get('container')->getItems('config_version', '1=1', 'id DESC');
 			$this->get('cache')->save('global_sites', $sites);
 		}
