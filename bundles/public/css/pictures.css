@@ -609,6 +609,20 @@ span.icon-logout {
     }
 }
 
+a.btn-single-link {
+    background-color: #cf142b;
+    width: 280px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 20px;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 10px;
+    font-family: "ToyotaDisplay", "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
 @media (min-width: 900px) {
     /*.content {*/
         /*-moz-box-shadow: 0px 3px 40px rgb(100,100,100);*/

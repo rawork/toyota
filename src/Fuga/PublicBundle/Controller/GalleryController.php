@@ -40,7 +40,7 @@ class GalleryController extends Controller
 			$pictures = null;
 
 			if (!$pictures) {
-				$pictures = $this->get('container')->getItems('gallery_picture', $criteria, null, null, 'id,name,person,city,age,age_id,likes,picture,idea', false);
+				$pictures = $this->get('container')->getItems('gallery_picture', $criteria, null, null, 'id,name,person,city,age,likes,picture,idea', false);
 
 				$this->get('cache')->save($cacheCriteria, $pictures, 3600);
 			}
@@ -112,13 +112,17 @@ class GalleryController extends Controller
 				$this->get('container')->setVar('og_title', $picture['name']);
 				$this->get('container')->setVar('og_description', implode(', ', array($picture['person'], $picture['age'], $picture['city'])));
 				$this->get('container')->setVar('og_image', "http://".$_SERVER['SERVER_NAME'].$picture['picture_value']['extra']['main']['path']);
+
+				return $this->render('gallery/picture.html.twig', compact('picture'));
 			} else {
 				return $this->redirect('/pictures');
 			}
 
+		} else {
+			return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive', 'link', 'button', 'currentPicture'));
 		}
 
-		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive', 'link', 'button', 'currentPicture'));
+
 	}
 
 	public function archiveAction()
