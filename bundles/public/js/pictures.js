@@ -129,8 +129,8 @@
                         var maxElement = 6;
 
                         desktopTotalPictures = data.total;
-                        desktopTotalPages =  desktopTotalPictures / maxElement;
-                        desktopLoadedPages = desktopPictures.length / maxElement;
+                        desktopTotalPages =  Math.ceil(desktopTotalPictures / maxElement);
+                        desktopLoadedPages = Math.ceil(desktopPictures.length / maxElement);
 
                         console.log('first loaded pages', desktopLoadedPages);
 
@@ -431,8 +431,8 @@
                             var maxElement = 6;
 
                             desktopTotalPictures = data.total;
-                            desktopTotalPages =  desktopTotalPictures / maxElement;
-                            desktopLoadedPages = desktopPictures.length / maxElement;
+                            desktopTotalPages =  Math.ceil(desktopTotalPictures / maxElement);
+                            desktopLoadedPages = Math.ceil(desktopPictures.length / maxElement);
 
                             console.log('loaded pages', desktopLoadedPages);
 
