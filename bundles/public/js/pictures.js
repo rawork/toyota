@@ -90,7 +90,9 @@
                             picturesArray.push(picturesObj[i]);
                         }
 
-                        //shuffle(picturesArray);
+                        console.log('shuffle start',  Date.now());
+                        shuffle(picturesArray);
+                        console.log('shuffle stop',  Date.now());
 
                         //console.log(picturesArray);
 
