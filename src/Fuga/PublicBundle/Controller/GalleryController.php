@@ -40,7 +40,7 @@ class GalleryController extends Controller
 			$pictures = null;
 
 			if (!$pictures) {
-				$pictures = $this->get('container')->getItems('gallery_picture', $criteria, null, null, 'id,name,person,city,age,age_id,likes,picture.idea', false);
+				$pictures = $this->get('container')->getItems('gallery_picture', $criteria, null, null, 'id,name,person,city,age,age_id,likes,picture,idea', false);
 
 				$this->get('cache')->save($cacheCriteria, $pictures, 3600);
 			}
