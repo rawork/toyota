@@ -425,13 +425,13 @@
             that.addClass('active').siblings().removeClass('active');
             galleryContainer.attr('data-category', id);
             buildGallery();
-            $.scrollTo('.pictures-container', 1000);
+            $.scrollTo('.picture-help', 1000);
         });
 
         $(document).on('click', '.btn-picture-search', function(e) {
             e.preventDefault();
             buildGallery();
-            $.scrollTo('.pictures-container', 1000);
+            $.scrollTo('.picture-help', 1000);
         });
 
         $(document).on('click', '.picture .img a', function(e) {
