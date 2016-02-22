@@ -723,6 +723,13 @@ a.btn-single-link {
         width: 200px;
     }
 
+    .picture .img img {
+        max-width: 100% !important;
+        min-height: inherit;
+        min-width: inherit;
+        border: 0;
+    }
+
     .picture .idea, .picture .place, .picture .nomination {
         display: none;
     }
