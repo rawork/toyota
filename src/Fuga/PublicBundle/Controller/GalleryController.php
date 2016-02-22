@@ -587,7 +587,7 @@ class GalleryController extends Controller
 
 	public function repairAction() {
 
-//		UPDATE `gallery_picture` SET `publish`=0 WHERE is_archive=0
+//		UPDATE `gallery_picture` SET `publish`=1 WHERE is_archive=0
 
 		return $this->redirect('/pictures');
 
