@@ -196,6 +196,8 @@
             $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                 function(data){
 
+                    console.log(data);
+
                     //console.log('mobile ajax response',  Date.now());
 
                     if (data.pictures != undefined) {
