@@ -46,13 +46,14 @@ class GalleryController extends Controller
 
 			$pictures = null;
 			$total = 0;
+			$total = $this->get('container')->count('gallery_picture', $criteria);
 
-			if ($this->get('cache')->contains('total_'.$cacheCriteria)) {
-				$total = $this->get('cache')->fetch('total_'.$cacheCriteria);
-			} else {
-				$total = $this->get('container')->count('gallery_picture', $criteria);
-				$this->get('cache')->save('total_'.$cacheCriteria, $total);
-			}
+//			if ($this->get('cache')->contains('total_'.$cacheCriteria)) {
+//				$total = $this->get('cache')->fetch('total_'.$cacheCriteria);
+//			} else {
+//				$total = $this->get('container')->count('gallery_picture', $criteria);
+//				$this->get('cache')->save('total_'.$cacheCriteria, $total);
+//			}
 
 			if ($this->get('cache')->contains($cacheCriteria)) {
 				$pictures = $this->get('cache')->fetch($cacheCriteria);
