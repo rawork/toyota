@@ -216,6 +216,7 @@
 
                         mobileTotalPictures =  data.total;
                         mobileCurrentPicture = 0;
+                        galleryContainer.empty();
                         galleryContainer.append('<div class="picture">' + elementMobileHtml(mobilePictures[0], 0) +'</div>');
 
                         var pic = mobilePictures[0];
