@@ -308,7 +308,7 @@
                 var url = $('meta[property="og:url"]').attr('content', currentUrl);
                 var title = $('meta[property="og:title"]').attr('content', picturesArray[currentSlide]['name']);
                 var description = $('meta[property="og:description"]').attr('content', picturesArray[currentSlide]['person']+', '+picturesArray[currentSlide]['age']+', '+picturesArray[currentSlide]['city']);
-                var image = $('meta[property="og:image"]').attr('content', window.location.protocol + '//' + window.location.host + picturesArray[currentSlide]['picture_value']['extra']['main']['path']);
+                var image = $('meta[property="og:image"]').attr('content', window.location.protocol + '//' + window.location.host + picturesArray[currentSlide]['picture_main']);
 
                 window.history.pushState({currentSlide:picturesArray[currentSlide]['id']},'', '/pictures/'+picturesArray[currentSlide]['id']);
             });
@@ -322,7 +322,7 @@
             var url = $('meta[property="og:url"]').attr('content', currentUrl);
             var title = $('meta[property="og:title"]').attr('content', picturesArray[pos]['name']);
             var description = $('meta[property="og:description"]').attr('content', picturesArray[pos]['person']+', '+picturesArray[pos]['age']+', '+picturesArray[pos]['city']);
-            var image = $('meta[property="og:image"]').attr('content', window.location.protocol + '//' + window.location.host + picturesArray[pos]['picture_value']['extra']['main']['path']);
+            var image = $('meta[property="og:image"]').attr('content', window.location.protocol + '//' + window.location.host + picturesArray[pos]['picture_main']);
 
             window.history.pushState({currentSlide:picturesArray[pos]['id']},'', '/pictures/'+picturesArray[pos]['id']);
 
