@@ -47,8 +47,6 @@
 
         var buildGallery = function() {
 
-            console.log('start build gallery', Date.now());
-
             $('.preloader').show();
             $('#pictures').empty();
 
@@ -90,10 +88,7 @@
                             picturesArray.push(picturesObj[i]);
                         }
 
-                        console.log('shuffle start',  Date.now());
                         shuffle(picturesArray);
-                        console.log('shuffle stop',  Date.now());
-
                         //console.log(picturesArray);
 
                         if (gallerySlick) {
@@ -104,7 +99,6 @@
                         var currentElement = 1;
                         var maxElement = 0;
 
-                        console.log('start build html',  Date.now());
 
                         if (windowWidth > 900) {
                             maxElement = 6;
@@ -188,7 +182,6 @@
                             $('.picture .img a[data-id='+currentPicture+']').trigger('click');
                         }
                         $('.preloader').hide();
-                        console.log('stop init slick',  Date.now());
                     }
                 });
         };
