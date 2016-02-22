@@ -38,7 +38,7 @@ class GalleryController extends Controller
 					$picture['vote'] = $this->get('container')->getItem('gallery_vote', 'picture_id='.$picture['id'].' AND user_id="'.$user['id'].'"');
 				}
 
-				$picture['likes'] = $this->get('container')->count('gallery_vote', 'picture_id='.$picture['id']);
+				//$picture['likes'] = $this->get('container')->count('gallery_vote', 'picture_id='.$picture['id']);
 			}
 			unset($picture);
 
@@ -178,10 +178,18 @@ class GalleryController extends Controller
 
 				$this->get('container')->getTable('gallery_vote')->delete('id='.$vote['id']);
 
+				$likes = $this->get('container')->count('gallery_vote', 'picture_id='.$pictureId);
+
+				$this->get('container')->updateItem(
+					'gallery_picture',
+					array('likes' => $likes),
+					array('id' => $pictureId)
+				);
+
 				return array(
 					'voted' => true,
 					'message' => 'Вы уже голосовали за эту работу.',
-					'likes' => $this->get('container')->count('gallery_vote', 'picture_id='.$pictureId),
+					'likes' => $likes,
 				);
 			} else {
 				$this->get('container')->addItem('gallery_vote', array(
@@ -191,10 +199,18 @@ class GalleryController extends Controller
 					'ip_address' => $ip
 				));
 
+				$likes = $this->get('container')->count('gallery_vote', 'picture_id='.$pictureId);
+
+				$this->get('container')->updateItem(
+					'gallery_picture',
+					array('likes' => $likes),
+					array('id' => $pictureId)
+				);
+
 				return array(
 					'voted' => true,
 					'message' => 'Спасибо. Ваш голос учтен.',
-					'likes' => $this->get('container')->count('gallery_vote', 'picture_id='.$pictureId),
+					'likes' => $likes,
 				);
 			}
 		}
@@ -618,6 +634,22 @@ class GalleryController extends Controller
 		}
 
 		$text .= 'ready';
+
+		$response = new Response();
+		$response->setContent($text);
+
+		return $response;
+	}
+
+	public function likesAction() {
+		$sql = 'SELECT picture_id, count(id) as likes FROM `gallery_vote` GROUP BY picture_id';
+		$stmt = $this->get('connection')->prepare($sql);
+		$stmt->execute();
+		while ($picture = $stmt->fetch()) {
+			$this->get('container')->updateItem('gallery_picture', array('likes' => $picture['likes']), array('id' => $picture['picture_id']));
+		}
+
+		$text = 'ready';
 
 		$response = new Response();
 		$response->setContent($text);
