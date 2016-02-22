@@ -191,6 +191,8 @@
                 return;
             }
 
+            mobileLoadedPages = 0;
+
             //console.log('mobile ajax request',  Date.now());
 
             $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
@@ -218,6 +220,7 @@
                             galleryContainer.html('Поиск не дал результатов');
                             $('.preloader').hide();
                             $('#pictures').show();
+                            $('#picture-counter').hide();
                             return;
                         }
 
@@ -422,6 +425,7 @@
         $(document).on('click', '.btn-picture-search', function(e) {
             e.preventDefault();
             buildGallery();
+            $.scrollTo('.pictures-container', 1000);
         });
 
         $(document).on('click', '.picture .img a', function(e) {

@@ -32,12 +32,14 @@ class GalleryController extends Controller
 			}
 
 			if (trim($city) != '') {
-				$criteria .= ' AND city="'.$city.'"';
+				$criteria .= ' AND city LIKE "%'.$city.'%"';
 			}
 
 			if (trim($person) != '') {
-				$criteria .= ' AND person LIKE("%'.$person.'%")';
+				$criteria .= ' AND person LIKE "%'.$person.'%"';
 			}
+
+//			$this->get('log')->addError($criteria);
 
 			$cacheCriteria = md5($criteria);
 			if ($limit) {
@@ -45,7 +47,7 @@ class GalleryController extends Controller
 			}
 
 			$pictures = null;
-			$total = 0;
+//			$total = 0;
 			$total = $this->get('container')->count('gallery_picture', $criteria);
 
 //			if ($this->get('cache')->contains('total_'.$cacheCriteria)) {
