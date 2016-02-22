@@ -23,13 +23,13 @@
         var popupSlick = $('.modal-pictures');
 
         var elementHtml = function(item, pos) {
-            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'"><img class="display-xs" data-lazy="'+ item.picture_value.extra.big.path +'"><img class="display-md" data-lazy="'+ item.picture_value.extra.main.path +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
+            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'" data-category="'+item.age_id+'"><img class="display-xs" data-lazy="'+ item.picture_big +'"><img class="display-md" data-lazy="'+ item.picture_main +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
         };
 
         var modalElementHtml = function (item) {
             //console.log(item.nomination);
             var text = '<a href="#" class="popup-prev"></a> <a href="#" class="popup-next"></a>';
-            return '<div class="modal-picture"><img data-lazy="'+item.picture_value.extra.big.path+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' +'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
+            return '<div class="modal-picture"><img data-lazy="'+item.picture_big+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' +'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
         };
 
         var shuffle = function(o) {
@@ -89,7 +89,7 @@
                         }
 
                         shuffle(picturesArray);
-                        //console.log(picturesArray);
+                        console.log(picturesArray);
 
                         if (gallerySlick) {
                             galleryContainer.slick('unslick');
@@ -288,36 +288,6 @@
             for (i in picturesArray) {
                 popupSlick.append(modalElementHtml(picturesArray[i]))
             }
-
-            //var picture = picturesArray[pos];
-
-            //var img = new Image();
-            //img.src = picture.picture_value.extra.big.path;
-            //
-            //$('.modal-picture img').attr('src', picture.picture_value.extra.big.path);
-            //$('.modal-picture .title').html(picture.name);
-            //if (0 < parseInt(picture.position)) {
-            //    $('.modal-picture .place span').html(picture.position+' место').show();
-            //    $('.modal-picture .place').show();
-            //} else {
-            //    $('.modal-picture .place').hide();
-            //}
-            //
-            //$('.modal-picture .person').html(picture.person+'('+picture.city+'), '+picture.age);
-            //$('.modal-picture .idea').html('Идея:<br>'+ picture.idea);
-            //if (pos <= 0) {
-            //    $('.popup-prev').hide();
-            //} else {
-            //    $('.popup-prev').show();
-            //}
-            //if (pos >= picturesArray.length-1) {
-            //    $('.popup-next').hide();
-            //} else {
-            //    $('.popup-next').show();
-            //}
-            //
-            //$('.popup-prev').attr('data-position', pos-1);
-            //$('.popup-next').attr('data-position', pos+1);
 
             $('body').addClass('modal-open');
             popupSlick.slick({

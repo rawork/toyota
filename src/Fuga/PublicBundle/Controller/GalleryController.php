@@ -37,34 +37,43 @@ class GalleryController extends Controller
 				$pictures = $this->get('cache')->fetch($cacheCriteria);
 			}
 
+			$pictures = null;
+
 			if (!$pictures) {
-				$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+				$pictures = $this->get('container')->getItems('gallery_picture', $criteria, null, null, 'id,name,person,city,age,age_id,likes,picture', false);
+
 				$this->get('cache')->save($cacheCriteria, $pictures, 3600);
 			}
 
 			$user = $this->get('session')->get('gallery_user');
 
-			$votes = array();
-			if ($user) {
-				$sql = 'SELECT id,picture_id,user_id FROM gallery_vote WHERE user_id='.$user['id'];
-				$stmt = $this->get('connection')->prepare($sql);
-				$stmt->execute();
-				$votes0 = $stmt->fetchAll();
+			if (is_array($pictures)) {
+				$votes = array();
+				if ($user) {
+					$sql = 'SELECT id,picture_id,user_id FROM gallery_vote WHERE user_id='.$user['id'];
+					$stmt = $this->get('connection')->prepare($sql);
+					$stmt->execute();
+					$votes0 = $stmt->fetchAll();
 
-				if (is_array($votes0)){
-					foreach ($votes0 as $vote) {
-						$votes[$vote['picture_id']] = true;
+					if (is_array($votes0)){
+						foreach ($votes0 as $vote) {
+							$votes[$vote['picture_id']] = true;
+						}
 					}
 				}
-			}
 
-			foreach ($pictures as &$picture) {
-				$picture['vote'] = false;
-				if (isset($votes[$picture['id']])) {
-					$picture['vote'] = true;
+
+				foreach ($pictures as &$picture) {
+					$picture['vote'] = false;
+					if (isset($votes[$picture['id']])) {
+						$picture['vote'] = true;
+					}
+					$picture['picture'] = UPLOAD_REF.$picture['picture'];
+					$picture['picture_main'] = str_replace('.jpg', '_main.jpg',$picture['picture']);
+					$picture['picture_big'] = str_replace('.jpg', '_big.jpg',$picture['picture']);
 				}
+				unset($picture);
 			}
-			unset($picture);
 
 			$response = new JsonResponse();
 			$response->setData(array(
