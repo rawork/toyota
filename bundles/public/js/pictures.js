@@ -196,7 +196,7 @@
             $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                 function(data){
 
-                    console.log(data);
+                    //console.log(data);
 
                     //console.log('mobile ajax response',  Date.now());
 
@@ -270,7 +270,7 @@
                 $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                     function(data){
 
-                        console.log(data);
+                        //console.log(data);
 
                         var tempArray = [];
 
@@ -289,6 +289,9 @@
 
                         galleryContainer.find('.picture').html(elementMobileHtml(mobilePictures[mobileCurrentPicture], mobileCurrentPicture));
 
+                        var pic = mobilePictures[mobileCurrentPicture];
+                        setGraph(pic['id'], pic['name'], pic['person'], pic['age'], pic['city'], pic['picture_main']);
+
                         $('#slide-current').html(mobileCurrentPicture+1);
                         $('#slide-total').html(mobileTotalPictures);
 
@@ -303,12 +306,28 @@
                     }, "json")
             } else {
                 galleryContainer.find('.picture').html(elementMobileHtml(mobilePictures[mobileCurrentPicture]));
+
+                var pic = mobilePictures[mobileCurrentPicture];
+                setGraph(pic['id'], pic['name'], pic['person'], pic['age'], pic['city'], pic['picture_main']);
+
                 $('#slide-current').html(mobileCurrentPicture+1);
                 $('.preloader').hide();
                 $('#pictures').show();
             }
 
         };
+
+        var setGraph = function(picture_id, picture_name, person, age, city, picture) {
+            var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures/' +picture_id;
+
+
+            var url = $('meta[property="og:url"]').attr('content', currentUrl);
+            var title = $('meta[property="og:title"]').attr('content', picture_name);
+            var description = $('meta[property="og:description"]').attr('content', person+', '+age+', '+city);
+            var image = $('meta[property="og:image"]').attr('content', window.location.protocol + '//' + window.location.host + picture);
+
+            window.history.pushState({currentSlide: picture_id},'', '/pictures/' + picture_id);
+        }
 
         var setArrowVibibility = function(currentSlide, totalSlides) {
             if (currentSlide+1 >= totalSlides) {
@@ -424,29 +443,16 @@
             }).on('afterChange', function(event, slick, currentSlide){
                 setModalArrowVibibility(currentSlide, picturesArray.length);
 
-                var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures/' +picturesArray[currentSlide]['id'];
+                var pic = picturesArray[currentSlide];
+                setGraph(pic['id'], pic['name'], pic['person'], pic['age'], pic['city'], pic['picture_main']);
 
-
-                var url = $('meta[property="og:url"]').attr('content', currentUrl);
-                var title = $('meta[property="og:title"]').attr('content', picturesArray[currentSlide]['name']);
-                var description = $('meta[property="og:description"]').attr('content', picturesArray[currentSlide]['person']+', '+picturesArray[currentSlide]['age']+', '+picturesArray[currentSlide]['city']);
-                var image = $('meta[property="og:image"]').attr('content', window.location.protocol + '//' + window.location.host + picturesArray[currentSlide]['picture_main']);
-
-                window.history.pushState({currentSlide:picturesArray[currentSlide]['id']},'', '/pictures/'+picturesArray[currentSlide]['id']);
             });
             $('#modal-gallery').show();
 
             popupSlick.slick('setPosition');
 
-            var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures/' +picturesArray[pos]['id'];
-
-
-            var url = $('meta[property="og:url"]').attr('content', currentUrl);
-            var title = $('meta[property="og:title"]').attr('content', picturesArray[pos]['name']);
-            var description = $('meta[property="og:description"]').attr('content', picturesArray[pos]['person']+', '+picturesArray[pos]['age']+', '+picturesArray[pos]['city']);
-            var image = $('meta[property="og:image"]').attr('content', window.location.protocol + '//' + window.location.host + picturesArray[pos]['picture_main']);
-
-            window.history.pushState({currentSlide:picturesArray[pos]['id']},'', '/pictures/'+picturesArray[pos]['id']);
+            var pic = picturesArray[pos];
+            setGraph(pic['id'], pic['name'], pic['person'], pic['age'], pic['city'], pic['picture_main']);
 
         });
 

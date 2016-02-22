@@ -1091,4 +1091,8 @@ a.btn-single-link {
         max-width: 100% !important;
         height: auto;
     }
+
+    .share-mobile {
+        display: none;
+    }
 }
