@@ -6,7 +6,13 @@ class SiteManager extends ModelManager
 {
 	public function detectSite($url)
 	{
-		$sites = $this->get('container')->getItems('config_version', '1=1', 'id DESC');
+		if ($this->get('cache')->contains('global_sites')) {
+			$sites = $this->get('cache')->fetch('global_sites');
+		} else {
+			$sites = $this->get('container')->getItems('config_version', '1=1', 'id DESC');
+			$this->get('cache')->save('global_sites', $sites);
+		}
+
 		foreach($sites as $site) {
 			if (strpos($url, $site['folder']) === 0) {
 				$site['url'] = '/'.substr($url, strlen($site['folder']));

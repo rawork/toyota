@@ -110,7 +110,7 @@ body.modal-open {
 }
 
 .picture .img{
-    width: 280px;
+    /*width: 280px;*/
     margin: 0 auto;
 }
 
@@ -135,7 +135,7 @@ body.modal-open {
 .picture .idea {
     margin-top: 30px;
     color: #54565b;
-    text-align: left;
+    text-align: center;
 }
 
 .picture .idea .red {

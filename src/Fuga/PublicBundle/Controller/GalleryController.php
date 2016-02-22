@@ -11,11 +11,21 @@ class GalleryController extends Controller
 	public function indexAction($id = null)
 	{
 		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
-			$criteria = 'publish=1 AND is_archive<>1';
 
 			$category = $this->get('request')->request->getInt('category');
 			$person = $this->get('request')->request->get('person');
 			$city = $this->get('request')->request->get('city');
+
+			$limit = $this->get('request')->request->getInt('limit', null);
+			$page = $this->get('request')->request->getInt('page', 0);
+
+			if ($limit) {
+				if ($page > 0) {
+					$limit = ($page*$limit).','.$limit;
+				}
+			}
+
+			$criteria = 'publish=1 AND is_archive<>1';
 
 			if ($category > 0) {
 				$criteria .= ' AND age_id='.$category;
@@ -30,17 +40,26 @@ class GalleryController extends Controller
 			}
 
 			$cacheCriteria = md5($criteria);
+			if ($limit) {
+				$cacheCriteria .= md5($limit);
+			}
 
 			$pictures = null;
+			$total = 0;
+
+			if ($this->get('cache')->contains('total_'.$cacheCriteria)) {
+				$total = $this->get('cache')->fetch('total_'.$cacheCriteria);
+			} else {
+				$total = $this->get('container')->count('gallery_picture', $criteria);
+				$this->get('cache')->save('total_'.$cacheCriteria, $total);
+			}
 
 			if ($this->get('cache')->contains($cacheCriteria)) {
 				$pictures = $this->get('cache')->fetch($cacheCriteria);
 			}
 
-			$pictures = null;
-
 			if (!$pictures) {
-				$pictures = $this->get('container')->getItems('gallery_picture', $criteria, null, null, 'id,name,person,city,age,likes,picture,idea', false);
+				$pictures = $this->get('container')->getItems('gallery_picture', $criteria, null, $limit, 'id,name,person,city,age,likes,picture,idea', false);
 
 				$this->get('cache')->save($cacheCriteria, $pictures, 3600);
 			}
@@ -78,6 +97,7 @@ class GalleryController extends Controller
 			$response = new JsonResponse();
 			$response->setData(array(
 				'pictures' => $pictures,
+				'total' => $total,
 				'vote_disabled' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'vote_disabled'),
 				'gallery_disabled' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'gallery_disabled'),
 			));
