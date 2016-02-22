@@ -47,6 +47,8 @@
 
         var buildGallery = function() {
 
+            console.log('start build gallery');
+
             $('.preloader').show();
             $('#pictures').empty();
 
@@ -72,8 +74,13 @@
                 return;
             }
 
+            console.log('ajax request');
+
             $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city},
                 function(data){
+
+                    console.log('ajax responce');
+
                     if (data.pictures != undefined) {
 
                         picturesObj = data.pictures;
@@ -94,6 +101,8 @@
 
                         var currentElement = 1;
                         var maxElement = 0;
+
+                        console.log('start build html');
 
                         if (windowWidth > 900) {
                             maxElement = 6;
@@ -150,6 +159,8 @@
                             galleryType = 320;
                         }
 
+                        console.log('end build html');
+
                         // hide vote block
                         if (data.vote_disabled || isArchive) {
                             $('.picture-vote').css({visibility: 'hidden'});
@@ -169,11 +180,13 @@
                             $('#picture-counter').hide();
                         }
                         filterChanged = false;
+                        console.log('start init slick');
                         initSliderPlugin(windowWidth);
                         if (currentPicture) {
                             $('.picture .img a[data-id='+currentPicture+']').trigger('click');
                         }
                         $('.preloader').hide();
+                        console.log('stop init slick');
                     }
                 });
         };
