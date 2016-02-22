@@ -625,7 +625,48 @@ a.btn-single-link {
 
 .modal-picture-page img {
     max-width: 100% !important;
+    display: block;
+    width: auto;
+    margin: 0 auto;
     height: auto;
+}
+
+.modal-picture {
+    padding: 0 0;
+}
+
+.modal-picture .picture-vote {
+    float: right;
+}
+
+.modal-picture .title {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 700;
+    color: #d0112b;
+    /*text-align: center;*/
+}
+
+.modal-picture .person {
+    font-size: 15px;
+    line-height: 20px;
+    color: #999;
+    margin-top: 3px;
+}
+
+.modal-picture .idea {
+    font-size: 18px;
+    line-height: 23px;
+    color: #54565b;
+    margin-top: 30px;
+}
+
+.modal-picture .idea .red {
+    display: block;
+    font-size: 17px;
+    line-height: 22px;
+    margin-bottom: 10px;
 }
 
 @media (min-width: 900px) {
@@ -923,6 +964,11 @@ a.btn-single-link {
         padding: 30px 55px;
         min-height: 300px;
         position: relative;
+    }
+
+    .modal-picture-page {
+        margin-top: 50px;
+        padding: 0 0;
     }
 
     .modal-picture img{
