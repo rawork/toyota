@@ -6,20 +6,25 @@
             $('#modal-gallery .modal-dialog').css('margin-left','-438px');
         }
 
-        var startBuildGallery = false;
-        var galleryType = 0;
-        var galleryContainer = $('.pictures');
+        var galleryContainer = $('#pictures');
         var gallerySlick = false;
         var currentCategory = 0;
         var currentPerson = '';
         var currentCity = '';
         var filterChanged = true;
-        var isArchive = parseInt($('#pictures').attr('data-archive'));
+        var isArchive = parseInt(galleryContainer.attr('data-archive'));
 
-        var currentSlide = 0;
-        var totalSlides = 0;
-        var picturesArray = [];
         var popupSlick = $('.modal-pictures');
+
+        var desktopTotalPictures = 0;
+        var desktopTotalPages = 0;
+        var desktopLoadedPages = 0;
+        var desktopCurrentPage = 0;
+        var desktopLoadedDataPages = 0;
+        var desktopPictures = [];
+        var desktopPageLimit = 120;
+
+        var desktopLoading = false;
 
 
         var mobileTotalPictures = 0;
@@ -29,7 +34,7 @@
         var mobilePageLimit = 50;
 
         var elementHtml = function(item, pos) {
-            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-xs" data-lazy="'+ item.picture_big +'"><img class="display-md" data-lazy="'+ item.picture_main +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
+            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-md" data-lazy="'+ item.picture_main +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
         };
 
         var elementMobileHtml = function(item, pos) {
@@ -57,6 +62,10 @@
 
         var buildGallery = function() {
 
+            if ($('.noload').length > 0) {
+                return;
+            }
+
             var windowWidth = $(this).width();
 
             if (900 > windowWidth) {
@@ -80,30 +89,36 @@
                 return;
             }
 
-            if ($('.noload').length > 0) {
-                return;
-            }
-
             $('.preloader').show();
             $('#pictures').hide();
 
             console.log('ajax request ', Date.now());
 
-            $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city},
+            desktopLoadedDataPages = 0;
+
+            $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
                 function(data){
 
                     console.log('ajax responce',  Date.now());
 
+                    if (data.gallery_disabled && !isArchive) {
+                        $('body').addClass('modal-open');
+                        $('#modal-closed').show();
+                    }
+
                     if (data.pictures != undefined) {
 
-                        picturesArray = [];
+                        desktopPictures = [];
 
-                        for (i in data.pictures) {
-                            picturesArray.push(data.pictures[i]);
+                        for (var i in data.pictures) {
+                            desktopPictures.push(data.pictures[i]);
                         }
 
-                        shuffle(picturesArray);
-                        //console.log(picturesArray);
+                        shuffle(desktopPictures);
+
+                        desktopLoadedDataPages = desktopLoadedDataPages + 1;
+
+                        console.log('desktopLoadedDataPages', desktopLoadedDataPages);
 
                         if (gallerySlick) {
                             galleryContainer.slick('unslick');
@@ -111,31 +126,32 @@
                         galleryContainer.empty();
 
                         var currentElement = 1;
-                        var maxElement = 0;
+                        var maxElement = 6;
 
+                        desktopTotalPictures = data.total;
+                        desktopTotalPages =  desktopTotalPictures / maxElement;
+                        desktopLoadedPages = desktopPictures.length / maxElement;
 
-                        if (windowWidth >= 900) {
-                            maxElement = 6;
-                            totalSlides =  Math.ceil(Object.keys(data.pictures).length / maxElement);
-                            currentSlide = 1;
-                            for (var i in picturesArray) {
-                                if (currentElement == 1) {
-                                    var newBlock = $('<div></div>');
-                                }
+                        console.log('first loaded pages', desktopLoadedPages);
 
-                                newBlock.append(elementHtml(picturesArray[i], i));
+                        desktopCurrentPage = 1;
 
-                                if (currentElement >= maxElement) {
-                                    galleryContainer.append(newBlock.get(0).outerHTML);
-                                    currentElement = 1;
-                                    continue;
-                                }
-                                currentElement = currentElement + 1;
+                        for (var i in desktopPictures) {
+                            if (currentElement == 1) {
+                                var newBlock = $('<div></div>');
                             }
-                            if (currentElement > 1) {
+
+                            newBlock.append(elementHtml(desktopPictures[i], i));
+
+                            if (currentElement >= maxElement) {
                                 galleryContainer.append(newBlock.get(0).outerHTML);
+                                currentElement = 1;
+                                continue;
                             }
-                            galleryType = 900;
+                            currentElement = currentElement + 1;
+                        }
+                        if (currentElement > 1) {
+                            galleryContainer.append(newBlock.get(0).outerHTML);
                         }
 
                         console.log('end build html', Date.now());
@@ -143,30 +159,29 @@
                         // hide vote block
                         if (data.vote_disabled || isArchive) {
                             $('.picture-vote').css({visibility: 'hidden'});
-                            $('#modal-gallery .share').hide();
+                            $('.share').hide();
                         }
 
-                        if (data.gallery_disabled && !isArchive) {
-                            $('body').addClass('modal-open');
-                            $('#modal-closed').show();
-                        }
+                        $('#slide-current').html(desktopCurrentPage);
+                        $('#slide-total').html(desktopTotalPages);
 
-                        //console.log(totalSlides, typeof totalSlides, totalSlides > 0);
-
-                        if (totalSlides > 0) {
+                        if (desktopTotalPages > 0) {
                             $('#picture-counter').show();
                         } else {
                             $('#picture-counter').hide();
                         }
+
                         filterChanged = false;
+
                         console.log('start init slick',  Date.now());
                         initSliderPlugin(windowWidth);
                         console.log('stop init slick',  Date.now());
+
                         if (currentPicture) {
                             $('.picture .img a[data-id='+currentPicture+']').trigger('click');
                         }
-                        $('.preloader').hide();
 
+                        $('.preloader').hide();
                     }
                 }, "json");
         };
@@ -293,7 +308,7 @@
                         }
 
                         shuffle(tempArray);
-                        mobilePictures.concat(tempArray);
+                        mobilePictures = mobilePictures.concat(tempArray);
 
                         mobileLoadedPages = mobileLoadedPages + 1;
 
@@ -349,7 +364,10 @@
 
         };
 
-        var setArrowVibibility = function(currentSlide, totalSlides) {
+        var handleGalleryAfterChange = function(currentSlide, totalSlides) {
+
+            desktopCurrentPage = currentSlide+1;
+
             if (currentSlide+1 >= totalSlides) {
                 $('.gallery-next').hide();
             } else {
@@ -365,6 +383,90 @@
             if (1 == totalSlides) {
                 $('.gallery-prev').hide();
                 $('.gallery-next').hide();
+            }
+
+            if (desktopCurrentPage >= desktopLoadedPages - 2) {
+
+                if (desktopLoading) {
+                    return;
+                }
+
+                var category = parseInt(galleryContainer.attr('data-category'));
+                var person = $('#person').val();
+                var city = $('#city').val();
+
+                desktopLoading = true;
+
+                console.log('desktopLoadedDataPages', desktopLoadedDataPages);
+                console.log('ajax request next',  Date.now());
+
+                $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
+                    function(data){
+
+                        console.log('ajax response next',  Date.now());
+
+                        if (data.gallery_disabled && !isArchive) {
+                            $('body').addClass('modal-open');
+                            $('#modal-closed').show();
+                        }
+
+                        if (data.pictures != undefined) {
+
+                            var tempPictures = [];
+
+                            for (var i in data.pictures) {
+                                tempPictures.push(data.pictures[i]);
+                            }
+
+                            shuffle(tempPictures);
+
+                            desktopPictures = desktopPictures.concat(tempPictures);
+
+                            desktopLoadedDataPages = desktopLoadedDataPages + 1;
+
+                            console.log('desktopLoadedDataPages', desktopLoadedDataPages);
+
+
+                            var currentElement = 1;
+                            var maxElement = 6;
+
+                            desktopTotalPictures = data.total;
+                            desktopTotalPages =  desktopTotalPictures / maxElement;
+                            desktopLoadedPages = desktopPictures.length / maxElement;
+
+                            console.log('loaded pages', desktopLoadedPages);
+
+                            $('#slide-current').html(desktopCurrentPage);
+                            $('#slide-total').html(desktopTotalPages);
+
+                            for (var i in tempPictures) {
+                                if (currentElement == 1) {
+                                    var newBlock = $('<div></div>');
+                                }
+
+                                newBlock.append(elementHtml(desktopPictures[i], i));
+
+                                if (currentElement >= maxElement) {
+                                    galleryContainer.slick('slickAdd',newBlock.get(0).outerHTML);
+                                    currentElement = 1;
+                                    continue;
+                                }
+                                currentElement = currentElement + 1;
+                            }
+                            if (currentElement > 1) {
+                                galleryContainer.slick('slickAdd',newBlock.get(0).outerHTML);
+                            }
+
+                            // hide vote block
+                            if (data.vote_disabled || isArchive) {
+                                $('.picture-vote').css({visibility: 'hidden'});
+                                $('.share').hide();
+                            }
+
+                            desktopLoading = false;
+
+                        }
+                    }, "json");
             }
         };
 
@@ -405,14 +507,15 @@
                 prevArrow: prevArrow,
                 nextArrow: nextArrow
             }).on('afterChange', function(event, slick, currentSlide){
-                setArrowVibibility(currentSlide, totalSlides);
+                handleGalleryAfterChange(currentSlide, desktopTotalPages);
                 $('#slide-current').html(currentSlide+1);
             });
 
-            $('#slide-current').html(currentSlide);
-            $('#slide-total').html(totalSlides);
-            setArrowVibibility(0, totalSlides);
-            //$('.picture-counter').show();
+            //$('#slide-current').html(desktopCurrentPage);
+            //$('#slide-total').html(desktopTotalPages);
+
+            handleGalleryAfterChange(0, desktopTotalPages);
+
             $('#pictures').show();
 
             gallerySlick = true;
@@ -448,8 +551,8 @@
 
             popupSlick.empty();
 
-            for (i in picturesArray) {
-                popupSlick.append(modalElementHtml(picturesArray[i]))
+            for (var i in desktopPictures) {
+                popupSlick.append(modalElementHtml(desktopPictures[i]))
             }
 
             $('body').addClass('modal-open');
@@ -463,9 +566,9 @@
                 prevArrow: '<button type="button" class="slick-prev popup-prev"><img src="/bundles/public/img/popup_prev.png"></button>',
                 nextArrow: '<button type="button" class="slick-next popup-next"><img src="/bundles/public/img/popup_next.png"></button>'
             }).on('afterChange', function(event, slick, currentSlide){
-                setModalArrowVibibility(currentSlide, picturesArray.length);
+                setModalArrowVibibility(currentSlide, desktopPictures.length);
 
-                var pic = picturesArray[currentSlide];
+                var pic = desktopPictures[currentSlide];
                 setGraph(pic['id'], pic['name'], pic['person'], pic['age'], pic['city'], pic['picture_main']);
 
             });
@@ -473,7 +576,7 @@
 
             popupSlick.slick('setPosition');
 
-            var pic = picturesArray[pos];
+            var pic = desktopPictures[pos];
             setGraph(pic['id'], pic['name'], pic['person'], pic['age'], pic['city'], pic['picture_main']);
 
         });
