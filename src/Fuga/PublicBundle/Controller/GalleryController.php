@@ -31,10 +31,13 @@ class GalleryController extends Controller
 
 			$cacheCriteria = md5($criteria);
 
+			$pictures = null;
 
 			if ($this->get('cache')->contains($cacheCriteria)) {
 				$pictures = $this->get('cache')->fetch($cacheCriteria);
-			} else {
+			}
+
+			if (!$pictures) {
 				$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
 				$this->get('cache')->save($cacheCriteria, $pictures, 3600);
 			}
@@ -42,6 +45,7 @@ class GalleryController extends Controller
 			$user = $this->get('session')->get('gallery_user');
 
 			$votes = array();
+			$this->get('log')->addError('get pictures - user votes start' . time());
 			if ($user) {
 				$sql = 'SELECT id,picture_id,user_id FROM gallery_vote WHERE user_id='.$user['id'];
 				$stmt = $this->get('connection')->prepare($sql);
@@ -62,6 +66,7 @@ class GalleryController extends Controller
 				}
 			}
 			unset($picture);
+			$this->get('log')->addError('get pictures - user votes assigned' . time());
 
 			$response = new JsonResponse();
 			$response->setData(array(
