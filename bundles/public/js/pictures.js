@@ -80,7 +80,7 @@
                             picturesArray.push(picturesObj[i]);
                         }
 
-                        shuffle(picturesArray);
+                        //shuffle(picturesArray);
 
                         //console.log(picturesArray);
 
