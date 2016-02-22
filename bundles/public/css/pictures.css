@@ -585,8 +585,9 @@ span.icon-logout {
 
     .picture {
         display: block;
-        float: left;
-        width: 50%;
+        text-align: center;
+        /*float: left;*/
+        width: 100%;
         overflow: hidden;
     }
 

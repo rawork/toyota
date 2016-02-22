@@ -70,11 +70,12 @@
 
             if (windowWidth >= 900 && galleryType == 900 && !filterChanged)  {
                 return;
-            } else if (windowWidth >= 600 && windowWidth < 900 && galleryType == 600 && !filterChanged) {
-                return;
-            } else if (windowWidth < 600 && galleryType == 320 && !filterChanged) {
+            } else if (windowWidth < 900 && galleryType == 600 && !filterChanged) {
                 return;
             }
+            //else if (windowWidth < 600 && galleryType == 320 && !filterChanged) {
+            //    return;
+            //}
 
             console.log('ajax request ', Date.now());
 
@@ -104,7 +105,7 @@
                         var maxElement = 0;
 
 
-                        if (windowWidth > 900) {
+                        if (windowWidth >= 900) {
                             maxElement = 6;
                             totalSlides =  Math.ceil(Object.keys(data.pictures).length / maxElement);
                             currentSlide = 1;
@@ -126,29 +127,29 @@
                                 galleryContainer.append(newBlock.get(0).outerHTML);
                             }
                             galleryType = 900;
-                        } else if (windowWidth > 600) {
-                            maxElement = 1;
-                            totalSlides =  Math.ceil(Object.keys(data.pictures).length / maxElement);
-                            currentSlide = 1;
-                            for (var i in picturesArray) {
-                                if (currentElement == 1) {
-                                    var newBlock = $('<div></div>');
-                                }
-
-                                newBlock.append(elementHtml(picturesArray[i], i));
-
-                                if (currentElement >= maxElement) {
-                                    galleryContainer.append(newBlock.get(0).outerHTML);
-                                    currentElement = 1;
-                                    continue;
-                                }
-                                currentElement = currentElement + 1;
-                            }
-                            if (currentElement > 1) {
-                                galleryContainer.append(newBlock.get(0).outerHTML);
-                            }
-
-                            galleryType = 600;
+                        //} else if (windowWidth > 600) {
+                        //    maxElement = 1;
+                        //    totalSlides =  Math.ceil(Object.keys(data.pictures).length / maxElement);
+                        //    currentSlide = 1;
+                        //    for (var i in picturesArray) {
+                        //        if (currentElement == 1) {
+                        //            var newBlock = $('<div></div>');
+                        //        }
+                        //
+                        //        newBlock.append(elementHtml(picturesArray[i], i));
+                        //
+                        //        if (currentElement >= maxElement) {
+                        //            galleryContainer.append(newBlock.get(0).outerHTML);
+                        //            currentElement = 1;
+                        //            continue;
+                        //        }
+                        //        currentElement = currentElement + 1;
+                        //    }
+                        //    if (currentElement > 1) {
+                        //        galleryContainer.append(newBlock.get(0).outerHTML);
+                        //    }
+                        //
+                        //    galleryType = 600;
                         } else {
                             totalSlides =  Object.keys(data.pictures).length;
                             currentSlide = 1;
@@ -156,7 +157,7 @@
                                 galleryContainer.append(elementHtml(picturesArray[i], i));
                             }
 
-                            galleryType = 320;
+                            galleryType = 600;
                         }
 
                         console.log('end build html', Date.now());
@@ -182,6 +183,7 @@
                         filterChanged = false;
                         console.log('start init slick',  Date.now());
                         initSliderPlugin(windowWidth);
+                        console.log('stop init slick',  Date.now());
                         if (currentPicture) {
                             $('.picture .img a[data-id='+currentPicture+']').trigger('click');
                         }
@@ -258,9 +260,9 @@
             gallerySlick = true;
         };
 
-        $(window).on('resize', function(e){
-            buildGallery();
-        });
+        //$(window).on('resize', function(e){
+        //    buildGallery();
+        //});
 
         $(document).on('click', '.tabs li', function(e) {
             var that = $(this);
