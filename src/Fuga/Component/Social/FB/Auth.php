@@ -148,19 +148,22 @@ class Auth
 						$network = 'fb';
 						$age = '';
 
-						$birthday = $userInfo->getBirthday();
+						$email = $userInfo->getEmail();
 
-						$this->container->get('log')->addError('birthday');
-						$this->container->get('log')->addError(serialize($birthday));
-
-						if ($birthday) {
-							$year = $birthday->format('Y');
-							$age = date('Y') - $year;
+						if (!$email) {
+							$email = $userInfo->getId().'@facebook.com';
 						}
+
+//						$birthday = $userInfo->getBirthday();
+//
+//						if ($birthday) {
+//							$year = $birthday->format('Y');
+//							$age = date('Y') - $year;
+//						}
 
 						$result['user'] = $userInfo;
 
-						$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
+						$localUser = $this->container->getItem('gallery_user', 'email="'.$email.'"');
 						if ($localUser) {
 							$this->container->updateItem(
 								'gallery_user',
@@ -170,7 +173,7 @@ class Auth
 								array('id' => $localUser['id'])
 							);
 
-							$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
+							$localUser = $this->container->getItem('gallery_user', 'email="'.$email.'"');
 							unset($localUser['password']);
 
 						} else {
@@ -178,7 +181,7 @@ class Auth
 							$password = $this->container->get('util')->genKey(8);
 
 							$this->container->get('log')->addError(json_encode(array(
-								'email' => $userInfo->getEmail(),
+								'email' => $email,
 								'password' => md5($password),
 								'name' => $userInfo->getFirstName(),
 								'lastname' => $userInfo->getLastName(),
@@ -187,14 +190,14 @@ class Auth
 							)));
 
 							$userId = $this->container->addItem('gallery_user', array(
-								'email' => $userInfo->getEmail(),
+								'email' => $email,
 								'password' => md5($password),
 								'name' => $userInfo->getFirstName(),
 								'lastname' => $userInfo->getLastName(),
 								'age' => $age,
 								'social_'.$network => $userInfo->getId(),
 							));
-							$localUser = $this->container->getItem('gallery_user', 'email="'.$userInfo['email'].'"');
+							$localUser = $this->container->getItem('gallery_user', 'email="'.$email.'"');
 							$result['register'] = true;
 						}
 

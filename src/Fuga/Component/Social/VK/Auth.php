@@ -105,6 +105,10 @@ class Auth
 						$userInfo['network'] = 'vk';
 						$userInfo['age'] = '';
 
+						if (!isset($userInfo[email])) {
+							$userInfo['email'] = $userInfo['uid'].'@vk.com';
+						}
+
 						if (isset($userInfo['bdate'])) {
 							$dateArray = explode('.', $userInfo['bdate']);
 							$userInfo['age'] = isset($dateArray[2]) ? intval(date('Y')) - intval($dateArray[2]) : '';
