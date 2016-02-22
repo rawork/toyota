@@ -26,7 +26,7 @@
         var mobileCurrentPicture = 0;
         var mobileLoadedPages = 0;
         var mobilePictures = [];
-        var mobilePageLimit = 10;
+        var mobilePageLimit = 50;
 
         var elementHtml = function(item, pos) {
             return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-xs" data-lazy="'+ item.picture_big +'"><img class="display-md" data-lazy="'+ item.picture_main +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
@@ -191,26 +191,26 @@
                 return;
             }
 
-            console.log('mobile ajax request',  Date.now());
+            //console.log('mobile ajax request',  Date.now());
 
             $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                 function(data){
 
-                    console.log('mobile ajax response',  Date.now());
+                    //console.log('mobile ajax response',  Date.now());
 
                     if (data.pictures != undefined) {
 
                         mobilePictures = [];
 
-                        shuffle(data.pictures);
-
-                        for (i in data.pictures) {
+                        for (var i in data.pictures) {
                             mobilePictures.push(data.pictures[i]);
                         }
 
+                        shuffle(mobilePictures);
+
                         mobileLoadedPages = 1;
 
-                        console.log('mobile', mobilePageLimit, mobilePictures);
+                        //console.log('mobile', mobilePageLimit, mobilePictures);
 
                         mobileTotalPictures =  data.total;
                         mobileCurrentPicture = 0;
@@ -254,20 +254,31 @@
             var person = $('#person').val();
             var city = $('#city').val();
 
-            mobileCurrentPicture = mobileCurrentPicture + 1;
+            if (e.clientX > $(window).width()/2 && mobileTotalPictures-1 > mobileCurrentPicture) {
+                mobileCurrentPicture = mobileCurrentPicture + 1;
+            } else if (mobileCurrentPicture > 0) {
+                mobileCurrentPicture = mobileCurrentPicture - 1;
+            } else {
+                $('.preloader').hide();
+                $('#pictures').show();
+                return;
+            }
 
             if (!(mobileCurrentPicture in mobilePictures)) {
                 $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                     function(data){
-                        shuffle(data.pictures);
+                        var tempArray = [];
 
-                        for (i in data.pictures) {
-                            mobilePictures.push(data.pictures[i]);
+                        for (var i in data.pictures) {
+                            tempArray.push(data.pictures[i]);
                         }
+
+                        shuffle(tempArray);
+                        mobilePictures.concat(tempArray);
 
                         mobileLoadedPages = mobileLoadedPages + 1;
 
-                        console.log(mobilePictures);
+                        //console.log(mobilePictures);
 
                         mobileTotalPictures =  data.total;
 
@@ -381,7 +392,7 @@
             e.preventDefault();
 
             if ($(window).width() < 900) {
-                clickMobilePicture(this);
+                clickMobilePicture(this, e);
                 return;
             }
 
@@ -453,7 +464,7 @@
             var that = $(this);
             var picture = that.attr('data-id');
 
-            console.log('vote click', 'picture - ' + picture);
+            //console.log('vote click', 'picture - ' + picture);
 
             $.post('/pictures/vote', {picture: picture}, function(data) {
                 if (data.voted ) {
@@ -464,7 +475,7 @@
                     }
                     that.siblings('.likes').html(data.likes);
                 } else if (data.redirect) {
-                    console.log(data);
+                    //console.log(data);
                     var url = data.redirect;
                     $.get(url, { "_": $.now() },function(data){
                         $('#modal-auth .modal-content').html(data);
@@ -473,7 +484,7 @@
                     })
 
                 } else {
-                    console.log(data.message);
+                    //console.log(data.message);
                 }
             });
         });
@@ -521,7 +532,7 @@
             });
 
             $.post(url, params, function(data){
-                console.log(data);
+                //console.log(data);
                 if (data.status) {
 
                     if (data.task == 'redirect') {
@@ -553,7 +564,7 @@
                 } else {
                     that.find('.message.message-error').html(data.message);
                     that.find('.message.message-error').show();
-                    console.log(data.message);
+                    //console.log(data.message);
                 }
             });
         });
