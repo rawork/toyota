@@ -1032,4 +1032,8 @@ a.btn-single-link {
         padding-right: 50px;
     }
 
+    .modal-picture-page img {
+        max-width: 100% !important;
+        height: auto;
+    }
 }
