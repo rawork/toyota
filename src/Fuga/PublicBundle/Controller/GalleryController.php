@@ -31,18 +31,23 @@ class GalleryController extends Controller
 
 			$cacheCriteria = md5($criteria);
 
-			// todo use cache 1h for pictures
+			$this->get('log')->addError('start pictures');
+			$this->get('log')->addError('start get pictures' . time());
+
 			if ($this->get('cache')->contains($cacheCriteria)) {
 				$pictures = $this->get('cache')->fetch($cacheCriteria);
+				$this->get('log')->addError('get pictures cache' . time());
 			} else {
 				$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+				$this->get('log')->addError('get pictures mysql' . time());
 				$this->get('cache')->save($cacheCriteria, $pictures, 3600);
+				$this->get('log')->addError('get pictures save cache' . time());
 			}
 
 			$user = $this->get('session')->get('gallery_user');
 
 			$votes = array();
-
+			$this->get('log')->addError('get pictures - user votes start' . time());
 			if ($user) {
 				$sql = 'SELECT id,picture_id,user_id FROM gallery_vote WHERE user_id='.$user['id'];
 				$stmt = $this->get('connection')->prepare($sql);
@@ -55,6 +60,7 @@ class GalleryController extends Controller
 					}
 				}
 			}
+			$this->get('log')->addError('get pictures - user votes stop' . time());
 
 			foreach ($pictures as &$picture) {
 				$picture['vote'] = false;
@@ -63,6 +69,7 @@ class GalleryController extends Controller
 				}
 			}
 			unset($picture);
+			$this->get('log')->addError('get pictures - user votes assigned' . time());
 
 			$response = new JsonResponse();
 			$response->setData(array(
