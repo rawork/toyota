@@ -47,6 +47,9 @@
 
         var buildGallery = function() {
 
+            $('.preloader').show();
+            $('#pictures').empty();
+
             var windowWidth = $(this).width();
 
             var category = parseInt(galleryContainer.attr('data-category'));
@@ -170,6 +173,7 @@
                         if (currentPicture) {
                             $('.picture .img a[data-id='+currentPicture+']').trigger('click');
                         }
+                        $('.preloader').hide();
                     }
                 });
         };
@@ -252,7 +256,7 @@
             that.addClass('active').siblings().removeClass('active');
             galleryContainer.attr('data-category', id);
             buildGallery();
-            $.scrollTo('#pictures', 1000);
+            $.scrollTo('.pictures-container', 1000);
         });
 
         $(document).on('click', '.btn-picture-search', function(e) {
