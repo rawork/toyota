@@ -396,6 +396,7 @@
             $('#pictures').show();
 
             gallerySlick = true;
+            galleryContainer.slick('setPosition');
         };
 
         $(document).on('click', '.tabs li', function(e) {
