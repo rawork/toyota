@@ -45,7 +45,6 @@ class GalleryController extends Controller
 			$user = $this->get('session')->get('gallery_user');
 
 			$votes = array();
-			$this->get('log')->addError('get pictures - user votes start' . time());
 			if ($user) {
 				$sql = 'SELECT id,picture_id,user_id FROM gallery_vote WHERE user_id='.$user['id'];
 				$stmt = $this->get('connection')->prepare($sql);
@@ -66,7 +65,6 @@ class GalleryController extends Controller
 				}
 			}
 			unset($picture);
-			$this->get('log')->addError('get pictures - user votes assigned' . time());
 
 			$response = new JsonResponse();
 			$response->setData(array(
