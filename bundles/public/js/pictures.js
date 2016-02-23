@@ -42,8 +42,6 @@
         };
 
         var modalElementHtml = function (item) {
-            //console.log(item.nomination);
-            var text = '<a href="#" class="popup-prev"></a> <a href="#" class="popup-next"></a>';
             return '<div class="modal-picture"><img data-lazy="'+item.picture_big+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' +'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
         };
 
@@ -798,7 +796,9 @@ Share = {
 function openProfileForm(picture) {
     $('.account-control').trigger('check');
     try {
-        $('.picture-vote button[data-id='+picture+']').trigger('click');
+        if (picture) {
+            $('.picture-vote button[data-id=' + picture + ']').trigger('click');
+        }
     } catch (err) {
         console.log(err);
         var url = '/pictures/profile';
@@ -817,7 +817,9 @@ function closeAuthForm(picture) {
     $('.account-control').trigger('check');
     $('#modal-auth a.modal-close').trigger('click');
     try {
-        $('.picture-vote button[data-id=' + picture + ']').trigger('click');
+        if (picture) {
+            $('.picture-vote button[data-id=' + picture + ']').trigger('click');
+        }
     } catch (err) {
         console.log(err);
     }
