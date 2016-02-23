@@ -101,13 +101,13 @@ class Auth
 						*/
 						$userInfo = $userInfo['response'][0];
 
-						$userInfo['email'] = $token['email'];
-						$userInfo['network'] = 'vk';
-						$userInfo['age'] = '';
-
-						if (!isset($userInfo[email])) {
+						if (isset($token['email'])) {
+							$userInfo['email'] = $token['email'];
+						} else {
 							$userInfo['email'] = $userInfo['uid'].'@vk.com';
 						}
+						$userInfo['network'] = 'vk';
+						$userInfo['age'] = '';
 
 						if (isset($userInfo['bdate'])) {
 							$dateArray = explode('.', $userInfo['bdate']);
