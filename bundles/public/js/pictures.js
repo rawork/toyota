@@ -446,7 +446,7 @@
                                     var newBlock = $('<div></div>');
                                 }
 
-                                newBlock.append(elementHtml(desktopPictures[i], i));
+                                newBlock.append(elementHtml(tempPictures[i], desktopPictures.length - tempPictures.length + i));
 
                                 if (currentElement >= maxElement) {
                                     galleryContainer.slick('slickAdd',newBlock.get(0).outerHTML);
