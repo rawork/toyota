@@ -149,7 +149,7 @@ class Auth
 				}
 			} catch (\Exception $e) {
 				$result['message'] = $e->getMessage();
-				$this->container->get('log')->addError($e->getMessage());
+				$this->container->get('log')->addError('Catch VK AUTH Error'.$e->getMessage());
 			}
 		}
 
