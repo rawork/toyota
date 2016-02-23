@@ -302,7 +302,7 @@ class GalleryController extends Controller
 			$stmt->execute();
 			$user = $stmt->fetch();
 
-			$this->get('log')->addError(json_encode($user));
+//			$this->get('log')->addError(json_encode($user));
 
 			if (!$user) {
 				return array(

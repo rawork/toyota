@@ -206,7 +206,7 @@ class Auth
 				}
 			} catch (\Exception $e) {
 				$result['message'] = $e->getMessage();
-				$this->container->get('log')->addError($e->getMessage());
+				$this->container->get('log')->addError('Catch FB AUTH Error: '.$e->getMessage());
 			}
 		}
 
