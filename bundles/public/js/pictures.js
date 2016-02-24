@@ -693,6 +693,7 @@
                     }
 
                     if (data.task == 'close') {
+                        checkUserVotes();
                         $('#modal-auth a.modal-close').trigger('click');
                     }
 
@@ -819,6 +820,7 @@ function openProfileForm(picture) {
 }
 
 function closeAuthForm(picture) {
+    checkUserVotes();
     $('.account-control').trigger('check');
     $('#modal-auth a.modal-close').trigger('click');
     try {
@@ -828,4 +830,16 @@ function closeAuthForm(picture) {
     } catch (err) {
         console.log(err);
     }
+}
+
+function checkUserVotes() {
+    $.post('/pictures/votes', {}, function(data){
+        if (data.votes) {
+            for (var i in data.votes) {
+                $('.picture-vote button[data-id='+data.votes[i]['picture_id']+']').addClass('inactive');
+            }
+        } else {
+            console.log(data.message);
+        }
+    },"json");
 }

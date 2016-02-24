@@ -282,6 +282,31 @@ class GalleryController extends Controller
 		return $this->redirect($this->generateUrl('public_page' ,array('node' => 'pictures')), 301);
 	}
 
+	public function votesAction()
+	{
+		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
+			$user = $this->get('session')->get('gallery_user');
+
+			if (!$user) {
+				return array(
+					'votes' => false,
+					'message' => 'You are now authorized',
+				);
+			}
+
+			$sql = 'SELECT id,picture_id,user_id FROM gallery_vote WHERE user_id='.$user['id'];
+			$stmt = $this->get('connection')->prepare($sql);
+			$stmt->execute();
+
+			return array(
+				'votes' => $stmt->fetchAll(),
+				'message' => 'OK',
+			);
+		}
+
+		return $this->redirect('/pictures');
+	}
+
 	public function loginAction()
 	{
 		if ('POST' == $_SERVER['REQUEST_METHOD']) {
