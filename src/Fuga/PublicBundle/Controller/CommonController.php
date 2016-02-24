@@ -81,6 +81,10 @@ class CommonController extends Controller {
 		$res = $this->dinamicAction($node, $action, $options);
 		if (is_object($res) && $res instanceof Response) {
 			return $res;
+		} elseif (is_array($res)) {
+			$response = new JsonResponse();
+			$response->setData($res);
+			return $response;
 		}
 
 		$this->get('templating')->assign(array('maincontent' => $staticContent.$res));
