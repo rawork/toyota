@@ -595,21 +595,25 @@
 
         // auth functions
 
-        $(document).on('click', '.picture-vote button', function(e) {
+        $(document).on('click', '.picture-vote button:not(.busy)', function(e) {
             e.preventDefault();
             var that = $(this);
+
+            that.addClass('busy');
+
             var picture = that.attr('data-id');
 
             //console.log('vote click', 'picture - ' + picture);
 
             $.post('/pictures/vote', {picture: picture}, function(data) {
                 if (data.voted ) {
-                    if (that.hasClass('inactive')) {
-                        that.removeClass('inactive');
-                    } else {
+                    if (data.like == true) {
                         that.addClass('inactive');
+                    } else {
+                        that.removeClass('inactive');
                     }
                     that.siblings('.likes').html(data.likes);
+                    that.removeClass('busy');
                 } else if (data.redirect) {
                     //console.log(data);
                     var url = data.redirect;
@@ -622,6 +626,7 @@
                 } else {
                     //console.log(data.message);
                 }
+                that.removeClass('busy');
             });
         });
 

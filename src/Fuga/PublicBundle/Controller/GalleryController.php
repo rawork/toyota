@@ -252,6 +252,7 @@ class GalleryController extends Controller
 					'voted' => true,
 					'message' => 'Вы уже голосовали за эту работу.',
 					'likes' => $likes,
+					'like' => false,
 				);
 			} else {
 				$this->get('container')->addItem('gallery_vote', array(
@@ -273,6 +274,7 @@ class GalleryController extends Controller
 					'voted' => true,
 					'message' => 'Спасибо. Ваш голос учтен.',
 					'likes' => $likes,
+					'like' => true,
 				);
 			}
 		}
