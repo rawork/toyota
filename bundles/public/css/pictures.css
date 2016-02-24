@@ -176,7 +176,7 @@ body.modal-open {
     display: inline-block;
 }
 
-.picture-vote button {
+.picture-vote a {
     float: right;
     text-align: center;
     background-color: transparent;
@@ -190,7 +190,7 @@ body.modal-open {
     outline: none;
 }
 
-.picture-vote button.inactive {
+.picture-vote a.inactive {
     text-align: center;
     background-image: url('../img/btn_vote_result.png');
     background-repeat: no-repeat;

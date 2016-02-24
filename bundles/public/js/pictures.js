@@ -34,15 +34,15 @@
         var mobilePageLimit = 50;
 
         var elementHtml = function(item, pos) {
-            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-md" data-lazy="'+ item.picture_main +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
+            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-md" data-lazy="'+ item.picture_main +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><a href="#" data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></a></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
         };
 
         var elementMobileHtml = function(item, pos) {
-            return '<div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-xs" src="'+ item.picture_big +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div>';
+            return '<div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-xs" src="'+ item.picture_big +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><a  href="#" data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></a></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div>';
         };
 
         var modalElementHtml = function (item) {
-            return '<div class="modal-picture"><img data-lazy="'+item.picture_big+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><button data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></button></div>' +'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
+            return '<div class="modal-picture"><img data-lazy="'+item.picture_big+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="picture-vote"><div class="likes">' + item.likes + '</div><a href="#" data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></a></div>' +'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
         };
 
         var shuffle = function(o) {
@@ -595,7 +595,7 @@
 
         // auth functions
 
-        $(document).on('click', '.picture-vote button:not(.busy)', function(e) {
+        $(document).on('click', '.picture-vote a:not(.busy)', function(e) {
             e.preventDefault();
             var that = $(this);
 
@@ -698,7 +698,7 @@
                     }
 
                     if (data.picture) {
-                        $('.picture-vote button[data-id='+data.picture+']').trigger('click');
+                        $('.picture-vote a[data-id='+data.picture+']').trigger('click');
                     }
 
                     $('.account-control').trigger('check');
@@ -803,7 +803,7 @@ function openProfileForm(picture) {
     $('.account-control').trigger('check');
     try {
         if (picture) {
-            $('.picture-vote button[data-id=' + picture + ']').trigger('click');
+            $('.picture-vote a[data-id=' + picture + ']').trigger('click');
         }
     } catch (err) {
         console.log(err);
@@ -825,7 +825,7 @@ function closeAuthForm(picture) {
     $('#modal-auth a.modal-close').trigger('click');
     try {
         if (picture) {
-            $('.picture-vote button[data-id=' + picture + ']').trigger('click');
+            $('.picture-vote a[data-id=' + picture + ']').trigger('click');
         }
     } catch (err) {
         console.log(err);
@@ -836,7 +836,7 @@ function checkUserVotes() {
     $.post('/pictures/votes', {}, function(data){
         if (data.votes) {
             for (var i in data.votes) {
-                $('.picture-vote button[data-id='+data.votes[i]['picture_id']+']').addClass('inactive');
+                $('.picture-vote a[data-id='+data.votes[i]['picture_id']+']').addClass('inactive');
             }
         } else {
             console.log(data.message);
