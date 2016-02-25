@@ -92,14 +92,14 @@
             $('.preloader').show();
             $('#pictures').hide();
 
-            console.log('ajax request ', Date.now());
+            //console.log('ajax request ', Date.now());
 
             desktopLoadedDataPages = 0;
 
             $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
                 function(data){
 
-                    console.log('ajax responce',  Date.now());
+                    //console.log('ajax responce',  Date.now());
 
                     if (data.gallery_disabled && !isArchive) {
                         $('body').addClass('modal-open');
@@ -118,7 +118,7 @@
 
                         desktopLoadedDataPages = desktopLoadedDataPages + 1;
 
-                        console.log('desktopLoadedDataPages', desktopLoadedDataPages);
+                        //console.log('desktopLoadedDataPages', desktopLoadedDataPages);
 
                         if (gallerySlick) {
                             galleryContainer.slick('unslick');
@@ -132,7 +132,7 @@
                         desktopTotalPages =  Math.ceil(desktopTotalPictures / maxElement);
                         desktopLoadedPages = Math.ceil(desktopPictures.length / maxElement);
 
-                        console.log('first loaded pages', desktopLoadedPages);
+                        //console.log('first loaded pages', desktopLoadedPages);
 
                         desktopCurrentPage = 1;
 
@@ -154,7 +154,7 @@
                             galleryContainer.append(newBlock.get(0).outerHTML);
                         }
 
-                        console.log('end build html', Date.now());
+                        //console.log('end build html', Date.now());
 
                         // hide vote block
                         if (data.vote_disabled || isArchive) {
@@ -173,9 +173,9 @@
 
                         filterChanged = false;
 
-                        console.log('start init slick',  Date.now());
+                        //console.log('start init slick',  Date.now());
                         initSliderPlugin(windowWidth);
-                        console.log('stop init slick',  Date.now());
+                        //console.log('stop init slick',  Date.now());
 
                         if (currentPicture) {
                             $('.picture .img a[data-id='+currentPicture+']').trigger('click');

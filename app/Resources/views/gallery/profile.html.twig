@@ -5,6 +5,9 @@
     <input type="text" name="name" placeholder="Имя" value="{{ user.name }}">
     <input type="text" name="lastname" placeholder="Фамилия" value="{{ user.lastname }}">
     <input type="number" name="age" placeholder="Возраст" value="{{ user.age }}">
+    {% if user.code %}
+    <input type="text" name="code" placeholder="Проверочный код из письма регистрации">
+    {% endif %}
     <div class="form-checkbox"><input type="checkbox" name="is_driver" value="1"><label>Автомобиль во владении</label></div>
     <input type="text" name="auto_brand" placeholder="Марка автомобиля">
     <input type="text" name="auto_model" placeholder="Модель автомобиля">

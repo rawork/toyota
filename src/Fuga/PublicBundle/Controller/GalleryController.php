@@ -396,6 +396,8 @@ class GalleryController extends Controller
 				);
 			}
 
+			$code = '';
+			$code = $this->get('util')->genKey(32);
 
 			try {
 				$userId = $this->get('container')->addItem('gallery_user', array(
@@ -404,6 +406,7 @@ class GalleryController extends Controller
 					'age' => '',
 					'name' => '',
 					'lastname' => '',
+					'code' => $code,
 				));
 
 				$user = $this->get('container')->getItem('gallery_user', $userId);
@@ -414,7 +417,7 @@ class GalleryController extends Controller
 
 				$this->get('mailer')->send(
 					'Регистрация на сайте dreamcar.toyota.ru',
-					$this->render('mail/register.html.twig', compact('server_link')),
+					$this->render('mail/register.html.twig', compact('server_link', 'code')),
 					$email
 				);
 
@@ -455,6 +458,7 @@ class GalleryController extends Controller
 				$name = $this->get('request')->request->get('name');
 				$lastname = $this->get('request')->request->get('lastname');
 				$age = $this->get('request')->request->getInt('age');
+				$code = $this->get('request')->request->get('code');
 
 				$emptyFields = array();
 
@@ -482,6 +486,21 @@ class GalleryController extends Controller
 						'status' => false,
 						'message' => 'Поле "Возраст" должно содержать только положительные цифры',
 					);
+				}
+
+				if (!$user['social_vk'] && !$user['social_fb']) {
+					if (!$code) {
+						return array(
+							'status' => false,
+							'message' => 'Не заполнено поле "Проверочный код"',
+						);
+					} elseif ($user['code'] != $code) {
+						return array(
+							'status' => false,
+							'message' => 'Некорректный Проверочный код',
+						);
+					}
+
 				}
 
 				$this->get('container')->updateItem(
