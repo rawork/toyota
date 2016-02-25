@@ -110,5 +110,13 @@ class SecurityController extends Controller
 
 		return $this->redirect($this->generateUrl('admin_index'));
 	}
+
+	public function closedAction()
+	{
+		$response = new Response();
+		$response->setContent($this->render('page.closed.html.twig', array('project_logo' => PRJ_LOGO)));
+
+		return $response;
+	}
 	
 }

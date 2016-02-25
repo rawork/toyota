@@ -25,8 +25,13 @@ class SecurityHandler
 		if (preg_match('/^'.(PRJ_REF ? '\\'.PRJ_REF : '').'\/admin\/(logout|forget|password)/', $_SERVER['REQUEST_URI'])) {
 			return false;
 		}
-		
-		return 'Y' == PROJECT_LOCKED || preg_match('/^'.(PRJ_REF ? '\\'.PRJ_REF : '').'\/admin/', $_SERVER['REQUEST_URI']);
+
+		return preg_match('/^'.(PRJ_REF ? '\\'.PRJ_REF : '').'\/admin/', $_SERVER['REQUEST_URI']);
+	}
+
+	public function isClosedArea()
+	{
+		return 'Y' == PROJECT_LOCKED && !preg_match('/^'.(PRJ_REF ? '\\'.PRJ_REF : '').'\/admin/', $_SERVER['REQUEST_URI']);
 	}
 	
 	public function getCurrentUser()

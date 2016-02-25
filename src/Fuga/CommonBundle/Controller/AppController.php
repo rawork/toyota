@@ -31,6 +31,12 @@ class AppController extends Controller
 			return $controller->loginAction();
 		}
 
+		if ($this->get('security')->isClosedArea()) {
+			$controller = new SecurityController();
+
+			return $controller->closedAction();
+		}
+
 		try {
 			$parameters = $this->get('routing')->match(array_shift(explode('?', $site['url'])));
 
