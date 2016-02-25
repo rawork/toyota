@@ -398,7 +398,7 @@ class GalleryController extends Controller
 			}
 
 			$code = '';
-			$code = $this->get('util')->genKey(32);
+//			$code = $this->get('util')->genKey(32);
 
 			try {
 				$userId = $this->get('container')->addItem('gallery_user', array(
