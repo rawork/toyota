@@ -820,7 +820,6 @@ function openProfileForm(picture) {
 }
 
 function closeAuthForm(picture) {
-    checkUserVotes();
     $('.account-control').trigger('check');
     $('#modal-auth a.modal-close').trigger('click');
     try {
@@ -830,6 +829,7 @@ function closeAuthForm(picture) {
     } catch (err) {
         console.log(err);
     }
+    checkUserVotes();
 }
 
 function checkUserVotes() {
