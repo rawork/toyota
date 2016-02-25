@@ -240,7 +240,7 @@ class GalleryController extends Controller
 
 				$this->get('container')->getTable('gallery_vote')->delete('id='.$vote['id']);
 
-				$likes = $this->get('container')->count('gallery_vote', 'picture_id='.$pictureId);
+				$likes = $this->get('container')->count('gallery_vote', 'publish=1 AND picture_id='.$pictureId);
 
 				$this->get('container')->updateItem(
 					'gallery_picture',
@@ -259,10 +259,11 @@ class GalleryController extends Controller
 					'picture_id' => $pictureId,
 					'user_id'    => $user['id'],
 					'session_id' => $sessionId,
-					'ip_address' => $ip
+					'ip_address' => $ip,
+					'publish'    => 1,
 				));
 
-				$likes = $this->get('container')->count('gallery_vote', 'picture_id='.$pictureId);
+				$likes = $this->get('container')->count('gallery_vote', 'publish=1 AND picture_id='.$pictureId);
 
 				$this->get('container')->updateItem(
 					'gallery_picture',
@@ -750,7 +751,7 @@ class GalleryController extends Controller
 	}
 
 	public function likesAction() {
-		$sql = 'SELECT picture_id, count(id) as likes FROM `gallery_vote` GROUP BY picture_id';
+		$sql = 'SELECT picture_id, count(id) as likes FROM gallery_vote WHERE publish=1 GROUP BY picture_id';
 		$stmt = $this->get('connection')->prepare($sql);
 		$stmt->execute();
 		while ($picture = $stmt->fetch()) {
