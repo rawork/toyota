@@ -158,8 +158,8 @@
 
                         // hide vote block
                         if (data.vote_disabled || isArchive) {
-                            $('.picture-vote').css({visibility: 'hidden'});
-                            $('.share').hide();
+                            $('.picture-vote a').css({visibility: 'hidden'});
+                            //$('.share').hide();
                         }
 
                         $('#slide-current').html(desktopCurrentPage);
@@ -252,8 +252,8 @@
 
                         // hide vote block
                         if (data.vote_disabled || isArchive) {
-                            $('.picture-vote').css({visibility: 'hidden'});
-                            $('.share').hide();
+                            $('.picture-vote a').css({visibility: 'hidden'});
+                            //$('.share').hide();
                         }
 
                         if (data.gallery_disabled && !isArchive) {
@@ -325,8 +325,8 @@
                         $('#slide-total').html(mobileTotalPictures);
 
                         if (data.vote_disabled || isArchive) {
-                            $('.picture-vote').css({visibility: 'hidden'});
-                            $('.share').hide();
+                            $('.picture-vote a').css({visibility: 'hidden'});
+                            //$('.share').hide();
                         }
 
                         $('.preloader').hide();
@@ -459,8 +459,8 @@
 
                             // hide vote block
                             if (data.vote_disabled || isArchive) {
-                                $('.picture-vote').css({visibility: 'hidden'});
-                                $('.share').hide();
+                                $('.picture-vote a').css({visibility: 'hidden'});
+                                //$('.share').hide();
                             }
 
                             desktopLoading = false;
