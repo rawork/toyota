@@ -489,20 +489,20 @@ class GalleryController extends Controller
 					);
 				}
 
-				if (!$user['social_vk'] && !$user['social_fb']) {
-					if (!$code) {
-						return array(
-							'status' => false,
-							'message' => 'Не заполнено поле "Проверочный код"',
-						);
-					} elseif ($user['code'] != $code) {
-						return array(
-							'status' => false,
-							'message' => 'Некорректный Проверочный код',
-						);
-					}
-
-				}
+//				if (!$user['social_vk'] && !$user['social_fb']) {
+//					if (!$code) {
+//						return array(
+//							'status' => false,
+//							'message' => 'Не заполнено поле "Проверочный код"',
+//						);
+//					} elseif ($user['code'] != $code) {
+//						return array(
+//							'status' => false,
+//							'message' => 'Некорректный Проверочный код',
+//						);
+//					}
+//
+//				}
 
 				$this->get('container')->updateItem(
 					'gallery_user',
