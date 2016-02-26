@@ -15,8 +15,8 @@ ul.slider li {
 
 ul.slider img {
     max-width: 330px !important;
-    /*margin: 0 auto;*/
-    margin: 40px auto 0;
+    margin: 0 auto;
+    /*margin: 40px auto 0;*/
 }
 
 .slider-prev, .slider-next {
