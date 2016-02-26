@@ -159,11 +159,12 @@ body.modal-open {
     line-height: 15px;
     height: 30px;
     width: 200px;
+    text-align: center;
 
 }
 
 .picture-vote .likes {
-    float: left;
+    /*float: left;*/
     border: 1px solid #999;
     height: 27px;
     background-image: url('../img/likes_bg.png');
@@ -648,6 +649,7 @@ a.btn-single-link {
 
 .modal-picture .picture-vote {
     float: right;
+    text-align: right;
 }
 
 .modal-picture .title {
