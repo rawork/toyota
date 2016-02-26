@@ -555,6 +555,8 @@
                 popupSlick.append(modalElementHtml(desktopPictures[i]))
             }
 
+            $('.picture-vote a').css({visibility: 'hidden'});
+
             $('body').addClass('modal-open');
             popupSlick.slick({
                 infinite: false,
