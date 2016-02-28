@@ -133,7 +133,7 @@ class SecurityHandler
 		if ($login == DEV_USER && $passwordHash == DEV_PASS) {
 			$user = array('login' => $login, 'id' => 0);
 		} else {
-			$sql = "SELECT id, login FROM user_user WHERE login= :login AND password= :password AND is_active=1 LIMIT 1";
+			$sql = "SELECT id, login FROM user_user WHERE login= :login AND password= :password AND is_active=1 AND group_id<>0 LIMIT 1";
 			$stmt = $this->container->get('connection')->prepare($sql);
 			$stmt->bindValue("login", $login);
 			$stmt->bindValue("password", $passwordHash);
