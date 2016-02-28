@@ -30,5 +30,9 @@ define('FB_APP_SHARED_SECRET', 'd175409174d570f83e90bb264026979d');
 define('FB_APP_REDIRECT_URI', 'http://toyota.local/pictures/verify');
 define('FB_OAUTH_URL', 'javascript: checkLoginState();');
 
+define('CACHE_DRIVER', 'file'); // file/memcached/redis
+define('CACHE_HOST', 'localhost');
+define('CACHE_PORT', 0);   // 0/11211/6379
+
 require_once('database.php');
 require_once('parameters.php');

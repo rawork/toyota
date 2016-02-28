@@ -3,6 +3,7 @@
 namespace Fuga\Component\DB;
 	
 use Fuga\Component\Container;
+use Fuga\Component\Observable;
 
 class Table
 {

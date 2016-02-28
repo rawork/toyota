@@ -460,8 +460,8 @@ class Container
 					$engine->addExtension(new Twig\FugaExtension());
 					$engine->addGlobal('prj_ref', PRJ_REF);
 					$engine->addGlobal('theme_ref', THEME_REF);
-					$engine->addGlobal('prj_name', PRJ_NAME);
-					$engine->addGlobal('prj_zone', PRJ_ZONE);
+					$engine->addGlobal('prj_name', defined('PRJ_NAME') ? PRJ_NAME : '');
+					$engine->addGlobal('prj_zone', defined('PRJ_ZONE') ? PRJ_ZONE : '');
 					$this->services[$name] = new Templating\TwigTemplating($engine, $this);
 					break;
 				case 'em':
@@ -572,17 +572,42 @@ class Container
 					$this->services[$name] = new Filesystem();
 					break;
 				case 'cache':
-					$memcached = new \Memcached();
-					$memcached->addServer('localhost', 11211);
+					if (!defined('CACHE_DRIVER')) {
+						throw new Exception('Не настроены параметры кеширующего сервера.');
+					}
+					$driver = CACHE_DRIVER;
+					switch ($driver) {
+						case 'memcached':
+							$memcached = new \Memcached();
+							$memcached->addServer(defined('CACHE_HOST') ? CACHE_HOST : 'localhost', defined('CACHE_PORT') ? CACHE_PORT : 11211);
+							$cacheDriver = new \Doctrine\Common\Cache\MemcachedCache();
+							$cacheDriver->setMemcached($memcached);
 
-					$cacheDriver = new \Doctrine\Common\Cache\MemcachedCache();
-					$cacheDriver->setMemcached($memcached);
-					$cacheDriver->setNamespace('dreamcar_');
+							break;
+						case 'redis':
+							$redis = new \Redis();
+							$redis->connect(defined('CACHE_HOST') ? CACHE_HOST : 'localhost', defined('CACHE_PORT') ? CACHE_PORT : 6379);
+
+							$cacheDriver = new \Doctrine\Common\Cache\RedisCache();
+							$cacheDriver->setRedis($redis);
+							break;
+						case 'file':
+						default:
+							$cacheDriver = new \Doctrine\Common\Cache\FilesystemCache($this->getBaseDir().'/app/cache/fuga/', '.cmscache.data');
+					}
+
+					$cacheDriver->setNamespace((defined('PRJ_NAME') ? PRJ_NAME : 'fuga').'_');
 
 					$this->services[$name] = $cacheDriver;
 					break;
+				case 'event':
+					$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
+
+					$this->services[$name] = $dispatcher;
+					break;
 			}	
 		}
+
 		if (!isset($this->services[$name])) {
 			throw new \Exception('Cлужба "'.$name.'" не найдена');
 		}

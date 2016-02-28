@@ -2,13 +2,22 @@
 
 namespace Fuga\CommonBundle\Controller;
 
-class ExceptionController extends Controller {
+use Symfony\Component\HttpFoundation\Response;
+
+class ExceptionController extends Controller
+{
 	
-	public function indexAction($status_code, $status_text) {
-		header("HTTP/1.0 ".$status_code." Not Found");
-		$locale = $this->get('session')->get('locale');
+	public function indexAction($status_code, $status_text)
+	{
 		$project_logo = PRJ_LOGO;
-		return $this->render('page.error.html.twig', compact('status_code', 'status_text', 'locale', 'project_logo'));
+		$mainpage_link  = PRJ_REF.'/';
+
+		$response = new Response();
+		$response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+		$response->setCharset('UTF-8');
+		$response->setContent($this->render('page.error.html.twig', compact('status_code', 'status_text', 'project_logo', 'mainpage_link')));
+
+		return $response;
 	}
 	
 }

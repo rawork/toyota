@@ -13,6 +13,7 @@
         "symfony/form": "2.8.*",
         "symfony/validator": "2.8.*",
         "symfony/security": "2.8.*",
+        "symfony/event-dispatcher": "2.8.*",
         "gregwar/captcha": "1.1.*",
         "cboden/ratchet": "0.3.*",
         "facebook/php-sdk-v4": "~5.0"

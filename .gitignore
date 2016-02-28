@@ -20,6 +20,9 @@ app/cache/*
 !app/cache/smarty
 app/cache/smarty/*
 !app/cache/smarty/.gitkeep
+!app/cache/fuga
+app/cache/fuga/*
+!app/cache/fuga/.gitkeep
 !app/cache/twig
 app/cache/twig/*
 !app/cache/twig/.gitkeep

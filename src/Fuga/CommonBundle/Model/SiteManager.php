@@ -6,11 +6,11 @@ class SiteManager extends ModelManager
 {
 	public function detectSite($url)
 	{
+		$sites = null;
+
 		if ($this->get('cache')->contains('global_sites')) {
 			$sites = $this->get('cache')->fetch('global_sites');
 		}
-
-		$sites = null;
 
 		if (!$sites) {
 			$sites = $this->get('container')->getItems('config_version', '1=1', 'id DESC');

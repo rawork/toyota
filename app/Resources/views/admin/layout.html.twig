@@ -10,7 +10,6 @@
 	<link href="{{ theme_ref }}/treeview/jquery.treeview.css" type="text/css" rel="stylesheet">
 </head>
 <body data-state="{{ state }}" data-theme="{{ theme-ref }}" data-ref="{{ prj_ref }}">
-
 	<div class="container">
 		<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
 			<div class="container-fluid">
@@ -47,7 +46,7 @@
 							<li class="divider"></li>
 						{% endfor %}
 						<li>
-							<a class="filemanager-link" href="/bundles/filemanager/dialog.php?type=0&fldr=" data-target="#modalDialog">Файловый менеджер</a>
+							<a class="filemanager-link" href="/bundles/filemanager/dialog.php?type=0&fldr=" data-target="#modalDialog">Файлы</a>
 						</li>
 						<li class="divider"></li>
 						{% for lcl in locales %}
@@ -61,7 +60,7 @@
 						{% endfor %}
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li class="user-menu"><a href="{{ path('security_logout') }}" title="Выйти из Управление сайтом"><span class="glyphicon glyphicon-user"></span> {{ user.name }} {{ user.lastname }}, выйти</a></li>
+						<li class="user-menu"><a href="{{ path('security_logout') }}" title="Выйти из Управление сайтом"><span class="glyphicon glyphicon-user" title="{{ user.name }} {{ user.lastname }}"></span> выйти</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>

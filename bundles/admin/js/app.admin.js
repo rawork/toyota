@@ -9,14 +9,13 @@ function showListDialog(inputId, table_name, field_name, value){
         }, "json");
 }
 
-
 (function($) {
     $(function() {
 
         jQuery.cachedScript = function( url, options ) {
 
             // Allow user to set any option except for dataType, cache, and url
-            options = $.extend( options || {}, {
+            var options = $.extend( options || {}, {
                 dataType: "script",
                 cache: true,
                 url: url
@@ -28,9 +27,9 @@ function showListDialog(inputId, table_name, field_name, value){
         };
 
         var $body = $('body');
-        window.state = $body.attr('data-state');
-        window.theme_ref = $body.attr('data-theme');
-        window.prj_ref = $body.attr('data-ref');
+        var state = $body.attr('data-state');
+        var theme_ref = $body.attr('data-theme');
+        var prj_ref = $body.attr('data-ref');
 
         var showPopup = function() {
             $('#modalDialog').modal('show');
@@ -59,8 +58,10 @@ function showListDialog(inputId, table_name, field_name, value){
                 $('.navbar-fixed-top,.navbar-fixed-bottom').css({position: 'static', 'margin-left': '-15px', 'margin-right': '-15px'});
                 $('.container').css({'position': 'absolute', 'padding-top': '0', 'padding-bottom': '0'})
                     .animate({
-                        right: '-260px'
+                        left: '260px'
                     }, 200);
+
+                $('body').css('overflow-x', 'hidden');
 
                 $('.statebar').animate({
                     left: '0px'
@@ -70,7 +71,7 @@ function showListDialog(inputId, table_name, field_name, value){
                 $('.navbar-fixed-top,.navbar-fixed-bottom').css({position: 'fixed', 'margin-left': '0', 'margin-right': '0'});
                 $('.container')
                     .animate({
-                        right: 'auto'
+                        left: 'auto'
                     }, 200)
                     .css({'position': 'static', 'padding-top': '70px', 'padding-bottom': '40px'});
 
@@ -144,11 +145,13 @@ function showListDialog(inputId, table_name, field_name, value){
             e.preventDefault();
 
             var inputId = $(this).attr('data-input');
-            value = $('#popupChoiceId').val();
-            valueTitle = $('#popupChoiceTitle').html();
-            type = $('#'+inputId+'_type').val();
+            var value = $('#popupChoiceId').val();
+            var valueTitle = $('#popupChoiceTitle').html();
+            var type = $('#'+inputId+'_type').val();
+
             if (type == 'many') {
-                text = '<div>'+valueTitle+' <input type="radio" name="'+inputId+'_default" value="'+value+'" class="selected-default" data-input-id="'+inputId+'"> По умолчанию <a href="#" class="selected-remove" data-input="'+inputId+'"><span class="glyphicon glyphicon-remove"></span></a></div>';
+                var text = '<div>'+valueTitle+' <input type="radio" name="'+inputId+'_default" value="'+value+'" class="selected-default" data-input-id="'+inputId+'"> По умолчанию <a href="#" class="selected-remove" data-input="'+inputId+'"><span class="glyphicon glyphicon-remove"></span></a></div>';
+
                 if ($('input[name|="'+inputId+'_default"]').length == 0) {
                     $('#'+inputId+'_title').html(text);
                     $('#'+inputId).val(value);
@@ -156,7 +159,7 @@ function showListDialog(inputId, table_name, field_name, value){
                 } else {
                     $('#'+inputId+'_title').append(text);
                 }
-                ids = new Array();
+                ids = [];
                 $('input[name|="'+inputId+'_default"]').each(function (index, domElement){
                     if ($(domElement).val() != $('#'+inputId).val()) {
                         ids.push($(domElement).val());
@@ -173,12 +176,12 @@ function showListDialog(inputId, table_name, field_name, value){
 
         $(document).on('click', '.btn-list-choice', function (e) {
             e.preventDefault();
-            input_id = $(this).attr('data-input');
-            ids = [];
-            titles = [];
+            var input_id = $(this).attr('data-input');
+            var ids = [];
+            var titles = [];
             $("input.popup-item:checked").each(function (index, domElement) {
-                id = $(domElement).val();
-                title = $('#itemTitle' + id).html();
+                var id = $(domElement).val();
+                var title = $('#itemTitle' + id).html();
                 ids.push(id);
                 titles.push(title);
             });
@@ -219,20 +222,20 @@ function showListDialog(inputId, table_name, field_name, value){
 
         $(document).on('click', '#btn-group-delete', function(e) {
             e.preventDefault();
-            elements = $(".list-checker:checked");
+            var elements = $(".list-checker:checked");
             if (elements.length <= 0) {
                 alert('Не выбраны элементы для удаления');
                 return false;
             }
 
             if (confirm('Уверены, что хотите удалить выделенные записи?')) {
-                ids = new Array();
+                var ids = new Array();
                 elements.each(function (index, domElement) {
-                    id = $(domElement).val();
+                    var id = $(domElement).val();
                     ids.push(id);
                 });
                 $('#ids').val(ids.join());
-                path = location.href.split('?');
+                var path = location.href.split('?');
                 $('#frmGroupUpdate').prop('action', path[0] + '/groupdelete').submit();
             }
 
@@ -241,17 +244,19 @@ function showListDialog(inputId, table_name, field_name, value){
 
         $(document).on('click', '#btn-group-save, #btn-group-edit', function(e) {
             e.preventDefault();
+
             var checkElements = $(this).attr('data-check') == 'true';
-            elements = $(".list-checker:checked");
+            var elements = $(".list-checker:checked");
+
             if (checkElements && elements.length <= 0) {
                 alert('Не выбраны элементы для редактирования');
                 return;
             }
 
             if (checkElements) {
-                ids = new Array();
+                var ids = new Array();
                 elements.each(function (index, domElement) {
-                    id = $(domElement).val();
+                    var id = $(domElement).val();
                     ids.push(id);
                 });
                 $('input[name="edited"]').val(0);
@@ -277,17 +282,38 @@ function showListDialog(inputId, table_name, field_name, value){
 
                     $('#module-menu').html(data.content);
                     $('#waiting').hide(0);
-                    if ($('.statebar').css('left') == '-260px') {
-                        $('body').css('position', 'absolute')
-                            .animate({
-                                right: '-260px'
-                            }, 200);
 
+                    console.log($('.statebar').css('left'));
+
+                    if ($('.statebar').css('left') == '-260px') {
+                        if ('static' != $('.navbar-fixed-top').css('position')) {
+                            $('.navbar-fixed-top,.navbar-fixed-bottom').css({position: 'static', 'margin-left': '-15px', 'margin-right': '-15px'});
+                        }
+
+                        $('body>.container').css({'position': 'absolute', 'padding-top': '0', 'padding-bottom': '0'})
+                            .animate({
+                                left: '260px'
+                            }, 200);
+                        $('body').css('overflow-x', 'hidden');
                         $('.statebar').animate({
                             left: '0px'
                         }, 200);
-                        $('#state-menu-icon').hide();
+                        //that.hide();
                     }
+
+
+
+                    //if ($('.statebar').css('left') == '-260px') {
+                    //    $('body').css('position', 'absolute')
+                    //        .animate({
+                    //            right: '-260px'
+                    //        }, 200);
+                    //
+                    //    $('.statebar').animate({
+                    //        left: '0px'
+                    //    }, 200);
+                    //    $('#state-menu-icon').hide();
+                    //}
                 }, "json");
         });
 
@@ -295,8 +321,10 @@ function showListDialog(inputId, table_name, field_name, value){
             e.preventDefault();
 
             $('#waiting').show();
+
             var url = $(this).attr('data-url');
-            tablelist = $(this).siblings('.admin-submenu');
+            var tablelist = $(this).siblings('.admin-submenu');
+
             if (tablelist.html() == '') {
                 $.post(url, {},
                     function(data){
@@ -334,7 +362,7 @@ function showListDialog(inputId, table_name, field_name, value){
             e.preventDefault();
             var url = $(this).attr('data-url');
             if (confirm('Уверены, что хотите удалить запись?')) {
-                window.location = url;
+                window.location.href = url;
             } else {
                 return false;
             }
@@ -360,7 +388,7 @@ function showListDialog(inputId, table_name, field_name, value){
 
             if (quantity > 0 && quantity < 11) {
                 hidePopup();
-                path = location.href.split('?');
+                var path = location.href.split('?');
                 window.location = path[0] + ref + '/' + quantity + (1 in path ? '?'+ path[1] : '');
             } else {
                 $('#copy-input').addClass('has-error');
@@ -518,7 +546,7 @@ function showListDialog(inputId, table_name, field_name, value){
                 $('#'+inputId+'_title').html('Не выбрано');
                 $('#'+inputId+'_extra').val('');
             } else {
-                firstElement = inputs.first();
+                var firstElement = inputs.first();
                 if (checked != undefined && checked && firstElement != undefined) {
                     firstElement.prop('checked', true);
                     $('#'+inputId).val(firstElement.val());

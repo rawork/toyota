@@ -21,7 +21,8 @@ function exception_handler($exception)
 
 	if (isset($_SERVER['REQUEST_URI'])) {
 		$controller = new Fuga\CommonBundle\Controller\ExceptionController();
-		echo $controller->indexAction($statusCode, $message);
+		$res = $controller->indexAction($statusCode, $message);
+		$res->send();
 	} else {
 		echo $message;
 	}
