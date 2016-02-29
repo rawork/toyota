@@ -27,9 +27,9 @@ function showListDialog(inputId, table_name, field_name, value){
         };
 
         var $body = $('body');
-        var state = $body.attr('data-state');
-        var theme_ref = $body.attr('data-theme');
-        var prj_ref = $body.attr('data-ref');
+        window.state = $body.attr('data-state');
+        window.theme_ref = $body.attr('data-theme');
+        window.prj_ref = $body.attr('data-ref');
 
         var showPopup = function() {
             $('#modalDialog').modal('show');
