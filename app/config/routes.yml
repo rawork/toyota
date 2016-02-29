@@ -223,6 +223,9 @@ ajax_picture_list:
 ajax_picture_archive_list:
   path: /ajax/picture/archive
   defaults: { _controller: 'Fuga:Public:Gallery:archive'}
+ajax_picture_works_list:
+  path: /ajax/picture/works
+  defaults: { _controller: 'Fuga:Public:Gallery:works'}
 
 public_page:
   path: /{node}

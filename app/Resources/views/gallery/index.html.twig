@@ -1,3 +1,4 @@
+<h2 class="text-center picture-gallery-title">{{ gallery_title }}</h2>
 {{ render('Fuga:Public:Gallery:user') }}
 
 <div class="picture-category-help"><span>Выберите возрастную категорию</span></div>
@@ -28,7 +29,7 @@
                 <div class="gear-y"></div>
             </div>
 
-            <div id="pictures" class="pictures" data-picture="{{ currentPicture }}" data-archive="{{ isArchive }}" data-category="{{ firstAge.id }}"></div>
+            <div id="pictures" class="pictures" data-picture="{{ currentPicture }}" data-archive="{{ isArchive }}" data-category="{{ firstAge.id }}" data-action="{{ action }}"></div>
             <div id="picture-counter" class="picture-counter"><span id="slide-current"></span>/<span id="slide-total"></span></div>
         <div class="bdr-b"></div>
     </div>
@@ -38,9 +39,12 @@
     <a class="btn-share btn-share-vk" data-source="popupSlick"><img src="/bundles/public/img/btn_like_vk.png"></a>
     <a class="btn-share btn-share-fb" data-source="popupSlick"><img src="/bundles/public/img/btn_like_fb.png"></a>
 </div>
+<div class="btn-archive-container">
+    {% for btn in buttons %}
+    <a class="btn-archive" href="{{ btn.link }}">{{ btn.title }}</a>
+    {% endfor %}
+</div>
 
-{#{% if action == 'index' %}<div class="archive-text">Вдохновитесь работами победителей 9-го конкурса «Автомобиль мечты».<br> Самые фантастические и красочные машины помогут придумать собственное изобретение!</div>{% endif %}
-<a class="btn-archive" href="{{ link }}">{{ button }}</a>#}
 
 <div class="modal" id="modal-gallery">
     <div class="modal-dialog">
@@ -79,8 +83,3 @@
         <img src="/bundles/public/img/message-sorry.png">
     </div>
 </div>
-
-
-{#<div class="red-line">#}
-    {#<div>Здесь вы можете посмотреть работы участников<br>9-го конкурса &laquo;Автомобиль мечты&raquo;</div>#}
-{#</div>#}

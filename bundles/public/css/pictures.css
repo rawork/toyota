@@ -268,21 +268,26 @@ body.modal-open {
 }
 
 .content a.btn-archive {
-    background-size: 280px 43px;
-    background-image: url('../img/btn_archive2.png');
-    background-repeat: no-repeat;
-    background-position: center center;
+    border-radius: 5px;
+    border: 0;
+    border-top: 1px solid #dd5b6b;
+    border-bottom: 2px solid #7d0011;
+    background-color: #ba1227;
+    margin: 40px auto 0;
+    max-width: 256px;
+    font-size: 15px;
+    line-height: 20px;
+    padding: 5px;
     display: block;
     color: #fff;
-    text-transform: uppercase;
-    /*letter-spacing: 1px;*/
-    font-size: 15px;
-    width: 280px;
-    height: 43px;
-    line-height: 43px;
-    margin: 40px auto 0;
     text-align: center;
     text-decoration: none;
+    background: #cf142b; /* Old browsers */
+    background: -moz-linear-gradient(top,  #cf142b 0%, #a61023 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #cf142b 0%,#a61023 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #cf142b 0%,#a61023 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf142b', endColorstr='#a61023',GradientType=0 ); /* IE6-9 */
+
 }
 
 .remark {
@@ -697,6 +702,10 @@ a.btn-single-link {
         /*box-shadow: 0px 3px 40px rgb(100,100,100);*/
     /*}*/
 
+    .picture-gallery-title {
+        padding-right: 60px;
+    }
+
     .content ul.tabs {
         margin-left: 117px;
     }
@@ -1098,13 +1107,16 @@ a.btn-single-link {
         display: block;
     }
 
+    .content .btn-archive-container {
+        text-align: center;
+    }
+
     .content a.btn-archive {
-        background-size: 375px 57px;
-        letter-spacing: 1px;
-        font-size: 18px;
-        width: 375px;
-        height: 57px;
-        line-height: 57px;
+        display: inline-block;
+        margin: 40px 30px 0;
+        line-height: 17px;
+        min-width: 258px;
+        padding: 10px 5px;
     }
 
     .account-control {

@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GalleryController extends Controller
 {
-	public function indexAction($id = null)
+	public function worksAction($id = null)
 	{
 		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
 
@@ -25,7 +25,7 @@ class GalleryController extends Controller
 				}
 			}
 
-			$criteria = 'publish=1 AND is_archive<>1';
+			$criteria = 'publish=1 AND is_archive<>1 AND position=0 AND nomination=""';
 
 			if ($category > 0) {
 				$criteria .= ' AND age_id='.$category;
@@ -112,9 +112,22 @@ class GalleryController extends Controller
 
 		$ages = $this->get('container')->getItems('gallery_age', 'publish=1');
 		$firstAge = reset($ages);
-		$isArchive = false;
+		$action = 'works';
 		$link = $this->generateUrl('public_page_dinamic', array('node' => 'pictures', 'action' => 'archive'));
 		$button = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_archive_title');
+
+		$buttons = array(
+			array(
+				'title' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_index_title'),
+				'link' => '/pictures',
+			),
+			array(
+				'title' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_archive_title'),
+				'link' => '/pictures/archive',
+			),
+		);
+
+		$gallery_title = 'Работы участников 10 конкурса';
 
 //		$this->get('log')->addError(json_encode($_COOKIE));
 //		var_dump($this->get('session')->get('gallery_user'));
@@ -144,10 +157,71 @@ class GalleryController extends Controller
 			}
 
 		} else {
-			return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive', 'link', 'button', 'currentPicture'));
+			return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'action', 'link', 'button', 'currentPicture', 'buttons', 'gallery_title'));
 		}
 
 
+	}
+
+	public function indexAction()
+	{
+		if ('POST' == $_SERVER['REQUEST_METHOD'] && $this->isXmlHttpRequest()) {
+			$criteria = 'publish=1 AND is_archive=0 AND (position>0 OR nomination<>"")';
+
+			$category = $this->get('request')->request->getInt('category');
+			$person = $this->get('request')->request->get('person');
+			$city = $this->get('request')->request->get('city');
+
+			if ($category > 0) {
+				$criteria .= ' AND age_id='.$category;
+			}
+
+			if (trim($city) != '') {
+				$criteria .= ' AND city="'.$city.'"';
+			}
+
+			if (trim($person) != '') {
+				$criteria .= ' AND person LIKE("%'.$person.'%")';
+			}
+
+			$total = $this->get('container')->count('gallery_picture', $criteria);
+			$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+
+			foreach ($pictures as &$picture) {
+				$picture['picture'] = UPLOAD_REF.$picture['picture'];
+				$picture['picture_main'] = str_replace('.jpg', '_main.jpg',$picture['picture']);
+				$picture['picture_big'] = str_replace('.jpg', '_big.jpg',$picture['picture']);
+			}
+			unset($picture);
+
+			$response = new JsonResponse();
+			$response->setData(array(
+				'pictures' => $pictures,
+				'vote_disabled' => true,
+				'total' => $total,
+			));
+
+			return $response;
+		}
+
+		$ages = $this->get('container')->getItems('gallery_age', 'publish=1');
+		$firstAge = reset($ages);
+		$action = 'index';
+		$link = $this->generateUrl('public_page', array('node' => 'pictures'));
+		$button = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_index_title');
+		$buttons = array(
+			array(
+				'title' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_works_title'),
+				'link' => '/pictures/works',
+			),
+			array(
+				'title' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_archive_title'),
+				'link' => '/pictures/archive',
+			),
+		);
+		$gallery_title = 'Работы победителей 10 конкурса';
+
+		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'action', 'button', 'link', 'buttons', 'gallery_title'));
 	}
 
 	public function archiveAction()
@@ -171,10 +245,21 @@ class GalleryController extends Controller
 				$criteria .= ' AND person LIKE("%'.$person.'%")';
 			}
 
+			$total = $this->get('container')->count('gallery_picture', $criteria);
+			$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+
+			foreach ($pictures as &$picture) {
+				$picture['picture'] = UPLOAD_REF.$picture['picture'];
+				$picture['picture_main'] = str_replace('.jpg', '_main.jpg',$picture['picture']);
+				$picture['picture_big'] = str_replace('.jpg', '_big.jpg',$picture['picture']);
+			}
+			unset($picture);
+
 			$response = new JsonResponse();
 			$response->setData(array(
-				'pictures' => $this->get('container')->getItems('gallery_picture', $criteria),
+				'pictures' => $pictures,
 				'vote_disabled' => true,
+				'total' => $total,
 			));
 
 			return $response;
@@ -182,11 +267,23 @@ class GalleryController extends Controller
 
 		$ages = $this->get('container')->getItems('gallery_age', 'publish=1');
 		$firstAge = reset($ages);
+		$action = 'archive';
 		$isArchive = true;
 		$link = $this->generateUrl('public_page', array('node' => 'pictures'));
 		$button = $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_index_title');
+		$buttons = array(
+			array(
+				'title' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_index_title'),
+				'link' => '/pictures',
+			),
+			array(
+				'title' => $this->getManager('Fuga:Common:Param')->getValue('gallery', 'button_works_title'),
+				'link' => '/pictures/works',
+			),
+		);
+		$gallery_title = 'Работы победителей 9 конкурса';
 
-		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'isArchive', 'button', 'link'));
+		return $this->render('gallery/index.html.twig', compact('ages', 'firstAge', 'action', 'button', 'link', 'buttons', 'gallery_title', 'isArchive'));
 	}
 
 	public function voteAction()

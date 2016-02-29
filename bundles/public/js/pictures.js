@@ -13,6 +13,7 @@
         var currentCity = '';
         var filterChanged = true;
         var isArchive = parseInt(galleryContainer.attr('data-archive'));
+        var currentAction = galleryContainer.attr('data-action');
 
         var popupSlick = $('.modal-pictures');
 
@@ -33,19 +34,26 @@
         var mobilePictures = [];
         var mobilePageLimit = 50;
 
+        var urls = {
+            'index'   : '/ajax/picture',
+            'archive' : '/ajax/picture/archive',
+            'works'   : '/ajax/picture/works'
+        };
+
+
         var elementHtml = function(item, pos) {
             //<a href="#" data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></a>
-            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-md" data-lazy="'+ item.picture_main +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
+            return '<div class="picture"><div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-md" data-lazy="'+ item.picture_main +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + (!isArchive ? '<div class="picture-vote"><div class="likes">' + item.likes + '</div></div>': '') + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div></div>';
         };
 
         var elementMobileHtml = function(item, pos) {
             //<a  href="#" data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></a>
-            return '<div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-xs" src="'+ item.picture_big +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + '<div class="picture-vote"><div class="likes">' + item.likes + '</div></div>' + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div>';
+            return '<div class="img"><a href="" data-position="'+pos+'" data-id="'+item.id+'"><img class="display-xs" src="'+ item.picture_big +'"></a></div>'+(item.nomination ? '<div class="nomination">'+item.nomination+'</div>' : '')+'<div class="person">'+item.person+ ', ' + item.age +'</div><div class="city">' + item.city + '</div><div class="name">'+item.name+'</div>' + (!isArchive ? '<div class="picture-vote"><div class="likes">' + item.likes + '</div></div>': '') + (parseInt(item.position) > 0 ? '<div class="place">'+item.position+' место</div>' : '' )+'<div class="idea"><span class="red">Идея</span>' + item.idea + '</div>';
         };
 
         var modalElementHtml = function (item) {
             //<a href="#" data-id="'+item.id+'" '+(item.vote ? 'class="inactive"' : '')+'></a>
-            return '<div class="modal-picture"><img data-lazy="'+item.picture_big+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + '<div class="picture-vote"><div class="likes">' + item.likes + '</div></div>' +'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
+            return '<div class="modal-picture"><img data-lazy="'+item.picture_big+'">'+(parseInt(item.position) > 0 || item.nomination ? '<div class="place-container"><div class="place"><span>'+(parseInt(item.position) > 0 ? item.position+' место' : (item.nomination ? item.nomination : ''))+'</span></div></div>' : '') + (!isArchive ? '<div class="picture-vote"><div class="likes">' + item.likes + '</div></div>': '') +'<div class="title">'+item.name+'</div><div class="person">'+item.person+' ('+item.city+'), '+item.age+'</div><div class="idea"><span class="red">Идея</span>'+item.idea+'</div></div>';
         };
 
         var shuffle = function(o) {
@@ -99,12 +107,14 @@
 
             desktopLoadedDataPages = 0;
 
-            $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
+            console.log(currentAction);
+
+            $.post(urls[currentAction], {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
                 function(data){
 
                     //console.log('ajax responce',  Date.now());
 
-                    if (data.gallery_disabled && !isArchive) {
+                    if (data.gallery_disabled) {
                         $('body').addClass('modal-open');
                         $('#modal-closed').show();
                     }
@@ -160,7 +170,7 @@
                         //console.log('end build html', Date.now());
 
                         // hide vote block
-                        if (data.vote_disabled || isArchive) {
+                        if (data.vote_disabled) {
                             $('.picture-vote a').css({visibility: 'hidden'});
                             //$('.share').hide();
                         }
@@ -212,8 +222,9 @@
             mobileLoadedPages = 0;
 
             //console.log('mobile ajax request',  Date.now());
+            console.log(currentAction);
 
-            $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
+            $.post(urls[currentAction], {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                 function(data){
 
                     //console.log(data);
@@ -254,12 +265,12 @@
                         $('#slide-total').html(mobileTotalPictures);
 
                         // hide vote block
-                        if (data.vote_disabled || isArchive) {
+                        if (data.vote_disabled) {
                             $('.picture-vote a').css({visibility: 'hidden'});
                             //$('.share').hide();
                         }
 
-                        if (data.gallery_disabled && !isArchive) {
+                        if (data.gallery_disabled) {
                             $('body').addClass('modal-open');
                             $('#modal-closed').show();
                         }
@@ -297,9 +308,10 @@
                 $('#pictures').show();
                 return;
             }
+            console.log(currentAction);
 
-            if (!(mobileCurrentPicture in mobilePictures)) {
-                $.post('/ajax/picture', {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
+            if (!(mobileCurrentPicture in mobilePictures && mobileLoadedPages < mobileTotalPictures)) {
+                $.post(urls[currentAction], {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                     function(data){
 
                         //console.log(data);
@@ -327,7 +339,7 @@
                         $('#slide-current').html(mobileCurrentPicture+1);
                         $('#slide-total').html(mobileTotalPictures);
 
-                        if (data.vote_disabled || isArchive) {
+                        if (data.vote_disabled) {
                             $('.picture-vote a').css({visibility: 'hidden'});
                             //$('.share').hide();
                         }
@@ -352,6 +364,8 @@
         var setGraph = function(picture_id, picture_name, person, age, city, picture, history) {
 
             if (typeof(history)==='undefined') history = false;
+
+            console.log(picture_id);
 
             var currentUrl = window.location.protocol + '//' + window.location.host + '/pictures/' +picture_id;
 
@@ -388,7 +402,7 @@
                 $('.gallery-next').hide();
             }
 
-            if (desktopCurrentPage >= desktopLoadedPages - 2) {
+            if (desktopCurrentPage >= desktopLoadedPages - 2 && mobileLoadedPages < mobileTotalPictures) {
 
                 if (desktopLoading) {
                     return;
@@ -400,15 +414,16 @@
 
                 desktopLoading = true;
 
-                console.log('desktopLoadedDataPages', desktopLoadedDataPages);
-                console.log('ajax request next',  Date.now());
+                //console.log('desktopLoadedDataPages', desktopLoadedDataPages);
+                //console.log('ajax request next',  Date.now());
+                console.log(currentAction);
 
-                $.post(isArchive ? '/ajax/picture/archive' : '/ajax/picture', {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
+                $.post(urls[currentAction], {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
                     function(data){
 
-                        console.log('ajax response next',  Date.now());
+                        //console.log('ajax response next',  Date.now());
 
-                        if (data.gallery_disabled && !isArchive) {
+                        if (data.gallery_disabled) {
                             $('body').addClass('modal-open');
                             $('#modal-closed').show();
                         }
@@ -427,7 +442,7 @@
 
                             desktopLoadedDataPages = desktopLoadedDataPages + 1;
 
-                            console.log('desktopLoadedDataPages', desktopLoadedDataPages);
+                            //console.log('desktopLoadedDataPages', desktopLoadedDataPages);
 
 
                             var currentElement = 1;
@@ -461,7 +476,7 @@
                             }
 
                             // hide vote block
-                            if (data.vote_disabled || isArchive) {
+                            if (data.vote_disabled) {
                                 $('.picture-vote a').css({visibility: 'hidden'});
                                 //$('.share').hide();
                             }
