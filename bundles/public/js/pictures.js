@@ -123,6 +123,8 @@
 
                         desktopPictures = [];
 
+                        console.log(data.pictures);
+
                         for (var i in data.pictures) {
                             desktopPictures.push(data.pictures[i]);
                         }
@@ -235,6 +237,8 @@
                     //console.log('mobile ajax response',  Date.now());
 
                     if (data.pictures != undefined) {
+
+                        console.log(data.pictures);
 
                         mobilePictures = [];
 
