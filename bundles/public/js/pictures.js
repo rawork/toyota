@@ -107,7 +107,7 @@
 
             desktopLoadedDataPages = 0;
 
-            console.log(currentAction);
+            //console.log(currentAction);
 
             $.post(urls[currentAction], {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
                 function(data){
@@ -123,8 +123,6 @@
 
                         desktopPictures = [];
 
-                        console.log(data.pictures);
-
                         for (var i in data.pictures) {
                             desktopPictures.push(data.pictures[i]);
                         }
@@ -132,7 +130,6 @@
                         if (currentAction == 'works'){
                             shuffle(desktopPictures);
                         }
-
 
                         desktopLoadedDataPages = desktopLoadedDataPages + 1;
 
@@ -227,7 +224,7 @@
             mobileLoadedPages = 0;
 
             //console.log('mobile ajax request',  Date.now());
-            console.log(currentAction);
+            //console.log(currentAction);
 
             $.post(urls[currentAction], {category: category, person: person, city: city, limit: mobilePageLimit, page: mobileLoadedPages},
                 function(data){
@@ -238,8 +235,6 @@
 
                     if (data.pictures != undefined) {
 
-                        console.log(data.pictures);
-
                         mobilePictures = [];
 
                         for (var i in data.pictures) {
@@ -249,7 +244,6 @@
                         if (currentAction == 'works'){
                             shuffle(mobilePictures);
                         }
-
 
                         mobileLoadedPages = 1;
 

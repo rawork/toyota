@@ -11,7 +11,8 @@ class CheckboxType extends Type {
 	
 	public function getValue($name = '') {
 		$name = $name ? $name : $this->getName();
-		$value = isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
+//		$value = isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
+		$value = $this->get('request')->request->get($name);
 		return $value;
 	}
 
@@ -29,8 +30,8 @@ class CheckboxType extends Type {
 	}
 
 	public function getSearchInput() {
-		$name = parent::getSearchName();
-		$value = parent::getSearchValue();
+		$name = $this->getSearchName();
+		$value = $this->getSearchValue();
 		$yes = $no = $no_matter = "";
 		switch ($value) {
 			case "on":
@@ -57,22 +58,26 @@ class CheckboxType extends Type {
 </label>';
 	}
 
-	public function getSearchSQL() {
-		$value = parent::getSearchValue();
-		if ($value == 'off') {
-			return $this->getName()."<>1";
-		} elseif ($value == 'on') {
-			return $this->getName()."=1";
-		} else {
-			return '';
+	public function getSearchSQL()
+	{
+		$value = $this->getSearchValue();
+		switch ($value) {
+			case 'off':
+				return $this->getName()."<>1";
+			case 'on':
+				return $this->getName()."=1";
+			default:
+				return false;
 		}
 	}
-	
-	public function getType() {
+
+	public function getType()
+	{
 		return 'boolean';
 	}
 
-	public function getGroupSQLValue() {
+	public function getGroupSQLValue()
+	{
 		return $this->getSQLValue($this->getName().$this->dbId);
 	}
 }

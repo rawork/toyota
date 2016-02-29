@@ -74,7 +74,7 @@ class Type {
 
 	public function getValue($name = '')
 	{
-		$name = $name ? $name : $this->getName();
+		$name = $name ?: $this->getName();
 //		$value = isset($_REQUEST[$name]) ? $_REQUEST[$name] : ($this->dbValue ?: null);
 		$value = $this->get('request')->request->get($name, $this->dbValue);
 

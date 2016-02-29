@@ -194,6 +194,8 @@ class GalleryController extends Controller
 			}
 			unset($picture);
 
+			$pictures = array_values($pictures);
+
 			$response = new JsonResponse();
 			$response->setData(array(
 				'pictures' => $pictures,
@@ -254,6 +256,8 @@ class GalleryController extends Controller
 				$picture['picture_big'] = str_replace('.jpg', '_big.jpg',$picture['picture']);
 			}
 			unset($picture);
+
+			$pictures = array_values($pictures);
 
 			$response = new JsonResponse();
 			$response->setData(array(
