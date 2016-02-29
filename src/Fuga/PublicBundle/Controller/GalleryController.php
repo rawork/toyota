@@ -185,7 +185,7 @@ class GalleryController extends Controller
 			}
 
 			$total = $this->get('container')->count('gallery_picture', $criteria);
-			$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+			$pictures = $this->get('container')->getItems('gallery_picture', $criteria, 'sort,id DESC');
 
 			foreach ($pictures as &$picture) {
 				$picture['picture'] = UPLOAD_REF.$picture['picture'];
@@ -246,7 +246,7 @@ class GalleryController extends Controller
 			}
 
 			$total = $this->get('container')->count('gallery_picture', $criteria);
-			$pictures = $this->get('container')->getItems('gallery_picture', $criteria);
+			$pictures = $this->get('container')->getItems('gallery_picture', $criteria, 'sort,id DESC');
 
 			foreach ($pictures as &$picture) {
 				$picture['picture'] = UPLOAD_REF.$picture['picture'];
