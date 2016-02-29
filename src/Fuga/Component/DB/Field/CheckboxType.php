@@ -60,7 +60,7 @@ class CheckboxType extends Type {
 	public function getSearchSQL() {
 		$value = parent::getSearchValue();
 		if ($value == 'off') {
-			return $this->getName()."=0";
+			return $this->getName()."<>1";
 		} elseif ($value == 'on') {
 			return $this->getName()."=1";
 		} else {
