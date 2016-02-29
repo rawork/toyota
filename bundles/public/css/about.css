@@ -304,7 +304,7 @@ ul.juri li {
 }
 .quote-content {
     position: relative;
-    z-index: 100;
+    z-index: 6;
 }
 .quote-top {
     height: 130px;
@@ -312,7 +312,7 @@ ul.juri li {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 6;
 }
 .quote-bottom {
     height: 130px;
@@ -320,7 +320,7 @@ ul.juri li {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 90;
+    z-index: 5;
 }
 .quote-bottom:before {
     content: '';
@@ -346,7 +346,7 @@ ul.juri li {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 90;
+    z-index: 5;
 }
 .quote-top:before {
     content: '';
@@ -367,6 +367,8 @@ ul.juri li {
     background: url('../img/bloquote_border/corn-top-right.png') right top no-repeat;
 }
 /* quotation block end */
+
+
 
 
 .prizes-mobile {
@@ -822,7 +824,29 @@ p.lego img {
     }
 
 
+    .attention {
+        width: 93%;
+        margin-top: 10px;
+        line-height: 24px;
+    }
 
+    .content .attention p{
+        margin: 0;
+    }
+
+    .content .attention ul {
+        margin-left: 20px;
+    }
+
+    .content .attention ul li:before{
+        content: '';
+    }
+
+    .content .attention ul li {
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style: disc;
+    }
 
     /*.content ul.fotos li.foto1-3 {*/
         /*width: 40%;*/

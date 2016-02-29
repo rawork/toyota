@@ -136,6 +136,86 @@ ul.dealer .site-link {
     background-color: rgba(207,20,43, 0.05);
 }
 
+/* quotation block */
+.quote-pop {
+    position: relative;
+    margin: 0 auto;
+    max-width: 760px;
+    min-height: 100px;
+    padding: 30px 40px;
+    /*outline: 1px solid #ddd;*/
+    background: url('../img/bloquote_border/center-vert-left.png') left center repeat-y, url('../img/bloquote_border/center-vert-right.png') right center repeat-y, url('../img/bloquote_border/center-hor-top.png') top center repeat-x, url('../img/bloquote_border/center-hor-bottom.png') bottom center repeat-x;
+}
+.quote-content {
+    position: relative;
+    z-index: 6;
+}
+.quote-top {
+    height: 130px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 6;
+}
+.quote-bottom {
+    height: 130px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+.quote-bottom:before {
+    content: '';
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    left: 0;
+    background: url('../img/bloquote_border/corn-bottom-left.png') left bottom no-repeat;
+}
+.quote-bottom:after {
+    content: '';
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    right: 0;
+    background: url('../img/bloquote_border/corn-bottom-right.png') right bottom no-repeat;
+}
+.quote-top {
+    height: 130px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+.quote-top:before {
+    content: '';
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    left: 0;
+    background: url('../img/bloquote_border/corn-top-left.png') left top no-repeat;
+}
+.quote-top:after {
+    content: '';
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    right: 0;
+    background: url('../img/bloquote_border/corn-top-right.png') right top no-repeat;
+}
+/* quotation block end */
+
+.attention {
+    margin-bottom: 40px;
+}
+
 @media (min-width: 768px){
     ul.dealer li {
         float:left;
@@ -411,6 +491,30 @@ ul.dealer .site-link {
         left: -20px;
         bottom: 2px;
         background: url('../img/lb.png') no-repeat;
+    }
+
+    .attention {
+        width: 93%;
+        margin-top: 10px;
+        line-height: 24px;
+    }
+
+    .content .attention p{
+        margin: 0;
+    }
+
+    .content .attention ul {
+        margin-left: 20px;
+    }
+
+    .content .attention ul li:before{
+        content: '';
+    }
+
+    .content .attention ul li {
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style: disc;
     }
 
 }
