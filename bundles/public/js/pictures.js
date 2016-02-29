@@ -127,7 +127,10 @@
                             desktopPictures.push(data.pictures[i]);
                         }
 
-                        shuffle(desktopPictures);
+                        if (currentAction == 'works'){
+                            shuffle(desktopPictures);
+                        }
+
 
                         desktopLoadedDataPages = desktopLoadedDataPages + 1;
 
@@ -239,7 +242,10 @@
                             mobilePictures.push(data.pictures[i]);
                         }
 
-                        shuffle(mobilePictures);
+                        if (currentAction == 'works'){
+                            shuffle(mobilePictures);
+                        }
+
 
                         mobileLoadedPages = 1;
 
@@ -322,7 +328,10 @@
                             tempArray.push(data.pictures[i]);
                         }
 
-                        shuffle(tempArray);
+                        if (currentAction == 'works'){
+                            shuffle(tempArray);
+                        }
+
                         mobilePictures = mobilePictures.concat(tempArray);
 
                         mobileLoadedPages = mobileLoadedPages + 1;
@@ -436,7 +445,9 @@
                                 tempPictures.push(data.pictures[i]);
                             }
 
-                            shuffle(tempPictures);
+                            if (currentAction == 'works'){
+                                shuffle(tempPictures);
+                            }
 
                             desktopPictures = desktopPictures.concat(tempPictures);
 
