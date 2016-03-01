@@ -13,8 +13,13 @@
             {#</li>#}
             {% for slide in slides %}
             <li id="slide{{ slide.id }}">
-                <img class="visible-xs hidden-md" src="{{ slide.mobile_value.value }}">
-                <img class="hidden-xs visible-md" src="{{ slide.desktop_value.value }}">
+                {% if slide.url %}
+                <a href="{{ slide.url }}"><img class="visible-xs hidden-md" src="{{ slide.mobile_value.value }}">
+                <img class="hidden-xs visible-md" src="{{ slide.desktop_value.value }}"></a>
+                {% else %}
+                    <img class="visible-xs hidden-md" src="{{ slide.mobile_value.value }}">
+                    <img class="hidden-xs visible-md" src="{{ slide.desktop_value.value }}">
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
