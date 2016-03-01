@@ -762,7 +762,7 @@ a.btn-single-link {
     }
 
     .picture .nomination {
-        display: none;
+        /*display: none;*/
     }
 
     .picture-vote {
