@@ -442,18 +442,29 @@ h3 {
     width: 100%;
 }
 
-p.lego {
-
-
-    padding-top: 5px;
-    font-weight: bold;
+.lego {
+    margin: 40px 0 0;
+    /*font-weight: bold;*/
 }
 
-p.lego img {
-    float: left;
+.lego img {
+    float: right;
     display: block;
-    margin-right: 35px;
+    margin-left: 35px;
     margin-bottom: 10px;
+}
+
+.lego h6 {
+    font-size: 17px;
+    background-color: #fff;
+    padding: 5px 10px;
+    display: inline-block;
+    color: #cf142b;
+    z-index: 7;
+    position: absolute;
+    text-transform: uppercase;
+    font-family: "ToyotaDisplay", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    top: -99px;
 }
 
 
