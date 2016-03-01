@@ -344,7 +344,8 @@ p.video iframe {
         margin-top: 0;
         margin-left: 40px;
         margin-bottom: 10px;
-        max-width: 185px !important;
+        /*max-width: 185px !important;*/
+        max-width: 240px !important;
     }
 
     img#boy-xs {
