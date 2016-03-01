@@ -305,7 +305,7 @@
 
             if (e.clientX > $(window).width()/2 && mobileTotalPictures-1 > mobileCurrentPicture) {
                 mobileCurrentPicture = mobileCurrentPicture + 1;
-            } else if (mobileCurrentPicture > 0) {
+            } else if (e.clientX < $(window).width()/2 && mobileCurrentPicture > 0) {
                 mobileCurrentPicture = mobileCurrentPicture - 1;
             } else {
                 $('.preloader').hide();

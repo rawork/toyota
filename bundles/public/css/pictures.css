@@ -131,6 +131,7 @@ body.modal-open {
 .picture .nomination {
     margin-top: 15px;
     font-weight: bold;
+    color: #cf142b;
 }
 
 .picture .person {
@@ -756,8 +757,12 @@ a.btn-single-link {
         border: 0;
     }
 
-    .picture .idea, .picture .place, .picture .nomination {
+    .picture .idea, .picture .place {
         display: none;
+    }
+
+    .picture .nomination {
+        /*display: none;*/
     }
 
     .picture-vote {
