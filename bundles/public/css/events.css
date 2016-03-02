@@ -687,6 +687,11 @@ a.next-event {
         line-height: 22px;
     }
 
+    .content ul.event-pictures {
+        margin-left: -25px;
+        margin-right: -25px;
+    }
+
     .content ul.event-pictures li {
         padding-left: 0;
         float: left;
