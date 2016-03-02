@@ -702,11 +702,11 @@ a.next-event {
     }
 
     .event-pictures .picture .img {
-        width: 200px;
+        width: 100%;
     }
 
     .event-pictures.pictures4 .picture .img {
-        width: 160px;
+        width: 100%;
     }
 
     /*ul.events .preview {*/
