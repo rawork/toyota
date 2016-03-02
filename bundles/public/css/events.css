@@ -693,18 +693,20 @@ a.next-event {
     /*}*/
 
     .content ul.event-pictures li {
-        padding-left: 0;
         float: left;
         width: 33.3333%;
-        padding: 0 40px;
+        padding: 0 30px;
+        padding-left: 0;
     }
 
     .content ul.event-pictures li:first-child {
         padding-left: 0;
+        padding-right: 50px;
     }
 
     .content ul.event-pictures li:last-child {
         padding-right: 0;
+        padding-left: 50px;
     }
 
     .content ul.event-pictures.pictures4 li {
