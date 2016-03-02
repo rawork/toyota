@@ -7,6 +7,10 @@
         var maxYear = parseInt(calendarYear.attr('data-max'));
         var currentYear = parseInt(calendarYear.text());
 
+
+        var galleryContainer = $('.pictures');
+
+
         var checkMonth = function(year) {
             if (currentYear != year) {
                 $('.month').removeClass('active');
@@ -118,6 +122,36 @@
             // Kick off one resize to fix all videos on page load
         }).resize();
 
+
+
+        //gallery
+        $(document).on('click', '.tabs li', function(e) {
+            e.preventDefault();
+
+            var that = $(this);
+            var id = that.attr('data-id');
+            that.addClass('active').siblings().removeClass('active');
+            $(id).addClass('active').siblings().removeClass('active');
+            if ($(window).width() < 900) {
+                galleryContainer.slick('setPosition');
+            }
+        });
+
+
+
+        galleryContainer.slick({
+            infinite: false,
+            dots : false,
+            lazyLoad: 'ondemand', //progressive
+            slidesToShow: 1,
+            adaptiveHeight: true,
+            prevArrow: '',
+            nextArrow: ''
+        })
+        //    .on('afterChange', function(event, slick, currentSlide){
+        //    handleGalleryAfterChange(currentSlide, desktopTotalPages);
+        //    $('#slide-current').html(currentSlide+1);
+        //});
 
     });
 

@@ -52,4 +52,18 @@ class NewsController extends Controller
 		return $this->render('news/calendar.html.twig', compact('years', 'year', 'month'));
 	}
 
+
+	public function winAction()
+	{
+		$ages = $this->get('container')->getItems('gallery_age', 'publish=1');
+		foreach ($ages as &$age) {
+			$age['pictures'] = $this->get('container')->getItems('gallery_picture', 'is_archive=0 AND publish=1 AND nomination<>"" AND age_id='.$age['id'], 'sort');
+		}
+		unset($age);
+
+		$content = $this->render('news/win.html.twig', compact('ages'));
+
+
+		return $content;
+	}
 }
