@@ -698,17 +698,17 @@ a.next-event {
     .content ul.event-pictures li {
         float: left;
         width: 33.3333%;
-        padding: 0 27px;
+        padding: 0 28px;
     }
 
     .content ul.event-pictures li:first-child {
         padding-left: 0;
-        padding-right: 55px;
+        padding-right: 56px;
     }
 
     .content ul.event-pictures li:last-child {
         padding-right: 0;
-        padding-left: 55px;
+        padding-left: 56px;
     }
 
     .content ul.event-pictures.pictures4 li {
