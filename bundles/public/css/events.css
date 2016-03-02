@@ -687,15 +687,24 @@ a.next-event {
         line-height: 22px;
     }
 
-    .content ul.event-pictures {
-        margin-left: -25px;
-        margin-right: -25px;
-    }
+    /*.content ul.event-pictures {*/
+        /*margin-left: -25px;*/
+        /*margin-right: -25px;*/
+    /*}*/
 
     .content ul.event-pictures li {
         padding-left: 0;
         float: left;
         width: 33.3333%;
+        padding: 0 40px;
+    }
+
+    .content ul.event-pictures li:first-child {
+        padding-left: 0;
+    }
+
+    .content ul.event-pictures li:last-child {
+        padding-right: 0;
     }
 
     .content ul.event-pictures.pictures4 li {
