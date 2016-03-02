@@ -658,8 +658,8 @@ a.next-event {
     }
 
     .picture {
-        font-size: 17px;
-        line-height: 22px;
+        font-size: 15px;
+        line-height: 20px;
         text-align: center;
         padding-top: 0;
         padding-bottom: 0;
@@ -668,6 +668,7 @@ a.next-event {
     .picture .nomination {
         position: static;
         text-align: center;
+        height: auto;
     }
 
     .picture .nomination div {
