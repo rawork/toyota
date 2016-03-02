@@ -718,7 +718,7 @@ a.next-event {
         padding-right: 23px;
     }
 
-    .content ul.event-pictures li:last-child {
+    .content ul.event-pictures.pictures4 li:last-child {
         padding-right: 0;
         padding-left: 23px;
     }
