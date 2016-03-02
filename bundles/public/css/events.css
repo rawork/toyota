@@ -710,17 +710,17 @@ a.next-event {
 
     .content ul.event-pictures.pictures4 li {
         width: 25%;
-        padding: 0 17px;
+        padding: 0 12px;
     }
 
     .content ul.event-pictures.pictures4 li:first-child {
         padding-left: 0;
-        padding-right: 23px;
+        padding-right: 24px;
     }
 
     .content ul.event-pictures.pictures4 li:last-child {
         padding-right: 0;
-        padding-left: 23px;
+        padding-left: 24px;
     }
 
     .content ul.event-pictures li:before {
