@@ -669,6 +669,8 @@ a.next-event {
         position: static;
         text-align: center;
         height: auto;
+        margin-top: 15px;
+        margin-bottom: 10px;
     }
 
     .picture .nomination div {
