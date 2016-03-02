@@ -710,6 +710,17 @@ a.next-event {
 
     .content ul.event-pictures.pictures4 li {
         width: 25%;
+        padding: 0 17px;
+    }
+
+    .content ul.event-pictures.pictures4 li:first-child {
+        padding-left: 0;
+        padding-right: 23px;
+    }
+
+    .content ul.event-pictures li:last-child {
+        padding-right: 0;
+        padding-left: 23px;
     }
 
     .content ul.event-pictures li:before {
@@ -717,11 +728,11 @@ a.next-event {
     }
 
     .event-pictures .picture .img {
-        width: 100%;
+        width: 200px;
     }
 
     .event-pictures.pictures4 .picture .img {
-        width: 100%;
+        width: 160px;
     }
 
     /*ul.events .preview {*/
