@@ -3,6 +3,7 @@
 namespace Fuga\PublicBundle\Controller;
 
 use Fuga\CommonBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class NewsController extends Controller
 {
@@ -65,5 +66,13 @@ class NewsController extends Controller
 
 
 		return $content;
+	}
+
+	public function inviteAction()
+	{
+		$response = new Response();
+		$response->setContent($this->render('news/invite.html.twig'));
+
+		return $response;
 	}
 }

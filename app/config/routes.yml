@@ -217,6 +217,10 @@ gallery_repair:
   path: /pictures/repair
   defaults: { _controller: 'Fuga:Public:Gallery:repair'}
 
+event_email:
+  path: /events/invite
+  defaults: { _controller: 'Fuga:Public:News:invite'}
+
 ajax_picture_list:
   path: /ajax/picture
   defaults: { _controller: 'Fuga:Public:Gallery:index'}
