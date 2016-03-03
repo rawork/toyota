@@ -342,11 +342,11 @@ p.video iframe {
     img#prizes {
         float: right;
         margin-top: 0;
-        margin-left: 60px;
+        margin-left: 80px;
         margin-bottom: 10px;
         margin-right: 0;
         /*max-width: 185px !important;*/
-        max-width: 258px !important;
+        max-width: 220px !important;
     }
 
     img#boy-xs {
