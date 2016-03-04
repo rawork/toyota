@@ -415,6 +415,7 @@ ul.social a.vk {
         background-size: 33px 38px;
         padding-left: 46px;
         min-height: 33px;
+        padding-top: 5px;
     }
 
     .address1 .time {
@@ -426,6 +427,7 @@ ul.social a.vk {
         background-size: 32px 32px;
         padding-left: 46px;
         min-height: 32px;
+        padding-top: 1px;
     }
 
     .address2 .schedule {
