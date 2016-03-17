@@ -467,6 +467,11 @@ h3 {
     top: -99px;
 }
 
+body .kidburg img {
+    float: left;
+    margin: 0 35px 10px 0;
+}
+
 
 @media (min-width: 480px) {
     #pack-rules {
