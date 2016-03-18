@@ -454,7 +454,7 @@ h3 {
 
 .lego h6 {
     font-size: 17px;
-    background-color: #fff;
+    background-image: url('../img/bg-pattern.jpg');
     padding: 5px 10px;
     display: inline-block;
     color: #cf142b;
@@ -953,4 +953,9 @@ body .kidburg img {
         background: url('../img/bloquote_border/corn-top-right.png') right top no-repeat;
     }
     /* quotation block end */
+
+    .lego h6 {
+        background-color: #fff;
+        background-image: none;
+    }
 }
