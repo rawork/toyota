@@ -444,6 +444,7 @@ h3 {
 
 .lego {
     margin: 40px 0 0;
+    background-color: #fff;
     /*font-weight: bold;*/
 }
 
@@ -452,6 +453,7 @@ h3 {
     display: block;
     margin-left: 35px;
     margin-bottom: 10px;
+
 }
 
 .lego h6 {
@@ -470,6 +472,10 @@ h3 {
 body .kidburg img {
     float: left;
     margin: 0 35px 10px 0;
+}
+
+.attention {
+    background-color: #fff;
 }
 
 
