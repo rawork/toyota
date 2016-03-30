@@ -409,7 +409,9 @@
                 $('.gallery-next').hide();
             }
 
-            if (desktopCurrentPage >= desktopLoadedPages - 2 && mobileLoadedPages < mobileTotalPictures) {
+            //console.log(desktopCurrentPage, desktopLoadedPages - 2,desktopTotalPages);
+
+            if (desktopCurrentPage >= desktopLoadedPages - 2 && desktopLoadedPages < desktopTotalPages) {
 
                 if (desktopLoading) {
                     return;
@@ -423,7 +425,7 @@
 
                 //console.log('desktopLoadedDataPages', desktopLoadedDataPages);
                 //console.log('ajax request next',  Date.now());
-                console.log(currentAction);
+                //console.log(currentAction);
 
                 $.post(urls[currentAction], {category: category, person: person, city: city, limit: desktopPageLimit, page:desktopLoadedDataPages},
                     function(data){
@@ -461,7 +463,7 @@
                             desktopTotalPages =  Math.ceil(desktopTotalPictures / maxElement);
                             desktopLoadedPages = Math.ceil(desktopPictures.length / maxElement);
 
-                            console.log('loaded pages', desktopLoadedPages);
+                            //console.log('loaded pages', desktopLoadedPages);
 
                             $('#slide-current').html(desktopCurrentPage);
                             $('#slide-total').html(desktopTotalPages);
